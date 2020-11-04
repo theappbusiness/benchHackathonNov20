@@ -1,0 +1,37 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+	package
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:70-108
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:1-110
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/garethmiller/Documents/projects/KMMHackathon/shared/src/androidMain/AndroidManifest.xml

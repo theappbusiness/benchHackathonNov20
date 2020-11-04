@@ -1,0 +1,2 @@
+com/kcc/kmmhackathon/androidHackathonApp/BuildConfig.java
+ com.kcc.kmmhackathon.androidHackathonApp.BuildConfig
