@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-android-extensions")
 }
@@ -23,8 +24,23 @@ kotlin {
             }
         }
     }
+
+    val coroutinesVersion = "1.3.9-native-mt"
+    val serializationVersion = "1.0.0-RC"
+    val ktorVersion = "1.4.0"
+    val touchlabVersion = "0.2.5"
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("co.touchlab:firestore:$touchlabVersion")
+            }
+
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -34,6 +50,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("com.google.android.material:material:1.2.0")
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+
             }
         }
         val androidTest by getting {
@@ -42,7 +60,11 @@ kotlin {
                 implementation("junit:junit:4.12")
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+            }
+        }
         val iosTest by getting
     }
 }
