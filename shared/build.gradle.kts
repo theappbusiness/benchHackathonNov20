@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-android-extensions")
 }
@@ -23,8 +24,16 @@ kotlin {
             }
         }
     }
+
+
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+            }
+
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -34,6 +43,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("com.google.android.material:material:1.2.0")
+
             }
         }
         val androidTest by getting {
