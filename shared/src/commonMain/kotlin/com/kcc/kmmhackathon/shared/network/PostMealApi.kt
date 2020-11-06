@@ -19,7 +19,7 @@ class PostMealApi() {
         }
     }
 
-    suspend fun postMeal(meal: Meal): List<Meal> {
+    suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(MEALS_ENDPOINT) {
             url(MEALS_ENDPOINT)
             contentType(ContentType.Application.Json)
