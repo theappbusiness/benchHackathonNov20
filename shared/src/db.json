@@ -1,6 +1,7 @@
 {
   "Meals": [
     {
+      "id": 1,
       "name": "lasagne",
       "quantity": 4,
       "availableFrom": "Monday",
@@ -9,6 +10,7 @@
       "hot": false
     },
     {
+      "id": 2,
       "name": "Chicken curry",
       "quantity": 2,
       "availableFrom": "Monday",
@@ -17,6 +19,7 @@
       "hot": true
     },
     {
+      "id": 3,
       "name": "tomato pasta",
       "quantity": 1,
       "availableFrom": "Monday",
@@ -25,6 +28,7 @@
       "hot": true
     },
     {
+      "id": 4,
       "name": "lasagne",
       "quantity": 4,
       "availableFrom": "Monday",
@@ -33,6 +37,7 @@
       "hot": false
     },
     {
+      "id": 5,
       "name": "Chicken curry",
       "quantity": 2,
       "availableFrom": "Monday",
@@ -41,6 +46,7 @@
       "hot": true
     },
     {
+      "id": 6,
       "name": "tomato pasta",
       "quantity": 1,
       "availableFrom": "Monday",
