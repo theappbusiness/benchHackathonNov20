@@ -53,6 +53,18 @@
       "info": "Vegetarian",
       "expiryDate": "Tuesday",
       "hot": true
+    },
+    {
+      "name": "pizza",
+      "quantity": 1,
+      "availableFrom": "Monday",
+      "info": "Vegetarian",
+      "expiryDate": "Tuesday",
+      "hot": false,
+      "id": 7
+    },
+    {
+      "id": 8
     }
   ]
 }

@@ -168,6 +168,19 @@ __attribute__((swift_name("Platform")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PostMealSDK")))
+@interface SharedPostMealSDK : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)postMealWithCompletionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(completionHandler:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MealApi")))
 @interface SharedMealApi : SharedBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
@@ -183,6 +196,27 @@ __attribute__((swift_name("MealApi")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MealApi.Companion")))
 @interface SharedMealApiCompanion : SharedBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PostMealApi")))
+@interface SharedPostMealApi : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)postMealWithCompletionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(completionHandler:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PostMealApi.Companion")))
+@interface SharedPostMealApiCompanion : SharedBase
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
