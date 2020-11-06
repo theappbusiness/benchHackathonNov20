@@ -23,6 +23,30 @@
       "info": "Vegetarian",
       "expiryDate": "Tuesday",
       "hot": true
+    },
+    {
+      "name": "lasagne",
+      "quantity": 4,
+      "availableFrom": "Monday",
+      "info": "This is lasagne",
+      "expiryDate": "Tuesday",
+      "hot": false
+    },
+    {
+      "name": "Chicken curry",
+      "quantity": 2,
+      "availableFrom": "Monday",
+      "info": "Sorry vegans",
+      "expiryDate": "Tuesday",
+      "hot": true
+    },
+    {
+      "name": "tomato pasta",
+      "quantity": 1,
+      "availableFrom": "Monday",
+      "info": "Vegetarian",
+      "expiryDate": "Tuesday",
+      "hot": true
     }
   ]
 }

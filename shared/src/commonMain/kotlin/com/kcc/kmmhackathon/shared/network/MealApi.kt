@@ -14,9 +14,6 @@ class MealApi {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
         }
-        defaultRequest {
-            header("secret-key", "\$2b\$10\$zAulGredtvb5w9Z8hZ5IjOFKu6uCKPRmxZN6T1A6Xnebpbf8LlvJa")
-        }
     }
 
     suspend fun getAllMeals(): List<Meal> {
@@ -24,6 +21,6 @@ class MealApi {
     }
 
     companion object {
-        private const val MEALS_ENDPOINT = "https://api.jsonbin.io/b/5fa44c571e633a56cf8da38f/5"
+        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
     }
 }
