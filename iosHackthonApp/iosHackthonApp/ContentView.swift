@@ -55,6 +55,13 @@ extension ContentView {
                     self.meals = .error(error?.localizedDescription ?? "error")
                 }
             })
+            self.getNewUUID()
+            self.getNewUUID()
+            self.getNewUUID()
+        }
+
+        func getNewUUID() {
+          print("UUID test: \(sdk.getUUID())")
         }
     }
 }
