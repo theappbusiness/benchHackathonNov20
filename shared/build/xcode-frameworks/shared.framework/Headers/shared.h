@@ -177,7 +177,7 @@ __attribute__((swift_name("PostMealSDK")))
  @note This method converts instances of Exception to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)postMealWithCompletionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(completionHandler:)")));
+- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -211,7 +211,7 @@ __attribute__((swift_name("PostMealApi")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)postMealWithCompletionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(completionHandler:)")));
+- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

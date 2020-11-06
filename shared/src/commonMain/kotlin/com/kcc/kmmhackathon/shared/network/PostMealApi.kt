@@ -6,10 +6,12 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
+import io.ktor.http.*
 import kotlinx.serialization.json.Json
 
 
 class PostMealApi() {
+
     private val httpClient = HttpClient {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
@@ -17,21 +19,15 @@ class PostMealApi() {
         }
     }
 
-
-    suspend fun postMeal(): String {
+    suspend fun postMeal(meal: Meal): List<Meal> {
         return httpClient.post(MEALS_ENDPOINT) {
             url(MEALS_ENDPOINT)
-            parameter("name", "test")
-            parameter("quantity", "3")
-            parameter("availableFrom", "test")
-            parameter("info", "test")
-            parameter("expiryDate", "test")
-            parameter("hot", "false")
+            contentType(ContentType.Application.Json)
+            body = meal
         }
-
     }
 
     companion object {
-        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
+        private const val MEALS_ENDPOINT = "http://localhost:3000/meals/"
     }
 }
