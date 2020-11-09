@@ -69,8 +69,10 @@ struct MealRow: View {
                 Text("Name: \(meal.name)")
                 Text("Description: \(meal.info)")
                 Text("Temperature: \(meal.hot ? "Hot" : "Cold")")
-                Text("Available from: \(meal.availableFrom)")
+                Text("Available from: \(meal.availableFromDate)")
                 Text("Expires: \(meal.expiryDate)")
+                Text("Lat, Lon: [\(meal.locationLat), \(meal.locationLong)]")
+                Text("Pick up code test: \(String(meal.id.suffix(4)))")
             }
             Spacer()
         }

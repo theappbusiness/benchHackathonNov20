@@ -1,52 +1,70 @@
 {
   "Meals": [
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870a07",
       "name": "lasagne",
       "quantity": 4,
-      "availableFrom": "Monday",
-      "info": "This is lasagne",
+      "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
-      "hot": false
+      "info": "This is lasagne",
+      "hot": false,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870a01",
       "name": "Chicken curry",
       "quantity": 2,
-      "availableFrom": "Monday",
+      "availableFromDate": "Monday",
+      "expiryDate": "Wednesday",
       "info": "Sorry vegans",
-      "expiryDate": "Tuesday",
-      "hot": true
+      "hot": true,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870a02",
       "name": "tomato pasta",
       "quantity": 1,
-      "availableFrom": "Monday",
-      "info": "Vegetarian",
+      "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
-      "hot": true
+      "info": "Vegetarian",
+      "hot": true,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870a01",
       "name": "lasagne",
       "quantity": 4,
-      "availableFrom": "Monday",
-      "info": "This is lasagne",
+      "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
-      "hot": false
+      "info": "This is lasagne",
+      "hot": false,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870a05",
       "name": "Chicken curry",
       "quantity": 2,
-      "availableFrom": "Monday",
-      "info": "Sorry vegans",
+      "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
-      "hot": true
+      "info": "Sorry vegans",
+      "hot": true,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870b02",
       "name": "tomato pasta",
       "quantity": 1,
-      "availableFrom": "Monday",
-      "info": "Vegetarian",
+      "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
-      "hot": true
+      "info": "Vegetarian",
+      "hot": true,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     }
   ]
 }

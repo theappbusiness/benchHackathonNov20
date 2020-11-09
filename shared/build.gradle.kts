@@ -28,7 +28,7 @@ kotlin {
     val coroutinesVersion = "1.3.9-native-mt"
     val serializationVersion = "1.0.0-RC"
     val ktorVersion = "1.4.0"
-    val touchlabVersion = "0.2.5"
+    val uuidVersion = "0.2.2"
 
     sourceSets {
         val commonMain by getting {
@@ -37,6 +37,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("com.benasher44:uuid:$uuidVersion")
             }
 
         }
