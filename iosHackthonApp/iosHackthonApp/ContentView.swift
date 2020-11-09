@@ -10,13 +10,19 @@ struct ContentView: View {
 				.navigationBarTitle("Meals")
 				.navigationBarItems(leading:
 															Button("Add Meal") {
-																let meal = Meal(quantity: 2,
-																								availableFrom: "Monday",
-																								info: "Meat",
-																								expiryDate: "Saturday",
-																								hot: true,
-																								name: "Pizza")
+
+																//TODO: MOVE THIS TO ADD POST SCREEN
 																let sdk = PostMealApi()
+																let meal = Meal(id: "\(sdk.getUUID())",
+																								name: "Pizza",
+																								quantity: 2,
+																								availableFromDate: "Tuesday",
+																								expiryDate: "Saturday",
+																								info: "Meat",
+																								hot: false,
+																								locationLat: 51.509865,
+																								locationLong:  -0.118092)
+
 																sdk.postMeal(meal: meal, completionHandler: { response,test  in
 																	print("Response \(response)")
 
@@ -70,6 +76,7 @@ extension ContentView {
 					self.meals = .error(error?.localizedDescription ?? "error")
 				}
 			})
+			print("UUID example call: \(sdk.getUUID())")
 		}
 	}
 }
@@ -77,17 +84,16 @@ extension ContentView {
 struct MealRow: View {
 
 	var meal: Meal
-
 	var body: some View {
 		HStack() {
 			VStack(alignment: .leading, spacing: 10.0) {
 				Text("Name: \(meal.name)")
 				Text("Description: \(meal.info)")
 				Text("Temperature: \(meal.hot ? "Hot" : "Cold")")
-				Text("Available from: \(meal.availableFrom)")
+				Text("Available from: \(meal.availableFromDate)")
 				Text("Expires: \(meal.expiryDate)")
-
-
+				Text("Lat, Lon: [\(meal.locationLat), \(meal.locationLong)]")
+				Text("Pick up code test: \(String(meal.id.suffix(4)))")
 			}
 			Spacer()
 		}

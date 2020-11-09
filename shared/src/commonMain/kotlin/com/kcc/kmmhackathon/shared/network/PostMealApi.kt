@@ -8,6 +8,8 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.json.Json
+import com.benasher44.uuid.Uuid
+import com.benasher44.uuid.uuid4
 
 
 class PostMealApi() {
@@ -25,6 +27,10 @@ class PostMealApi() {
             contentType(ContentType.Application.Json)
             body = meal
         }
+    }
+
+    fun getUUID(): Uuid {
+        return uuid4()
     }
 
     companion object {
