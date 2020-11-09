@@ -18,7 +18,7 @@ struct LandingView: View {
                     }
                     .padding()
 
-                    NavigationLink(destination: AddMealView(sdk: sdk)) {
+                    NavigationLink(destination: AddMealView(viewModel: .init(sdk: sdk))) {
                         CustomButton(
                             width: geometry.size.width,
                             foreGroundColor: ColorManager.appPrimary,

@@ -11,10 +11,7 @@ import shared
 
 struct AddMealView: View {
 
-	let sdk: MealsSDK
-	init(sdk: MealsSDK) {
-		self.sdk = sdk
-	}
+	@ObservedObject private(set) var viewModel: ViewModel
 	
 	var body: some View {
 		//TODO: Pass the actual values when UI is complete
@@ -29,18 +26,31 @@ struct AddMealView: View {
 										locationLat: 51.509865,
 										locationLong:  -0.118092)
 		Button("Add a meal") {
+			self.viewModel.postMeal(meal: meal)
+		}
+	}
+}
+
+
+extension AddMealView {
+	class ViewModel: ObservableObject {
+
+		let sdk: MealsSDK
+		init(sdk: MealsSDK) {
+			self.sdk = sdk
+		}
+
+		func postMeal(meal: Meal) {
 			sdk.postMeal(meal: meal, completionHandler: { response,test  in
 				print("Response \(response)")
-
 			})
 		}
 	}
 }
 
 
-
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-			AddMealView(sdk: MealsSDK())
+			AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
     }
 }
