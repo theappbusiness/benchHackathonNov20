@@ -50,6 +50,6 @@ extension AddMealView {
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-			AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
+        AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
     }
 }
