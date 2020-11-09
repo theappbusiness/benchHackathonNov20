@@ -26,7 +26,7 @@ struct LandingView: View {
                             text: Strings.LandingScreen.plusButtonText)
                     }
 
-                    NavigationLink(destination: MealListView(viewModel: .init(sdk: sdk))) {
+                    NavigationLink(destination: MealListView(viewModel: .init(sdk: self.sdk))) {
                         CustomButton(
                             width: geometry.size.width,
                             buttonColor: ColorManager.appSecondary,
