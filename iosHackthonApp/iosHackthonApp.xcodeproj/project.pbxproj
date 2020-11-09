@@ -20,6 +20,7 @@
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
 		CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF12B25558B740054D2AA /* ColorManager.swift */; };
 		CE0EF13325558B830054D2AA /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF13225558B830054D2AA /* Strings.swift */; };
+		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		CE0EF12B25558B740054D2AA /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		CE0EF13225558B830054D2AA /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE9AE6B92559533400EA7A9B /* Add Meal Screen */,
 				CE0EF13C25558BC10054D2AA /* Meal List Screen */,
 				CE0EF10F25558B1F0054D2AA /* Landing Screen */,
 				CE0EF11B25558B460054D2AA /* Resources */,
@@ -226,6 +229,14 @@
 				7555FF82242A565900829871 /* MealListView.swift */,
 			);
 			path = "Meal List Screen";
+			sourceTree = "<group>";
+		};
+		CE9AE6B92559533400EA7A9B /* Add Meal Screen */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */,
+			);
+			path = "Add Meal Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +395,7 @@
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
 				CE0EF11125558B290054D2AA /* LandingView.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
+				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
 				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,
 				7555FF83242A565900829871 /* MealListView.swift in Sources */,
 				CE0EF13325558B830054D2AA /* Strings.swift in Sources */,

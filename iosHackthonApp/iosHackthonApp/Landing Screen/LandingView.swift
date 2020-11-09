@@ -9,7 +9,6 @@ struct LandingView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-
                 VStack {
                     HStack {
                         Spacer()
@@ -20,9 +19,7 @@ struct LandingView: View {
                     }
                     .padding()
 
-                    Button(action: {
-                        #warning("TODO: launch AddMeal Screen")
-                    }) {
+                    NavigationLink(destination: AddMealView()) {
                         ZStack {
                             RoundedRectangle(cornerRadius: viewModel.cornerRadius)
                                 .foregroundColor(ColorManager.appPrimary)
