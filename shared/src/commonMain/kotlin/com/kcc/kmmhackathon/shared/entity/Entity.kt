@@ -5,16 +5,22 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Meal(
+    @SerialName("id")
+    val id: String,
+    @SerialName("name")
+    val name: String,
     @SerialName("quantity")
     val quantity: Int,
-    @SerialName("availableFrom")
-    val availableFrom: String,
-    @SerialName("info")
-    val info: String,
+    @SerialName("availableFromDate")
+    val availableFromDate: String,
     @SerialName("expiryDate")
     val expiryDate: String,
+    @SerialName("info")
+    val info: String,
     @SerialName("hot")
     val hot: Boolean,
-    @SerialName("name")
-    val name: String
+    @SerialName("locationLat")
+    val locationLat: Float,
+    @SerialName("locationLong")
+    val locationLong: Float
 )

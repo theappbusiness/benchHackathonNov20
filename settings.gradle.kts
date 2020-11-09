@@ -15,7 +15,7 @@ pluginManagement {
 }
 rootProject.name = "KMMHackathon"
 
-
 include(":androidHackathonApp")
 include(":shared")
+enableFeaturePreview("GRADLE_METADATA")
 

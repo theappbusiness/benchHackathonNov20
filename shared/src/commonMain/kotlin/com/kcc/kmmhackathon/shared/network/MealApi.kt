@@ -1,5 +1,7 @@
 package com.kcc.kmmhackathon.shared.network
 
+import com.benasher44.uuid.Uuid
+import com.benasher44.uuid.uuid4
 import com.kcc.kmmhackathon.shared.entity.Meal
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
@@ -18,6 +20,10 @@ class MealApi {
 
     suspend fun getAllMeals(): List<Meal> {
         return httpClient.get(MEALS_ENDPOINT)
+    }
+
+    fun getUUID(): Uuid {
+        return uuid4()
     }
 
     companion object {
