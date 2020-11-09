@@ -6,13 +6,13 @@ struct MealListView: View {
     @ObservedObject private(set) var viewModel: ViewModel
 
     var body: some View {
-            listView()
-                .navigationBarTitle("Meals")
-                .navigationBarItems(trailing:
-                                        Button("Reload") {
-                                            self.viewModel.loadMeals(forceReload: true)
-                                        })
-                .navigationBarBackButtonHidden(true)
+        listView()
+            .navigationBarTitle("Meals")
+            .navigationBarItems(trailing:
+                                    Button("Reload") {
+                                        self.viewModel.loadMeals(forceReload: true)
+                                    })
+            .navigationBarBackButtonHidden(true)
     }
 
     private func listView() -> AnyView {
