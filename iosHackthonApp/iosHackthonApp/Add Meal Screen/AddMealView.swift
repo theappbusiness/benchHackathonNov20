@@ -11,8 +11,6 @@ import shared
 
 struct AddMealView: View {
 	var body: some View {
-		Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-
 		//TODO: Pass the actual values when UI is complete
 		let sdk = PostMealApi()
 		let meal = Meal(id: "\(sdk.getUUID())",
