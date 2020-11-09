@@ -3,7 +3,7 @@ import shared
 
 struct LandingView: View {
 
-    private var viewModel = Constants()
+    private var constants = Constants()
     private let sdk = MealsSDK()
 
     var body: some View {
@@ -21,16 +21,16 @@ struct LandingView: View {
 
                     NavigationLink(destination: AddMealView()) {
                         ZStack {
-                            RoundedRectangle(cornerRadius: viewModel.cornerRadius)
+                            RoundedRectangle(cornerRadius: constants.cornerRadius)
                                 .foregroundColor(ColorManager.appPrimary)
-                                .padding(geometry.size.width * viewModel.paddingRatio)
-                                .shadow(radius: viewModel.shadowRadius)
+                                .padding(geometry.size.width * constants.paddingRatio)
+                                .shadow(radius: constants.shadowRadius)
 
                             VStack {
 
                                 Image(systemName: Strings.LandingScreen.Images.plus)
                                     .resizable()
-                                    .frame(width: geometry.size.width * viewModel.imageFrameRatio, height: geometry.size.width * viewModel.imageFrameRatio)
+                                    .frame(width: geometry.size.width * constants.imageFrameRatio, height: geometry.size.width * constants.imageFrameRatio)
                                     .foregroundColor(.white)
                                 Text(Strings.LandingScreen.plusButtonText)
                                     .foregroundColor(.white)
@@ -40,14 +40,14 @@ struct LandingView: View {
 
                     NavigationLink(destination: MealListView(viewModel: .init(sdk: sdk))) {
                         ZStack {
-                            RoundedRectangle(cornerRadius: viewModel.cornerRadius)
+                            RoundedRectangle(cornerRadius: constants.cornerRadius)
                                 .foregroundColor(ColorManager.appSecondary)
-                                .padding(geometry.size.width * viewModel.paddingRatio)
-                                .shadow(radius: viewModel.shadowRadius)
+                                .padding(geometry.size.width * constants.paddingRatio)
+                                .shadow(radius: constants.shadowRadius)
                             VStack {
                                 Image(systemName: Strings.LandingScreen.Images.find)
                                     .resizable()
-                                    .frame(width: geometry.size.width * viewModel.imageFrameRatio, height: geometry.size.width * viewModel.imageFrameRatio)
+                                    .frame(width: geometry.size.width * constants.imageFrameRatio, height: geometry.size.width * constants.imageFrameRatio)
                                     .foregroundColor(.white)
                                 Text(Strings.LandingScreen.findButtonText)
                                     .foregroundColor(.white)
