@@ -56,7 +56,6 @@ extension ContentView {
                 }
             })
             print("UUID example call: \(sdk.getUUID())")
-            print("UUID example call: \(sdk.getUUID())")
         }
     }
 }
