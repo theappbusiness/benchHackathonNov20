@@ -15,9 +15,8 @@ struct AddMealView: View {
 	
 	var body: some View {
 		//TODO: Pass the actual values when UI is complete
-		let sdk = MealApi()
 		Button("Add a meal") {
-			let meal = Meal(id: "\(sdk.getUUID())",
+			let meal = Meal(id: "\(viewModel.sdk.getUUID())",
 											name: "Pizza",
 											quantity: 2,
 											availableFromDate: "Tuesday",
