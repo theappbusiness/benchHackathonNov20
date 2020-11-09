@@ -9,6 +9,7 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
+import io.ktor.http.*
 
 class MealApi {
     private val httpClient = HttpClient {
@@ -20,6 +21,14 @@ class MealApi {
 
     suspend fun getAllMeals(): List<Meal> {
         return httpClient.get(MEALS_ENDPOINT)
+    }
+
+    suspend fun postMeal(meal: Meal): Meal {
+        return httpClient.post(MEALS_ENDPOINT) {
+            url(MEALS_ENDPOINT)
+            contentType(ContentType.Application.Json)
+            body = meal
+        }
     }
 
     fun getUUID(): Uuid {
