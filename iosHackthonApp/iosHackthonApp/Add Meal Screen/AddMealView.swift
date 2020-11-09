@@ -10,9 +10,15 @@ import SwiftUI
 import shared
 
 struct AddMealView: View {
+
+	let sdk: MealsSDK
+	init(sdk: MealsSDK) {
+		self.sdk = sdk
+	}
+	
 	var body: some View {
 		//TODO: Pass the actual values when UI is complete
-		let sdk = PostMealApi()
+		let sdk = MealApi()
 		let meal = Meal(id: "\(sdk.getUUID())",
 										name: "Pizza",
 										quantity: 2,
@@ -31,8 +37,10 @@ struct AddMealView: View {
 	}
 }
 
+
+
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMealView()
+			AddMealView(sdk: MealsSDK())
     }
 }

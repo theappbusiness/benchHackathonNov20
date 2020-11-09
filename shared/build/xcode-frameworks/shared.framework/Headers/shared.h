@@ -158,6 +158,12 @@ __attribute__((swift_name("MealsSDK")))
 */
 - (void)getMealsForceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(forceReload:completionHandler:)")));
 - (NSString *)getUUID __attribute__((swift_name("getUUID()")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -166,20 +172,6 @@ __attribute__((swift_name("Platform")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) NSString *platform __attribute__((swift_name("platform")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("PostMealSDK")))
-@interface SharedPostMealSDK : SharedBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (NSString *)getUUID __attribute__((swift_name("getUUID()")));
-
-/**
- @note This method converts instances of Exception to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -194,22 +186,6 @@ __attribute__((swift_name("MealApi")))
 */
 - (void)getAllMealsWithCompletionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(completionHandler:)")));
 - (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("MealApi.Companion")))
-@interface SharedMealApiCompanion : SharedBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("PostMealApi")))
-@interface SharedPostMealApi : SharedBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
 
 /**
  @note This method converts instances of CancellationException to errors.
@@ -219,8 +195,8 @@ __attribute__((swift_name("PostMealApi")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("PostMealApi.Companion")))
-@interface SharedPostMealApiCompanion : SharedBase
+__attribute__((swift_name("MealApi.Companion")))
+@interface SharedMealApiCompanion : SharedBase
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
