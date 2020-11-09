@@ -16,14 +16,14 @@ struct CustomButton: View {
     let shadowRadius: CGFloat = 5
 
     var width: CGFloat
-    var foreGroundColor: Color
+    var buttonColor: Color
     var image: String
     var text: String
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .foregroundColor(foreGroundColor)
+                .foregroundColor(buttonColor)
                 .padding(width * paddingRatio)
                 .shadow(radius: shadowRadius)
 
@@ -31,16 +31,15 @@ struct CustomButton: View {
                 Image(systemName: image)
                     .resizable()
                     .frame(width: width * imageFrameRatio, height: width * imageFrameRatio)
-                    .foregroundColor(.white)
                 Text(text)
-                    .foregroundColor(.white)
             }
+            .foregroundColor(.white)
         }
     }
 }
 
 struct CustomButton_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton(width: 150, foreGroundColor: .green, image: Strings.LandingScreen.Images.plus, text: "Placeholder")
+        CustomButton(width: 150, buttonColor: .green, image: Strings.LandingScreen.Images.plus, text: "Placeholder")
     }
 }

@@ -21,7 +21,7 @@ struct LandingView: View {
                     NavigationLink(destination: AddMealView()) {
                         CustomButton(
                             width: geometry.size.width,
-                            foreGroundColor: ColorManager.appPrimary,
+                            buttonColor: ColorManager.appPrimary,
                             image: Strings.LandingScreen.Images.plus,
                             text: Strings.LandingScreen.plusButtonText)
                     }
@@ -29,7 +29,7 @@ struct LandingView: View {
                     NavigationLink(destination: MealListView(viewModel: .init(sdk: sdk))) {
                         CustomButton(
                             width: geometry.size.width,
-                            foreGroundColor: ColorManager.appSecondary,
+                            buttonColor: ColorManager.appSecondary,
                             image: Strings.LandingScreen.Images.find,
                             text: Strings.LandingScreen.findButtonText)
                     }
