@@ -20,10 +20,11 @@ struct AddMealView: View {
 	@State var availableFromDate = Date()
 	@State var useByDate = Date()
 	@State var address: String = ""
-	@State var latitude: Double = 00.000000
-	@State var longitude: Double = 00.000000
+	@State var latitude: Float = 0
+	@State var longitude: Float = 0
 
 	var body: some View {
+		
 		ScrollView {
 			VStack(alignment: .leading, spacing: 10) {
 
@@ -67,13 +68,9 @@ struct AddMealView: View {
 						Spacer()
 						Button(action: {
 							print("location button tapped!")
-							print("locationViewModel.userLatitude \(self.viewModel.locationManager.userLatitude)")
-							print("locationViewModel.userLongitude \(self.viewModel.locationManager.userLongitude)")
-							print("locationViewModel.address \(self.viewModel.locationManager.address)")
 							self.address = "\(self.viewModel.locationManager.address)"
-							self.latitude = self.viewModel.locationManager.userLatitude
-							self.longitude = self.viewModel.locationManager.userLongitude
-
+							self.latitude = Float(self.viewModel.locationManager.userLatitude)
+							self.longitude = Float(self.viewModel.locationManager.userLongitude)
 						}) {
 							Image(systemName: "location")
 								.font(.title)
@@ -92,20 +89,17 @@ struct AddMealView: View {
 						availableFromDate: "\(self.availableFromDate)",
 						expiryDate: "\(self.useByDate)",
 						info: "\(self.additionalInfo)",
-						hot: false,
-						locationLat: 51.509865,
-						locationLong:  -0.118092)
+						hot: self.hot,
+						locationLat: self.latitude,
+						locationLong:  self.longitude)
 					self.viewModel.postMeal(meal: meal)
 				}
-				.foregroundColor(.white)
-				.padding(10)
-				.frame(minWidth: 0, maxWidth: .infinity)
-				.background(Color.red)
-				.cornerRadius(10)
+				.modifier(ButtonViewModifier())
 
 			}.padding()
 
 		}
+		.navigationBarTitle(Strings.AddMealScreen.addMeal)
 	}
 }
 
