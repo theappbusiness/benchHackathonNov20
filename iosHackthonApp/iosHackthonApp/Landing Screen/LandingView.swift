@@ -35,7 +35,7 @@ struct LandingView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text(Strings.LandingScreen.heading))
+            .navigationBarTitle(Text(Strings.LandingScreen.title))
             .navigationBarBackButtonHidden(true)
         }
     }

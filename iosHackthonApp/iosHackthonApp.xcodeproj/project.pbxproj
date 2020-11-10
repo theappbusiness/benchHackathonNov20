@@ -20,6 +20,7 @@
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
 		CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF12B25558B740054D2AA /* ColorManager.swift */; };
 		CE0EF13325558B830054D2AA /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF13225558B830054D2AA /* Strings.swift */; };
+		CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA191255AEB9C006AFF20 /* MealRow.swift */; };
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		CE0EF12B25558B740054D2AA /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		CE0EF13225558B830054D2AA /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		CE2BA191255AEB9C006AFF20 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				7555FF82242A565900829871 /* MealListView.swift */,
+				CE2BA191255AEB9C006AFF20 /* MealRow.swift */,
 			);
 			path = "Meal List Screen";
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
 				CE0EF11125558B290054D2AA /* LandingView.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
+				CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */,
 				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
 				CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */,
 				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,

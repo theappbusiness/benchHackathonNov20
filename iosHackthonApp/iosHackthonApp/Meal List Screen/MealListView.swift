@@ -7,7 +7,7 @@ struct MealListView: View {
 
     var body: some View {
         listView()
-            .navigationBarTitle("Meals")
+            .navigationBarTitle(Strings.MealListScreen.title)
             .navigationBarItems(trailing:
                                     Button("Reload") {
                                         self.viewModel.loadMeals(forceReload: true)
@@ -55,26 +55,6 @@ extension MealListView {
                     self.meals = .error(error?.localizedDescription ?? "error")
                 }
             })
-        }
-    }
-}
-
-struct MealRow: View {
-
-    var meal: Meal
-
-    var body: some View {
-        HStack() {
-            VStack(alignment: .leading, spacing: 10.0) {
-                Text("Name: \(meal.name)")
-                Text("Description: \(meal.info)")
-                Text("Temperature: \(meal.hot ? "Hot" : "Cold")")
-                Text("Available from: \(meal.availableFromDate)")
-                Text("Expires: \(meal.expiryDate)")
-                Text("Lat, Lon: [\(meal.locationLat), \(meal.locationLong)]")
-                Text("Pick up code test: \(String(meal.id.suffix(4)))")
-            }
-            Spacer()
         }
     }
 }

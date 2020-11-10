@@ -10,7 +10,7 @@ import Foundation
 
 struct Strings {
     struct LandingScreen {
-        static let heading = "Welcome!"
+        static let title = "Welcome!"
         static let subheading = "List a meal to help out someone in your local community or browse the meals that others have added"
         static let plusButtonText = "List a Meal"
         static let findButtonText = "Find a Meal"
@@ -19,6 +19,10 @@ struct Strings {
             static let plus = "plus.app"
             static let find = "magnifyingglass"
         }
+    }
+
+    struct MealListScreen {
+        static let title = "Meals in your area"
     }
 }
 
