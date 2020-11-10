@@ -11,14 +11,14 @@ import shared
 
 struct AddMealView: View {
 
-    @ObservedObject private(set) var viewModel: ViewModel
+    @ObservedObject private(set) var viewModel: AddMealViewModel
 
     var body: some View {
         ZStack {}
         .alert(isPresented: $viewModel.showingCollectionCode) {
             Alert(
-                title: Text(Strings.AddMealScreen.CollectionAlert.title),
-                message: Text(Strings.AddMealScreen.CollectionAlert.message + viewModel.code),
+                title: Text(viewModel.code),
+                message: Text(Strings.AddMealScreen.CollectionAlert.message),
                 dismissButton: .default(Text(Strings.Common.ok)))
         }
         ZStack {
@@ -48,34 +48,8 @@ struct AddMealView: View {
     }
 }
 
-extension AddMealView {
-    class ViewModel: ObservableObject {
-
-        @Published var code = ""
-        @Published var showingCollectionCode = false
-        @Published var showingError = false
-
-        let sdk: MealsSDK
-
-        init(sdk: MealsSDK) {
-            self.sdk = sdk
-        }
-
-        func postMeal(meal: Meal) {
-            sdk.postMeal(meal: meal, completionHandler: { response, error in
-                if error == nil {
-                    self.code = response?.id.suffix(4).uppercased() ?? ""
-                    self.showingCollectionCode.toggle()
-                } else {
-                    self.showingError.toggle()
-                }
-            })
-        }
-    }
-}
-
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
+        AddMealView(viewModel: AddMealViewModel(sdk: MealsSDK()))
     }
 }

@@ -23,8 +23,7 @@ struct Strings {
 
     struct AddMealScreen {
         struct CollectionAlert {
-            static let title = "Collection Code"
-            static let message = "When someone arrives to collect this meal they will quote this code:\n"
+            static let message = "When someone arrives to collect this meal they will quote the above code"
         }
     }
 
