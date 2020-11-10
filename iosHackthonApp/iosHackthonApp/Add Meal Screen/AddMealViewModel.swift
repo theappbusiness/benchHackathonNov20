@@ -6,7 +6,6 @@
 //  Copyright © 2020 orgName. All rights reserved.
 //
 
-import Foundation
 import shared
 
 protocol AddMealViewModelProtocol {
@@ -34,14 +33,14 @@ extension AddMealViewModel: AddMealViewModelProtocol {
 
     func postMeal(meal: Meal) {
         sdk.postMeal(meal: meal, completionHandler: { response, error in
-            if error == nil {
-                if let code = response?.id.last4Chars() {
-                    self.code = code
-                }
-                self.showingCollectionCode.toggle()
-            } else {
+
+            guard let response = response else {
                 self.showingError.toggle()
+                return
             }
+            self.code = response.id.last4Chars()
+            self.showingCollectionCode.toggle()
+
         })
     }
 }
