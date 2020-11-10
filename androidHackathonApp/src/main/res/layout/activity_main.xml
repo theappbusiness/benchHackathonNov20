@@ -10,20 +10,24 @@
 
   <TextView
       android:id="@+id/textView"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="32dp"
+      android:layout_marginLeft="24dp"
+      android:layout_marginRight="24dp"
       android:text="@string/subheading"
-      app:layout_constraintBottom_toTopOf="@+id/list_meal"
+      app:layout_constraintBottom_toTopOf="@+id/add_meal"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
 
   <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
-      android:id="@+id/list_meal"
-      android:layout_width="wrap_content"
+      android:id="@+id/add_meal"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/findButton"
+      android:layout_marginLeft="24dp"
+      android:layout_marginRight="24dp"
+      android:text="@string/plusButton"
       android:background="@color/colorPrimary"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -31,14 +35,16 @@
       app:layout_constraintTop_toTopOf="parent" />
 
   <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
-      android:id="@+id/add_meal"
-      android:layout_width="wrap_content"
+      android:id="@+id/find_meal"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="32dp"
-      android:text="@string/plusButton"
+      android:layout_marginLeft="24dp"
+      android:layout_marginRight="24dp"
+      android:text="@string/findButton"
       android:background="@color/colorSecondary"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_meal" />
+      app:layout_constraintTop_toBottomOf="@+id/add_meal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

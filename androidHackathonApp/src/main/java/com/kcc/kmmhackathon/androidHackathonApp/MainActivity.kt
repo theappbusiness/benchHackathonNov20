@@ -1,5 +1,6 @@
 package com.kcc.kmmhackathon.androidHackathonApp
 
+import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,13 +13,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setTitle(R.string.heading)
 
-        val listMealButton = findViewById<ActionButton>(R.id.list_meal)
-        listMealButton.setIcon(R.drawable.ic_baseline_search_24)
-        listMealButton.setText(R.string.findButton)
-
         val addMealButton = findViewById<ActionButton>(R.id.add_meal)
         addMealButton.setIcon(R.drawable.ic_outline_add_box_24)
         addMealButton.setText(R.string.plusButton)
+        addMealButton.setOnClickListener {
+            println("Add meal button tapped")
+            val intent = Intent(this, AddMealActivity::class.java)
+            startActivity(intent)
+        }
 
+        val findMealButton = findViewById<ActionButton>(R.id.find_meal)
+        findMealButton.setIcon(R.drawable.ic_baseline_search_24)
+        findMealButton.setText(R.string.findButton)
+        findMealButton.setOnClickListener {
+            println("Find meal button tapped")
+            val intent = Intent(this, FindMealActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
