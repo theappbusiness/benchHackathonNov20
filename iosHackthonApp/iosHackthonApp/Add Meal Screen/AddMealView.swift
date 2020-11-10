@@ -14,25 +14,46 @@ struct AddMealView: View {
     @ObservedObject private(set) var viewModel: ViewModel
 
     var body: some View {
-        //TODO: Pass the actual values when UI is complete
-        Button("Add a meal") {
-            let meal = Meal(
-                id: "\(viewModel.sdk.getUUID())",
-                name: "Pizza",
-                quantity: 2,
-                availableFromDate: "Tuesday",
-                expiryDate: "Saturday",
-                info: "Meat",
-                hot: false,
-                locationLat: 51.509865,
-                locationLong:  -0.118092)
-            self.viewModel.postMeal(meal: meal)
+        ZStack {}
+        .alert(isPresented: $viewModel.showingCollectionCode) {
+            Alert(
+                title: Text("Collection Code"),
+                message: Text("When someone arrives to collect this meal they will quote this code:\n \(viewModel.code)\nPlease make a note of it"),
+                dismissButton: .default(Text("Ok")))
+        }
+        ZStack {
+            VStack {
+            //TODO: Pass the actual values when UI is complete
+                Button("Add a meal") {
+                    let meal = Meal(
+                        id: "\(viewModel.sdk.getUUID())",
+                        name: "Pizza",
+                        quantity: 2,
+                        availableFromDate: "Tuesday",
+                        expiryDate: "Saturday",
+                        info: "Meat",
+                        hot: false,
+                        locationLat: 51.509865,
+                        locationLong:  -0.118092)
+                    self.viewModel.postMeal(meal: meal)
+                }
+            }
+        }
+        .alert(isPresented: $viewModel.showingError) {
+            Alert(
+                title: Text("Sorry!"),
+                message: Text("There was an error creating your meal.\n please try again"),
+                dismissButton: .default(Text("Ok")))
         }
     }
 }
 
 extension AddMealView {
     class ViewModel: ObservableObject {
+
+        @Published var code = ""
+        @Published var showingCollectionCode = false
+        @Published var showingError = false
 
         let sdk: MealsSDK
 
@@ -41,8 +62,13 @@ extension AddMealView {
         }
 
         func postMeal(meal: Meal) {
-            sdk.postMeal(meal: meal, completionHandler: { response, test in
-                print("Response \(response)")
+            sdk.postMeal(meal: meal, completionHandler: { response, error in
+                if error == nil {
+                    self.code = response?.id.suffix(4).uppercased() ?? ""
+                    self.showingCollectionCode.toggle()
+                } else {
+                    self.showingError.toggle()
+                }
             })
         }
     }
