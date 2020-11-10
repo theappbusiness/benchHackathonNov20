@@ -10,16 +10,13 @@ import kotlinx.serialization.json.Json
 import io.ktor.http.*
 
 class MealApi {
-    private val meal = Meal
     private val httpClient = HttpClient {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
             defaultRequest {
-                header("content-Type", ContentType.Application.Json)
+                header("Content-Type", ContentType.Application.Json)
                 url(MEALS_ENDPOINT)
-                body = meal
-
             }
         }
     }
@@ -28,8 +25,15 @@ class MealApi {
         return httpClient.get(MEALS_ENDPOINT)
     }
 
-    suspend fun postMeal(): Meal {
+    suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(MEALS_ENDPOINT) {
+            body = meal
+        }
+    }
+
+    suspend fun patchMeal(meal: Meal, id: String, ): Meal {
+        return httpClient.patch("$MEALS_ENDPOINT/$id") {
+            body = meal
         }
     }
 
