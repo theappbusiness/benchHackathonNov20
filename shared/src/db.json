@@ -65,6 +65,17 @@
       "hot": true,
       "locationLat": 51.509865,
       "locationLong": -0.118092
+    },
+    {
+      "id": "2be2d854-a067-43ec-a488-2e69f0f2a624",
+      "name": "Pizza",
+      "quantity": 2,
+      "availableFromDate": "Tuesday",
+      "expiryDate": "Saturday",
+      "info": "Meat",
+      "hot": false,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
     }
   ]
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="heading">Welcome!</string>
+    <string name="subheading">List a meal to help out someone in your local community or browse the meals that others have added</string>
+    <string name="plusButton">List a Meal</string>
+    <string name="findButton">Find a Meal</string>
+</resources>
