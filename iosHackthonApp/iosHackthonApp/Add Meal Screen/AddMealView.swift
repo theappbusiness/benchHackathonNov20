@@ -16,12 +16,12 @@ struct AddMealView: View {
 	@State var title: String = ""
 	@State var additionalInfo: String = ""
 	@State var quantity: Int = 0
-	@State var hot: Bool = false
 	@State var availableFromDate = Date()
 	@State var useByDate = Date()
 	@State var address: String = ""
 	@State var latitude: Float = 0
 	@State var longitude: Float = 0
+	@State var isHot : Bool = true
 
 	var body: some View {
 		
@@ -38,14 +38,38 @@ struct AddMealView: View {
 					Text(Strings.AddMealScreen.quantity)
 					TextField("", value: $quantity, formatter: NumberFormatter())
 						.modifier(TextFieldModifier())
+						.keyboardType(.numberPad)
 					Text(Strings.AddMealScreen.temperature)
+
 					HStack {
-						Button(Strings.AddMealScreen.hot, action: {
-							hot = true
-						})
-						Button(Strings.AddMealScreen.cold, action: {
-							hot = false
-						})
+						//change to use custom button here
+
+						Button(action: {
+							 isHot = true
+						}) {
+						//	Image(self.isHot == true ? "fireEnabled": "fireDisabled")
+							//	.foregroundColor(self.isHot == true ? .red: .gray)
+							Image(systemName: "flame")
+								.foregroundColor(self.isHot == true ? .red: .gray)
+								.padding(10)
+								.frame(minWidth: 0, maxWidth: 50)
+								.background(Color.clear)
+								.border(self.isHot == true ? Color.red: Color.gray, width: 2)
+								.cornerRadius(5)
+						}
+
+						Button(action: {
+							 isHot = false
+						}) {
+						//	Image(self.isHot == false ? "coldEnabled": "coldDisabled")
+							Image(systemName: "snow")
+								.foregroundColor(self.isHot == false ? .blue: .gray)
+								.padding(10)
+								.frame(minWidth: 0, maxWidth: 50)
+								.background(Color.clear)
+								.border(self.isHot == false ? Color.blue: Color.gray, width: 2)
+								.cornerRadius(5)
+						}
 					}
 				}
 
@@ -60,14 +84,10 @@ struct AddMealView: View {
 				Group {
 					Text(Strings.AddMealScreen.address)
 					HStack {
-
 						TextField("", text: $address)
-							.keyboardType(.numberPad)
 							.modifier(TextFieldModifier())
-						Spacer()
-						Spacer()
+						Spacer(minLength: 10)
 						Button(action: {
-							print("location button tapped!")
 							self.address = "\(self.viewModel.locationManager.address)"
 							self.latitude = Float(self.viewModel.locationManager.userLatitude)
 							self.longitude = Float(self.viewModel.locationManager.userLongitude)
@@ -89,7 +109,7 @@ struct AddMealView: View {
 						availableFromDate: "\(self.availableFromDate)",
 						expiryDate: "\(self.useByDate)",
 						info: "\(self.additionalInfo)",
-						hot: self.hot,
+						hot: self.isHot,
 						locationLat: self.latitude,
 						locationLong:  self.longitude)
 					self.viewModel.postMeal(meal: meal)
