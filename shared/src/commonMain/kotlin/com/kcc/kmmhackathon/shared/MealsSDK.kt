@@ -12,7 +12,11 @@ class MealsSDK {
         return api.getAllMeals()
     }
 
-    fun getUUID(): String {
-        return api.getUUID().toString()
+    @Throws(Exception::class) suspend fun postMeal(meal: Meal): Meal {
+        return api.postMeal(meal)
+    }
+
+    fun getUUID(): Uuid {
+        return uuid4()
     }
 }
