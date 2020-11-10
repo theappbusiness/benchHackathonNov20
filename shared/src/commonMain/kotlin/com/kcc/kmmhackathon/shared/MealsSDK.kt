@@ -12,10 +12,6 @@ class MealsSDK {
         return api.getAllMeals()
     }
 
-    @Throws(Exception::class) suspend fun postMeal(meal: Meal): Meal {
-        return api.postMeal(meal)
-    }
-
     fun getUUID(): String {
         return api.getUUID().toString()
     }
