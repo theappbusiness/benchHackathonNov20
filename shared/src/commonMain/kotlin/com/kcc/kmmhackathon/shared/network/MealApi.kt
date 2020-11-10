@@ -31,7 +31,7 @@ class MealApi {
         }
     }
 
-    suspend fun patchMeal(meal: Meal, id: String, ): Meal {
+    suspend fun patchMeal(meal: Meal, id: String): Meal {
         return httpClient.patch("$MEALS_ENDPOINT/$id") {
             body = meal
         }
