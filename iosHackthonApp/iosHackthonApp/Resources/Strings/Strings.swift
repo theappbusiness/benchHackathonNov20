@@ -20,6 +20,21 @@ struct Strings {
             static let find = "magnifyingglass"
         }
     }
+
+    struct AddMealScreen {
+        struct CollectionAlert {
+            static let title = "Collection Code"
+            static let message = "When someone arrives to collect this meal they will quote this code:\n"
+        }
+    }
+
+    struct Common {
+        struct ErrorAlert {
+            static let message = "There was an error creating your meal.\n please try again"
+        }
+        static let ok = "Ok"
+        static let sorry = "Sorry!"
+    }
 }
 
 

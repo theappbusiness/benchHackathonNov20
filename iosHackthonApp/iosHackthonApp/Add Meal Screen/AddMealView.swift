@@ -17,9 +17,9 @@ struct AddMealView: View {
         ZStack {}
         .alert(isPresented: $viewModel.showingCollectionCode) {
             Alert(
-                title: Text("Collection Code"),
-                message: Text("When someone arrives to collect this meal they will quote this code:\n \(viewModel.code)\nPlease make a note of it"),
-                dismissButton: .default(Text("Ok")))
+                title: Text(Strings.AddMealScreen.CollectionAlert.title),
+                message: Text(Strings.AddMealScreen.CollectionAlert.message + viewModel.code),
+                dismissButton: .default(Text(Strings.Common.ok)))
         }
         ZStack {
             VStack {
@@ -41,9 +41,9 @@ struct AddMealView: View {
         }
         .alert(isPresented: $viewModel.showingError) {
             Alert(
-                title: Text("Sorry!"),
-                message: Text("There was an error creating your meal.\n please try again"),
-                dismissButton: .default(Text("Ok")))
+                title: Text(Strings.Common.sorry),
+                message: Text(Strings.Common.ErrorAlert.message),
+                dismissButton: .default(Text(Strings.Common.ok)))
         }
     }
 }
