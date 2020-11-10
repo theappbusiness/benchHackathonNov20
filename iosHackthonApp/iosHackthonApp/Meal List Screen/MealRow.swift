@@ -20,56 +20,70 @@ struct MealRow: View {
 
             VStack {
                 Spacer()
-            HStack() {
-                Image(meal.hot ? "bowl" : "salad")
-                    .padding()
-                VStack(alignment: .leading, spacing: 10.0) {
-                    HStack {
-                        Text(meal.name)
-                            .font(.title)
-                            .foregroundColor(.black)
-                        Spacer()
-                        Image(systemName: meal.hot ? "flame" : "snow")
-                            .foregroundColor(meal.hot ? .red : .blue)
-                            .padding(.trailing)
-                    }
-                    HStack {
-                        Image(systemName: "info.circle")
-                        Text(meal.info)
-                    }
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                        Text("2.2km away")
-                        // Use user location and meal location to get distance
-                    }
-                    HStack {
-                        Image(systemName: "clock")
-                        Text("Available: \(meal.availableFromDate)")
-                    }
-                    HStack {
-                        Image(systemName: "hourglass")
-                        Text(" Expires: \(meal.expiryDate)")
-                    }
+                HStack() {
+                    Image(meal.hot ? "bowl" : "salad")
+                        .padding()
+                    VStack(alignment: .leading, spacing: 10.0) {
+                        HStack {
+                            Text(meal.name)
+                                .font(.title)
+                                .foregroundColor(.black)
+                            Spacer()
+                            Image(systemName: meal.hot ? "flame" : "snow")
+                                .foregroundColor(meal.hot ? .red : .blue)
+                                .padding(.trailing)
+                        }
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text(meal.info)
+                        }
+                        HStack {
+                            Image(systemName: "mappin.and.ellipse")
+                            Text("2.2km away")
+                            // Use user location and meal location to get distance
+                        }
+                        HStack {
+                            Image(systemName: "clock")
+                            Text("Available: \(meal.availableFromDate)")
+                        }
+                        HStack {
+                            Image(systemName: "hourglass")
+                            Text(" Expires: \(meal.expiryDate)")
+                        }
 
-                    HStack {
-                        Image(systemName: "number")
-                        Text("\(meal.quantity) portions remaining")
+                        HStack {
+                            Image(systemName: "number")
+                            Text("\(meal.quantity) portions remaining")
+                        }
                     }
+                    .foregroundColor(.gray)
 
-                
-                .foregroundColor(.gray)
+                    Spacer()
                 }
 
-                Spacer()
+                VStack {
+                    HStack {
+                        Button(action: {
+
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Reserve a portion")
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(15)
+                        }
+                    }
+                    .padding(.leading)
+                    .padding(.trailing)
+                }
+                .padding(.top)
             }
-
-                    Button("Reserve") {
-
-                    }
-                    .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                }
+            .padding(.bottom)
+            .padding(.top)
             Spacer()
         }
     }
