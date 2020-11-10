@@ -11,24 +11,81 @@ import shared
 
 struct AddMealView: View {
 
-    @ObservedObject private(set) var viewModel: ViewModel
+	@ObservedObject private(set) var viewModel: ViewModel
+	@State var title: String = ""
+	@State var quantity: String = ""
+	@State var hot: Bool = false
+	@State var availableFromDate = Date()
+	@State var useByDate = Date()
 
-    var body: some View {
-        //TODO: Pass the actual values when UI is complete
-        Button("Add a meal") {
-            let meal = Meal(
-                id: "\(viewModel.sdk.getUUID())",
-                name: "Pizza",
-                quantity: 2,
-                availableFromDate: "Tuesday",
-                expiryDate: "Saturday",
-                info: "Meat",
-                hot: false,
-                locationLat: 51.509865,
-                locationLong:  -0.118092)
-            self.viewModel.postMeal(meal: meal)
-        }
-    }
+	var body: some View {
+
+
+		ScrollView {
+			VStack(alignment: .leading, spacing: 10) {
+				Text("Title")
+				TextField("", text: $title)
+					.padding(.all)
+					.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+
+
+				Text("Quantity")
+				TextField("", text: $quantity)
+					.keyboardType(.numberPad)
+					.padding(.all)
+					.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+
+				Text("Temperature")
+				HStack {
+					Button("Hot", action: {
+						hot = true
+					})
+					Button("Cold", action: {
+						hot = false
+					})
+				}
+
+
+				DatePicker("Available From", selection: $availableFromDate, in: Date()..., displayedComponents: .date)
+
+				DatePicker("Use By", selection: $useByDate, in: Date()..., displayedComponents: .date)
+
+
+
+				Spacer()
+				//TODO: Pass the actual values when UI is complete
+				Button("Add A Meal") {
+					let meal = Meal(
+						id: "\(viewModel.sdk.getUUID())",
+						name: "Pizza",
+						quantity: 2,
+						availableFromDate: "Tuesday",
+						expiryDate: "Saturday",
+						info: "Meat",
+						hot: false,
+						locationLat: 51.509865,
+						locationLong:  -0.118092)
+					self.viewModel.postMeal(meal: meal)
+				}
+				.foregroundColor(.white)
+				.padding(10)
+				.frame(minWidth: 0, maxWidth: .infinity)
+				.background(Color.red)
+				.cornerRadius(10)
+
+			}.padding()
+
+		}
+
+
+
+
+
+
+
+
+
+	}
 }
 
 extension AddMealView {
