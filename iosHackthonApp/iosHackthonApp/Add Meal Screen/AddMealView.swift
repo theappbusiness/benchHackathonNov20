@@ -15,14 +15,15 @@ struct AddMealView: View {
 	@ObservedObject private(set) var viewModel: ViewModel
 	@State var title: String = ""
 	@State var additionalInfo: String = ""
-	@State var quantity: String = ""
+	@State var quantity: Int = 0
 	@State var hot: Bool = false
 	@State var availableFromDate = Date()
 	@State var useByDate = Date()
 	@State var address: String = ""
+	@State var latitude: Double = 00.000000
+	@State var longitude: Double = 00.000000
 
 	var body: some View {
-
 		ScrollView {
 			VStack(alignment: .leading, spacing: 10) {
 
@@ -34,7 +35,7 @@ struct AddMealView: View {
 					TextField("", text: $additionalInfo)
 						.modifier(TextFieldModifier())
 					Text(Strings.AddMealScreen.quantity)
-					TextField("", text: $quantity)
+					TextField("", value: $quantity, formatter: NumberFormatter())
 						.modifier(TextFieldModifier())
 					Text(Strings.AddMealScreen.temperature)
 					HStack {
@@ -58,6 +59,7 @@ struct AddMealView: View {
 				Group {
 					Text(Strings.AddMealScreen.address)
 					HStack {
+
 						TextField("", text: $address)
 							.keyboardType(.numberPad)
 							.modifier(TextFieldModifier())
@@ -67,6 +69,11 @@ struct AddMealView: View {
 							print("location button tapped!")
 							print("locationViewModel.userLatitude \(self.viewModel.locationManager.userLatitude)")
 							print("locationViewModel.userLongitude \(self.viewModel.locationManager.userLongitude)")
+							print("locationViewModel.address \(self.viewModel.locationManager.address)")
+							self.address = "\(self.viewModel.locationManager.address)"
+							self.latitude = self.viewModel.locationManager.userLatitude
+							self.longitude = self.viewModel.locationManager.userLongitude
+
 						}) {
 							Image(systemName: "location")
 								.font(.title)
@@ -80,11 +87,11 @@ struct AddMealView: View {
 				Button(Strings.AddMealScreen.addMeal) {
 					let meal = Meal(
 						id: "\(viewModel.sdk.getUUID())",
-						name: "Pizza",
-						quantity: 2,
-						availableFromDate: "Tuesday",
-						expiryDate: "Saturday",
-						info: "Meat",
+						name: "\(self.title)",
+						quantity: Int32(self.quantity),
+						availableFromDate: "\(self.availableFromDate)",
+						expiryDate: "\(self.useByDate)",
+						info: "\(self.additionalInfo)",
 						hot: false,
 						locationLat: 51.509865,
 						locationLong:  -0.118092)

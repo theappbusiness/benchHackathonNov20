@@ -14,6 +14,7 @@ class LocationManager: NSObject, ObservableObject{
 
 	@Published var userLatitude: Double = 0
 	@Published var userLongitude: Double = 0
+	@Published var address: String = ""
 	
 	private let locationManager = CLLocationManager()
 
@@ -33,5 +34,23 @@ extension LocationManager: CLLocationManagerDelegate {
 		userLatitude = location.coordinate.latitude
 		userLongitude = location.coordinate.longitude
 		print(location)
+
+		let geocoder = CLGeocoder()
+		 geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+				 if (error != nil){
+						 print("error in reverseGeocode")
+				 }
+				 let placemark = placemarks! as [CLPlacemark]
+				 if placemark.count>0 {
+						 let placemark = placemarks![0]
+						 print(placemark.locality!)
+						 print(placemark.administrativeArea!)
+						 print(placemark.country!)
+
+					self.address = "\(placemark.postalCode!), \(placemark.locality!),  \(placemark.administrativeArea!), \(placemark.country!)"
+
+
+				 }
+		 }
 	}
 }
