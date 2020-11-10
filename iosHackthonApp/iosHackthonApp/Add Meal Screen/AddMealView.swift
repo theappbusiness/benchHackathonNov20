@@ -65,6 +65,8 @@ struct AddMealView: View {
 						Spacer()
 						Button(action: {
 							print("location button tapped!")
+							print("locationViewModel.userLatitude \(self.viewModel.locationManager.userLatitude)")
+							print("locationViewModel.userLongitude \(self.viewModel.locationManager.userLongitude)")
 						}) {
 							Image(systemName: "location")
 								.font(.title)
@@ -104,9 +106,11 @@ extension AddMealView {
 	class ViewModel: ObservableObject {
 
 		let sdk: MealsSDK
+		let locationManager : LocationManager
 
-		init(sdk: MealsSDK) {
+		init(sdk: MealsSDK, locationManager: LocationManager) {
 			self.sdk = sdk
+			self.locationManager = locationManager
 		}
 
 		func postMeal(meal: Meal) {
@@ -119,7 +123,7 @@ extension AddMealView {
 
 struct AddMealView_Previews: PreviewProvider {
 	static var previews: some View {
-		AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
+		AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
 	}
 }
 

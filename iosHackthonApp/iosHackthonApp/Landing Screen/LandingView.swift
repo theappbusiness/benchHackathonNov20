@@ -4,6 +4,7 @@ import shared
 struct LandingView: View {
 
     private let sdk = MealsSDK()
+		private let locationManager = LocationManager()
 
     var body: some View {
         NavigationView {
@@ -18,7 +19,7 @@ struct LandingView: View {
                     }
                     .padding()
 
-                    NavigationLink(destination: AddMealView(viewModel: .init(sdk: self.sdk))) {
+									NavigationLink(destination: AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))) {
                         CustomButton(
                             width: geometry.size.width,
                             buttonColor: ColorManager.appPrimary,
