@@ -6,7 +6,21 @@ struct MealListView: View {
     @ObservedObject private(set) var viewModel: ViewModel
 
     var body: some View {
-        listView()
+        ScrollView {
+            if #available(iOS 14.0, *) {
+                LazyVStack {
+                    ForEach((0 ..< viewModel.meals.count), id: \.self) {
+                        MealRow(meal: viewModel.meals[$0] as! Meal)
+                            .padding()
+                    }
+                }
+            } else {
+                List(0 ..< viewModel.meals.count) { index in
+                    MealRow(meal: viewModel.meals[index] as! Meal)
+                        .padding()
+                }
+            }
+        }
             .navigationBarTitle(Strings.MealListScreen.title)
             .navigationBarItems(trailing:
                                     Button("Reload") {
@@ -14,32 +28,14 @@ struct MealListView: View {
                                     })
             .navigationBarBackButtonHidden(true)
     }
-
-    private func listView() -> AnyView {
-        switch viewModel.meals {
-        case .loading:
-            return AnyView(Text("Loading...").multilineTextAlignment(.center))
-        case .result(let meals):
-            return AnyView(List(meals) { meal in
-                MealRow(meal: meal)
-            })
-        case .error(let description):
-            return AnyView(Text(description).multilineTextAlignment(.center))
-        }
-    }
 }
 
 extension MealListView {
-    enum LoadableMeals {
-        case loading
-        case result([Meal])
-        case error(String)
-    }
 
     class ViewModel: ObservableObject {
 
         let sdk: MealsSDK
-        @Published var meals = LoadableMeals.loading
+        @Published var meals = []
 
         init(sdk: MealsSDK) {
             self.sdk = sdk
@@ -47,12 +43,9 @@ extension MealListView {
         }
 
         func loadMeals(forceReload: Bool) {
-            self.meals = .loading
-            sdk.getMeals(forceReload: forceReload, completionHandler: { launches, error in
-                if let launches = launches {
-                    self.meals = .result(launches)
-                } else {
-                    self.meals = .error(error?.localizedDescription ?? "error")
+            sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
+                if let meals = meals {
+                    self.meals = meals
                 }
             })
         }
