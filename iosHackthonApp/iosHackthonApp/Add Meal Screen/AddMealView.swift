@@ -27,54 +27,40 @@ struct AddMealView: View {
 			VStack(alignment: .leading, spacing: 10) {
 
 				Group {
-					Text("Title")
+					Text(Strings.AddMealScreen.title)
 					TextField("", text: $title)
-						.padding(.all)
-						.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-
-					Text("Additional Information")
+						.modifier(TextFieldModifier())
+					Text(Strings.AddMealScreen.additionalInfo)
 					TextField("", text: $additionalInfo)
-						.keyboardType(.numberPad)
-						.padding(.all)
-						.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-
-					Text("Quantity")
+						.modifier(TextFieldModifier())
+					Text(Strings.AddMealScreen.quantity)
 					TextField("", text: $quantity)
-						.keyboardType(.numberPad)
-						.padding(.all)
-						.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-
-					//	Spacer()
-
-					Text("Temperature")
+						.modifier(TextFieldModifier())
+					Text(Strings.AddMealScreen.temperature)
 					HStack {
-						Button("Hot", action: {
+						Button(Strings.AddMealScreen.hot, action: {
 							hot = true
 						})
-						Button("Cold", action: {
+						Button(Strings.AddMealScreen.cold, action: {
 							hot = false
 						})
 					}
 				}
 
-
 				Spacer()
 				Group {
-					DatePicker("Available From", selection: $availableFromDate, in: Date()..., displayedComponents: .date)
-
-					DatePicker("Use By", selection: $useByDate, in: Date()..., displayedComponents: .date)
-
+					DatePicker(Strings.AddMealScreen.availableFrom, selection: $availableFromDate, in: Date()..., displayedComponents: .date)
+					DatePicker(Strings.AddMealScreen.useBy, selection: $useByDate, in: Date()..., displayedComponents: .date)
 				}
 
 
 				Spacer()
 				Group {
-					Text("Address")
+					Text(Strings.AddMealScreen.address)
 					HStack {
 						TextField("", text: $address)
 							.keyboardType(.numberPad)
-							.padding(.all)
-							.background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+							.modifier(TextFieldModifier())
 						Spacer()
 						Spacer()
 						Button(action: {
@@ -89,7 +75,7 @@ struct AddMealView: View {
 
 				Spacer()
 				//TODO: Pass the actual values when UI is complete
-				Button("Add A Meal") {
+				Button(Strings.AddMealScreen.addMeal) {
 					let meal = Meal(
 						id: "\(viewModel.sdk.getUUID())",
 						name: "Pizza",
@@ -136,3 +122,5 @@ struct AddMealView_Previews: PreviewProvider {
 		AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
 	}
 }
+
+
