@@ -27,6 +27,7 @@ struct AddMealView: View {
                 locationLat: 51.509865,
                 locationLong:  -0.118092)
             self.viewModel.postMeal(meal: meal)
+        }
         ZStack {}
         .alert(isPresented: $viewModel.showingCollectionCode) {
             Alert(
