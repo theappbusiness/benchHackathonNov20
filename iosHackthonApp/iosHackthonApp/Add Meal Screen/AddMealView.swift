@@ -21,7 +21,7 @@ struct AddMealView: View {
 	@State var address: String = ""
 	@State var latitude: Float = 0
 	@State var longitude: Float = 0
-	@State var isHot : Bool = true
+	@State var isHot: Bool = true
 	
 	var body: some View {
 		
