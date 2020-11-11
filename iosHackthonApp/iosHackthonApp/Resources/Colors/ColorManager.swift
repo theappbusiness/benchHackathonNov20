@@ -10,6 +10,9 @@ import SwiftUI
 
 struct ColorManager {
 
-    static let appPrimary = Color("appPrimary")
-    static let appSecondary = Color("appSecondary")
+	static let appPrimary = Color("appPrimary")
+	static let appSecondary = Color("appSecondary")
+	static let red = Color.red
+	static let blue = Color.blue
+	static let gray = Color.gray
 }
