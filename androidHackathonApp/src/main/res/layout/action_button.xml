@@ -2,12 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:minHeight="@dimen/button_min_height"
+    android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/background"
-    android:padding="@dimen/button_padding"
     android:id="@+id/action_button">
 
     <ImageView
@@ -19,10 +19,11 @@
         app:tint="@color/white" />
 
     <TextView
-        android:id="@+id/button_text"
         android:gravity="center_horizontal"
+        android:id="@+id/button_text"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:padding="@dimen/button_padding"
         android:textColor="@color/white"
         android:textSize="@dimen/button_title_size" />
 </LinearLayout>

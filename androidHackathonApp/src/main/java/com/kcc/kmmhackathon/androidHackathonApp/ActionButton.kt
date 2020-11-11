@@ -77,5 +77,4 @@ class ActionButton : LinearLayout {
         val textView = findViewById<TextView>(R.id.button_text)
         textView.setText(textId)
     }
-
 }
