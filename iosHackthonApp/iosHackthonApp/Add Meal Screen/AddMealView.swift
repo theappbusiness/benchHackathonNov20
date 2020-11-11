@@ -31,44 +31,31 @@ struct AddMealView: View {
 				Group {
 					Text(Strings.AddMealScreen.title)
 					TextField("", text: $title)
-						.modifier(TextFieldModifier())
+						.modifier(GrayTextFieldStyle())
 					Text(Strings.AddMealScreen.additionalInfo)
 					TextField("", text: $additionalInfo)
-						.modifier(TextFieldModifier())
+						.modifier(GrayTextFieldStyle())
 					Text(Strings.AddMealScreen.quantity)
 					TextField("", value: $quantity, formatter: NumberFormatter())
-						.modifier(TextFieldModifier())
+						.modifier(GrayTextFieldStyle())
 						.keyboardType(.numberPad)
 					Text(Strings.AddMealScreen.temperature)
 
 					HStack {
-						//change to use custom button here
-
 						Button(action: {
-							 isHot = true
+							isHot = true
 						}) {
-						//	Image(self.isHot == true ? "fireEnabled": "fireDisabled")
-							//	.foregroundColor(self.isHot == true ? .red: .gray)
-							Image(systemName: "flame")
-								.foregroundColor(self.isHot == true ? .red: .gray)
-								.padding(10)
-								.frame(minWidth: 0, maxWidth: 50)
-								.background(Color.clear)
-								.border(self.isHot == true ? Color.red: Color.gray, width: 2)
-								.cornerRadius(5)
+							let color = self.isHot == true ? ColorManager.red: ColorManager.gray
+							Image(systemName: Strings.AddMealScreen.Images.hotFood)
+								.modifier(IconButtonImageStyle(color: color))
 						}
 
 						Button(action: {
-							 isHot = false
+							isHot = false
 						}) {
-						//	Image(self.isHot == false ? "coldEnabled": "coldDisabled")
-							Image(systemName: "snow")
-								.foregroundColor(self.isHot == false ? .blue: .gray)
-								.padding(10)
-								.frame(minWidth: 0, maxWidth: 50)
-								.background(Color.clear)
-								.border(self.isHot == false ? Color.blue: Color.gray, width: 2)
-								.cornerRadius(5)
+							let color = self.isHot == false ? ColorManager.blue: ColorManager.gray
+							Image(systemName: Strings.AddMealScreen.Images.coldFood)
+								.modifier(IconButtonImageStyle(color: color))
 						}
 					}
 				}
@@ -85,14 +72,14 @@ struct AddMealView: View {
 					Text(Strings.AddMealScreen.address)
 					HStack {
 						TextField("", text: $address)
-							.modifier(TextFieldModifier())
+							.modifier(GrayTextFieldStyle())
 						Spacer(minLength: 10)
 						Button(action: {
 							self.address = "\(self.viewModel.locationManager.address)"
 							self.latitude = Float(self.viewModel.locationManager.userLatitude)
 							self.longitude = Float(self.viewModel.locationManager.userLongitude)
 						}) {
-							Image(systemName: "location")
+							Image(systemName: Strings.AddMealScreen.Images.location)
 								.font(.title)
 								.foregroundColor(.green)
 						}
@@ -100,7 +87,6 @@ struct AddMealView: View {
 				}
 
 				Spacer()
-				//TODO: Pass the actual values when UI is complete
 				Button(Strings.AddMealScreen.addMeal) {
 					let meal = Meal(
 						id: "\(viewModel.sdk.getUUID())",
@@ -114,8 +100,7 @@ struct AddMealView: View {
 						locationLong:  self.longitude)
 					self.viewModel.postMeal(meal: meal)
 				}
-				.modifier(ButtonViewModifier())
-
+				.modifier(AddButtonStyle())
 			}.padding()
 
 		}

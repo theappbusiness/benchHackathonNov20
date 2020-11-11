@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct TextFieldModifier: ViewModifier {
+struct GrayTextFieldStyle: ViewModifier {
 		func body(content: Content) -> some View {
 				content
 					.padding(.all)
@@ -18,7 +18,7 @@ struct TextFieldModifier: ViewModifier {
 }
 
 
-struct ButtonViewModifier: ViewModifier {
+struct AddButtonStyle: ViewModifier {
 		func body(content: Content) -> some View {
 				content
 					.foregroundColor(.white)
@@ -28,3 +28,22 @@ struct ButtonViewModifier: ViewModifier {
 					.cornerRadius(10)
 		}
 }
+
+struct IconButtonImageStyle: ViewModifier {
+	var color: Color
+
+	init(color: Color) {
+		self.color = color
+	}
+		func body(content: Content) -> some View {
+				content
+					.foregroundColor(color)
+					.padding(10)
+					.frame(minWidth: 0, maxWidth: 50)
+					.background(Color.clear)
+					.border(color, width: 2)
+					.cornerRadius(5)
+		}
+}
+
+

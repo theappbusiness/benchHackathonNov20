@@ -33,6 +33,12 @@ struct Strings {
 		static let address = "Address"
 		static let addMeal = "Add A Meal"
 
+		struct Images {
+			static let hotFood = "flame"
+			static let coldFood = "snow"
+			static let location = "location"
+		}
+
 	}
 }
 
