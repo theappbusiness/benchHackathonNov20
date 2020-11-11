@@ -37,20 +37,13 @@ extension LocationManager: CLLocationManagerDelegate {
 
 		let geocoder = CLGeocoder()
 		 geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-				 if (error != nil) {
+				 if (error != nil){
 						 print("error in reverseGeocode")
 				 }
-				 let placemark = placemarks! as [CLPlacemark]
-				 if placemark.count>0 {
-						 let placemark = placemarks![0]
-						 print(placemark.locality!)
-						 print(placemark.administrativeArea!)
-						 print(placemark.country!)
-
-					self.address = "\(placemark.postalCode!), \(placemark.locality!),  \(placemark.administrativeArea!), \(placemark.country!)"
-
-
-				 }
+			if placemarks?.count ?? 0 > 0 {
+				let placemark = placemarks?[0]
+				self.address = "\(placemark?.postalCode ?? ""), \(placemark?.locality ?? ""),  \(placemark?.administrativeArea ?? ""), \(placemark?.country ?? "")"
+			}
 		 }
 	}
 }

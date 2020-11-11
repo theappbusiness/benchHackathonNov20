@@ -52,7 +52,7 @@ struct AddMealView: View {
 								isHot = true
 							}) {
 								let color = self.isHot ? ColorManager.red: ColorManager.gray
-								Image(systemName: Strings.AddMealScreen.Images.hotFood)
+								Image(systemName: Strings.Common.Images.hotFood)
 									.modifier(IconButtonImageStyle(color: color))
 							}
 							
@@ -60,7 +60,7 @@ struct AddMealView: View {
 								isHot = false
 							}) {
 								let color = self.isHot ? ColorManager.gray: ColorManager.blue
-								Image(systemName: Strings.AddMealScreen.Images.coldFood)
+								Image(systemName: Strings.Common.Images.coldFood)
 									.modifier(IconButtonImageStyle(color: color))
 							}
 						}
@@ -82,7 +82,7 @@ struct AddMealView: View {
 								self.latitude = Float(self.viewModel.locationManager.userLatitude)
 								self.longitude = Float(self.viewModel.locationManager.userLongitude)
 							}) {
-								Image(systemName: Strings.AddMealScreen.Images.location)
+								Image(systemName: Strings.Common.Images.location)
 									.font(.title)
 									.foregroundColor(.green)
 							}

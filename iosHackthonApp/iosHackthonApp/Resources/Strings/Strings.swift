@@ -32,13 +32,6 @@ struct Strings {
 		static let useBy = "Use By"
 		static let address = "Address"
 		static let addMeal = "Add A Meal"
-
-		struct Images {
-			static let hotFood = "flame"
-			static let coldFood = "snow"
-			static let location = "location"
-		}
-
 		struct CollectionAlert {
 			static let message = "When someone arrives to collect this meal they will quote the above code"
 		}
@@ -50,6 +43,12 @@ struct Strings {
 		}
 		static let ok = "Ok"
 		static let sorry = "Sorry!"
+
+		struct Images {
+			static let hotFood = "flame"
+			static let coldFood = "snow"
+			static let location = "location"
+		}
 	}
 }
 
