@@ -17,7 +17,6 @@ struct GrayTextFieldStyle: ViewModifier {
 		}
 }
 
-
 struct AddButtonStyle: ViewModifier {
 		func body(content: Content) -> some View {
 				content
@@ -45,5 +44,3 @@ struct IconButtonImageStyle: ViewModifier {
 					.cornerRadius(5)
 		}
 }
-
-

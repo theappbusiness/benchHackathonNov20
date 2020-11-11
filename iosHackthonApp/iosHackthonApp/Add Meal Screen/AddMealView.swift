@@ -33,10 +33,8 @@ struct AddMealView: View {
 					dismissButton: .default(Text(Strings.Common.ok)))
 			}
 		ZStack {
-			
 			ScrollView {
 				VStack(alignment: .leading, spacing: 10) {
-					
 					Group {
 						Text(Strings.AddMealScreen.title)
 						TextField("", text: $title)
@@ -53,7 +51,7 @@ struct AddMealView: View {
 							Button(action: {
 								isHot = true
 							}) {
-								let color = self.isHot == true ? ColorManager.red: ColorManager.gray
+								let color = self.isHot ? ColorManager.red: ColorManager.gray
 								Image(systemName: Strings.AddMealScreen.Images.hotFood)
 									.modifier(IconButtonImageStyle(color: color))
 							}
@@ -61,20 +59,17 @@ struct AddMealView: View {
 							Button(action: {
 								isHot = false
 							}) {
-								let color = self.isHot == false ? ColorManager.blue: ColorManager.gray
+								let color = self.isHot ? ColorManager.gray: ColorManager.blue
 								Image(systemName: Strings.AddMealScreen.Images.coldFood)
 									.modifier(IconButtonImageStyle(color: color))
 							}
 						}
 					}
-					
 					Spacer()
 					Group {
 						DatePicker(Strings.AddMealScreen.availableFrom, selection: $availableFromDate, in: Date()..., displayedComponents: .date)
 						DatePicker(Strings.AddMealScreen.useBy, selection: $useByDate, in: Date()..., displayedComponents: .date)
 					}
-					
-					
 					Spacer()
 					Group {
 						Text(Strings.AddMealScreen.address)
@@ -110,7 +105,6 @@ struct AddMealView: View {
 					}
 					.modifier(AddButtonStyle())
 				}.padding()
-				
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
 		}
