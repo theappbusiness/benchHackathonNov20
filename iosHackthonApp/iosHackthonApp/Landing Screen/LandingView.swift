@@ -3,47 +3,47 @@ import shared
 
 struct LandingView: View {
 
-    private let sdk = MealsSDK()
-		private let locationManager = LocationManager()
+	private let sdk = MealsSDK()
+	private let locationManager = LocationManager()
 
-    var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text(Strings.LandingScreen.subheading)
-                            .font(.subheadline)
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                    .padding()
+	var body: some View {
+		NavigationView {
+			GeometryReader { geometry in
+				VStack {
+					HStack {
+						Spacer()
+						Text(Strings.LandingScreen.subheading)
+							.font(.subheadline)
+							.multilineTextAlignment(.center)
+						Spacer()
+					}
+					.padding()
+					
+					NavigationLink(destination: AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))) {
+						CustomButton(
+							width: geometry.size.width,
+							buttonColor: ColorManager.appPrimary,
+							image: Strings.LandingScreen.Images.plus,
+							text: Strings.LandingScreen.plusButtonText)
+					}
 
-									NavigationLink(destination: AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))) {
-                        CustomButton(
-                            width: geometry.size.width,
-                            buttonColor: ColorManager.appPrimary,
-                            image: Strings.LandingScreen.Images.plus,
-                            text: Strings.LandingScreen.plusButtonText)
-                    }
-
-                    NavigationLink(destination: MealListView(viewModel: .init(sdk: self.sdk))) {
-                        CustomButton(
-                            width: geometry.size.width,
-                            buttonColor: ColorManager.appSecondary,
-                            image: Strings.LandingScreen.Images.find,
-                            text: Strings.LandingScreen.findButtonText)
-                    }
-                }
-            }
-            .navigationBarTitle(Text(Strings.LandingScreen.heading))
-            .navigationBarBackButtonHidden(true)
-        }
-    }
+					NavigationLink(destination: MealListView(viewModel: .init(sdk: self.sdk))) {
+						CustomButton(
+							width: geometry.size.width,
+							buttonColor: ColorManager.appSecondary,
+							image: Strings.LandingScreen.Images.find,
+							text: Strings.LandingScreen.findButtonText)
+					}
+				}
+			}
+			.navigationBarTitle(Text(Strings.LandingScreen.heading))
+			.navigationBarBackButtonHidden(true)
+		}
+	}
 }
 
 struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingView()
-    }
+	static var previews: some View {
+		LandingView()
+	}
 }

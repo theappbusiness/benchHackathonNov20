@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CoreLocation
 
-class LocationManager: NSObject, ObservableObject{
+class LocationManager: NSObject, ObservableObject {
 
 	@Published var userLatitude: Double = 0
 	@Published var userLongitude: Double = 0
@@ -37,7 +37,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
 		let geocoder = CLGeocoder()
 		 geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-				 if (error != nil){
+				 if (error != nil) {
 						 print("error in reverseGeocode")
 				 }
 				 let placemark = placemarks! as [CLPlacemark]
