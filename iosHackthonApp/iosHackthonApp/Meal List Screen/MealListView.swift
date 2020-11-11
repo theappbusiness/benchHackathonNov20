@@ -25,7 +25,7 @@ struct MealListView: View {
         ScrollView {
             LazyVStack {
                 ForEach((0 ..< viewModel.meals.count), id: \.self) {
-                    MealRow(listViewModel: viewModel, rowViewModel: MealRowViewModel(mealDistanceTuple: viewModel.meals[$0]))
+                    MealRow(listViewModel: viewModel, rowViewModel: MealRowViewModel(mealWithDistance: viewModel.meals[$0]))
                         .padding()
                 }
             }

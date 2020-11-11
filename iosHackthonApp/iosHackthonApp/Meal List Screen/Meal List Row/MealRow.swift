@@ -27,17 +27,17 @@ struct MealRow: View {
                         .padding()
                     VStack(alignment: .leading, spacing: rowViewModel.spacing) {
                         HStack {
-                            Text(rowViewModel.mealDistanceTuple.meal.name)
+                            Text(rowViewModel.mealWithDistance.meal.name)
                                 .font(.title)
                                 .foregroundColor(rowViewModel.textColor)
                             Spacer()
                             Image(systemName: rowViewModel.temperatureImage)
-                                .foregroundColor(rowViewModel.imageColor)
+                                .foregroundColor(rowViewModel.temperatureImageColor)
                                 .padding(.trailing)
                         }
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.info)
-                            Text(rowViewModel.mealDistanceTuple.meal.info)
+                            Text(rowViewModel.mealWithDistance.meal.info)
                         }
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.location)
@@ -66,7 +66,7 @@ struct MealRow: View {
                 VStack {
                     HStack {
                         Button(action: {
-                            listViewModel.patchMeal(meal: rowViewModel.mealDistanceTuple.meal)
+                            listViewModel.patchMeal(meal: rowViewModel.mealWithDistance.meal)
                         }) {
                             HStack {
                                 Spacer()
@@ -95,6 +95,6 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(mealDistanceTuple: (Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12), 12)))
+        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(mealWithDistance: MealWithDistance(meal: Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12), distance: 12)))
     }
 }

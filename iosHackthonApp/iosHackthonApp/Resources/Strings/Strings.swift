@@ -10,7 +10,7 @@ import Foundation
 
 struct Strings {
 	struct LandingScreen {
-		static let heading = "Welcome!"
+		static let heading = "CommunityKitchen"
 		static let subheading = "List a meal to help out someone in your local community or browse the meals that others have added"
 		static let plusButtonText = "List a Meal"
 		static let findButtonText = "Find a Meal"
@@ -42,8 +42,8 @@ struct Strings {
         static let title = "Meals in your area"
         static let portion = "portion remaining"
         static let portions = "portions remaining"
-        static let available = "Available from "
-        static let expiresAt = " Expires on "
+        static let available = "Available: "
+        static let expiresAt = " Expires: "
 
         struct UnavailableAlert {
             static let message = "This meal is no longer available"
@@ -59,8 +59,10 @@ struct Strings {
         }
 
         struct Images {
-            static let hotFood = "bowl"
-            static let coldFood = "salad"
+            static let hotFood = "bowl-black"
+            static let coldFood = "salad-black"
+            static let hotFoodGrey = "bowl-grey"
+            static let coldFoodGrey = "salad-grey"
             static let info = "info.circle"
             static let location = "mappin.and.ellipse"
             static let fromTime = "clock"
@@ -84,6 +86,11 @@ struct Strings {
 			static let coldFood = "snow"
 			static let location = "location"
 		}
+
+        struct Date {
+            static let americanFormat = "yyyy-MM-dd' 'HH:mm:ssZ"
+            static let nameDayMonth = "E d MMM"
+        }
 	}
 }
 
