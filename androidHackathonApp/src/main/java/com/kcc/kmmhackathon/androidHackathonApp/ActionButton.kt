@@ -36,16 +36,6 @@ class ActionButton : LinearLayout {
         inflateLayout(context)
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(
-            context: Context,
-            @Nullable attrs: AttributeSet?,
-            defStyleAttr: Int,
-            defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes) {
-        inflateLayout(context)
-    }
-
     private fun inflateLayout(context: Context) {
         inflate(context, R.layout.action_button, this)
     }

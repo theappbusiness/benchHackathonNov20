@@ -1,11 +1,8 @@
 package com.kcc.kmmhackathon.androidHackathonApp
 
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kcc.kmmhackathon.shared.Greeting
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
