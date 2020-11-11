@@ -19,7 +19,7 @@ struct LandingView: View {
 					}
 					.padding()
 					
-					NavigationLink(destination: TabAppView(selectedView: 1)) {
+					NavigationLink(destination: TabAppView(selectedView: 0)) {
 						CustomButton(
 							width: geometry.size.width,
 							buttonColor: ColorManager.appPrimary,
@@ -27,7 +27,7 @@ struct LandingView: View {
 							text: Strings.LandingScreen.plusButtonText)
 					}
 
-					NavigationLink(destination: TabAppView(selectedView: 0)) {
+					NavigationLink(destination: TabAppView(selectedView: 1)) {
 						CustomButton(
 							width: geometry.size.width,
 							buttonColor: ColorManager.appSecondary,

@@ -18,20 +18,19 @@ struct TabAppView: View {
 	var body: some View {
 		TabView(selection: $selectedView, content: {
 			NavigationView {
-				MealListView(viewModel: .init(sdk: self.sdk))
-			}
-			.tabItem {
-				Image(systemName: Strings.LandingScreen.Images.find)
-				Text(Strings.LandingScreen.findButtonText)
-			}.tag(0)
-
-
-			NavigationView {
 				AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))
 			}
 			.tabItem {
 				Image(systemName: Strings.LandingScreen.Images.plus)
 				Text(Strings.LandingScreen.plusButtonText)
+			}.tag(0)
+
+			NavigationView {
+				MealListView(viewModel: .init(sdk: self.sdk))
+			}
+			.tabItem {
+				Image(systemName: Strings.LandingScreen.Images.find)
+				Text(Strings.LandingScreen.findButtonText)
 			}.tag(1)
 		})
 		
