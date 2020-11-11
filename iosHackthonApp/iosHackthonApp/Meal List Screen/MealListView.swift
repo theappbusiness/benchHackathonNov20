@@ -7,26 +7,19 @@ struct MealListView: View {
 
     var body: some View {
         ScrollView {
-            if #available(iOS 14.0, *) {
-                LazyVStack {
-                    ForEach((0 ..< viewModel.meals.count), id: \.self) {
-                        MealRow(meal: viewModel.meals[$0] as! Meal)
-                            .padding()
-                    }
-                }
-            } else {
-                List(0 ..< viewModel.meals.count) { index in
-                    MealRow(meal: viewModel.meals[index] as! Meal)
+            LazyVStack {
+                ForEach((0 ..< viewModel.meals.count), id: \.self) {
+                    MealRow(meal: viewModel.meals[$0] as! Meal)
                         .padding()
                 }
             }
         }
-            .navigationBarTitle(Strings.MealListScreen.title)
-            .navigationBarItems(trailing:
-                                    Button("Reload") {
-                                        self.viewModel.loadMeals(forceReload: true)
-                                    })
-            .navigationBarBackButtonHidden(true)
+        .navigationBarTitle(Strings.MealListScreen.title)
+        .navigationBarItems(trailing:
+                                Button("Reload") {
+                                    self.viewModel.loadMeals(forceReload: true)
+                                })
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -36,6 +29,7 @@ extension MealListView {
 
         let sdk: MealsSDK
         @Published var meals = []
+        @Published
 
         init(sdk: MealsSDK) {
             self.sdk = sdk
@@ -48,6 +42,14 @@ extension MealListView {
                     self.meals = meals
                 }
             })
+        }
+
+        func patchMeal(meal: Meal) {
+            sdk.patchMeal(meal: meal) { meal, error in
+                if let meal = meal {
+
+                }
+            }
         }
     }
 }

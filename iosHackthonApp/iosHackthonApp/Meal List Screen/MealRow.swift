@@ -10,6 +10,7 @@ import SwiftUI
 import shared
 
 struct MealRow: View {
+    var viewModel: MealListView.ViewModel
     var meal: Meal
 
     var body: some View {
@@ -64,7 +65,7 @@ struct MealRow: View {
                 VStack {
                     HStack {
                         Button(action: {
-
+                            viewModel.
                         }) {
                             HStack {
                                 Spacer()
@@ -91,6 +92,6 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(meal: Meal(id: "1", name: "lasagne", quantity: 3, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
+        MealRow(viewModel: <#MealListView.ViewModel#>, meal: Meal(id: "1", name: "lasagne", quantity: 3, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
     }
 }
