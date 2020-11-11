@@ -62,7 +62,6 @@ extension MealListView {
 
         func loadMeals(forceReload: Bool) {
             sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
-                print(error)
                 if let meals = meals {
                     self.meals = meals
                 }
