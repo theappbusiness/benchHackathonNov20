@@ -32,20 +32,20 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintBottom_toBottomOf="parent">
 
-  <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
-      android:id="@+id/add_meal_button"
-      android:background="@color/colorPrimary"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/default_margin"
-      android:layout_marginTop="@dimen/medium_margin"/>
+    <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
+        android:id="@+id/add_meal_button"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="@dimen/medium_margin"/>
 
-  <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
-      android:id="@+id/find_meal_button"
-      android:background="@color/colorSecondary"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/default_margin" />
+    <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
+        android:id="@+id/find_meal_button"
+        android:background="@color/colorSecondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin" />
 
   </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
