@@ -11,13 +11,13 @@ import shared
 
 struct AddMealView: View {
 
-    @ObservedObject private(set) var viewModel: ViewModel
+    @ObservedObject private(set) var viewModel: AddMealViewModel
 
     var body: some View {
         //TODO: Pass the actual values when UI is complete
         Button("Add a meal") {
             let meal = Meal(
-                id: "\(viewModel.sdk.getUUID())",
+                id: "\(self.viewModel.sdk.getUUID())",
                 name: "Pizza",
                 quantity: 2,
                 availableFromDate: "Tuesday",
@@ -28,28 +28,42 @@ struct AddMealView: View {
                 locationLong:  -0.118092)
             self.viewModel.postMeal(meal: meal)
         }
-    }
-}
-
-extension AddMealView {
-    class ViewModel: ObservableObject {
-
-        let sdk: MealsSDK
-
-        init(sdk: MealsSDK) {
-            self.sdk = sdk
+        ZStack {}
+        .alert(isPresented: $viewModel.showingCollectionCode) {
+            Alert(
+                title: Text(viewModel.code),
+                message: Text(Strings.AddMealScreen.CollectionAlert.message),
+                dismissButton: .default(Text(Strings.Common.ok)))
         }
-
-        func postMeal(meal: Meal) {
-            sdk.postMeal(meal: meal, completionHandler: { response, test in
-                print("Response \(response)")
-            })
+        ZStack {
+            VStack {
+            //TODO: Pass the actual values when UI is complete
+                Button("Add a meal") {
+                    let meal = Meal(
+                        id: "\(viewModel.sdk.getUUID())",
+                        name: "Pizza",
+                        quantity: 2,
+                        availableFromDate: "Tuesday",
+                        expiryDate: "Saturday",
+                        info: "Meat",
+                        hot: false,
+                        locationLat: 51.509865,
+                        locationLong:  -0.118092)
+                    self.viewModel.postMeal(meal: meal)
+                }
+            }
+        }
+        .alert(isPresented: $viewModel.showingError) {
+            Alert(
+                title: Text(Strings.Common.sorry),
+                message: Text(Strings.Common.ErrorAlert.message),
+                dismissButton: .default(Text(Strings.Common.ok)))
         }
     }
 }
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK()))
+        AddMealView(viewModel: AddMealViewModel(sdk: MealsSDK()))
     }
 }
