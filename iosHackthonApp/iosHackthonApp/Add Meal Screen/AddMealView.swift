@@ -12,7 +12,7 @@ import CoreLocation
 
 struct AddMealView: View {
 
-	@ObservedObject private(set) var viewModel: ViewModel
+	@ObservedObject private(set) var viewModel: AddMealViewModel
 	@State var title: String = ""
 	@State var additionalInfo: String = ""
 	@State var quantity: Int = 0
@@ -24,6 +24,15 @@ struct AddMealView: View {
 	@State var isHot : Bool = true
 
 	var body: some View {
+
+	ZStack {}
+	.alert(isPresented: $viewModel.showingCollectionCode) {
+			Alert(
+					title: Text(viewModel.code),
+					message: Text(Strings.AddMealScreen.CollectionAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+	}
+	ZStack {
 		
 		ScrollView {
 			VStack(alignment: .leading, spacing: 10) {
@@ -106,30 +115,18 @@ struct AddMealView: View {
 		}
 		.navigationBarTitle(Strings.AddMealScreen.addMeal)
 	}
-}
-
-extension AddMealView {
-	class ViewModel: ObservableObject {
-
-		let sdk: MealsSDK
-		let locationManager : LocationManager
-
-		init(sdk: MealsSDK, locationManager: LocationManager) {
-			self.sdk = sdk
-			self.locationManager = locationManager
-		}
-
-		func postMeal(meal: Meal) {
-			sdk.postMeal(meal: meal, completionHandler: { response, test in
-				print("Response \(response)")
-			})
-		}
+	.alert(isPresented: $viewModel.showingError) {
+			Alert(
+					title: Text(Strings.Common.sorry),
+					message: Text(Strings.Common.ErrorAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+	}
 	}
 }
 
 struct AddMealView_Previews: PreviewProvider {
 	static var previews: some View {
-		AddMealView(viewModel: AddMealView.ViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
+		AddMealView(viewModel: AddMealViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
 	}
 }
 
