@@ -13,6 +13,10 @@ struct MealRow: View {
     var viewModel: MealListView.ViewModel
     var meal: Meal
 
+    var buttonDisabled: Bool {
+        meal.quantity < 1
+    }
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
@@ -69,14 +73,16 @@ struct MealRow: View {
                         }) {
                             HStack {
                                 Spacer()
-                                Text("Reserve a portion")
+                                Text(buttonDisabled ? "Unavailable" : "Reserve a portion")
                                 Spacer()
                             }
                             .padding()
-                            .background(Color.red)
+                            .background(buttonDisabled ? Color.gray : Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(15)
                         }
+                        .disabled(buttonDisabled)
+                        .shadow(radius: buttonDisabled ? 0 : 2)
                     }
                     .padding(.leading)
                     .padding(.trailing)

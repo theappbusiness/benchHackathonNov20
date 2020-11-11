@@ -14,7 +14,7 @@
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a01",
       "name": "Chicken curry",
-      "quantity": 2,
+      "quantity": 0,
       "availableFromDate": "Monday",
       "expiryDate": "Wednesday",
       "info": "Sorry vegans",
@@ -25,7 +25,7 @@
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a03",
       "name": "tomato pasta",
-      "quantity": 1,
+      "quantity": 0,
       "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
       "info": "Vegetarian",
@@ -36,7 +36,7 @@
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a04",
       "name": "lasagne",
-      "quantity": 4,
+      "quantity": 1,
       "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
       "info": "This is lasagne",
