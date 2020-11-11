@@ -7,22 +7,22 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background"
-    android:padding="16dp"
+    android:padding="@dimen/button_padding"
     android:id="@+id/action_button">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/button_image"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:minHeight="50dp"
-        android:minWidth="50dp"
+        android:minHeight="@dimen/button_image_size"
+        android:minWidth="@dimen/button_image_size"
         app:tint="@color/white" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/button_text"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="@dimen/button_title_size" />
 </LinearLayout>

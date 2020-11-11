@@ -52,7 +52,7 @@ class ActionButton : LinearLayout {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        val textView = findViewById<TextView>(R.id.textView)
+        val textView = findViewById<TextView>(R.id.button_text)
         makeSpannable(textView)
     }
 
@@ -69,12 +69,12 @@ class ActionButton : LinearLayout {
     }
 
     fun setIcon(resourceId: Int) {
-       val iconView = findViewById<ImageView>(R.id.imageView)
+       val iconView = findViewById<ImageView>(R.id.button_image)
         iconView.setImageResource(resourceId)
     }
 
     fun setText(textId: Int) {
-        val textView = findViewById<TextView>(R.id.textView)
+        val textView = findViewById<TextView>(R.id.button_text)
         textView.setText(textId)
     }
 
