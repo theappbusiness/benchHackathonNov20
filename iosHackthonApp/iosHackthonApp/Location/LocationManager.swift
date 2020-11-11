@@ -37,7 +37,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
 		let geocoder = CLGeocoder()
 		 geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-				 if (error != nil){
+				 if (error != nil) {
 						 print("error in reverseGeocode")
 				 }
 			if placemarks?.count ?? 0 > 0 {
