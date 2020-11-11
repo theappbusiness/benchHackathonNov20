@@ -16,6 +16,10 @@ class MealsSDK {
         return api.postMeal(meal)
     }
 
+    @Throws(Exception::class) suspend fun patchMeal(meal: Meal): Meal {
+        return api.patchMeal(meal)
+    }
+
     fun getUUID(): Uuid {
         return uuid4()
     }

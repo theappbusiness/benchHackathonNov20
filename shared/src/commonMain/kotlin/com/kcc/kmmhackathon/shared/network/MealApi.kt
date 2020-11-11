@@ -14,6 +14,10 @@ class MealApi {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
+            defaultRequest {
+                header("Content-Type", ContentType.Application.Json)
+                url(MEALS_ENDPOINT)
+            }
         }
     }
 
@@ -23,8 +27,12 @@ class MealApi {
 
     suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(MEALS_ENDPOINT) {
-            url(MEALS_ENDPOINT)
-            contentType(ContentType.Application.Json)
+            body = meal
+        }
+    }
+
+    suspend fun patchMeal(meal: Meal): Meal {
+        return httpClient.patch("$MEALS_ENDPOINT/${meal.id}") {
             body = meal
         }
     }

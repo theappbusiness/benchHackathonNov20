@@ -6,10 +6,18 @@ struct MealListView: View {
     @ObservedObject private(set) var viewModel: ViewModel
 
     var body: some View {
+        ZStack {}
+            .alert(isPresented: $viewModel.showingCollectionCode) {
+                Alert(
+                    title: Text(viewModel.code),
+                    message: Text(Strings.AddMealScreen.CollectionAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            }
+
         ScrollView {
             LazyVStack {
                 ForEach((0 ..< viewModel.meals.count), id: \.self) {
-                    MealRow(meal: viewModel.meals[$0] as! Meal)
+                    MealRow(viewModel: viewModel, meal: viewModel.meals[$0] as! Meal)
                         .padding()
                 }
             }
@@ -20,6 +28,12 @@ struct MealListView: View {
                                     self.viewModel.loadMeals(forceReload: true)
                                 })
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $viewModel.showingError) {
+            Alert(
+                title: Text(Strings.Common.sorry),
+                message: Text(Strings.Common.ErrorAlert.message),
+                dismissButton: .default(Text(Strings.Common.ok)))
+        }
     }
 }
 
@@ -29,7 +43,9 @@ extension MealListView {
 
         let sdk: MealsSDK
         @Published var meals = []
-        @Published
+        @Published var code = ""
+        @Published var showingCollectionCode = false
+        @Published var showingError = false
 
         init(sdk: MealsSDK) {
             self.sdk = sdk
@@ -45,10 +61,14 @@ extension MealListView {
         }
 
         func patchMeal(meal: Meal) {
-            sdk.patchMeal(meal: meal) { meal, error in
-                if let meal = meal {
-
+            let newMeal = Meal(id: meal.id, name: meal.name, quantity: meal.quantity - 1, availableFromDate: meal.availableFromDate, expiryDate: meal.expiryDate, info: meal.info, hot: meal.hot, locationLat: meal.locationLat, locationLong: meal.locationLong)
+            sdk.patchMeal(meal: newMeal) { meal, error in
+                guard let response = meal else {
+                    self.showingError.toggle()
+                    return
                 }
+                self.code = response.id.last4Chars()
+                self.showingCollectionCode.toggle()
             }
         }
     }

@@ -65,7 +65,7 @@ struct MealRow: View {
                 VStack {
                     HStack {
                         Button(action: {
-                            viewModel.
+                            viewModel.patchMeal(meal: meal)
                         }) {
                             HStack {
                                 Spacer()
@@ -92,6 +92,6 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(viewModel: <#MealListView.ViewModel#>, meal: Meal(id: "1", name: "lasagne", quantity: 3, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
+        MealRow(viewModel: MealListView.ViewModel(sdk: MealsSDK()), meal: Meal(id: "1", name: "lasagne", quantity: 3, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
     }
 }

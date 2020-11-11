@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedUuidUuid, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteArray, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode, SharedKotlinEnum<E>;
+@class SharedMeal, SharedUuidUuid, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode, SharedKotlinEnum<E>;
 
 @protocol SharedKotlinx_serialization_coreKSerializer, SharedKotlinComparable, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -157,7 +157,19 @@ __attribute__((swift_name("MealsSDK")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)getMealsForceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(forceReload:completionHandler:)")));
-- (NSString *)getUUID __attribute__((swift_name("getUUID()")));
+- (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)patchMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("patchMeal(meal:completionHandler:)")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -179,7 +191,18 @@ __attribute__((swift_name("MealApi")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)getAllMealsWithCompletionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(completionHandler:)")));
-- (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)patchMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("patchMeal(meal:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -250,6 +273,25 @@ __attribute__((swift_name("KotlinException")))
 - (instancetype)initWithCause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
 @end;
 
+__attribute__((swift_name("KotlinComparable")))
+@protocol SharedKotlinComparable
+@required
+- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("UuidUuid")))
+@interface SharedUuidUuid : SharedBase <SharedKotlinComparable>
+- (instancetype)initWithMsb:(int64_t)msb lsb:(int64_t)lsb __attribute__((swift_name("init(msb:lsb:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithUuidBytes:(SharedKotlinByteArray *)uuidBytes __attribute__((swift_name("init(uuidBytes:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use `uuidOf` instead.")));
+- (int32_t)compareToOther:(SharedUuidUuid *)other __attribute__((swift_name("compareTo(other:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int64_t leastSignificantBits __attribute__((swift_name("leastSignificantBits")));
+@property (readonly) int64_t mostSignificantBits __attribute__((swift_name("mostSignificantBits")));
+@end;
+
 __attribute__((swift_name("KotlinRuntimeException")))
 @interface SharedKotlinRuntimeException : SharedKotlinException
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
@@ -275,25 +317,6 @@ __attribute__((swift_name("KotlinCancellationException")))
 - (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithMessage:(NSString * _Nullable)message cause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithCause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-@end;
-
-__attribute__((swift_name("KotlinComparable")))
-@protocol SharedKotlinComparable
-@required
-- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("UuidUuid")))
-@interface SharedUuidUuid : SharedBase <SharedKotlinComparable>
-- (instancetype)initWithMsb:(int64_t)msb lsb:(int64_t)lsb __attribute__((swift_name("init(msb:lsb:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithUuidBytes:(SharedKotlinByteArray *)uuidBytes __attribute__((swift_name("init(uuidBytes:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use `uuidOf` instead.")));
-- (int32_t)compareToOther:(SharedUuidUuid *)other __attribute__((swift_name("compareTo(other:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) int64_t leastSignificantBits __attribute__((swift_name("leastSignificantBits")));
-@property (readonly) int64_t mostSignificantBits __attribute__((swift_name("mostSignificantBits")));
 @end;
 
 __attribute__((swift_name("Kotlinx_serialization_coreSerializationStrategy")))
