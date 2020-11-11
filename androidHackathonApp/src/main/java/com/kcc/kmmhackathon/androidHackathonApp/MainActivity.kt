@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         addMealButton.setIcon(R.drawable.ic_outline_add_box_24)
         addMealButton.setText(R.string.add_meal_title)
         addMealButton.setOnClickListener {
-            println("Add meal button tapped")
             val intent = Intent(this, AddMealActivity::class.java)
             startActivity(intent)
         }
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         findMealButton.setIcon(R.drawable.ic_baseline_search_24)
         findMealButton.setText(R.string.find_meal_title)
         findMealButton.setOnClickListener {
-            println("Find meal button tapped")
             val intent = Intent(this, FindMealActivity::class.java)
             startActivity(intent)
         }
