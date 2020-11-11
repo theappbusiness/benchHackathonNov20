@@ -14,7 +14,6 @@ final class MealListViewModel: ObservableObject {
     let sdk: MealsSDK
     let locationManager: LocationManager
 
-//    @Published var meals = [(meal: Meal, distance: Double)]()
     @Published var meals = [MealWithDistance]()
 
     @Published var code = ""
@@ -32,7 +31,6 @@ final class MealListViewModel: ObservableObject {
         sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
             if let meals = meals {
                 self.meals = meals
-//                    .map { ($0, self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
                     .map { MealWithDistance(meal: $0, distance: self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
                     .sorted(by: { $0.distance < $1.distance })
             }

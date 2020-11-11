@@ -9,34 +9,34 @@
 import Foundation
 
 struct Strings {
-	struct LandingScreen {
-		static let heading = "CommunityKitchen"
-		static let subheading = "List a meal to help out someone in your local community or browse the meals that others have added"
-		static let plusButtonText = "List a Meal"
-		static let findButtonText = "Find a Meal"
+    struct LandingScreen {
+        static let heading = "CommunityKitchen"
+        static let subheading = "List a meal to help out someone in your local community or browse the meals that others have added"
+        static let plusButtonText = "List a Meal"
+        static let findButtonText = "Find a Meal"
 
-		struct Images {
-			static let plus = "plus.app"
-			static let find = "magnifyingglass"
-		}
-	}
+        struct Images {
+            static let plus = "plus.app"
+            static let find = "magnifyingglass"
+        }
+    }
 
-	struct AddMealScreen {
-		static let title = "Title"
-		static let additionalInfo = "Additional Information"
-		static let quantity = "Quantity"
-		static let temperature = "Temperature"
-		static let hot = "Hot"
-		static let cold = "Cold"
-		static let availableFrom = "Available From"
-		static let useBy = "Use By"
-		static let address = "Address"
-		static let addMeal = "Add A Meal"
+    struct AddMealScreen {
+        static let title = "Title"
+        static let additionalInfo = "Additional Information"
+        static let quantity = "Quantity"
+        static let temperature = "Temperature"
+        static let hot = "Hot"
+        static let cold = "Cold"
+        static let availableFrom = "Available From"
+        static let useBy = "Use By"
+        static let address = "Address"
+        static let addMeal = "Add A Meal"
 
-		struct CollectionAlert {
-			static let message = "When someone arrives to collect this meal they will quote the above code"
-		}
-	}
+        struct CollectionAlert {
+            static let message = "When someone arrives to collect this meal they will quote the above code"
+        }
+    }
 
     struct MealListScreen {
         static let title = "Meals in your area"
@@ -72,26 +72,27 @@ struct Strings {
         }
     }
 
-	struct Common {
-		struct ErrorAlert {
-			static let message = "There was an error creating your meal.\n please try again"
-		}
-		static let ok = "Ok"
-		static let sorry = "Sorry!"
+    struct Common {
+        static let ok = "Ok"
+        static let sorry = "Sorry!"
         static let km = "km"
         static let twoDecimal = "%.2f"
 
-		struct Images {
-			static let hotFood = "flame"
-			static let coldFood = "snow"
-			static let location = "location"
-		}
+        struct ErrorAlert {
+            static let message = "There was an error creating your meal.\n please try again"
+        }
+
+        struct Images {
+            static let hotFood = "flame"
+            static let coldFood = "snow"
+            static let location = "location"
+        }
 
         struct Date {
             static let americanFormat = "yyyy-MM-dd' 'HH:mm:ssZ"
             static let nameDayMonth = "E d MMM"
         }
-	}
+    }
 }
 
 
