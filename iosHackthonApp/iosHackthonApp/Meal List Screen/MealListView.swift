@@ -7,10 +7,17 @@ struct MealListView: View {
 
     var body: some View {
         ZStack {}
+            .alert(isPresented: $viewModel.showingNoMoreAvailableError) {
+                Alert(
+                    title: Text(Strings.Common.sorry),
+                    message: Text("This meal is unavailable"),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            }
+        ZStack {}
             .alert(isPresented: $viewModel.showingCollectionCode) {
                 Alert(
                     title: Text(viewModel.code),
-                    message: Text(Strings.AddMealScreen.CollectionAlert.message),
+                    message: Text("When you go to collect this meal, you will be asked for the above code"),
                     dismissButton: .default(Text(Strings.Common.ok)))
             }
 
@@ -20,12 +27,6 @@ struct MealListView: View {
                     MealRow(viewModel: viewModel, meal: viewModel.meals[$0] as! Meal)
                         .padding()
                 }
-            }
-            .alert(isPresented: $viewModel.showingNoMoreAvailableError) {
-                Alert(
-                    title: Text(Strings.Common.sorry),
-                    message: Text("This meal is unavailable"),
-                    dismissButton: .default(Text(Strings.Common.ok)))
             }
         }
         .navigationBarTitle(Strings.MealListScreen.title)
@@ -61,6 +62,7 @@ extension MealListView {
 
         func loadMeals(forceReload: Bool) {
             sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
+                print(error)
                 if let meals = meals {
                     self.meals = meals
                 }
@@ -72,16 +74,19 @@ extension MealListView {
 
                 guard let updatedMeal = updatedMeal else {
                     self.showingError.toggle()
+                    self.loadMeals(forceReload: true)
                     return
                 }
-                if updatedMeal.quantity.quantity > 1 {
-                    self.sdk.patchMeal(id: updatedMeal.id, quantity: updatedMeal.quantity.quantity - 1) { meal, error in
+                if updatedMeal.quantity > 0 {
+                    self.sdk.patchMeal(id: updatedMeal.id, quantity: updatedMeal.quantity - 1) { meal, error in
                         guard let meal = meal else {
                             self.showingError.toggle()
+                            self.loadMeals(forceReload: true)
                             return
                         }
                         self.code = meal.id.last4Chars()
                         self.showingCollectionCode.toggle()
+                        self.loadMeals(forceReload: true)
                     }
                 } else {
                     self.showingNoMoreAvailableError.toggle()

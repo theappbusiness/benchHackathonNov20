@@ -54,7 +54,7 @@ struct MealRow: View {
 
                         HStack {
                             Image(systemName: "number")
-                            Text("\(meal.quantity.quantity) portions remaining")
+                            Text("\(meal.quantity) portions remaining")
                         }
                     }
                     .foregroundColor(.gray)
@@ -92,6 +92,6 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(viewModel: MealListView.ViewModel(sdk: MealsSDK()), meal: Meal(id: "1", name: "lasagne", quantity: Quantity(quantity: 2), availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
+        MealRow(viewModel: MealListView.ViewModel(sdk: MealsSDK()), meal: Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12))
     }
 }

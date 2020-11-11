@@ -19,7 +19,7 @@ struct AddMealView: View {
             let meal = Meal(
                 id: "\(self.viewModel.sdk.getUUID())",
                 name: "Pizza",
-                quantity: Quantity(quantity: 2),
+                quantity: 2,
                 availableFromDate: "Tuesday",
                 expiryDate: "Saturday",
                 info: "Meat",
@@ -42,7 +42,7 @@ struct AddMealView: View {
                     let meal = Meal(
                         id: "\(viewModel.sdk.getUUID())",
                         name: "Pizza",
-                        quantity: Quantity(quantity: 2),
+                        quantity: 2,
                         availableFromDate: "Tuesday",
                         expiryDate: "Saturday",
                         info: "Meat",
