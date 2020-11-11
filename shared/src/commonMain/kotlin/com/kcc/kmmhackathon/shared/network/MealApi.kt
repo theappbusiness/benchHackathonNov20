@@ -15,7 +15,7 @@ class MealApi {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
             defaultRequest {
-                header("Content-Type", ContentType.Application.Json)
+                contentType(ContentType.Application.Json)
                 url(MEALS_ENDPOINT)
             }
         }
