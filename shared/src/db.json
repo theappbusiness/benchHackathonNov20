@@ -19,8 +19,8 @@
       "expiryDate": "Wednesday",
       "info": "Sorry vegans",
       "hot": true,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLat": 52.509865,
+      "locationLong": 0.118092
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a03",
@@ -30,19 +30,19 @@
       "expiryDate": "Tuesday",
       "info": "Vegetarian",
       "hot": true,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLat": 51.529865,
+      "locationLong": 0.0018092
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a04",
       "name": "lasagne",
-      "quantity": 1,
+      "quantity": 0,
       "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
       "info": "This is lasagne",
       "hot": false,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLat": 51.502865,
+      "locationLong": -0.128092
     }
   ]
 }

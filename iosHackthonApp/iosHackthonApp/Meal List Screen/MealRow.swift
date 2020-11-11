@@ -8,10 +8,12 @@
 
 import SwiftUI
 import shared
+import CoreLocation
 
 struct MealRow: View {
     var viewModel: MealListView.ViewModel
     var meal: Meal
+    var locationManager = LocationManager()
 
     var buttonDisabled: Bool {
         meal.quantity < 1
@@ -21,7 +23,7 @@ struct MealRow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .foregroundColor(.white)
-                .shadow(color: .gray, radius: 10)
+                .shadow(color: .gray, radius: buttonDisabled ? 0 : 10)
 
             VStack {
                 Spacer()
@@ -32,10 +34,10 @@ struct MealRow: View {
                         HStack {
                             Text(meal.name)
                                 .font(.title)
-                                .foregroundColor(.black)
+                                .foregroundColor(buttonDisabled ? .gray : .black)
                             Spacer()
                             Image(systemName: meal.hot ? "flame" : "snow")
-                                .foregroundColor(meal.hot ? .red : .blue)
+                                .foregroundColor(buttonDisabled ? .gray : meal.hot ? .red : .blue)
                                 .padding(.trailing)
                         }
                         HStack {
@@ -44,7 +46,7 @@ struct MealRow: View {
                         }
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
-                            Text("2.2km away")
+                            Text(distanceFrom(meal.locationLat, meal.locationLong))
                             // Use user location and meal location to get distance
                         }
                         HStack {
@@ -61,7 +63,7 @@ struct MealRow: View {
                             Text("\(meal.quantity) portions remaining")
                         }
                     }
-                    .foregroundColor(.gray)
+                    .foregroundColor(buttonDisabled ? .gray : .black)
 
                     Spacer()
                 }
@@ -93,6 +95,13 @@ struct MealRow: View {
             .padding(.top)
             Spacer()
         }
+    }
+
+    func distanceFrom(_ lat: Float, _ long: Float) -> String {
+        let mealLocation = CLLocation(latitude: Double(lat), longitude: Double(long))
+        let userLocation = CLLocation(latitude: 51.3, longitude: 0.0012)
+        let distance = String(format: "%.2f", mealLocation.distance(from: userLocation)/1000)
+        return "\(distance) km"
     }
 }
 
