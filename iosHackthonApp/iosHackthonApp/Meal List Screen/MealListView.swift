@@ -61,14 +61,21 @@ extension MealListView {
         }
 
         func patchMeal(meal: Meal) {
-            let newMeal = Meal(id: meal.id, name: meal.name, quantity: meal.quantity - 1, availableFromDate: meal.availableFromDate, expiryDate: meal.expiryDate, info: meal.info, hot: meal.hot, locationLat: meal.locationLat, locationLong: meal.locationLong)
-            sdk.patchMeal(meal: newMeal) { meal, error in
-                guard let response = meal else {
+            let updatedMeal = sdk.getMeal(id: meal.id) { updatedMeal, error in
+
+                guard let updatedMeal = updatedMeal else {
                     self.showingError.toggle()
                     return
                 }
-                self.code = response.id.last4Chars()
-                self.showingCollectionCode.toggle()
+                let newMeal = Meal(id: meal.id, name: meal.name, quantity: updatedMeal.quantity - 1, availableFromDate: meal.availableFromDate, expiryDate: meal.expiryDate, info: meal.info, hot: meal.hot, locationLat: meal.locationLat, locationLong: meal.locationLong)
+                self.sdk.patchMeal(meal: newMeal) { meal, error in
+                    guard let meal = meal else {
+                        self.showingError.toggle()
+                        return
+                    }
+                    self.code = meal.id.last4Chars()
+                    self.showingCollectionCode.toggle()
+                }
             }
         }
     }

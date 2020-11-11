@@ -15,10 +15,14 @@ class MealApi {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
             defaultRequest {
-                header("Content-Type", ContentType.Application.Json)
                 url(MEALS_ENDPOINT)
+                contentType(ContentType.Application.Json)
             }
         }
+    }
+
+    suspend fun getMeal(id: String): Meal {
+        return httpClient.get("$MEALS_ENDPOINT/$id")
     }
 
     suspend fun getAllMeals(): List<Meal> {
