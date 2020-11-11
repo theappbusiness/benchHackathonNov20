@@ -9,7 +9,7 @@
       "info": "This is lasagne",
       "hot": false,
       "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLong": -0.1337092
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a01",
@@ -19,19 +19,19 @@
       "expiryDate": "Wednesday",
       "info": "Sorry vegans",
       "hot": true,
-      "locationLat": 52.509865,
-      "locationLong": 0.118092
+      "locationLat": 51.50998,
+      "locationLong": -0.1337
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a03",
       "name": "tomato pasta",
-      "quantity": 0,
+      "quantity": 12,
       "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
       "info": "Vegetarian",
       "hot": true,
       "locationLat": 51.529865,
-      "locationLong": 0.0018092
+      "locationLong": -0.1337188
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a04",

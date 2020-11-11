@@ -32,10 +32,43 @@ struct Strings {
 		static let useBy = "Use By"
 		static let address = "Address"
 		static let addMeal = "Add A Meal"
+
 		struct CollectionAlert {
 			static let message = "When someone arrives to collect this meal they will quote the above code"
 		}
 	}
+
+    struct MealListScreen {
+        static let title = "Meals in your area"
+        static let portion = "portion remaining"
+        static let portions = "portions remaining"
+        static let available = "Available from "
+        static let expiresAt = " Expires on "
+
+        struct UnavailableAlert {
+            static let message = "This meal is no longer available"
+        }
+
+        struct CollectionAlert {
+            static let message = "When you go to collect this meal, you will be asked for the above code"
+        }
+
+        struct Button {
+            static let disabledText = "Unavailable"
+            static let enabledText = "Reserve a portion"
+        }
+
+        struct Images {
+            static let hotFood = "bowl"
+            static let coldFood = "salad"
+            static let info = "info.circle"
+            static let location = "mappin.and.ellipse"
+            static let fromTime = "clock"
+            static let expireTime = "hourglass"
+            static let quantity = "number"
+            static let reload = "arrow.clockwise"
+        }
+    }
 
 	struct Common {
 		struct ErrorAlert {
@@ -43,6 +76,8 @@ struct Strings {
 		}
 		static let ok = "Ok"
 		static let sorry = "Sorry!"
+        static let km = "km"
+        static let twoDecimal = "%.2f"
 
 		struct Images {
 			static let hotFood = "flame"

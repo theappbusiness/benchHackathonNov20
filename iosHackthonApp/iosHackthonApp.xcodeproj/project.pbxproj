@@ -25,6 +25,8 @@
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
 		CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */; };
 		CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA191255AEB9C006AFF20 /* MealRow.swift */; };
+		CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */; };
+		CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B992B255C475100629D79 /* MealRowViewModel.swift */; };
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,8 @@
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
 		CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewModel.swift; sourceTree = "<group>"; };
 		CE2BA191255AEB9C006AFF20 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
+		CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
+		CE5B992B255C475100629D79 /* MealRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowViewModel.swift; sourceTree = "<group>"; };
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,8 +253,9 @@
 		CE0EF13C25558BC10054D2AA /* Meal List Screen */ = {
 			isa = PBXGroup;
 			children = (
+				CE5B992F255C477D00629D79 /* Meal List Row */,
 				7555FF82242A565900829871 /* MealListView.swift */,
-				CE2BA191255AEB9C006AFF20 /* MealRow.swift */,
+				CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */,
 			);
 			path = "Meal List Screen";
 			sourceTree = "<group>";
@@ -261,6 +266,15 @@
 				CE2BA107255AD490006AFF20 /* Strings+extension.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		CE5B992F255C477D00629D79 /* Meal List Row */ = {
+			isa = PBXGroup;
+			children = (
+				CE2BA191255AEB9C006AFF20 /* MealRow.swift */,
+				CE5B992B255C475100629D79 /* MealRowViewModel.swift */,
+			);
+			path = "Meal List Row";
 			sourceTree = "<group>";
 		};
 		CE9AE6B92559533400EA7A9B /* Add Meal Screen */ = {
@@ -460,7 +474,9 @@
 				CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */,
 				46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */,
 				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
+				CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */,
 				CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */,
+				CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */,
 				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,
 				7555FF83242A565900829871 /* MealListView.swift in Sources */,
 				CE0EF13325558B830054D2AA /* Strings.swift in Sources */,
