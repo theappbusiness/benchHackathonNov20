@@ -21,6 +21,12 @@ struct MealListView: View {
                         .padding()
                 }
             }
+            .alert(isPresented: $viewModel.showingNoMoreAvailableError) {
+                Alert(
+                    title: Text(Strings.Common.sorry),
+                    message: Text("This meal is unavailable"),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            }
         }
         .navigationBarTitle(Strings.MealListScreen.title)
         .navigationBarItems(trailing:
@@ -46,6 +52,7 @@ extension MealListView {
         @Published var code = ""
         @Published var showingCollectionCode = false
         @Published var showingError = false
+        @Published var showingNoMoreAvailableError = false
 
         init(sdk: MealsSDK) {
             self.sdk = sdk
@@ -61,20 +68,24 @@ extension MealListView {
         }
 
         func patchMeal(meal: Meal) {
-            let updatedMeal = sdk.getMeal(id: meal.id) { updatedMeal, error in
+            sdk.getMeal(id: meal.id) { updatedMeal, error in
 
                 guard let updatedMeal = updatedMeal else {
                     self.showingError.toggle()
                     return
                 }
-                let newMeal = Meal(id: meal.id, name: meal.name, quantity: updatedMeal.quantity - 1, availableFromDate: meal.availableFromDate, expiryDate: meal.expiryDate, info: meal.info, hot: meal.hot, locationLat: meal.locationLat, locationLong: meal.locationLong)
-                self.sdk.patchMeal(meal: newMeal) { meal, error in
-                    guard let meal = meal else {
-                        self.showingError.toggle()
-                        return
+                if updatedMeal.quantity.quantity > 1 {
+                    self.sdk.patchMeal(id: updatedMeal.id, quantity: updatedMeal.quantity.quantity - 1) { meal, error in
+                        guard let meal = meal else {
+                            self.showingError.toggle()
+                            return
+                        }
+                        self.code = meal.id.last4Chars()
+                        self.showingCollectionCode.toggle()
                     }
-                    self.code = meal.id.last4Chars()
-                    self.showingCollectionCode.toggle()
+                } else {
+                    self.showingNoMoreAvailableError.toggle()
+                    self.loadMeals(forceReload: true)
                 }
             }
         }
@@ -88,3 +99,4 @@ struct MealListView_Previews: PreviewProvider {
 }
 
 extension Meal: Identifiable { }
+extension Quantity: Identifiable { }

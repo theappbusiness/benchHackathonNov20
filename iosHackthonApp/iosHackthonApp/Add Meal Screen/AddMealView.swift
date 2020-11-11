@@ -14,6 +14,20 @@ struct AddMealView: View {
     @ObservedObject private(set) var viewModel: AddMealViewModel
 
     var body: some View {
+        //TODO: Pass the actual values when UI is complete
+        Button("Add a meal") {
+            let meal = Meal(
+                id: "\(self.viewModel.sdk.getUUID())",
+                name: "Pizza",
+                quantity: Quantity(quantity: 2),
+                availableFromDate: "Tuesday",
+                expiryDate: "Saturday",
+                info: "Meat",
+                hot: false,
+                locationLat: 51.509865,
+                locationLong:  -0.118092)
+            self.viewModel.postMeal(meal: meal)
+        }
         ZStack {}
         .alert(isPresented: $viewModel.showingCollectionCode) {
             Alert(
@@ -28,7 +42,7 @@ struct AddMealView: View {
                     let meal = Meal(
                         id: "\(viewModel.sdk.getUUID())",
                         name: "Pizza",
-                        quantity: 2,
+                        quantity: Quantity(quantity: 2),
                         availableFromDate: "Tuesday",
                         expiryDate: "Saturday",
                         info: "Meat",

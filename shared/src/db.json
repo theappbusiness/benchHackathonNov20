@@ -3,66 +3,13 @@
     {
       "id": "1598044e-5259-11e9-8647-d663bd870a07",
       "name": "lasagne",
-      "quantity": 4,
+      "quantity": {
+        "quantity": 2
+      },
       "availableFromDate": "Monday",
       "expiryDate": "Tuesday",
       "info": "This is lasagne",
       "hot": false,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
-    },
-    {
-      "id": "1598044e-5259-11e9-8647-d663bd870a01",
-      "name": "Chicken curry",
-      "quantity": 2,
-      "availableFromDate": "Monday",
-      "expiryDate": "Wednesday",
-      "info": "Sorry vegans",
-      "hot": true,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
-    },
-    {
-      "id": "1598044e-5259-11e9-8647-d663bd870a02",
-      "name": "tomato pasta",
-      "quantity": 1,
-      "availableFromDate": "Monday",
-      "expiryDate": "Tuesday",
-      "info": "Vegetarian",
-      "hot": true,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
-    },
-    {
-      "id": "1598044e-5259-11e9-8647-d663bd870a01",
-      "name": "lasagne",
-      "quantity": 4,
-      "availableFromDate": "Monday",
-      "expiryDate": "Tuesday",
-      "info": "This is lasagne",
-      "hot": false,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
-    },
-    {
-      "id": "1598044e-5259-11e9-8647-d663bd870a05",
-      "name": "Chicken curry",
-      "quantity": 2,
-      "availableFromDate": "Monday",
-      "expiryDate": "Tuesday",
-      "info": "Sorry vegans",
-      "hot": true,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
-    },
-    {
-      "id": "1598044e-5259-11e9-8647-d663bd870b02",
-      "name": "tomato pasta",
-      "quantity": 1,
-      "availableFromDate": "Monday",
-      "expiryDate": "Tuesday",
-      "info": "Vegetarian",
-      "hot": true,
       "locationLat": 51.509865,
       "locationLong": -0.118092
     }

@@ -10,7 +10,7 @@ data class Meal(
     @SerialName("name")
     val name: String,
     @SerialName("quantity")
-    val quantity: Int,
+    val quantity: Quantity,
     @SerialName("availableFromDate")
     val availableFromDate: String,
     @SerialName("expiryDate")
@@ -23,4 +23,10 @@ data class Meal(
     val locationLat: Float,
     @SerialName("locationLong")
     val locationLong: Float
+)
+
+@Serializable
+data class Quantity(
+    @SerialName("quantity")
+    val quantity: Int
 )
