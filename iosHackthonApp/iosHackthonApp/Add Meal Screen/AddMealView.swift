@@ -47,7 +47,6 @@ struct AddMealView: View {
 					Text(Strings.AddMealScreen.quantity)
 					TextField("", value: $quantity, formatter: NumberFormatter())
 						.modifier(GrayTextFieldStyle())
-						.keyboardType(.numberPad)
 					Text(Strings.AddMealScreen.temperature)
 
 					HStack {
