@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
+import java.time.LocalDate
 import kotlin.math.exp
 
 class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
@@ -51,8 +52,8 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
                 }
             }
             infoView.text = "Info: ${meal.info}"
-            availableView.text ="Available: ${meal.availableFromDate}"
-            expiryView.text ="Expires: ${meal.expiryDate}"
+            availableView.text ="Available: ${parseDate(meal.availableFromDate)}"
+            expiryView.text ="Expires: ${parseDate(meal.expiryDate)}"
             portionsView.text ="# ${meal.quantity} portions remaining"
             if (meal.quantity > 0) {
                 reserveButton.text ="Reserve a portion"
@@ -61,7 +62,16 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
                 reserveButton.text = "Unavailable"
                 reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorUnavailable))
             }
+        }
 
+        fun parseDate(dateString: String) : String {
+            if (dateString.length > 8) {
+                // TODO handle dates in kotlin
+                val shortDate = dateString.slice(0..9)
+                val dateArr = shortDate.split("-")
+                return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
+            }
+            return dateString
         }
     }
 }
