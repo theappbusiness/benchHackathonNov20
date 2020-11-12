@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/row_margin"
-            android:gravity="center_horizontal"
             android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,30 +38,45 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/row_margin"
-            android:gravity="center_horizontal"
             android:textSize="@dimen/default_text_size"
+            android:drawableLeft="@drawable/ic_outline_info_24"
+            android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealTemp" />
+
+        <TextView
+            android:id="@+id/mealDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_margin"
+            android:textSize="@dimen/default_text_size"
+            android:drawableLeft="@drawable/ic_baseline_pin_drop_24"
+            android:drawablePadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealInfo" />
 
         <TextView
             android:id="@+id/mealAvailable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/row_margin"
-            android:gravity="center_horizontal"
             android:textSize="@dimen/default_text_size"
+            android:drawableLeft="@drawable/ic_baseline_access_time_24"
+            android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mealInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/mealDistance" />
 
         <TextView
             android:id="@+id/mealExpiry"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/row_margin"
-            android:gravity="center_horizontal"
             android:textSize="@dimen/default_text_size"
+            android:drawableLeft="@drawable/ic_baseline_hourglass_bottom_24"
+            android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealAvailable" />
@@ -72,9 +86,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/row_margin"
-            android:gravity="center_horizontal"
             android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
+            android:paddingLeft="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealExpiry" />
 

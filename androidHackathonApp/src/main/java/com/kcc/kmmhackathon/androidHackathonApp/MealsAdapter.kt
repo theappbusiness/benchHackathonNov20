@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
+import org.w3c.dom.Text
 import java.time.LocalDate
 import kotlin.math.exp
 
@@ -33,6 +35,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         private val nameView = itemView.findViewById<TextView>(R.id.mealName)
         private val tempView = itemView.findViewById<TextView>(R.id.mealTemp)
         private val infoView = itemView.findViewById<TextView>(R.id.mealInfo)
+        private val distanceView = itemView.findViewById<TextView>(R.id.mealDistance)
         private val availableView = itemView.findViewById<TextView>(R.id.mealAvailable)
         private val expiryView = itemView.findViewById<TextView>(R.id.mealExpiry)
         private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
@@ -47,11 +50,19 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
             tempView.text = tempString
             tempView.setTextColor(ContextCompat.getColor(itemView.context, tempColor))
 
-            infoView.text = if (meal.info.isNotEmpty()) "Info: ${meal.info}" else ""
+            if (meal.info.isNullOrEmpty()) {
+                infoView.isVisible = false
+            } else {
+                infoView.text = "Info: ${meal.info}"
+            }
+
+            // TODO calculate distance (this could be done in the shared layer)
+            distanceView.text = "8637.35km"
+
             availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
             expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
 
-            portionsView.text = "# ${meal.quantity} portions remaining"
+            portionsView.text = "#    ${meal.quantity} portions remaining"
 
             val hasPortions = meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
