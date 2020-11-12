@@ -7,7 +7,6 @@ struct MealListView: View {
     @ObservedObject private(set) var viewModel: MealListViewModel
 
     var body: some View {
-
         ScrollView {
             LazyVStack {
                 ForEach((0 ..< viewModel.meals.count), id: \.self) {
@@ -23,27 +22,27 @@ struct MealListView: View {
                                     self.viewModel.loadMeals(forceReload: true)
                                 }, label: {
                                     Image(systemName: Strings.MealListScreen.Images.reload)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                 }))
-            .alert(isPresented: $viewModel.showingAlert) {
-                switch viewModel.activeAlert {
-                case .unavailable:
-                    return  Alert(
-                        title: Text(Strings.Common.sorry),
-                        message: Text(Strings.MealListScreen.UnavailableAlert.message),
-                        dismissButton: .default(Text(Strings.Common.ok)))
-                case .collection:
-                    return Alert(
-                        title: Text(viewModel.code),
-                        message: Text(Strings.MealListScreen.CollectionAlert.message),
-                        dismissButton: .default(Text(Strings.Common.ok)))
-                case .error:
-                    return Alert(
-                                        title: Text(Strings.Common.sorry),
-                                message: Text(Strings.Common.ErrorAlert.message),
-                                dismissButton: .default(Text(Strings.Common.ok)))
-                }
+        .alert(isPresented: $viewModel.showingAlert) {
+            switch viewModel.activeAlert {
+            case .unavailable:
+                return  Alert(
+                    title: Text(Strings.Common.sorry),
+                    message: Text(Strings.MealListScreen.UnavailableAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            case .collection:
+                return Alert(
+                    title: Text(viewModel.code),
+                    message: Text(Strings.MealListScreen.CollectionAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            case .error:
+                return Alert(
+                    title: Text(Strings.Common.sorry),
+                    message: Text(Strings.Common.ErrorAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
             }
+        }
         .onAppear(perform: {
             viewModel.loadMeals(forceReload: true)
         })

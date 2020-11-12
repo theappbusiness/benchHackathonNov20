@@ -78,7 +78,7 @@ struct AddMealView: View {
 							}) {
 								Image(systemName: Strings.Common.Images.location)
 									.font(.title)
-									.foregroundColor(.green)
+                                    .foregroundColor(ColorManager.appGreen)
 							}
 							
 						}
@@ -99,7 +99,7 @@ struct AddMealView: View {
 								locationLong:  self.longitude)
 							self.viewModel.postMeal(meal: meal)
 						}) {
-							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.red
+							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.appGreen
 							Text(Strings.AddMealScreen.addMeal)
 								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 						}
