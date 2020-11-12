@@ -3,9 +3,6 @@ package com.kcc.kmmhackathon.androidHackathonApp
 import android.R.attr.button
 import android.annotation.TargetApi
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
@@ -14,7 +11,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
-
 
 class ActionButton : LinearLayout {
     constructor(context: Context) : super(context) {
