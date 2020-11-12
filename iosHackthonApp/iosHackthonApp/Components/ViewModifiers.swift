@@ -23,7 +23,7 @@ struct AddButtonStyle: ViewModifier {
             .foregroundColor(.white)
             .padding(10)
             .frame(minWidth: 0, maxWidth: .infinity)
-            .background(Color.red)
+            .background(ColorManager.appGreen)
             .cornerRadius(10)
     }
 }
