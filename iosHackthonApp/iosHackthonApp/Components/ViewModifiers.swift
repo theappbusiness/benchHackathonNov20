@@ -18,14 +18,20 @@ struct GrayTextFieldStyle: ViewModifier {
 }
 
 struct AddButtonStyle: ViewModifier {
-		func body(content: Content) -> some View {
-				content
-					.foregroundColor(.white)
-					.padding(10)
-					.frame(minWidth: 0, maxWidth: .infinity)
-					.background(Color.red)
-					.cornerRadius(10)
-		}
+	var width: CGFloat
+
+	init(width: CGFloat) {
+		self.width = width
+	}
+
+	func body(content: Content) -> some View {
+		content
+			.foregroundColor(.white)
+			.padding(10)
+			.frame(minWidth: width, maxWidth: .infinity)
+			.background(Color.red)
+			.cornerRadius(10)
+	}
 }
 
 struct IconButtonImageStyle: ViewModifier {

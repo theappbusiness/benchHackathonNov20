@@ -80,24 +80,30 @@ struct AddMealView: View {
 									.font(.title)
 									.foregroundColor(.green)
 							}
+							
 						}
 					}
 					
 					Spacer()
-					Button(Strings.AddMealScreen.addMeal) {
-						let meal = Meal(
-							id: "\(viewModel.sdk.getUUID())",
-							name: "\(self.title)",
-							quantity: Int32(self.quantity),
-							availableFromDate: "\(self.availableFromDate)",
-							expiryDate: "\(self.useByDate)",
-							info: "\(self.additionalInfo)",
-							hot: self.isHot,
-							locationLat: self.latitude,
-							locationLong:  self.longitude)
-						self.viewModel.postMeal(meal: meal)
+					GeometryReader { geometry in
+						Button(action: {
+							let meal = Meal(
+								id: "\(viewModel.sdk.getUUID())",
+								name: "\(self.title)",
+								quantity: Int32(self.quantity),
+								availableFromDate: "\(self.availableFromDate)",
+								expiryDate: "\(self.useByDate)",
+								info: "\(self.additionalInfo)",
+								hot: self.isHot,
+								locationLat: self.latitude,
+								locationLong:  self.longitude)
+							self.viewModel.postMeal(meal: meal)
+						}) {
+							Text(Strings.AddMealScreen.addMeal)
+								.modifier(AddButtonStyle(width: geometry.size.width))
+						}
 					}
-					.modifier(AddButtonStyle())
+
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
