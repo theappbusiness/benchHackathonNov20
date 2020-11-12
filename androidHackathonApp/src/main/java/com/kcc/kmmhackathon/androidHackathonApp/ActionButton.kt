@@ -1,8 +1,8 @@
 package com.kcc.kmmhackathon.androidHackathonApp
 
+import android.R.attr.button
 import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
@@ -12,34 +12,23 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
 
-
 class ActionButton : LinearLayout {
     constructor(context: Context) : super(context) {
         inflateLayout(context)
     }
 
     constructor(context: Context, @Nullable attrs: AttributeSet?) : super(
-        context,
-        attrs,
+            context,
+            attrs,
     ) {
         inflateLayout(context)
     }
 
     constructor(
-        context: Context,
-        @Nullable attrs: AttributeSet?,
-        defStyleAttr: Int
+            context: Context,
+            @Nullable attrs: AttributeSet?,
+            defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
-        inflateLayout(context)
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(
-        context: Context,
-        @Nullable attrs: AttributeSet?,
-        defStyleAttr: Int,
-        defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes) {
         inflateLayout(context)
     }
 
@@ -56,17 +45,17 @@ class ActionButton : LinearLayout {
     private fun makeSpannable(textView: TextView) {
         val spannable: Spannable = SpannableString(textView.text)
         spannable.setSpan(
-            BackgroundColorSpan(-0xffdf),
-            0,
-            textView.text.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                BackgroundColorSpan(-0xffdf),
+                0,
+                textView.text.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         textView.text = spannable
         invalidate()
     }
 
     fun setIcon(resourceId: Int) {
-        val iconView = findViewById<ImageView>(R.id.button_image)
+       val iconView = findViewById<ImageView>(R.id.button_image)
         iconView.setImageResource(resourceId)
     }
 

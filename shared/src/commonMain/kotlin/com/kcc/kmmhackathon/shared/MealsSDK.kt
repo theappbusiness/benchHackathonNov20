@@ -8,11 +8,23 @@ import com.kcc.kmmhackathon.shared.network.MealApi
 class MealsSDK {
     private val api = MealApi()
 
+    @Throws(Exception::class) suspend fun getMeal(id: String): Meal {
+        return api.getMeal(id)
+    }
+
     @Throws(Exception::class) suspend fun getMeals(forceReload: Boolean): List<Meal> {
         return api.getAllMeals()
     }
 
-    fun getUUID(): String {
-        return api.getUUID().toString()
+    @Throws(Exception::class) suspend fun postMeal(meal: Meal): Meal {
+        return api.postMeal(meal)
+    }
+
+    @Throws(Exception::class) suspend fun patchMeal(id: String, quantity: Int): Meal {
+        return api.patchMeal(id, quantity)
+    }
+
+    fun getUUID(): Uuid {
+        return uuid4()
     }
 }

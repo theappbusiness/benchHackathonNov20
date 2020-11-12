@@ -5,7 +5,7 @@
 ### Installing json-server
 We are currently using `json-server` as a mock server to run the project against.
 
-In order to get up and running you will need to install `json-server`, you can do this form the command-line using:
+In order to get up and running you will need to install `json-server`, if you don't already have it installed you can do this from the command line by running the following command:
 
 ```
 npm install -g json-server

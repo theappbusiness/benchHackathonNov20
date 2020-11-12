@@ -16,6 +16,7 @@
       android:layout_marginLeft="@dimen/default_margin"
       android:layout_marginRight="@dimen/medium_margin"
       android:text="@string/subheading"
+      android:textSize="@dimen/default_text_size"
       app:layout_constraintBottom_toTopOf="@+id/button_container"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"

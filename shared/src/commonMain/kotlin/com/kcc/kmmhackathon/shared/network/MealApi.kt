@@ -1,14 +1,14 @@
 package com.kcc.kmmhackathon.shared.network
 
-import com.benasher44.uuid.Uuid
-import com.benasher44.uuid.uuid4
 import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kcc.kmmhackathon.shared.entity.Quantity
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
+import io.ktor.client.request.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
+import io.ktor.http.*
 
 class MealApi {
     private val httpClient = HttpClient {
@@ -18,12 +18,26 @@ class MealApi {
         }
     }
 
+    suspend fun getMeal(id: String): Meal {
+        return httpClient.get("$MEALS_ENDPOINT/$id")
+    }
+
     suspend fun getAllMeals(): List<Meal> {
         return httpClient.get(MEALS_ENDPOINT)
     }
 
-    fun getUUID(): Uuid {
-        return uuid4()
+    suspend fun postMeal(meal: Meal): Meal {
+        return httpClient.post(MEALS_ENDPOINT) {
+            contentType(ContentType.Application.Json)
+            body = meal
+        }
+    }
+
+    suspend fun patchMeal(id: String, quantity: Int): Meal {
+        return httpClient.patch("$MEALS_ENDPOINT/${id}") {
+            contentType(ContentType.Application.Json)
+            body = Quantity(quantity)
+        }
     }
 
     companion object {
