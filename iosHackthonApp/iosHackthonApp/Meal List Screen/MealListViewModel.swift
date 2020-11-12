@@ -15,7 +15,6 @@ final class MealListViewModel: ObservableObject {
     let locationManager: LocationManager
 
     @Published var meals = [MealWithDistance]()
-
     @Published var code = ""
     @Published var showingCollectionCode = false
     @Published var showingError = false
@@ -29,18 +28,26 @@ final class MealListViewModel: ObservableObject {
 
     func loadMeals(forceReload: Bool) {
         sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
-            if let meals = meals {
-                self.meals = meals
-                    .map { MealWithDistance(meal: $0, distance: self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
-                    .sorted(by: { $0.distance < $1.distance })
-            }
+            guard
+                let meals = meals,
+                error == nil else { return }
+            self.meals = meals
+                .filter { self.mealNotExpired($0.expiryDate) }
+                .map { MealWithDistance(meal: $0, distance: self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
+                .sorted(by: { $0.distance < $1.distance })
         })
+    }
+
+    func mealNotExpired(_ expiry: String) -> Bool {
+        Date() < Date.dateFrom(dateString: expiry)
     }
 
     func patchMeal(meal: Meal) {
         sdk.getMeal(id: meal.id) { updatedMeal, error in
 
-            guard let updatedMeal = updatedMeal else {
+            guard
+                let updatedMeal = updatedMeal,
+                error == nil else {
                 self.showingError.toggle()
                 self.loadMeals(forceReload: true)
                 return

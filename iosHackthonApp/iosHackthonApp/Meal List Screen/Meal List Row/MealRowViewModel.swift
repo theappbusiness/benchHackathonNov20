@@ -23,37 +23,37 @@ final class MealRowViewModel: ObservableObject {
     }
 
     // MARK:- Computed properties
-    var buttonDisabled: Bool {
+    var isButtonDisabled: Bool {
         mealWithDistance.meal.quantity < 1
     }
 
-    var oneMealLeft: Bool {
+    var isOneMealLeft: Bool {
         mealWithDistance.meal.quantity == 1
     }
 
     var quantityText: String {
-        let portionText = oneMealLeft ? Strings.MealListScreen.portion: Strings.MealListScreen.portions
+        let portionText = isOneMealLeft ? Strings.MealListScreen.portion: Strings.MealListScreen.portions
         return "\(mealWithDistance.meal.quantity) \(portionText)"
     }
 
     var mealImage: String {
         mealWithDistance.meal.hot
-            ? buttonDisabled ? Strings.MealListScreen.Images.hotFoodGrey : Strings.MealListScreen.Images.hotFood
-            : buttonDisabled ? Strings.MealListScreen.Images.coldFoodGrey : Strings.MealListScreen.Images.coldFood
+            ? isButtonDisabled ? Strings.MealListScreen.Images.hotFoodGrey : Strings.MealListScreen.Images.hotFood
+            : isButtonDisabled ? Strings.MealListScreen.Images.coldFoodGrey : Strings.MealListScreen.Images.coldFood
     }
 
     var textColor: Color {
-        buttonDisabled ? .gray : .black
+        isButtonDisabled ? .gray : .black
     }
 
     var temperatureImageColor: Color {
-        buttonDisabled
+        isButtonDisabled
             ? .gray : mealWithDistance.meal.hot
             ? .red : .blue
     }
 
     var imageColor: Color {
-        buttonDisabled ? .gray : .black
+        isButtonDisabled ? .gray : .black
     }
 
     var temperatureImage: String {
@@ -61,11 +61,11 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var buttonTextColor: Color {
-        buttonDisabled ? .gray : .black
+        isButtonDisabled ? .gray : .black
     }
 
     var buttonBackgroundColor: Color {
-        buttonDisabled ? Color.gray : Color.red
+        isButtonDisabled ? Color.gray : Color.red
     }
 
     var locationText: String {
@@ -73,33 +73,22 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var fromTimeText: String {
-        "\(Strings.MealListScreen.available) \(readableDate(from: mealWithDistance.meal.availableFromDate))"
+        "\(Strings.MealListScreen.available) \(Date.readableDateString(from: mealWithDistance.meal.availableFromDate)))"
     }
 
     var expiresAtText: String {
-        "\(Strings.MealListScreen.expiresAt) \(readableDate(from: mealWithDistance.meal.expiryDate))"
+        "\(Strings.MealListScreen.expiresAt) \(Date.readableDateString(from: mealWithDistance.meal.expiryDate))"
     }
 
     var buttonText: String {
-        buttonDisabled ? Strings.MealListScreen.Button.disabledText : Strings.MealListScreen.Button.enabledText
+        isButtonDisabled ? Strings.MealListScreen.Button.disabledText : Strings.MealListScreen.Button.enabledText
     }
 
     var viewShadowRadius: CGFloat {
-        buttonDisabled ? 0 : 10
+        isButtonDisabled ? 0 : 10
     }
 
     var buttonShadowRadius: CGFloat {
-        buttonDisabled ? 0 : 2
-    }
-
-    func readableDate(from dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Strings.Common.Date.americanFormat
-        let date = dateFormatter.date(from: dateString)!
-
-        let formatDate = DateFormatter()
-        formatDate.dateFormat = Strings.Common.Date.nameDayMonth
-        let drawDate = formatDate.string(from: date)
-        return drawDate
+        isButtonDisabled ? 0 : 2
     }
 }

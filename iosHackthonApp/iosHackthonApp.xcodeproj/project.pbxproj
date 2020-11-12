@@ -29,6 +29,7 @@
 		CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B992B255C475100629D79 /* MealRowViewModel.swift */; };
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
+		CEA07292255D328300D45B50 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA07291255D328300D45B50 /* Date+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		CE5B992B255C475100629D79 /* MealRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowViewModel.swift; sourceTree = "<group>"; };
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CEA07291255D328300D45B50 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2BA107255AD490006AFF20 /* Strings+extension.swift */,
+				CEA07291255D328300D45B50 /* Date+extension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				46A57FAF255ABFA10076BB88 /* LocationManager.swift in Sources */,
 				CE2BA108255AD490006AFF20 /* Strings+extension.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
+				CEA07292255D328300D45B50 /* Date+extension.swift in Sources */,
 				CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */,
 				46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */,
 				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,

@@ -45,6 +45,9 @@ struct MealListView: View {
                 message: Text(Strings.Common.ErrorAlert.message),
                 dismissButton: .default(Text(Strings.Common.ok)))
         }
+        .onAppear(perform: {
+            viewModel.loadMeals(forceReload: true)
+        })
     }
 }
 

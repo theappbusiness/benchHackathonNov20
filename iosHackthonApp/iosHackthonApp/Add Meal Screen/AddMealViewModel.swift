@@ -37,7 +37,9 @@ extension AddMealViewModel: AddMealViewModelProtocol {
     func postMeal(meal: Meal) {
         sdk.postMeal(meal: meal, completionHandler: { meal, error in
 
-            guard let meal = meal else {
+            guard
+                let meal = meal,
+                error == nil else {
                 self.showingError.toggle()
                 return
             }

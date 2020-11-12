@@ -41,7 +41,6 @@ struct MealRow: View {
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.location)
                             Text(rowViewModel.locationText)
-
                         }
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.fromTime)
@@ -51,7 +50,6 @@ struct MealRow: View {
                             Image(systemName: Strings.MealListScreen.Images.expireTime)
                             Text(rowViewModel.expiresAtText)
                         }
-
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.quantity)
                             Text(rowViewModel.quantityText)
@@ -77,7 +75,7 @@ struct MealRow: View {
                             .foregroundColor(.white)
                             .cornerRadius(rowViewModel.cornerRadius)
                         }
-                        .disabled(rowViewModel.buttonDisabled)
+                        .disabled(rowViewModel.isButtonDisabled)
                         .shadow(radius: rowViewModel.buttonShadowRadius)
                     }
                     .padding(.leading)
