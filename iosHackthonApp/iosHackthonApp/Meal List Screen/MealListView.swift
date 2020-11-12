@@ -7,20 +7,6 @@ struct MealListView: View {
     @ObservedObject private(set) var viewModel: MealListViewModel
 
     var body: some View {
-        ZStack {}
-            .alert(isPresented: $viewModel.showingNoMoreAvailableError) {
-                Alert(
-                    title: Text(Strings.Common.sorry),
-                    message: Text(Strings.MealListScreen.UnavailableAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            }
-        ZStack {}
-            .alert(isPresented: $viewModel.showingCollectionCode) {
-                Alert(
-                    title: Text(viewModel.code),
-                    message: Text(Strings.MealListScreen.CollectionAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            }
 
         ScrollView {
             LazyVStack {
@@ -29,6 +15,7 @@ struct MealListView: View {
                         .padding()
                 }
             }
+
         }
         .navigationBarTitle(Strings.MealListScreen.title)
         .navigationBarItems(trailing:
@@ -38,17 +25,31 @@ struct MealListView: View {
                                     Image(systemName: Strings.MealListScreen.Images.reload)
                                         .foregroundColor(.black)
                                 }))
-        .navigationBarBackButtonHidden(true)
-        .alert(isPresented: $viewModel.showingError) {
-            Alert(
-                title: Text(Strings.Common.sorry),
-                message: Text(Strings.Common.ErrorAlert.message),
-                dismissButton: .default(Text(Strings.Common.ok)))
-        }
+            .alert(isPresented: $viewModel.showingAlert) {
+                switch viewModel.activeAlert {
+                case .unavailable:
+                    return  Alert(
+                        title: Text(Strings.Common.sorry),
+                        message: Text(Strings.MealListScreen.UnavailableAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                case .collection:
+                    return Alert(
+                        title: Text(viewModel.code),
+                        message: Text(Strings.MealListScreen.CollectionAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                case .error:
+                    return Alert(
+                                        title: Text(Strings.Common.sorry),
+                                message: Text(Strings.Common.ErrorAlert.message),
+                                dismissButton: .default(Text(Strings.Common.ok)))
+                }
+
+            }
         .onAppear(perform: {
             viewModel.loadMeals(forceReload: true)
         })
     }
+    
 }
 
 struct MealListView_Previews: PreviewProvider {

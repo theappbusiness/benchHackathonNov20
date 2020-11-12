@@ -11,14 +11,17 @@ import shared
 
 final class MealListViewModel: ObservableObject {
 
+    enum ActiveAlert {
+        case unavailable, collection, error
+    }
+
     let sdk: MealsSDK
     let locationManager: LocationManager
 
     @Published var meals = [MealWithDistance]()
     @Published var code = ""
-    @Published var showingCollectionCode = false
-    @Published var showingError = false
-    @Published var showingNoMoreAvailableError = false
+    @Published var showingAlert = false
+    @Published var activeAlert: ActiveAlert = .unavailable
 
     init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk
@@ -48,23 +51,27 @@ final class MealListViewModel: ObservableObject {
             guard
                 let updatedMeal = updatedMeal,
                 error == nil else {
-                self.showingError.toggle()
+                self.activeAlert = .error
+                self.showingAlert.toggle()
                 self.loadMeals(forceReload: true)
                 return
             }
             if updatedMeal.quantity > 0 {
                 self.sdk.patchMeal(id: updatedMeal.id, quantity: updatedMeal.quantity - 1) { meal, error in
                     guard let meal = meal else {
-                        self.showingError.toggle()
+                        self.activeAlert = .error
+                        self.showingAlert.toggle()
                         self.loadMeals(forceReload: true)
                         return
                     }
                     self.code = meal.id.last4Chars()
-                    self.showingCollectionCode.toggle()
+                    self.activeAlert = .collection
+                    self.showingAlert.toggle()
                     self.loadMeals(forceReload: true)
                 }
             } else {
-                self.showingNoMoreAvailableError.toggle()
+                self.activeAlert = .unavailable
+                self.showingAlert.toggle()
                 self.loadMeals(forceReload: true)
             }
         }
