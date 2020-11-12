@@ -30,13 +30,13 @@ struct AddMealView: View {
 					Group {
 						Text(Strings.AddMealScreen.title)
 						TextField(Strings.AddMealScreen.titlePlaceholder, text: $title)
-							.modifier(GrayTextFieldStyle())
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.additionalInfo)
 						TextField(Strings.AddMealScreen.additionalInfoPlaceholder, text: $additionalInfo)
-							.modifier(GrayTextFieldStyle())
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.quantity)
 						TextField(Strings.AddMealScreen.quantityPlaceholder, value: $quantity, formatter: NumberFormatter())
-							.modifier(GrayTextFieldStyle())
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.temperature)
 						
 						HStack {
@@ -67,7 +67,7 @@ struct AddMealView: View {
 						Text(Strings.AddMealScreen.address)
 						HStack {
 							TextField("", text: $address)
-								.modifier(GrayTextFieldStyle())
+								.modifier(GreyTextFieldStyle())
 								.disabled(true)
 							
 							Spacer(minLength: 10)
