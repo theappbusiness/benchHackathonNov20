@@ -32,6 +32,9 @@ struct Strings {
 		static let useBy = "Use By"
 		static let address = "Address"
 		static let addMeal = "Add A Meal"
+		static let titlePlaceholder = "Enter Title"
+		static let additionalInfoPlaceholder = "Enter Additional Information"
+		static let quantityPlaceholder = "Enter Quantity"
 		struct CollectionAlert {
 			static let message = "When someone arrives to collect this meal they will quote the above code"
 		}

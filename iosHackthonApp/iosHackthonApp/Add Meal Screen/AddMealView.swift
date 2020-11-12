@@ -29,13 +29,13 @@ struct AddMealView: View {
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
 						Text(Strings.AddMealScreen.title)
-						TextField("", text: $title)
+						TextField(Strings.AddMealScreen.titlePlaceholder, text: $title)
 							.modifier(GrayTextFieldStyle())
 						Text(Strings.AddMealScreen.additionalInfo)
-						TextField("", text: $additionalInfo)
+						TextField(Strings.AddMealScreen.additionalInfoPlaceholder, text: $additionalInfo)
 							.modifier(GrayTextFieldStyle())
 						Text(Strings.AddMealScreen.quantity)
-						TextField("", value: $quantity, formatter: NumberFormatter())
+						TextField(Strings.AddMealScreen.quantityPlaceholder, value: $quantity, formatter: NumberFormatter())
 							.modifier(GrayTextFieldStyle())
 						Text(Strings.AddMealScreen.temperature)
 						
@@ -68,6 +68,8 @@ struct AddMealView: View {
 						HStack {
 							TextField("", text: $address)
 								.modifier(GrayTextFieldStyle())
+								.disabled(true)
+
 							Spacer(minLength: 10)
 							Button(action: {
 								self.address = "\(self.viewModel.locationManager.address)"
@@ -99,6 +101,9 @@ struct AddMealView: View {
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
+			.onAppear() {
+				address = "\(self.viewModel.locationManager.address)"
+			}
 		}
 		.alert(isPresented: $viewModel.showingError) {
 			Alert(
