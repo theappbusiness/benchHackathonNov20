@@ -40,7 +40,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
 
         fun bindData(meal: Meal) {
             val ctx = itemView.context
-            nameView.setText(meal.name)
+            nameView.text = meal.name
 
             val tempString = if (meal.hot) "Hot" else "Cold"
             val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
