@@ -15,9 +15,6 @@ class MealApi {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
-            defaultRequest {
-                url(MEALS_ENDPOINT)
-            }
         }
     }
 
