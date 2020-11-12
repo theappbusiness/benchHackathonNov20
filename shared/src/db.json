@@ -13,11 +13,11 @@
     },
     {
       "id": "182647f0-71fd-497d-9f67-2c7def1fc2d5",
-      "name": "",
+      "name": "Lasagne",
       "quantity": 0,
       "availableFromDate": "2020-11-11 16:56:59 +0000",
       "expiryDate": "2020-11-14 16:56:59 +0000",
-      "info": "",
+      "info": "Contains gluten",
       "hot": true,
       "locationLat": 0,
       "locationLong": 0
@@ -28,7 +28,7 @@
       "quantity": 5,
       "availableFromDate": "2020-11-10 16:56:59 +0000",
       "expiryDate": "2020-11-11 16:56:59 +0000",
-      "info": "",
+      "info": "Beef and ale",
       "hot": true,
       "locationLat": 0,
       "locationLong": 0
