@@ -19,9 +19,11 @@ struct GrayTextFieldStyle: ViewModifier {
 
 struct AddButtonStyle: ViewModifier {
 	var width: CGFloat
+	var backgroundColor: Color
 
-	init(width: CGFloat) {
+	init(width: CGFloat, backgroundColor: Color) {
 		self.width = width
+		self.backgroundColor = backgroundColor
 	}
 
 	func body(content: Content) -> some View {
@@ -29,7 +31,7 @@ struct AddButtonStyle: ViewModifier {
 			.foregroundColor(.white)
 			.padding(10)
 			.frame(minWidth: width, maxWidth: .infinity)
-			.background(Color.red)
+			.background(backgroundColor)
 			.cornerRadius(10)
 	}
 }

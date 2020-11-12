@@ -99,9 +99,12 @@ struct AddMealView: View {
 								locationLong:  self.longitude)
 							self.viewModel.postMeal(meal: meal)
 						}) {
+							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.red
 							Text(Strings.AddMealScreen.addMeal)
-								.modifier(AddButtonStyle(width: geometry.size.width))
+								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 						}
+						.disabled(title.isEmpty || additionalInfo.isEmpty || address.isEmpty)
+
 					}
 
 				}.padding()
