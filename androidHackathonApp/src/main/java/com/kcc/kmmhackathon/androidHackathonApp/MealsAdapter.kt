@@ -53,10 +53,19 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
 
             portionsView.text = "# ${meal.quantity} portions remaining"
 
-            val reserveButtonText = if (meal.quantity > 0) "Reserve a portion" else "Unavailable"
-            val reserveButtonColor = if (meal.quantity > 0) R.color.colorReserve else R.color.colorUnavailable
+            val hasPortions = meal.quantity > 0
+            val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
+            val reserveButtonColor = if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
             reserveButton.text = reserveButtonText
             reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, reserveButtonColor))
+            if (hasPortions) {
+                reserveButton.setOnClickListener {
+                    // TODO link up to sdk and adjust quantity and show user reservation code
+                    val id = meal.id
+                    val code = id.subSequence(id.length - 5, id.length - 1)
+                    Log.i("Reserve button tapped", "${meal.name} reservation code ${code}")
+                }
+            }
         }
     }
 
