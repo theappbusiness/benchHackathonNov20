@@ -41,37 +41,32 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         fun bindData(meal: Meal) {
             val ctx = itemView.context
             nameView.setText(meal.name)
-            tempView.setText(if (meal.hot) "Hot" else "Cold")
-            if (meal.hot != null) {
-                if (meal.hot) {
-                    tempView.text = "Hot"
-                    tempView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorHot))
-                } else {
-                    tempView.text = "Cold"
-                    tempView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorCold))
-                }
-            }
-            infoView.text = "Info: ${meal.info}"
-            availableView.text ="Available: ${parseDate(meal.availableFromDate)}"
-            expiryView.text ="Expires: ${parseDate(meal.expiryDate)}"
-            portionsView.text ="# ${meal.quantity} portions remaining"
-            if (meal.quantity > 0) {
-                reserveButton.text ="Reserve a portion"
-                reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorSecondary))
-            } else {
-                reserveButton.text = "Unavailable"
-                reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorUnavailable))
-            }
-        }
 
-        fun parseDate(dateString: String) : String {
-            if (dateString.length > 8) {
-                // TODO handle dates in kotlin
-                val shortDate = dateString.slice(0..9)
-                val dateArr = shortDate.split("-")
-                return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
-            }
-            return dateString
+            val tempString = if (meal.hot) "Hot" else "Cold"
+            val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
+            tempView.text = tempString
+            tempView.setTextColor(ContextCompat.getColor(itemView.context, tempColor))
+
+            infoView.text = "Info: ${meal.info}"
+            availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
+            expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
+
+            portionsView.text = "# ${meal.quantity} portions remaining"
+
+            val reserveButtonText = if (meal.quantity > 0) "Reserve a portion" else "Unavailable"
+            val reserveButtonColor = if (meal.quantity > 0) R.color.colorReserve else R.color.colorUnavailable
+            reserveButton.text = reserveButtonText
+            reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, reserveButtonColor))
         }
+    }
+
+    fun parseDate(dateString: String) : String {
+        if (dateString.length > 8) {
+            // TODO handle dates in kotlin
+            val shortDate = dateString.slice(0..9)
+            val dateArr = shortDate.split("-")
+            return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
+        }
+        return dateString
     }
 }
