@@ -11,8 +11,15 @@ import SwiftUI
 import shared
 
 struct TabAppView: View {
+
 	private let sdk = MealsSDK()
 	private let locationManager = LocationManager()
+
+    init(selectedView: Int) {
+        self.selectedView = selectedView
+        UITabBar.appearance().barTintColor = UIColor(ColorManager.appGreen)
+    }
+
 	@State var selectedView = 0
 
 	var body: some View {
@@ -21,6 +28,7 @@ struct TabAppView: View {
 				AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))
 			}
 			.navigationBarHidden(true)
+            .navigationViewStyle(StackNavigationViewStyle())
 			.tabItem {
 				Image(systemName: Strings.LandingScreen.Images.plus)
 				Text(Strings.LandingScreen.plusButtonText)
@@ -29,18 +37,20 @@ struct TabAppView: View {
 			NavigationView {
                 MealListView(viewModel: .init(sdk: self.sdk, locationManager: locationManager))
 			}
+            .navigationViewStyle(StackNavigationViewStyle())
 			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.LandingScreen.Images.find)
 				Text(Strings.LandingScreen.findButtonText)
 			}.tag(1)
 		})
+        .accentColor(.white)
 		
 	}
 }
 
 struct TabAppView_Previews: PreviewProvider {
 	static var previews: some View {
-		TabAppView()
+        TabAppView(selectedView: 1)
 	}
 }

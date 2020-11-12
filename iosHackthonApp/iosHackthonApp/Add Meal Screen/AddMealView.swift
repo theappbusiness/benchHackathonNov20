@@ -76,7 +76,7 @@ struct AddMealView: View {
 							}) {
 								Image(systemName: Strings.Common.Images.location)
 									.font(.title)
-									.foregroundColor(.green)
+                                    .foregroundColor(ColorManager.appGreen)
 							}
 						}
 					}
