@@ -29,14 +29,14 @@ struct AddMealView: View {
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
 						Text(Strings.AddMealScreen.title)
-						TextField("", text: $title)
-							.modifier(GrayTextFieldStyle())
+						TextField(Strings.AddMealScreen.titlePlaceholder, text: $title)
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.additionalInfo)
-						TextField("", text: $additionalInfo)
-							.modifier(GrayTextFieldStyle())
+						TextField(Strings.AddMealScreen.additionalInfoPlaceholder, text: $additionalInfo)
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.quantity)
-						TextField("", value: $quantity, formatter: NumberFormatter())
-							.modifier(GrayTextFieldStyle())
+						TextField(Strings.AddMealScreen.quantityPlaceholder, value: $quantity, formatter: NumberFormatter())
+							.modifier(GreyTextFieldStyle())
 						Text(Strings.AddMealScreen.temperature)
 						
 						HStack {
@@ -67,7 +67,9 @@ struct AddMealView: View {
 						Text(Strings.AddMealScreen.address)
 						HStack {
 							TextField("", text: $address)
-								.modifier(GrayTextFieldStyle())
+								.modifier(GreyTextFieldStyle())
+								.disabled(true)
+							
 							Spacer(minLength: 10)
 							Button(action: {
 								self.address = "\(self.viewModel.locationManager.address)"
@@ -78,42 +80,54 @@ struct AddMealView: View {
 									.font(.title)
                                     .foregroundColor(ColorManager.appGreen)
 							}
+							
 						}
 					}
 					
 					Spacer()
-					Button(Strings.AddMealScreen.addMeal) {
-						let meal = Meal(
-							id: "\(viewModel.sdk.getUUID())",
-							name: "\(self.title)",
-							quantity: Int32(self.quantity),
-							availableFromDate: "\(self.availableFromDate)",
-							expiryDate: "\(self.useByDate)",
-							info: "\(self.additionalInfo)",
-							hot: self.isHot,
-							locationLat: self.latitude,
-							locationLong:  self.longitude)
-						self.viewModel.postMeal(meal: meal)
+					GeometryReader { geometry in
+						Button(action: {
+							let meal = Meal(
+								id: "\(viewModel.sdk.getUUID())",
+								name: "\(self.title)",
+								quantity: Int32(self.quantity),
+								availableFromDate: "\(self.availableFromDate)",
+								expiryDate: "\(self.useByDate)",
+								info: "\(self.additionalInfo)",
+								hot: self.isHot,
+								locationLat: self.latitude,
+								locationLong:  self.longitude)
+							self.viewModel.postMeal(meal: meal)
+						}) {
+							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.appGreen
+							Text(Strings.AddMealScreen.addMeal)
+								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
+						}
+						.disabled(title.isEmpty || additionalInfo.isEmpty || address.isEmpty)
+						
 					}
-					.modifier(AddButtonStyle())
+					
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
+			.onAppear() {
+				address = "\(self.viewModel.locationManager.address)"
+			}
 		}
-        .alert(isPresented: $viewModel.showingAlert) {
-            switch viewModel.activeAlert {
-            case .collection:
-                return Alert(
-                    title: Text(viewModel.code),
-                    message: Text(Strings.MealListScreen.CollectionAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            default:
-                return Alert(
-                    title: Text(Strings.Common.sorry),
-                    message: Text(Strings.Common.ErrorAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            }
-        }
+		.alert(isPresented: $viewModel.showingAlert) {
+			switch viewModel.activeAlert {
+			case .collection:
+				return Alert(
+					title: Text(viewModel.code),
+					message: Text(Strings.MealListScreen.CollectionAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+			default:
+				return Alert(
+					title: Text(Strings.Common.sorry),
+					message: Text(Strings.Common.ErrorAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+			}
+		}
 	}
 }
 
