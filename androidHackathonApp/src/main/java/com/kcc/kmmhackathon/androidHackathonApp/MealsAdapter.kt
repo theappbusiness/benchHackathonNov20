@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         private val availableView = itemView.findViewById<TextView>(R.id.mealAvailable)
         private val expiryView = itemView.findViewById<TextView>(R.id.mealExpiry)
         private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
+        private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
 
         fun bindData(meal: Meal) {
             val ctx = itemView.context
@@ -42,26 +44,23 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
             if (meal.hot != null) {
                 if (meal.hot) {
                     tempView.text = "Hot"
-                    tempView.setTextColor(
-                        (ContextCompat.getColor(
-                            itemView.context,
-                            R.color.colorHot
-                        ))
-                    )
+                    tempView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorHot))
                 } else {
                     tempView.text = "Cold"
-                    tempView.setTextColor(
-                        (ContextCompat.getColor(
-                            itemView.context,
-                            R.color.colorCold
-                        ))
-                    )
+                    tempView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorCold))
                 }
             }
             infoView.text = "Info: ${meal.info}"
-            availableView.text ="Available ${meal.availableFromDate}"
+            availableView.text ="Available: ${meal.availableFromDate}"
             expiryView.text ="Expires: ${meal.expiryDate}"
             portionsView.text ="# ${meal.quantity} portions remaining"
+            if (meal.quantity > 0) {
+                reserveButton.text ="Reserve a portion"
+                reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorSecondary))
+            } else {
+                reserveButton.text = "Unavailable"
+                reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorUnavailable))
+            }
 
         }
     }

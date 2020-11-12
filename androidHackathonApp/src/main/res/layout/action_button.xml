@@ -24,5 +24,5 @@
         android:layout_width="match_parent"
         android:padding="@dimen/default_padding"
         android:textColor="@color/white"
-        android:textSize="@dimen/button_title_size" />
+        android:textSize="@dimen/large_text_size" />
 </LinearLayout>
