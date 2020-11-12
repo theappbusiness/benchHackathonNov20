@@ -9,13 +9,44 @@
     tools:context=".MainActivity">
 
   <TextView
-      android:layout_width="wrap_content"
+      android:id="@+id/textView"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Hello World!"
-      android:id="@+id/text_view"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      android:layout_marginBottom="@dimen/medium_margin"
+      android:layout_marginLeft="@dimen/default_margin"
+      android:layout_marginRight="@dimen/medium_margin"
+      android:text="@string/subheading"
+      android:textSize="@dimen/default_text_size"
+      app:layout_constraintBottom_toTopOf="@+id/button_container"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
+  <LinearLayout
+      android:id="@+id/button_container"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/medium_margin"
+      app:layout_constraintTop_toBottomOf="@id/textView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+    <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
+        android:id="@+id/add_meal_button"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="@dimen/medium_margin"/>
+
+    <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
+        android:id="@+id/find_meal_button"
+        android:background="@color/colorSecondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin" />
+
+  </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

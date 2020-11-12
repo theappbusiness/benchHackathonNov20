@@ -9,19 +9,20 @@
 import shared
 
 protocol AddMealViewModelProtocol {
+
 	var code: String { get }
-	var showingCollectionCode: Bool { get }
-	var showingError: Bool { get }
+    var activeAlert: ActiveAlert { get }
+	var showingAlert: Bool { get }
 	var sdk: MealsSDK { get }
 	var locationManager: LocationManager { get }
 	func postMeal(meal: Meal)
 }
 
 final class AddMealViewModel: ObservableObject {
-	
+
 	@Published var code = ""
-	@Published var showingCollectionCode = false
-	@Published var showingError = false
+	@Published var showingAlert = false
+    @Published var activeAlert: ActiveAlert = .collection
 	
 	let sdk: MealsSDK
 	let locationManager: LocationManager
@@ -33,17 +34,20 @@ final class AddMealViewModel: ObservableObject {
 }
 
 extension AddMealViewModel: AddMealViewModelProtocol {
-	
-	func postMeal(meal: Meal) {
-		sdk.postMeal(meal: meal, completionHandler: { response, error in
-			
-			guard let response = response else {
-				self.showingError.toggle()
-				return
-			}
-			self.code = response.id.last4Chars()
-			self.showingCollectionCode.toggle()
-			
-		})
-	}
+
+    func postMeal(meal: Meal) {
+        sdk.postMeal(meal: meal, completionHandler: { meal, error in
+
+            guard
+                let meal = meal,
+                error == nil else {
+                self.activeAlert = .error
+                self.showingAlert.toggle()
+                return
+            }
+            self.code = meal.id.last4Chars()
+            self.activeAlert = .collection
+            self.showingAlert.toggle()
+        })
+    }
 }

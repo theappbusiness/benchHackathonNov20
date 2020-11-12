@@ -1,6 +1,7 @@
 package com.kcc.kmmhackathon.shared.network
 
 import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kcc.kmmhackathon.shared.entity.Quantity
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
 import io.ktor.client.request.*
@@ -14,11 +15,11 @@ class MealApi {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
-            defaultRequest {
-                contentType(ContentType.Application.Json)
-                url(MEALS_ENDPOINT)
-            }
         }
+    }
+
+    suspend fun getMeal(id: String): Meal {
+        return httpClient.get("$MEALS_ENDPOINT/$id")
     }
 
     suspend fun getAllMeals(): List<Meal> {
@@ -27,13 +28,15 @@ class MealApi {
 
     suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(MEALS_ENDPOINT) {
+            contentType(ContentType.Application.Json)
             body = meal
         }
     }
 
-    suspend fun patchMeal(meal: Meal): Meal {
-        return httpClient.patch("$MEALS_ENDPOINT/${meal.id}") {
-            body = meal
+    suspend fun patchMeal(id: String, quantity: Int): Meal {
+        return httpClient.patch("$MEALS_ENDPOINT/${id}") {
+            contentType(ContentType.Application.Json)
+            body = Quantity(quantity)
         }
     }
 
