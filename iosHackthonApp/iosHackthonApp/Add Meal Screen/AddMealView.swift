@@ -24,14 +24,6 @@ struct AddMealView: View {
 	@State var isHot: Bool = true
 	
 	var body: some View {
-		
-		ZStack {}
-			.alert(isPresented: $viewModel.showingCollectionCode) {
-				Alert(
-					title: Text(viewModel.code),
-					message: Text(Strings.AddMealScreen.CollectionAlert.message),
-					dismissButton: .default(Text(Strings.Common.ok)))
-			}
 		ZStack {
 			ScrollView {
 				VStack(alignment: .leading, spacing: 10) {
@@ -114,6 +106,14 @@ struct AddMealView: View {
 				message: Text(Strings.Common.ErrorAlert.message),
 				dismissButton: .default(Text(Strings.Common.ok)))
 		}
+		
+		ZStack {}
+			.alert(isPresented: $viewModel.showingCollectionCode) {
+				Alert(
+					title: Text(viewModel.code),
+					message: Text(Strings.AddMealScreen.CollectionAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+			}
 	}
 }
 
