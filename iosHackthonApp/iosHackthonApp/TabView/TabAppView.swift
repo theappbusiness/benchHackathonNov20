@@ -20,6 +20,7 @@ struct TabAppView: View {
 			NavigationView {
 				AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))
 			}
+			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.LandingScreen.Images.plus)
 				Text(Strings.LandingScreen.plusButtonText)
@@ -28,6 +29,7 @@ struct TabAppView: View {
 			NavigationView {
 				MealListView(viewModel: .init(sdk: self.sdk))
 			}
+			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.LandingScreen.Images.find)
 				Text(Strings.LandingScreen.findButtonText)
