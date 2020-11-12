@@ -47,7 +47,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
             tempView.text = tempString
             tempView.setTextColor(ContextCompat.getColor(itemView.context, tempColor))
 
-            infoView.text = "Info: ${meal.info}"
+            infoView.text = if (meal.info.isNotEmpty()) "Info: ${meal.info}" else ""
             availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
             expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
 
