@@ -51,46 +51,18 @@ class FindMealActivity : AppCompatActivity() {
     }
 
     private fun displayMeals(needReload: Boolean) {
-        Log.i("==DisplayMeals", "Inside fun")
         progressBarView.isVisible = true
         mainScope.launch {
-            Log.i("==DisplayMeals", "Inside launch")
             kotlin.runCatching {
                 sdk.getMeals(needReload)
             }.onSuccess {
-                Log.i("DisplayMeals:", "Success ${it}")
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()
             }.onFailure {
-                Log.i("DisplayMeals:", "Failure")
-                Toast.makeText(this@FindMealActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
-                loadSampleMeals()
+                Toast.makeText(this@FindMealActivity, it.localizedMessage, Toast.LENGTH_SHORT)
+                    .show()
             }
             progressBarView.isVisible = false
         }
-    }
-
-    private fun loadSampleMeals() {
-        var lastMealId = 0
-        var numMeals = 22
-
-        val sampleMeals = ArrayList<Meal>()
-        for (i in 1..numMeals) {
-            sampleMeals.add(
-                Meal(
-                "${++lastMealId}",
-                "Meal + ${lastMealId}",
-                50 - i,
-                "Today",
-                "Saturday",
-                "This is a great meal",
-                i <= numMeals / 2,
-                51.023f,
-                0.21f)
-            )
-        }
-
-        mealsAdapter.mealsList = sampleMeals
-        mealsAdapter.notifyDataSetChanged()
     }
 }
