@@ -1,88 +1,61 @@
 import SwiftUI
 import shared
+import CoreLocation
 
 struct MealListView: View {
 
-    @ObservedObject private(set) var viewModel: ViewModel
+    @ObservedObject private(set) var viewModel: MealListViewModel
 
     var body: some View {
-        listView()
-            .navigationBarTitle("Meals")
-            .navigationBarItems(trailing:
-                                    Button("Reload") {
-                                        self.viewModel.loadMeals(forceReload: true)
-                                    })
-            .navigationBarBackButtonHidden(true)
-    }
 
-    private func listView() -> AnyView {
-        switch viewModel.meals {
-        case .loading:
-            return AnyView(Text("Loading...").multilineTextAlignment(.center))
-        case .result(let meals):
-            return AnyView(List(meals) { meal in
-                MealRow(meal: meal)
-            })
-        case .error(let description):
-            return AnyView(Text(description).multilineTextAlignment(.center))
-        }
-    }
-}
-
-extension MealListView {
-    enum LoadableMeals {
-        case loading
-        case result([Meal])
-        case error(String)
-    }
-
-    class ViewModel: ObservableObject {
-
-        let sdk: MealsSDK
-        @Published var meals = LoadableMeals.loading
-
-        init(sdk: MealsSDK) {
-            self.sdk = sdk
-            self.loadMeals(forceReload: false)
-        }
-
-        func loadMeals(forceReload: Bool) {
-            self.meals = .loading
-            sdk.getMeals(forceReload: forceReload, completionHandler: { launches, error in
-                if let launches = launches {
-                    self.meals = .result(launches)
-                } else {
-                    self.meals = .error(error?.localizedDescription ?? "error")
+        ScrollView {
+            LazyVStack {
+                ForEach((0 ..< viewModel.meals.count), id: \.self) {
+                    MealRow(listViewModel: viewModel, rowViewModel: MealRowViewModel(mealWithDistance: viewModel.meals[$0]))
+                        .padding()
                 }
-            })
-        }
-    }
-}
-
-struct MealRow: View {
-
-    var meal: Meal
-
-    var body: some View {
-        HStack() {
-            VStack(alignment: .leading, spacing: 10.0) {
-                Text("Name: \(meal.name)")
-                Text("Description: \(meal.info)")
-                Text("Temperature: \(meal.hot ? "Hot" : "Cold")")
-                Text("Available from: \(meal.availableFromDate)")
-                Text("Expires: \(meal.expiryDate)")
-                Text("Lat, Lon: [\(meal.locationLat), \(meal.locationLong)]")
-                Text("Pick up code test: \(String(meal.id.suffix(4)))")
             }
-            Spacer()
+
         }
+        .navigationBarTitle(Strings.MealListScreen.title)
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    self.viewModel.loadMeals(forceReload: true)
+                                }, label: {
+                                    Image(systemName: Strings.MealListScreen.Images.reload)
+                                        .foregroundColor(.black)
+                                }))
+            .alert(isPresented: $viewModel.showingAlert) {
+                switch viewModel.activeAlert {
+                case .unavailable:
+                    return  Alert(
+                        title: Text(Strings.Common.sorry),
+                        message: Text(Strings.MealListScreen.UnavailableAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                case .collection:
+                    return Alert(
+                        title: Text(viewModel.code),
+                        message: Text(Strings.MealListScreen.CollectionAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                case .error:
+                    return Alert(
+                                        title: Text(Strings.Common.sorry),
+                                message: Text(Strings.Common.ErrorAlert.message),
+                                dismissButton: .default(Text(Strings.Common.ok)))
+                }
+            }
+        .onAppear(perform: {
+            viewModel.loadMeals(forceReload: true)
+        })
     }
+    
 }
 
 struct MealListView_Previews: PreviewProvider {
     static var previews: some View {
-        MealListView(viewModel: MealListView.ViewModel(sdk: MealsSDK()))
+        MealListView(viewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
     }
 }
 
 extension Meal: Identifiable { }
+extension Quantity: Identifiable { }

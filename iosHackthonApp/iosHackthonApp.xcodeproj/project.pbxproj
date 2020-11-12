@@ -25,8 +25,13 @@
 		CE2BA108255AD490006AFF20 /* Strings+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA107255AD490006AFF20 /* Strings+extension.swift */; };
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
 		CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */; };
+		CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA191255AEB9C006AFF20 /* MealRow.swift */; };
+		CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */; };
+		CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B992B255C475100629D79 /* MealRowViewModel.swift */; };
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
+		CEA07292255D328300D45B50 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA07291255D328300D45B50 /* Date+extension.swift */; };
+		CEA072A9255D52F300D45B50 /* ActiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA072A8255D52F300D45B50 /* ActiveAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +89,13 @@
 		CE2BA107255AD490006AFF20 /* Strings+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extension.swift"; sourceTree = "<group>"; };
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
 		CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewModel.swift; sourceTree = "<group>"; };
+		CE2BA191255AEB9C006AFF20 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
+		CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
+		CE5B992B255C475100629D79 /* MealRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowViewModel.swift; sourceTree = "<group>"; };
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CEA07291255D328300D45B50 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
+		CEA072A8255D52F300D45B50 /* ActiveAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +164,10 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
-				46A0506F255C4E7A00A1DF75 /* TabView */,
-				CE2BA106255AD478006AFF20 /* extensions */,
+				CEA072A7255D52DE00D45B50 /* AlertHelper */,
+				CE2BA106255AD478006AFF20 /* Extensions */,
 				CE9AE6C1255961F500EA7A9B /* Components */,
+				46A0506F255C4E7A00A1DF75 /* TabView */,
 				CE9AE6B92559533400EA7A9B /* Add Meal Screen */,
 				CE0EF13C25558BC10054D2AA /* Meal List Screen */,
 				CE0EF10F25558B1F0054D2AA /* Landing Screen */,
@@ -258,17 +269,29 @@
 		CE0EF13C25558BC10054D2AA /* Meal List Screen */ = {
 			isa = PBXGroup;
 			children = (
+				CE5B992F255C477D00629D79 /* Meal List Row */,
 				7555FF82242A565900829871 /* MealListView.swift */,
+				CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */,
 			);
 			path = "Meal List Screen";
 			sourceTree = "<group>";
 		};
-		CE2BA106255AD478006AFF20 /* extensions */ = {
+		CE2BA106255AD478006AFF20 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				CE2BA107255AD490006AFF20 /* Strings+extension.swift */,
+				CEA07291255D328300D45B50 /* Date+extension.swift */,
 			);
-			path = extensions;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE5B992F255C477D00629D79 /* Meal List Row */ = {
+			isa = PBXGroup;
+			children = (
+				CE2BA191255AEB9C006AFF20 /* MealRow.swift */,
+				CE5B992B255C475100629D79 /* MealRowViewModel.swift */,
+			);
+			path = "Meal List Row";
 			sourceTree = "<group>";
 		};
 		CE9AE6B92559533400EA7A9B /* Add Meal Screen */ = {
@@ -287,6 +310,14 @@
 				46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		CEA072A7255D52DE00D45B50 /* AlertHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CEA072A8255D52F300D45B50 /* ActiveAlert.swift */,
+			);
+			path = AlertHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,9 +497,14 @@
 				46A57FAF255ABFA10076BB88 /* LocationManager.swift in Sources */,
 				CE2BA108255AD490006AFF20 /* Strings+extension.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
+				CEA07292255D328300D45B50 /* Date+extension.swift in Sources */,
+				CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */,
+				CEA072A9255D52F300D45B50 /* ActiveAlert.swift in Sources */,
 				46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */,
 				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
+				CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */,
 				CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */,
+				CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */,
 				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,
 				7555FF83242A565900829871 /* MealListView.swift in Sources */,
 				CE0EF13325558B830054D2AA /* Strings.swift in Sources */,
@@ -558,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -612,7 +648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -631,6 +667,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks";
 				INFOPLIST_FILE = iosHackthonApp/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -651,6 +688,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks";
 				INFOPLIST_FILE = iosHackthonApp/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

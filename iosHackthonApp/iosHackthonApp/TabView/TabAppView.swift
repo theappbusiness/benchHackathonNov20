@@ -27,7 +27,7 @@ struct TabAppView: View {
 			}.tag(0)
 
 			NavigationView {
-				MealListView(viewModel: .init(sdk: self.sdk))
+                MealListView(viewModel: .init(sdk: self.sdk, locationManager: locationManager))
 			}
 			.navigationBarHidden(true)
 			.tabItem {
