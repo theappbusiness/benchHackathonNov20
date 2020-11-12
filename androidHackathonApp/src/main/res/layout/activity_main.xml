@@ -17,6 +17,8 @@
       android:layout_marginRight="@dimen/medium_margin"
       android:text="@string/subheading"
       android:textSize="@dimen/default_text_size"
+      android:textAlignment="center"
+      android:textColor="@color/black"
       app:layout_constraintBottom_toTopOf="@+id/button_container"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
