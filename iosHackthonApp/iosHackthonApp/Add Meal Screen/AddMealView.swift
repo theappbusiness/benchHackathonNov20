@@ -69,7 +69,7 @@ struct AddMealView: View {
 							TextField("", text: $address)
 								.modifier(GrayTextFieldStyle())
 								.disabled(true)
-
+							
 							Spacer(minLength: 10)
 							Button(action: {
 								self.address = "\(self.viewModel.locationManager.address)"
@@ -104,9 +104,9 @@ struct AddMealView: View {
 								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 						}
 						.disabled(title.isEmpty || additionalInfo.isEmpty || address.isEmpty)
-
+						
 					}
-
+					
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
@@ -114,20 +114,20 @@ struct AddMealView: View {
 				address = "\(self.viewModel.locationManager.address)"
 			}
 		}
-        .alert(isPresented: $viewModel.showingAlert) {
-            switch viewModel.activeAlert {
-            case .collection:
-                return Alert(
-                    title: Text(viewModel.code),
-                    message: Text(Strings.MealListScreen.CollectionAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            default:
-                return Alert(
-                    title: Text(Strings.Common.sorry),
-                    message: Text(Strings.Common.ErrorAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            }
-        }
+		.alert(isPresented: $viewModel.showingAlert) {
+			switch viewModel.activeAlert {
+			case .collection:
+				return Alert(
+					title: Text(viewModel.code),
+					message: Text(Strings.MealListScreen.CollectionAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+			default:
+				return Alert(
+					title: Text(Strings.Common.sorry),
+					message: Text(Strings.Common.ErrorAlert.message),
+					dismissButton: .default(Text(Strings.Common.ok)))
+			}
+		}
 	}
 }
 
