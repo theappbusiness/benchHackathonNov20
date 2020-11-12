@@ -62,7 +62,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
                 reserveButton.setOnClickListener {
                     // TODO link up to sdk and adjust quantity and show user reservation code
                     val id = meal.id
-                    val code = id.subSequence(id.length - 5, id.length - 1)
+                    val code = id.subSequence(id.length - 4, id.length)
                     Log.i("Reserve button tapped", "${meal.name} reservation code ${code}")
                 }
             }
