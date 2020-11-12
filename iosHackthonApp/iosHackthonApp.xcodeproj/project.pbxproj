@@ -31,6 +31,7 @@
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
 		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
 		CEA07292255D328300D45B50 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA07291255D328300D45B50 /* Date+extension.swift */; };
+		CEA072A9255D52F300D45B50 /* ActiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA072A8255D52F300D45B50 /* ActiveAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CEA07291255D328300D45B50 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
+		CEA072A8255D52F300D45B50 /* ActiveAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,9 +164,10 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
-				46A0506F255C4E7A00A1DF75 /* TabView */,
-				CE2BA106255AD478006AFF20 /* extensions */,
+				CEA072A7255D52DE00D45B50 /* AlertHelper */,
+				CE2BA106255AD478006AFF20 /* Extensions */,
 				CE9AE6C1255961F500EA7A9B /* Components */,
+				46A0506F255C4E7A00A1DF75 /* TabView */,
 				CE9AE6B92559533400EA7A9B /* Add Meal Screen */,
 				CE0EF13C25558BC10054D2AA /* Meal List Screen */,
 				CE0EF10F25558B1F0054D2AA /* Landing Screen */,
@@ -273,13 +276,13 @@
 			path = "Meal List Screen";
 			sourceTree = "<group>";
 		};
-		CE2BA106255AD478006AFF20 /* extensions */ = {
+		CE2BA106255AD478006AFF20 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				CE2BA107255AD490006AFF20 /* Strings+extension.swift */,
 				CEA07291255D328300D45B50 /* Date+extension.swift */,
 			);
-			path = extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CE5B992F255C477D00629D79 /* Meal List Row */ = {
@@ -307,6 +310,14 @@
 				46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		CEA072A7255D52DE00D45B50 /* AlertHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CEA072A8255D52F300D45B50 /* ActiveAlert.swift */,
+			);
+			path = AlertHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,6 +499,7 @@
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
 				CEA07292255D328300D45B50 /* Date+extension.swift in Sources */,
 				CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */,
+				CEA072A9255D52F300D45B50 /* ActiveAlert.swift in Sources */,
 				46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */,
 				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
 				CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */,

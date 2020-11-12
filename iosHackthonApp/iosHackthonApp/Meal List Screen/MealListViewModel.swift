@@ -11,10 +11,6 @@ import shared
 
 final class MealListViewModel: ObservableObject {
 
-    enum ActiveAlert {
-        case unavailable, collection, error
-    }
-
     let sdk: MealsSDK
     let locationManager: LocationManager
 

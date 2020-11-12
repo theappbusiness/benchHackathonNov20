@@ -100,20 +100,20 @@ struct AddMealView: View {
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
 		}
-		.alert(isPresented: $viewModel.showingError) {
-			Alert(
-				title: Text(Strings.Common.sorry),
-				message: Text(Strings.Common.ErrorAlert.message),
-				dismissButton: .default(Text(Strings.Common.ok)))
-		}
-		
-		ZStack {}
-			.alert(isPresented: $viewModel.showingCollectionCode) {
-				Alert(
-					title: Text(viewModel.code),
-					message: Text(Strings.AddMealScreen.CollectionAlert.message),
-					dismissButton: .default(Text(Strings.Common.ok)))
-			}
+        .alert(isPresented: $viewModel.showingAlert) {
+            switch viewModel.activeAlert {
+            case .collection:
+                return Alert(
+                    title: Text(viewModel.code),
+                    message: Text(Strings.MealListScreen.CollectionAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            default:
+                return Alert(
+                    title: Text(Strings.Common.sorry),
+                    message: Text(Strings.Common.ErrorAlert.message),
+                    dismissButton: .default(Text(Strings.Common.ok)))
+            }
+        }
 	}
 }
 
