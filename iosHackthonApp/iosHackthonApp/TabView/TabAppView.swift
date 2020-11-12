@@ -33,6 +33,7 @@ struct TabAppView: View {
 				Image(systemName: Strings.LandingScreen.Images.plus)
 				Text(Strings.LandingScreen.plusButtonText)
 			}.tag(0)
+            .accentColor(ColorManager.appGreen)
 
 			NavigationView {
                 MealListView(viewModel: .init(sdk: self.sdk, locationManager: locationManager))
@@ -43,6 +44,7 @@ struct TabAppView: View {
 				Image(systemName: Strings.LandingScreen.Images.find)
 				Text(Strings.LandingScreen.findButtonText)
 			}.tag(1)
+            .accentColor(ColorManager.appGreen)
 		})
         .accentColor(.white)
 		
