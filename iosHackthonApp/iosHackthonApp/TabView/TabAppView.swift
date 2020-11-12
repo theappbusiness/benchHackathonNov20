@@ -14,13 +14,12 @@ struct TabAppView: View {
 
 	private let sdk = MealsSDK()
 	private let locationManager = LocationManager()
+    @State var selectedView: Int
 
     init(selectedView: Int) {
-        self.selectedView = selectedView
         UITabBar.appearance().barTintColor = UIColor(ColorManager.appGreen)
+        _selectedView = State(initialValue: selectedView)
     }
-
-	@State var selectedView = 0
 
 	var body: some View {
 		TabView(selection: $selectedView, content: {
