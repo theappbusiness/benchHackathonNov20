@@ -27,6 +27,8 @@ class MealApi {
     }
 
     companion object {
-        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
+//        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
+        private const val MEALS_ENDPOINT = "http://10.0.2.2:3000/meals"
+
     }
 }
