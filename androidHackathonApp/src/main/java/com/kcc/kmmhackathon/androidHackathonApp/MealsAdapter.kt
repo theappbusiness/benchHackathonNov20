@@ -1,13 +1,14 @@
 package com.kcc.kmmhackathon.androidHackathonApp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.kcc.kmmhackathon.androidHackathonApp.data.Meal
+import com.kcc.kmmhackathon.shared.entity.Meal
 
-class MealsAdapter (private val mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
+class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
 
     inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val nameTextView = itemView.findViewById<TextView>(R.id.meal_name)
@@ -16,10 +17,9 @@ class MealsAdapter (private val mealsList: List<Meal>) : RecyclerView.Adapter<Me
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsAdapter.ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val contactView = inflater.inflate(R.layout.meal_item_row, parent, false)
-        return ViewHolder(contactView)
+        val inflater = LayoutInflater.from(parent.context)
+        val mealItemView = inflater.inflate(R.layout.meal_item_row, parent, false)
+        return ViewHolder(mealItemView)
     }
 
     override fun onBindViewHolder(viewHolder: MealsAdapter.ViewHolder, position: Int) {
@@ -28,7 +28,7 @@ class MealsAdapter (private val mealsList: List<Meal>) : RecyclerView.Adapter<Me
         val idTextView = viewHolder.idTextView
         val tempTextView = viewHolder.tempTextView
 
-        val tempText = if (meal.isHot) "Hot" else "Cold"
+        val tempText = if (meal.hot) "Hot" else "Cold"
 
         nameTextView.setText(meal.name)
         idTextView.setText(meal.id)
@@ -36,6 +36,7 @@ class MealsAdapter (private val mealsList: List<Meal>) : RecyclerView.Adapter<Me
     }
 
     override fun getItemCount(): Int {
+        Log.i("MealsAdapter: ", "${mealsList.toString()}")
         return mealsList.size
     }
 }
