@@ -43,7 +43,7 @@
 
     <com.kcc.kmmhackathon.androidHackathonApp.ActionButton
         android:id="@+id/find_meal_button"
-        android:background="@color/colorSecondary"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin" />
