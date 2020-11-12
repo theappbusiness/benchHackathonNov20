@@ -34,6 +34,28 @@
       "locationLong": 0
     },
     {
+      "id": "1598044e-5259-11e9-8647-d663bd870b02",
+      "name": "tomato pasta",
+      "quantity": 1,
+      "availableFromDate": "Monday",
+      "expiryDate": "Tuesday",
+      "info": "Vegetarian",
+      "hot": true,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
+    },
+    {
+      "id": "2be2d854-a067-43ec-a488-2e69f0f2a624",
+      "name": "Pizza",
+      "quantity": 2,
+      "availableFromDate": "Tuesday",
+      "expiryDate": "Saturday",
+      "info": "Meat",
+      "hot": false,
+      "locationLat": 51.509865,
+      "locationLong": -0.118092
+    },
+    {
       "id": "182647f0-71fd-497d-9f67-2c7def1fc2d3",
       "name": "Lasagne",
       "quantity": 14,
