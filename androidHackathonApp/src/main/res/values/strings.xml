@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CommunityKitchen</string>
-    <string name="subheading">List a meal to help out someone in your local community or browse the meals that others have added</string>
-    <string name="add_meal_title">List a Meal</string>
+<string name="heading">CommunityKitchen</string>
+    <string name="subheading">Add a meal to help out someone in your local community or browse the meals that others have added</string>
+    <string name="add_meal_title">Add a Meal</string>
     <string name="find_meal_title">Find a Meal</string>
     <string name="title_activity_add_meal">AddMealActivity</string>
     <string name="add_meal_activity_header">This is the add meal activity screen</string>

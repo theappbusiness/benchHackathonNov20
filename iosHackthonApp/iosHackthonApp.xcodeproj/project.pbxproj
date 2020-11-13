@@ -26,6 +26,7 @@
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
 		CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */; };
 		CE2BA192255AEB9C006AFF20 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA191255AEB9C006AFF20 /* MealRow.swift */; };
+		CE2BCA61255D8A2D00633B34 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BCA60255D8A2D00633B34 /* MapView.swift */; };
 		CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */; };
 		CE5B992C255C475100629D79 /* MealRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B992B255C475100629D79 /* MealRowViewModel.swift */; };
 		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
@@ -90,6 +91,7 @@
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
 		CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewModel.swift; sourceTree = "<group>"; };
 		CE2BA191255AEB9C006AFF20 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
+		CE2BCA60255D8A2D00633B34 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
 		CE5B992B255C475100629D79 /* MealRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowViewModel.swift; sourceTree = "<group>"; };
 		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		CE0EF13C25558BC10054D2AA /* Meal List Screen */ = {
 			isa = PBXGroup;
 			children = (
+				CE2BCA5F255D8A2000633B34 /* MapView */,
 				CE5B992F255C477D00629D79 /* Meal List Row */,
 				7555FF82242A565900829871 /* MealListView.swift */,
 				CE5B9925255C3DAD00629D79 /* MealListViewModel.swift */,
@@ -283,6 +286,14 @@
 				CEA07291255D328300D45B50 /* Date+extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE2BCA5F255D8A2000633B34 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2BCA60255D8A2D00633B34 /* MapView.swift */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		CE5B992F255C477D00629D79 /* Meal List Row */ = {
@@ -506,6 +517,7 @@
 				CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */,
 				CE5B9926255C3DAD00629D79 /* MealListViewModel.swift in Sources */,
 				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,
+				CE2BCA61255D8A2D00633B34 /* MapView.swift in Sources */,
 				7555FF83242A565900829871 /* MealListView.swift in Sources */,
 				CE0EF13325558B830054D2AA /* Strings.swift in Sources */,
 				CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */,

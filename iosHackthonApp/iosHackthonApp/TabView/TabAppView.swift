@@ -17,7 +17,7 @@ struct TabAppView: View {
     @State var selectedView: Int
 
     init(selectedView: Int) {
-        UITabBar.appearance().barTintColor = UIColor(ColorManager.appGreen)
+        UITabBar.appearance().barTintColor = UIColor(ColorManager.appPrimary)
         _selectedView = State(initialValue: selectedView)
     }
 
@@ -32,7 +32,7 @@ struct TabAppView: View {
 				Image(systemName: Strings.LandingScreen.Images.plus)
 				Text(Strings.LandingScreen.plusButtonText)
 			}.tag(0)
-            .accentColor(ColorManager.appGreen)
+            .accentColor(ColorManager.appPrimary)
 
 			NavigationView {
                 MealListView(viewModel: .init(sdk: self.sdk, locationManager: locationManager))
@@ -43,7 +43,7 @@ struct TabAppView: View {
 				Image(systemName: Strings.LandingScreen.Images.find)
 				Text(Strings.LandingScreen.findButtonText)
 			}.tag(1)
-            .accentColor(ColorManager.appGreen)
+            .accentColor(ColorManager.appPrimary)
 		})
         .accentColor(.white)
 		

@@ -78,7 +78,7 @@ struct AddMealView: View {
 							}) {
 								Image(systemName: Strings.Common.Images.location)
 									.font(.title)
-                                    .foregroundColor(ColorManager.appGreen)
+                                    .foregroundColor(ColorManager.appPrimary)
 							}
 							
 						}
@@ -99,14 +99,13 @@ struct AddMealView: View {
 								locationLong:  self.longitude)
 							self.viewModel.postMeal(meal: meal)
 						}) {
-							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.appGreen
+							let backgroundColor = title.isEmpty || additionalInfo.isEmpty || address.isEmpty || self.quantity == 0 ? ColorManager.gray: ColorManager.appPrimary
 							Text(Strings.AddMealScreen.addMeal)
 								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 						}
 						.disabled(title.isEmpty || additionalInfo.isEmpty || address.isEmpty)
-						
 					}
-					
+                    Spacer()
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
@@ -119,7 +118,7 @@ struct AddMealView: View {
 			case .collection:
 				return Alert(
 					title: Text(viewModel.code),
-					message: Text(Strings.MealListScreen.CollectionAlert.message),
+					message: Text(Strings.AddMealScreen.CollectionAlert.message),
 					dismissButton: .default(Text(Strings.Common.ok)))
 			default:
 				return Alert(
