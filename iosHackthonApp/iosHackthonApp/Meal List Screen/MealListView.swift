@@ -23,7 +23,6 @@ struct MealListView: View {
                                 .padding()
                         }
                     }
-
                 }
                 .navigationBarTitle(Strings.MealListScreen.title)
                 .navigationBarItems(trailing:

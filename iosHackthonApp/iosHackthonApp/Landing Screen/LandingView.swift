@@ -7,7 +7,7 @@ struct LandingView: View {
 
     init() {
         coloredNavAppearance.configureWithOpaqueBackground()
-        coloredNavAppearance.backgroundColor = UIColor(ColorManager.appGreen)
+        coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
         coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
@@ -34,7 +34,7 @@ struct LandingView: View {
                     NavigationLink(destination: TabAppView(selectedView: 0)) {
                         CustomButton(
                             width: geometry.size.width,
-                            buttonColor: ColorManager.appGreen,
+                            buttonColor: ColorManager.appPrimary,
                             image: Strings.LandingScreen.Images.plus,
                             text: Strings.LandingScreen.plusButtonText)
                     }
@@ -42,7 +42,7 @@ struct LandingView: View {
                     NavigationLink(destination: TabAppView(selectedView: 1)) {
                         CustomButton(
                             width: geometry.size.width,
-                            buttonColor: ColorManager.appDarkGreen,
+                            buttonColor: ColorManager.appSecondary,
                             image: Strings.LandingScreen.Images.find,
                             text: Strings.LandingScreen.findButtonText)
                     }

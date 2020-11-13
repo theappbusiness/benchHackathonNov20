@@ -46,7 +46,6 @@ final class MealListViewModel: ObservableObject {
                 mapAnnotation.title = meal.name
                 mapAnnotation.subtitle = self.getQuantityText(Int(meal.quantity))
                 self.locations.append(mapAnnotation)
-
             }
         })
     }

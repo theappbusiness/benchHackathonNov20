@@ -65,7 +65,7 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var buttonBackgroundColor: Color {
-        isButtonDisabled ? Color.gray : ColorManager.appGreen
+        isButtonDisabled ? Color.gray : ColorManager.appPrimary
     }
 
     var locationText: String {
