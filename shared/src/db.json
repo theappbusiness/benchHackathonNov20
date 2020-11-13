@@ -8,8 +8,8 @@
       "expiryDate": "2020-11-19 16:55:14 +0000",
       "info": "Misery sand",
       "hot": true,
-      "locationLat": 51.50998,
-      "locationLong": -0.1337
+      "locationLat": 51.50598,
+      "locationLong": -0.1357
     },
     {
       "id": "182647f0-71fd-497d-9f67-2c7def1fc2d1",
@@ -19,8 +19,8 @@
       "expiryDate": "2020-11-17 16:56:59 +0000",
       "info": "Contains gluten",
       "hot": true,
-      "locationLat": 0,
-      "locationLong": 0
+      "locationLat": 51.50998,
+      "locationLong": -0.133492
     },
     {
       "id": "182647f0-71fd-497d-9f67-2c7def1fc2d2",
@@ -30,8 +30,8 @@
       "expiryDate": "2020-11-18 16:56:59 +0000",
       "info": "Beef and ale",
       "hot": true,
-      "locationLat": 0,
-      "locationLong": 0
+      "locationLat": 51.509465,
+      "locationLong": -0.130692
     },
     {
       "id": "1598044e-5259-11e9-8647-d663bd870b02",
@@ -41,8 +41,8 @@
       "expiryDate": "2020-11-18 16:56:59 +0000",
       "info": "Vegetarian",
       "hot": false,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLat": 51.508865,
+      "locationLong": -0.132492
     },
     {
       "id": "2be2d854-a067-43ec-a488-2e69f0f2a624",
@@ -52,19 +52,19 @@
       "expiryDate": "2020-11-19 16:56:59 +0000",
       "info": "Meat",
       "hot": false,
-      "locationLat": 51.509865,
-      "locationLong": -0.118092
+      "locationLat": 51.509465,
+      "locationLong": -0.135392
     },
     {
       "id": "182647f0-71fd-497d-9f67-2c7def1fc2d3",
       "name": "Stir-fry",
-      "quantity": 14,
+      "quantity": 13,
       "availableFromDate": "2020-11-15 16:56:59 +0000",
       "expiryDate": "2020-11-19 16:56:59 +0000",
       "info": "Vegan",
       "hot": false,
-      "locationLat": 0,
-      "locationLong": 0
+      "locationLat": 51.509465,
+      "locationLong": -0.1343392
     }
   ]
 }

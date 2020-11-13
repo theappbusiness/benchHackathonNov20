@@ -11,8 +11,8 @@ import Foundation
 struct Strings {
     struct LandingScreen {
         static let heading = "CommunityKitchen"
-        static let subheading = "List a meal to help out someone in your local community or browse the meals that others have added"
-        static let plusButtonText = "List a Meal"
+        static let subheading = "Add a meal to help out someone in your local community or browse the meals that others have added"
+        static let plusButtonText = "Add a Meal"
         static let findButtonText = "Find a Meal"
 
         struct Images {

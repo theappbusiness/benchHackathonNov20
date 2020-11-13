@@ -104,9 +104,8 @@ struct AddMealView: View {
 								.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 						}
 						.disabled(title.isEmpty || additionalInfo.isEmpty || address.isEmpty)
-						
 					}
-					
+                    Spacer()
 				}.padding()
 			}
 			.navigationBarTitle(Strings.AddMealScreen.addMeal)
