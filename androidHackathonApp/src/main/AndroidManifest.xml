@@ -2,16 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kcc.kmmhackathon.androidHackathonApp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true" >
+
         <activity
             android:name=".FindMealActivity"
-            android:label="Find a Meal"/>
+            android:label="@string/find_meal_activity_header"/>
         <activity
             android:name=".AddMealActivity"
-            android:label="Add a Meal" />
+            android:label="@string/add_meal_activity_header" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

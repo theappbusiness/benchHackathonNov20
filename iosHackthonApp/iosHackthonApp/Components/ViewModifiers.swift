@@ -9,38 +9,46 @@
 import Foundation
 import SwiftUI
 
-struct GrayTextFieldStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding(.all)
-            .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-    }
+struct GreyTextFieldStyle: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.padding(.all)
+			.background(ColorManager.textfieldGrey)
+	}
 }
 
 struct AddButtonStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(.white)
-            .padding(10)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .background(ColorManager.appGreen)
-            .cornerRadius(10)
-    }
+	var width: CGFloat
+	var backgroundColor: Color
+	
+	init(width: CGFloat, backgroundColor: Color) {
+		self.width = width
+		self.backgroundColor = backgroundColor
+	}
+	
+	func body(content: Content) -> some View {
+		content
+			.foregroundColor(.white)
+			.padding(10)
+			.frame(minWidth: width, maxWidth: .infinity)
+			.background(backgroundColor)
+			.cornerRadius(10)
+	}
 }
 
 struct IconButtonImageStyle: ViewModifier {
-    var color: Color
-
-    init(color: Color) {
-        self.color = color
-    }
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(color)
-            .padding(10)
-            .frame(minWidth: 0, maxWidth: 50)
-            .background(Color.clear)
-            .border(color, width: 2)
-            .cornerRadius(5)
-    }
+	var color: Color
+	
+	init(color: Color) {
+		self.color = color
+	}
+	func body(content: Content) -> some View {
+		content
+			.foregroundColor(color)
+			.padding(10)
+			.frame(minWidth: 0, maxWidth: 50)
+			.background(Color.clear)
+			.border(color, width: 2)
+			.cornerRadius(5)
+	}
 }

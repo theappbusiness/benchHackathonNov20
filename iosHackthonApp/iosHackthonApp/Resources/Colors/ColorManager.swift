@@ -15,4 +15,5 @@ struct ColorManager {
     static let gray = Color.gray
     static let appGreen = Color("appGreen")
     static let appDarkGreen = Color("appDarkGreen")
+	static let textfieldGrey = Color("textField-grey")
 }

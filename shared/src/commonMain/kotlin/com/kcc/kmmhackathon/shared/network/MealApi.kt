@@ -41,6 +41,10 @@ class MealApi {
     }
 
     companion object {
-        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
+        // iOS can use this endpoint
+//        private const val MEALS_ENDPOINT = "http://localhost:3000/Meals"
+
+        // Android needs to switch to this endpoint
+        private const val MEALS_ENDPOINT = "http://10.0.2.2:3000/meals"
     }
 }
