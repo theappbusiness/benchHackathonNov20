@@ -45,6 +45,16 @@ struct Strings {
         static let available = "Available: "
         static let expiresAt = " Expires: "
 
+        struct SegmentControl {
+            static let map = "Map"
+            static let list = "List"
+        }
+
+        struct Map {
+            static let missing = "Missing place information"
+            static let reserved = "All meals reserved"
+        }
+
         struct UnavailableAlert {
             static let message = "This meal is no longer available"
         }
@@ -77,6 +87,7 @@ struct Strings {
         static let sorry = "Sorry!"
         static let km = "km"
         static let twoDecimal = "%.2f"
+        static let unknown = "Unknown"
 
         struct ErrorAlert {
             static let message = "There was an error creating your meal.\n please try again"

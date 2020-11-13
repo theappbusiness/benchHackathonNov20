@@ -6,8 +6,8 @@
 //  Copyright © 2020 orgName. All rights reserved.
 //
 
-
 import shared
+import MapKit
 
 final class MealListViewModel: ObservableObject {
 
@@ -18,6 +18,10 @@ final class MealListViewModel: ObservableObject {
     @Published var code = ""
     @Published var showingAlert = false
     @Published var activeAlert: ActiveAlert = .unavailable
+    @Published var locations = [MKPointAnnotation]()
+    @Published var showMap = 0
+    @Published var centerCoordinate = CLLocationCoordinate2D()
+    @Published var selectedPlace: MKPointAnnotation?
 
     init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk
@@ -34,10 +38,30 @@ final class MealListViewModel: ObservableObject {
                 .filter { self.mealNotExpired($0.expiryDate) }
                 .map { MealWithDistance(meal: $0, distance: self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
                 .sorted(by: { $0.distance < $1.distance })
+
+            for meal in meals {
+                let mapAnnotation = MKPointAnnotation()
+                let location = CLLocationCoordinate2D(latitude: Double(meal.locationLat), longitude: Double(meal.locationLong))
+                mapAnnotation.coordinate = location
+                mapAnnotation.title = meal.name
+                mapAnnotation.subtitle = self.getQuantityText(Int(meal.quantity))
+                self.locations.append(mapAnnotation)
+
+            }
         })
     }
 
-    func mealNotExpired(_ expiry: String) -> Bool {
+    private func getQuantityText(_ quantity: Int) -> String {
+        if quantity > 1 {
+            return "\(quantity) \(Strings.MealListScreen.portions)"
+        } else if quantity == 1 {
+            return "\(quantity) \(Strings.MealListScreen.portion)"
+        } else {
+            return "\(Strings.MealListScreen.Map.reserved)"
+        }
+    }
+
+    private func mealNotExpired(_ expiry: String) -> Bool {
         Date() < Date.dateFrom(dateString: expiry)
     }
 

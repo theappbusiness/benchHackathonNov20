@@ -34,7 +34,7 @@ struct LandingView: View {
                     NavigationLink(destination: TabAppView(selectedView: 0)) {
                         CustomButton(
                             width: geometry.size.width,
-                            buttonColor: ColorManager.appPrimary,
+                            buttonColor: ColorManager.appGreen,
                             image: Strings.LandingScreen.Images.plus,
                             text: Strings.LandingScreen.plusButtonText)
                     }
@@ -42,7 +42,7 @@ struct LandingView: View {
                     NavigationLink(destination: TabAppView(selectedView: 1)) {
                         CustomButton(
                             width: geometry.size.width,
-                            buttonColor: ColorManager.appSecondary,
+                            buttonColor: ColorManager.appDarkGreen,
                             image: Strings.LandingScreen.Images.find,
                             text: Strings.LandingScreen.findButtonText)
                     }
