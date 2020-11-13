@@ -119,7 +119,7 @@ struct AddMealView: View {
 			case .collection:
 				return Alert(
 					title: Text(viewModel.code),
-					message: Text(Strings.MealListScreen.CollectionAlert.message),
+					message: Text(Strings.AddMealScreen.CollectionAlert.message),
 					dismissButton: .default(Text(Strings.Common.ok)))
 			default:
 				return Alert(
