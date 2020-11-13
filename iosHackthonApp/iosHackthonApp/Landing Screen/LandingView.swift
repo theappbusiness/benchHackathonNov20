@@ -7,7 +7,7 @@ struct LandingView: View {
 
     init() {
         coloredNavAppearance.configureWithOpaqueBackground()
-        coloredNavAppearance.backgroundColor = UIColor(ColorManager.appGreen)
+        coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
         coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
