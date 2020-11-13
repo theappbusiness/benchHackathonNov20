@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setTitle(R.string.heading)
+        setTitle(R.string.app_name)
 
         val addMealButton = findViewById<ActionButton>(R.id.add_meal_button)
         addMealButton.setIcon(R.drawable.ic_outline_add_box_24)
