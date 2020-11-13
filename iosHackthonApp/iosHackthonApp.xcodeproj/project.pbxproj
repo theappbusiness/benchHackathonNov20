@@ -166,7 +166,6 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
-				CE2BCA5E255D8A1600633B34 /* New Group */,
 				CEA072A7255D52DE00D45B50 /* AlertHelper */,
 				CE2BA106255AD478006AFF20 /* Extensions */,
 				CE9AE6C1255961F500EA7A9B /* Components */,
@@ -287,13 +286,6 @@
 				CEA07291255D328300D45B50 /* Date+extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CE2BCA5E255D8A1600633B34 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		CE2BCA5F255D8A2000633B34 /* MapView */ = {

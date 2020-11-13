@@ -56,9 +56,8 @@ final class MealListViewModel: ObservableObject {
             return "\(quantity) \(Strings.MealListScreen.portions)"
         } else if quantity == 1 {
             return "\(quantity) \(Strings.MealListScreen.portion)"
-        } else {
-            return "\(Strings.MealListScreen.Map.reserved)"
         }
+        return "\(Strings.MealListScreen.Map.reserved)"
     }
 
     private func mealNotExpired(_ expiry: String) -> Bool {

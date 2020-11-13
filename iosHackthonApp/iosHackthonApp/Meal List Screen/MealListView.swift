@@ -50,7 +50,6 @@ struct MealListView: View {
                             title: Text(Strings.Common.sorry),
                             message: Text(Strings.Common.ErrorAlert.message),
                             dismissButton: .default(Text(Strings.Common.ok)))
-                    
                     }
                 }
                 .onAppear(perform: {
