@@ -10,9 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
-import org.w3c.dom.Text
-import java.time.LocalDate
-import kotlin.math.exp
 
 class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
@@ -44,7 +41,6 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         fun bindData(meal: Meal) {
             val ctx = itemView.context
             nameView.text = meal.name
-
             val tempString = if (meal.hot) "Hot" else "Cold"
             val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
             tempView.text = tempString
@@ -62,7 +58,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
             availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
             expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
 
-            portionsView.text = "#    ${meal.quantity} portions remaining"
+            portionsView.text = getQuantityText(meal.quantity)
 
             val hasPortions = meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
@@ -88,5 +84,14 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
             return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
         }
         return dateString
+    }
+
+    fun getQuantityText(quantity: Int) : String {
+        return if (quantity > 1) {
+            "#    ${quantity} portions remaining"
+        } else if (quantity == 1) {
+            "#    ${quantity} portion remaining"
+        } else {
+            "#    Reserved" }
     }
 }
