@@ -86,11 +86,9 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         return dateString
     }
 
-    fun getQuantityText(quantity: Int) : String {
-        return when (quantity) {
-            0 -> "#    Reserved"
-            1 ->  "#    ${quantity} portion remaining"
-            else -> "#    ${quantity} portions remaining"
-        }
+    fun getQuantityText(quantity: Int) : String = when (quantity) {
+        0 -> "#    Reserved"
+        1 ->  "#    ${quantity} portion remaining"
+        else -> "#    ${quantity} portions remaining"
     }
 }
