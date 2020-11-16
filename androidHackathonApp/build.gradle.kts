@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-android-extensions")
+    id("kotlin-android")
 }
 group = "com.kcc.kmmhackathon"
 version = "1.0-SNAPSHOT"
@@ -26,6 +27,9 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("com.google.android.gms:play-services-location:17.1.0")
+    implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.0.0")
 }
 
 android {
