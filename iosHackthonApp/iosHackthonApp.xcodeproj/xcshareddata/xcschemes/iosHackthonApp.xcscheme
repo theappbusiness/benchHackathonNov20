@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1200"
+   LastUpgradeVersion = "1210"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -36,6 +36,66 @@
                BuildableName = "iosHackthonAppTests.xctest"
                BlueprintName = "iosHackthonAppTests"
                ReferencedContainer = "container:iosHackthonApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ComponentsTests"
+               BuildableName = "ComponentsTests"
+               BlueprintName = "ComponentsTests"
+               ReferencedContainer = "container:Modules/Shared/Components">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ExtensionsTests"
+               BuildableName = "ExtensionsTests"
+               BlueprintName = "ExtensionsTests"
+               ReferencedContainer = "container:Modules/Shared/Extensions">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "LocationTests"
+               BuildableName = "LocationTests"
+               BlueprintName = "LocationTests"
+               ReferencedContainer = "container:Modules/Shared/Location">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MealListTests"
+               BuildableName = "MealListTests"
+               BlueprintName = "MealListTests"
+               ReferencedContainer = "container:Modules/Features/MealList">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "StringsTests"
+               BuildableName = "StringsTests"
+               BlueprintName = "StringsTests"
+               ReferencedContainer = "container:Modules/Shared/Strings">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ThemingTests"
+               BuildableName = "ThemingTests"
+               BlueprintName = "ThemingTests"
+               ReferencedContainer = "container:Modules/Shared/Theming">
             </BuildableReference>
          </TestableReference>
       </Testables>
