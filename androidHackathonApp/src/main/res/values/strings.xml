@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">CommunityKitchen</string>
-    <string name="subheading">Add a meal to help out someone in your local community or browse the meals that others have added</string>
-    <string name="add_meal_title">Add a Meal</string>
-    <string name="find_meal_title">Find a Meal</string>
+    //Core
+    <string name="app_name">CommunityKitchen</string>
+
+    //Titles
+    <string name="title_add_meal">Add a Meal</string>
+    <string name="title_find_meal">Find a Meal</string>
     <string name="title_activity_add_meal">AddMealActivity</string>
-    <string name="add_meal_activity_header">This is the add meal activity screen</string>
-    <string name="find_meal_activity_header">This is the find meal activity screen</string>
+
+    //Headers
+    <string name="header_add_meal_activity">This is the add meal activity screen</string>
+    <string name="header_find_meal_activity">This is the find meal activity screen</string>
+    <string name="subheading_main">Add a meal to help out someone in your local community or browse the meals that others have added</string>
+
+    //Meals
     <string name="portion">portion remaining</string>
     <string name="portions">portions remaining</string>
     <string name="reserved">portion remaining</string>
