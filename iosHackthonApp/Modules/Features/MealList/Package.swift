@@ -17,7 +17,7 @@ let package = Package(
 		.package(path: "../Shared/Extensions"),
 		.package(path: "../Shared/Location"),
 		.package(path: "../Shared/Components"),
-		.package(name: "shared", path: "/Users/kanecheshire/Projects/benchHackathonNov20/shared/swiftpackage")
+		.package(name: "shared", path: "../../../../shared/swiftpackage")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
