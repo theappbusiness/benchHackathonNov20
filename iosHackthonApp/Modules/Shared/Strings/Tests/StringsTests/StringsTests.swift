@@ -3,6 +3,6 @@ import XCTest
 
 final class StringsTests: XCTestCase {
     func testExample() {
-		XCTAssertTrue(true)
+        XCTAssertTrue(true)
     }
 }

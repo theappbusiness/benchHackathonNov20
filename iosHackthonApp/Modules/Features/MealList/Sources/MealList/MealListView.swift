@@ -4,22 +4,22 @@ import CoreLocation
 import Strings
 
 public struct MealListView: View {
-
+    
     @ObservedObject private var viewModel: MealListViewModel
-
-	public init(viewModel: MealListViewModel) {
-		self.viewModel = viewModel
-	}
-
+    
+    public init(viewModel: MealListViewModel) {
+        self.viewModel = viewModel
+    }
+    
     public var body: some View {
-
+        
         VStack {
             Picker(selection: $viewModel.showMap, label: Text("")) {
                 Text(Strings.MealListScreen.SegmentControl.list).tag(0)
                 Text(Strings.MealListScreen.SegmentControl.map).tag(1)
             }.pickerStyle(SegmentedPickerStyle())
             .padding()
-
+            
             if viewModel.showMap == 0 {
                 ScrollView {
                     LazyVStack {

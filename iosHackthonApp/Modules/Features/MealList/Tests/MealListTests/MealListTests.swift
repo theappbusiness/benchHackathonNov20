@@ -3,6 +3,6 @@ import XCTest
 
 final class MealListTests: XCTestCase {
     func testExample() {
-		XCTAssertTrue(true)
+        XCTAssertTrue(true)
     }
 }
