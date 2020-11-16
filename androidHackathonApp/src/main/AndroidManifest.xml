@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FindMealActivity"
+            android:name="com.kinandcarta.lib.find.meal.FindMealActivity"
             android:label="@string/find_meal_activity_header"/>
         <activity
             android:name=".AddMealActivity"

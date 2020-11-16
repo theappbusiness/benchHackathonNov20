@@ -1,4 +1,4 @@
-package com.kcc.kmmhackathon.androidHackathonApp
+package com.kinandcarta.lib.find.meal
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,11 +13,9 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 
 class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsViewHolder {
-        return LayoutInflater.from(parent.context)
-            .inflate(R.layout.meal_item_row, parent, false)
-            .run(::MealsViewHolder)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            MealsViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.meal_item_row, parent, false))
 
     override fun getItemCount(): Int {
         return mealsList.size
