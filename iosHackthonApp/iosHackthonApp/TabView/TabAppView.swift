@@ -9,6 +9,10 @@
 
 import SwiftUI
 import shared
+import Location
+import Theming
+import MealList
+import Strings
 
 struct TabAppView: View {
 

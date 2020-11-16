@@ -7,6 +7,8 @@
 //
 
 import shared
+import Components
+import Location
 
 protocol AddMealViewModelProtocol {
 

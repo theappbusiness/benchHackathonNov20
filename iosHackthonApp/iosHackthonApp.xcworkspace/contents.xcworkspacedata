@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:iosHackthonApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Features/MealList">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Shared/Location">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Shared/Extensions">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Shared/Strings">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Shared/Components">
+   </FileRef>
+   <FileRef
+      location = "group:Modules/Shared/Theming">
+   </FileRef>
+</Workspace>

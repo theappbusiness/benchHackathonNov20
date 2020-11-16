@@ -8,7 +8,9 @@
 
 import SwiftUI
 import shared
-import CoreLocation
+import Strings
+import Theming
+import Location
 
 struct AddMealView: View {
 	
