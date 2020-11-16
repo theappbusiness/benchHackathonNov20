@@ -17,7 +17,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Xcode version to 12.2
         run: sudo xcode-select -switch /Applications/Xcode_12.2.app
-      - name: Ensure Kotlin framework has built & converted to SPM
-        run: ./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION} && ./gradlew createSwiftPackage
       - name: Test on iPhone SE
         run: cd iosHackthonApp && xcodebuild test -workspace iosHackthonApp.xcworkspace -scheme iosHackthonApp -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=14.2'
