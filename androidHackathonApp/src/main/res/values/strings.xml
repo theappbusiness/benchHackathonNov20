@@ -3,10 +3,18 @@
     //Core
     <string name="app_name">CommunityKitchen</string>
 
+    //Auth
+    <string name="login_button">Login</string>
+    <string name="login_signup_text">Don&apos;t have an account? Sign up</string>
+
     //Titles
     <string name="title_add_meal">Add a Meal</string>
     <string name="title_find_meal">Find a Meal</string>
     <string name="title_activity_add_meal">AddMealActivity</string>
+
+    //Hints
+    <string name="hint_email_address">Email address</string>
+    <string name="hint_password">Password</string>
 
     //Headers
     <string name="header_add_meal_activity">This is the add meal activity screen</string>
