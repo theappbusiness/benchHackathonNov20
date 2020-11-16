@@ -14,10 +14,13 @@ struct Strings {
         static let subheading = "Add a meal to help out someone in your local community or browse the meals that others have added"
         static let plusButtonText = "Add a Meal"
         static let findButtonText = "Find a Meal"
+        static let enableLocationText = "We will need access to your location in order to show you meals that are in your area.\n\nTo enable, tap the link below then navigate to:\nPrivacy\n↓\nLocation\n↓\nCommunityKitchen"
+        static let settingsLinkText = "Allow location"
 
         struct Images {
             static let plus = "plus.app"
             static let find = "magnifyingglass"
+            static let exclamation = "exclamationmark.circle"
         }
     }
 

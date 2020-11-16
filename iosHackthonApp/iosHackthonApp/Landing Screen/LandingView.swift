@@ -3,7 +3,8 @@ import shared
 
 struct LandingView: View {
 
-    let coloredNavAppearance = UINavigationBarAppearance()
+    private let coloredNavAppearance = UINavigationBarAppearance()
+    private let sdk = MealsSDK()
 
     init() {
         coloredNavAppearance.configureWithOpaqueBackground()
@@ -15,8 +16,7 @@ struct LandingView: View {
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
     }
 
-    private let sdk = MealsSDK()
-    private let locationManager = LocationManager()
+    @ObservedObject var locationManager = LocationManager()
 
     var body: some View {
         NavigationView {
@@ -31,20 +31,51 @@ struct LandingView: View {
                     }
                     .padding()
 
-                    NavigationLink(destination: TabAppView(selectedView: 0)) {
-                        CustomButton(
-                            width: geometry.size.width,
-                            buttonColor: ColorManager.appPrimary,
-                            image: Strings.LandingScreen.Images.plus,
-                            text: Strings.LandingScreen.plusButtonText)
-                    }
+                    if locationManager.status == .authorizedWhenInUse || locationManager.status == .authorizedAlways {
+                        NavigationLink(destination: TabAppView(selectedView: 0)) {
+                            CustomButton(
+                                width: geometry.size.width,
+                                buttonColor: ColorManager.appPrimary,
+                                image: Strings.LandingScreen.Images.plus,
+                                text: Strings.LandingScreen.plusButtonText
+                            )
+                        }
 
-                    NavigationLink(destination: TabAppView(selectedView: 1)) {
-                        CustomButton(
-                            width: geometry.size.width,
-                            buttonColor: ColorManager.appSecondary,
-                            image: Strings.LandingScreen.Images.find,
-                            text: Strings.LandingScreen.findButtonText)
+                        NavigationLink(destination: TabAppView(selectedView: 1)) {
+                            CustomButton(
+                                width: geometry.size.width,
+                                buttonColor: ColorManager.appSecondary,
+                                image: Strings.LandingScreen.Images.find,
+                                text: Strings.LandingScreen.findButtonText
+                            )
+                        }
+                    } else {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15) // move the radius
+                                .foregroundColor(ColorManager.appPrimary)
+                            VStack {
+                                Spacer()
+                                Image(systemName: Strings.LandingScreen.Images.exclamation)
+                                    .resizable()
+                                    .frame(width: geometry.size.width * 0.25, height: geometry.size.width * 0.25)
+                                Spacer()
+                                Text(Strings.LandingScreen.enableLocationText)
+                                    .font(.headline)
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                                Button(Strings.LandingScreen.settingsLinkText) {
+                                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                                        if UIApplication.shared.canOpenURL(url) {
+                                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                        }
+                                    }
+                                }
+                                .foregroundColor(.blue)
+                            }
+                            .padding()
+                        }
+                        .foregroundColor(.white)
+                        .padding(.init(top: padding(geometry.size.width)/2, leading: padding(geometry.size.width), bottom: padding(geometry.size.width), trailing: padding(geometry.size.width)))
                     }
                 }
             }
@@ -52,6 +83,10 @@ struct LandingView: View {
             .navigationBarBackButtonHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+
+    func padding(_ width: CGFloat) -> CGFloat {
+        width/10
     }
 }
 
