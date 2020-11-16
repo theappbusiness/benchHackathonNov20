@@ -1,0 +1,21 @@
+name: iOS CI
+
+on:
+   workflow_dispatch: # This allows you to manually run the workflow from GitHub's web UI
+   push:
+     branches: [ main ]
+   pull_request:
+     branches: [ '*' ]
+
+jobs:
+  test_xcode12_ios14:
+    name: Run tests on latest macOS, Xcode 12.2 and iOS 14.2
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set Xcode version to 12.2
+        run: sudo xcode-select -switch /Applications/Xcode_12.2.app
+      - name: Test on iPhone SE
+        run: xcodebuild test -project iosHackthonApp/iosHackthonApp.xcodeproj -scheme iosHackthonApp -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=14.2'
