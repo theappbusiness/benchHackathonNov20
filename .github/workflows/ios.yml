@@ -18,4 +18,4 @@ jobs:
       - name: Set Xcode version to 12.2
         run: sudo xcode-select -switch /Applications/Xcode_12.2.app
       - name: Test on iPhone SE
-        run: xcodebuild test -workspace iosHackthonApp/iosHackthonApp.xcworkspace -scheme iosHackthonApp -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=14.2'
+        run: cd iosHackthonApp && xcodebuild test -workspace iosHackthonApp/iosHackthonApp.xcworkspace -scheme iosHackthonApp -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=14.2'
