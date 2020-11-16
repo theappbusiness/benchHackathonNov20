@@ -20,11 +20,7 @@ class LocationUtil {
         val c: Double = 2 * atan2(sqrt(a), sqrt(1 - a))
         val distance: Double = earthRadius * c
 
-        return if (inMiles) {
-            distance.round(2)
-        } else {
-            distance.toKilometres().round(2)
-        }
+        return if (inMiles) distance.round(2) else distance.toKilometres().round(2)
     }
 
     // Helper functions
