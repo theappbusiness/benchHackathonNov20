@@ -74,7 +74,9 @@
         android:textColor="@color/link"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true">
 
     </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
