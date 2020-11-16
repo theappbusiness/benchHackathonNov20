@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Strings
 
 struct CustomButton: View {
 

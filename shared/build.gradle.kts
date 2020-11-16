@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-android-extensions")
+    id("com.chromaticnoise.multiplatform-swiftpackage") version "1.0.2"
 }
 group = "com.kcc.kmmhackathon"
 version = "1.0-SNAPSHOT"
@@ -81,6 +82,12 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+}
+multiplatformSwiftPackage {
+    swiftToolsVersion("5.3")
+    targetPlatforms {
+        iOS { v("13") }
     }
 }
 val packForXcode by tasks.creating(Sync::class) {
