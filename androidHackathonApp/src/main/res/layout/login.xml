@@ -90,12 +90,13 @@
         android:layout_marginTop="@dimen/default_margin"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/login_signup_text"
+        android:text="@string/signup_text"
         android:textAlignment="center"
         android:textColor="@color/link"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

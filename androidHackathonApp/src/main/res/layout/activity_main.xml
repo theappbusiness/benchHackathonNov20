@@ -15,7 +15,7 @@
       android:layout_marginBottom="@dimen/medium_margin"
       android:layout_marginStart="@dimen/default_margin"
       android:layout_marginEnd="@dimen/medium_margin"
-      android:text="@string/subheading"
+      android:text="@string/subheading_main"
       android:textSize="@dimen/default_text_size"
       android:textAlignment="center"
       android:textColor="@color/black"
