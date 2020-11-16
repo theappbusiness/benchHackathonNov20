@@ -14,9 +14,6 @@
       location = "group:Modules/Shared/Extensions">
    </FileRef>
    <FileRef
-      location = "group:Modules/Shared/Strings">
-   </FileRef>
-   <FileRef
       location = "group:Modules/Shared/Components">
    </FileRef>
    <FileRef
