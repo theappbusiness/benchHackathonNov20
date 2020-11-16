@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedUuidUuid, SharedKaneClass, SharedMealWithDistance, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode, SharedKotlinEnum<E>;
+@class SharedMeal, SharedUuidUuid, SharedMealWithDistance, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode, SharedKotlinEnum<E>;
 
 @protocol SharedKotlinx_serialization_coreKSerializer, SharedKotlinComparable, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -231,28 +231,6 @@ __attribute__((swift_name("MealEndpoint")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KaneClass")))
-@interface SharedKaneClass : SharedBase
-- (instancetype)initWithMessage:(NSString *)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)component1 __attribute__((swift_name("component1()")));
-- (SharedKaneClass *)doCopyMessage:(NSString *)message __attribute__((swift_name("doCopy(message:)")));
-- (NSString *)doSomething __attribute__((swift_name("doSomething()")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *message __attribute__((swift_name("message")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KaneClass.Companion")))
-@interface SharedKaneClassCompanion : SharedBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-- (id<SharedKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
