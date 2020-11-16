@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,6 @@
 		46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		7555FFA1242A565B00829871 /* iosHackthonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */; };
-		C38DEAC82562ADF900A6D956 /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = C38DEAC72562ADF900A6D956 /* MealList */; };
 		CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF10B25558B160054D2AA /* AppDelegate.swift */; };
 		CE0EF11125558B290054D2AA /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11025558B290054D2AA /* LandingView.swift */; };
 		CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */; };
@@ -51,6 +50,7 @@
 		7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosHackthonAppUITests.swift; sourceTree = "<group>"; };
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7555FFB1242A642300829871 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = "../shared/build/xcode-frameworks/shared.framework"; sourceTree = "<group>"; };
+		C39352872562BE260087DEF8 /* MealList */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MealList; path = Modules/Features/MealList; sourceTree = "<group>"; };
 		CE0EF10B25558B160054D2AA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE0EF11025558B290054D2AA /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C38DEAC82562ADF900A6D956 /* MealList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +161,7 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C39352872562BE260087DEF8 /* MealList */,
 				7555FFB1242A642300829871 /* shared.framework */,
 			);
 			name = Frameworks;
@@ -238,7 +238,6 @@
 			);
 			name = iosHackthonApp;
 			packageProductDependencies = (
-				C38DEAC72562ADF900A6D956 /* MealList */,
 			);
 			productName = iosHackthonApp;
 			productReference = 7555FF7B242A565900829871 /* iosHackthonApp.app */;
@@ -713,13 +712,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C38DEAC72562ADF900A6D956 /* MealList */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MealList;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }
