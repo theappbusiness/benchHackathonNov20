@@ -1,6 +1,7 @@
 name: Android CI
 
 on:
+  workflow_dispatch: # This allows you to manually run the workflow from GitHub's web UI
   push:
     branches: [ main ]
   pull_request:
