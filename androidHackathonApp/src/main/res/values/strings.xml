@@ -11,10 +11,12 @@
     <string name="title_add_meal">Add a Meal</string>
     <string name="title_find_meal">Find a Meal</string>
     <string name="title_activity_add_meal">AddMealActivity</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Password</string>
 
     //Hints
-    <string name="hint_email_address">Email address</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_email_address">Enter Email address</string>
+    <string name="hint_password">Enter Password</string>
 
     //Headers
     <string name="header_add_meal_activity">This is the add meal activity screen</string>
