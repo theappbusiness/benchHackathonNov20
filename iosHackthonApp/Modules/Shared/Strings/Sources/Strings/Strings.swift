@@ -21,7 +21,6 @@ public struct Strings { // TODO: these can all be public enums, plus public exte
             public static let plus = "plus.app"
             public static let find = "magnifyingglass"
             public static let exclamation = "exclamationmark.circle"
-
         }
     }
 

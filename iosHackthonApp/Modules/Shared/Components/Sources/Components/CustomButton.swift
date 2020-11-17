@@ -51,6 +51,6 @@ public struct CustomButton: View {
 
 struct CustomButton_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton(width: 150, buttonColor: .green, image: Strings.LandingScreen.Images.plus, text: "Placeholder")
+        CustomButton(width: 150, buttonColor: .green, image: "plus.app", text: "Placeholder")
     }
 }

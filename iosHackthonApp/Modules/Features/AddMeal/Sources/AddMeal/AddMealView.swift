@@ -147,5 +147,3 @@ struct AddMealView_Previews: PreviewProvider {
         AddMealView(viewModel: AddMealViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
     }
 }
-
-

@@ -19,16 +19,19 @@ public struct LocationNeededMessageBox: View {
     private var buttonColor: Color
     private var image: String
     private var text: String
+    private var buttonText: String
     private var paddingSize: CGFloat
 
     public init(width: CGFloat,
                 buttonColor: Color,
                 image: String,
-                text: String) {
+                text: String,
+                buttonText: String) {
         self.width = width
         self.buttonColor = buttonColor
         self.image = image
         self.text = text
+        self.buttonText = buttonText
         paddingSize = width/paddingRatio
     }
 
@@ -38,15 +41,15 @@ public struct LocationNeededMessageBox: View {
                 .foregroundColor(ColorManager.appPrimary)
             VStack {
                 Spacer()
-                Image(systemName: Strings.LandingScreen.Images.exclamation)
+                Image(systemName: image)
                     .resizable()
                     .frame(width: width * widthRatio, height: width * widthRatio)
                 Spacer()
-                Text(Strings.LandingScreen.enableLocationText)
+                Text(text)
                     .font(.headline)
                     .multilineTextAlignment(.center)
                 Spacer()
-                Button(Strings.LandingScreen.settingsLinkText) {
+                Button(buttonText) {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         if UIApplication.shared.canOpenURL(url) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
