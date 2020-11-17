@@ -48,14 +48,15 @@ struct LoginView: View {
 							.modifier(GreyTextFieldStyle())
 						Spacer()
 
-						GeometryReader { geometry in
-							let backgroundColor = email.isEmpty || password.isEmpty ? ColorManager.gray: ColorManager.appPrimary
 
+						GeometryReader { geometry in
+							let isDisabled = email.isEmpty || password.isEmpty
+							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
 							NavigationLink(destination: LandingView()) {
 								Text(Strings.Login.loginButtonTitle)
 									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 							}
-							.disabled(email.isEmpty || password.isEmpty)
+							.disabled(isDisabled)
 						}
 					}
 				}
