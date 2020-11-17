@@ -1,4 +1,4 @@
-package com.kcc.kmmhackathon.androidHackathonApp
+package com.kinandcarta.lib.find.meal.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kinandcarta.lib.find.meal.R
 
-class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
+class MealsAdapter(var mealsList: List<Meal>) :
+    RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsViewHolder {
-        return LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        LayoutInflater.from(parent.context)
             .inflate(R.layout.meal_item_row, parent, false)
             .run(::MealsViewHolder)
-    }
 
     override fun getItemCount(): Int {
         return mealsList.size
@@ -39,7 +40,6 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
 
         fun bindData(meal: Meal) {
-            val ctx = itemView.context
             nameView.text = meal.name
             val tempString = if (meal.hot) "Hot" else "Cold"
             val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
@@ -62,9 +62,15 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
 
             val hasPortions = meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
-            val reserveButtonColor = if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
+            val reserveButtonColor =
+                if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
             reserveButton.text = reserveButtonText
-            reserveButton.setBackgroundColor(ContextCompat.getColor(itemView.context, reserveButtonColor))
+            reserveButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    reserveButtonColor
+                )
+            )
             if (hasPortions) {
                 reserveButton.setOnClickListener {
                     // TODO link up to sdk and adjust quantity and show user reservation code
@@ -76,7 +82,7 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         }
     }
 
-    fun parseDate(dateString: String) : String {
+    fun parseDate(dateString: String): String {
         if (dateString.length > 8) {
             // TODO handle dates in kotlin
             val shortDate = dateString.slice(0..9)
@@ -86,9 +92,9 @@ class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapt
         return dateString
     }
 
-    fun getQuantityText(quantity: Int) : String = when (quantity) {
+    fun getQuantityText(quantity: Int): String = when (quantity) {
         0 -> "#    Reserved"
-        1 ->  "#    ${quantity} portion remaining"
-        else -> "#    ${quantity} portions remaining"
+        1 -> "#    $quantity portion remaining"
+        else -> "#    $quantity portions remaining"
     }
 }
