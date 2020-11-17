@@ -58,7 +58,8 @@ public struct LandingView: View {
                         LocationNeededMessageBox(width: geometry.size.width,
                                            buttonColor: ColorManager.appPrimary,
                                            image: Strings.LandingScreen.Images.exclamation,
-                                           text: Strings.LandingScreen.enableLocationText)
+                                           text: Strings.LandingScreen.enableLocationText,
+                                           buttonText: Strings.LandingScreen.settingsLinkText)
                     }
                 }
             }
