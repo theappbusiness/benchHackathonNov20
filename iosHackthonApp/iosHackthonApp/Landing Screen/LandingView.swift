@@ -1,5 +1,8 @@
 import SwiftUI
 import shared
+import Location
+import Theming
+import Strings
 
 struct LandingView: View {
 
@@ -21,6 +24,7 @@ struct LandingView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
+                ScrollView {
                 VStack {
                     HStack {
                         Spacer()
@@ -76,6 +80,7 @@ struct LandingView: View {
                         }
                         .foregroundColor(.white)
                         .padding(.init(top: padding(geometry.size.width)/2, leading: padding(geometry.size.width), bottom: padding(geometry.size.width), trailing: padding(geometry.size.width)))
+                    }
                     }
                 }
             }
