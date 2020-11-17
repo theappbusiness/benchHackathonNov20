@@ -15,8 +15,8 @@ import com.kinandcarta.lib.find.meal.R
 class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            MealsViewHolder(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.meal_item_row, parent, false))
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.meal_item_row, parent, false).run(::MealsViewHolder)
 
     override fun getItemCount(): Int {
         return mealsList.size
