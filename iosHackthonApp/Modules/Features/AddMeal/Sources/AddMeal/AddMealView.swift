@@ -19,16 +19,17 @@ public struct AddMealView: View {
         self.viewModel = viewModel
     }
 
-    @ObservedObject private(set) var viewModel: AddMealViewModel
-    @State var title: String = ""
-    @State var additionalInfo: String = ""
-    @State var quantity: Int = 0
-    @State var availableFromDate = Date()
-    @State var useByDate = Date()
-    @State var address: String = ""
-    @State var latitude: Float = 0
-    @State var longitude: Float = 0
-    @State var isHot: Bool = true
+    @ObservedObject private var viewModel: AddMealViewModel
+
+    @State private var title: String = ""
+    @State private var additionalInfo: String = ""
+    @State private var quantity: Int = 0
+    @State private var availableFromDate = Date()
+    @State private var useByDate = Date()
+    @State private var address: String = ""
+    @State private var latitude: Float = 0
+    @State private var longitude: Float = 0
+    @State private var isHot: Bool = true
 
     var buttonIsDisabled: Bool {
         title.isEmpty || additionalInfo.isEmpty || address.isEmpty || quantity == 0

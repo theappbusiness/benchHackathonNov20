@@ -11,6 +11,8 @@ public struct LandingView: View {
     private let coloredNavAppearance = UINavigationBarAppearance()
     private let sdk = MealsSDK()
 
+    @ObservedObject private var locationManager = LocationManager()
+
     public init() {
         coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
@@ -20,8 +22,6 @@ public struct LandingView: View {
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
     }
-
-    @ObservedObject var locationManager = LocationManager()
 
     public var body: some View {
         NavigationView {

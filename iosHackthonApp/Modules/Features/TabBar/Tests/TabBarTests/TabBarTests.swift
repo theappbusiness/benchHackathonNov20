@@ -8,8 +8,4 @@ final class TabBarTests: XCTestCase {
         // results.
         XCTAssertEqual(TabBar().text, "Hello, World!")
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

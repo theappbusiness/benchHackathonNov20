@@ -8,8 +8,4 @@ final class AddMealTests: XCTestCase {
         // results.
         XCTAssertEqual(AddMeal().text, "Hello, World!")
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

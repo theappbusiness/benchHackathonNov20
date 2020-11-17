@@ -11,24 +11,14 @@ import Components
 import Location
 import Extensions
 
-protocol AddMealViewModelProtocol {
-
-    var code: String { get }
-    var activeAlert: ActiveAlert { get }
-    var showingAlert: Bool { get }
-    var sdk: MealsSDK { get }
-    var locationManager: LocationManager { get }
-    func postMeal(meal: Meal)
-}
-
 public final class AddMealViewModel: ObservableObject {
 
     @Published public var code = ""
     @Published public var showingAlert = false
     @Published public var activeAlert: ActiveAlert = .collection
 
-    public let sdk: MealsSDK
-    public let locationManager: LocationManager
+    let sdk: MealsSDK
+    let locationManager: LocationManager
 
     public init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk
@@ -36,7 +26,7 @@ public final class AddMealViewModel: ObservableObject {
     }
 }
 
-extension AddMealViewModel: AddMealViewModelProtocol {
+extension AddMealViewModel {
 
     func postMeal(meal: Meal) {
         sdk.postMeal(meal: meal, completionHandler: { meal, error in
