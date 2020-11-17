@@ -27,7 +27,6 @@ struct LoginView: View {
 
 	var body: some View {
 		NavigationView {
-
 			ScrollView {
 				VStack {
 					Image("") // Add proper logo
@@ -57,7 +56,6 @@ struct LoginView: View {
 									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 							}
 							.disabled(email.isEmpty || password.isEmpty)
-
 						}
 					}
 				}
