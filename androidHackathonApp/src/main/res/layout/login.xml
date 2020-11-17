@@ -25,7 +25,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_image_view"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -35,7 +34,7 @@
             android:layout_gravity="start"
             android:layout_marginTop="@dimen/default_margin"
             android:text="@string/title_email"
-            android:textSize="@dimen/default_text_size"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textStyle="bold" />
 
         <EditText
@@ -47,7 +46,7 @@
             android:inputType="textEmailAddress"
             android:lines="1"
             android:textColor="@color/black"
-            android:textSize="@dimen/default_text_size" />
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <TextView
             android:id="@+id/login_password_text"
@@ -56,7 +55,7 @@
             android:layout_gravity="start"
             android:layout_marginTop="@dimen/default_margin"
             android:text="@string/title_password"
-            android:textSize="@dimen/default_text_size"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textStyle="bold" />
 
         <EditText
@@ -68,7 +67,7 @@
             android:inputType="numberPassword"
             android:lines="1"
             android:textColor="@color/black"
-            android:textSize="@dimen/default_text_size" />
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <Button
             android:id="@+id/login_button"
@@ -79,7 +78,7 @@
             android:background="@drawable/login_button"
             android:text="@string/login_button"
             android:textColor="@color/black"
-            android:textSize="@dimen/default_text_size" />
+            android:textAppearance="?android:textAppearanceMedium" />
     </LinearLayout>
 
     <TextView
@@ -93,6 +92,7 @@
         android:text="@string/signup_text"
         android:textAlignment="center"
         android:textColor="@color/link"
+        android:textAppearance="?android:textAppearanceSmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
