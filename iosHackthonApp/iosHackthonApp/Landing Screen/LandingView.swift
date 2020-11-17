@@ -6,23 +6,10 @@ import Strings
 
 struct LandingView: View {
 
-    let coloredNavAppearance = UINavigationBarAppearance()
-
-    init() {
-        coloredNavAppearance.configureWithOpaqueBackground()
-        coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
-        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
-    }
-
     private let sdk = MealsSDK()
     private let locationManager = LocationManager()
 
     var body: some View {
-        NavigationView {
             GeometryReader { geometry in
                 VStack {
                     HStack {
@@ -53,8 +40,6 @@ struct LandingView: View {
             }
             .navigationBarTitle(Text(Strings.LandingScreen.heading))
             .navigationBarBackButtonHidden(true)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
