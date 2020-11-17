@@ -29,7 +29,7 @@ struct LoginView: View {
 		NavigationView {
 			ScrollView {
 				VStack {
-					Image("") // Add proper logo
+					Image("") // TODO:  Add proper logo
 						.resizable()
 						.scaledToFit()
 						.frame(width: 150, height: 150, alignment: .center)
@@ -73,7 +73,6 @@ struct LoginView: View {
 				}
 			}
 		}
-		.navigationViewStyle(StackNavigationViewStyle())
 	}
 }
 
