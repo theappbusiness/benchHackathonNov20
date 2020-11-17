@@ -21,6 +21,14 @@ public struct Strings { // TODO: these can all be public enums, plus public exte
 		}
 	}
 
+	public struct Login {
+		public static let email = "Email"
+		public static let emailPlaceholder = "Enter your email"
+		public static let password = "Password"
+		public static let passwordPlaceholder = "Enter your password"
+		public static let signupButtonTitle = "Not signed up, tap here to register"
+	}
+
 	public struct AddMealScreen {
 		public static let title = "Title"
 		public static let additionalInfo = "Additional Information"
