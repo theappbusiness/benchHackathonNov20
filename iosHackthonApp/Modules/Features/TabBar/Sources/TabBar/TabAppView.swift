@@ -49,7 +49,6 @@ public struct TabAppView: View {
             .accentColor(ColorManager.appPrimary)
         })
         .accentColor(.white)
-
     }
 }
 
