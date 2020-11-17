@@ -12,11 +12,15 @@ import CoreLocation
 
 public class LocationManager: NSObject, ObservableObject {
 
+    private let locationManager = CLLocationManager()
+
     @Published public var userLatitude: Double = 0
     @Published public var userLongitude: Double = 0
     @Published public var address: String = ""
-
-    private let locationManager = CLLocationManager()
+    @Published public var status: CLAuthorizationStatus? {
+        willSet { objectWillChange.send() }
+    }
+    public let objectWillChange = PassthroughSubject<Void, Never>()
 
     public override init() {
         super.init()
@@ -24,6 +28,15 @@ public class LocationManager: NSObject, ObservableObject {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+    }
+}
+
+extension LocationManager {
+
+    public func userDistanceFrom(_ lat: Float, _ long: Float) -> Double {
+        let mealLocation = CLLocation(latitude: Double(lat), longitude: Double(long))
+        let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
+        return mealLocation.distance(from: userLocation)/1000
     }
 }
 
@@ -47,9 +60,7 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
 
-	public func userDistanceFrom(_ lat: Float, _ long: Float) -> Double {
-        let mealLocation = CLLocation(latitude: Double(lat), longitude: Double(long))
-        let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
-        return mealLocation.distance(from: userLocation)/1000
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.status = status
     }
 }
