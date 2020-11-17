@@ -26,6 +26,7 @@ public struct Strings { // TODO: these can all be public enums, plus public exte
 		public static let emailPlaceholder = "Enter your email"
 		public static let password = "Password"
 		public static let passwordPlaceholder = "Enter your password"
+		public static let loginButtonTitle = "Login"
 		public static let signupButtonTitle = "Not signed up, tap here to register"
 	}
 

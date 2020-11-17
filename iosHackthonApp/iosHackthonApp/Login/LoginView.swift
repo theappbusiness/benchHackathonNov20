@@ -13,6 +13,7 @@ import Theming
 struct LoginView: View {
 	@State var email: String = ""
 	@State var password: String = ""
+	@State var loginSucessful: Bool = true
 	let coloredNavAppearance = UINavigationBarAppearance()
 
 	init() {
@@ -48,17 +49,15 @@ struct LoginView: View {
 							.modifier(GreyTextFieldStyle())
 						Spacer()
 
-
 						GeometryReader { geometry in
-							Button(action: {
-								print("email \($email)")
-								print("password \($password)")
-							}) {
-								let backgroundColor = email.isEmpty || password.isEmpty ? ColorManager.gray: ColorManager.appPrimary
-								Text(Strings.AddMealScreen.addMeal)
+							let backgroundColor = email.isEmpty || password.isEmpty ? ColorManager.gray: ColorManager.appPrimary
+
+							NavigationLink(destination: LandingView()) {
+								Text(Strings.Login.loginButtonTitle)
 									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 							}
 							.disabled(email.isEmpty || password.isEmpty)
+
 						}
 					}
 				}
@@ -67,6 +66,7 @@ struct LoginView: View {
 				VStack {
 					Spacer(minLength: 20)
 					Button(action: {
+						print("Go to sign up")
 					}) {
 						Text(Strings.Login.signupButtonTitle)
 							.frame(alignment: .center)

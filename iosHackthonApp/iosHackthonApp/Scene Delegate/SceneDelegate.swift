@@ -8,11 +8,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        let landingView = LandingView()
+        let loginView = LoginView()
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: landingView)
+            window.rootViewController = UIHostingController(rootView: loginView)
             self.window = window
             window.makeKeyAndVisible()
         }
