@@ -1,7 +1,5 @@
 package com.kcc.kmmhackathon.androidHackathonApp
 
-import android.R.attr.button
-import android.annotation.TargetApi
 import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString

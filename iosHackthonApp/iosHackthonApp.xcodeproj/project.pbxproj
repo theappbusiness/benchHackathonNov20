@@ -16,6 +16,7 @@
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
 		CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */ = {isa = PBXBuildFile; productRef = CE48C6922563C9F700EB29FD /* AddMeal */; };
+		CE551F5C256403B800B4E4F5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE551F5B256403B800B4E4F5 /* LoginView.swift */; };
 		CE9EEEEB2563C3F1005F5432 /* LandingScreen in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEEA2563C3F1005F5432 /* LandingScreen */; };
 		CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEFE2563C820005F5432 /* TabBar */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		CE0EF11E25558B500054D2AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
+		CE551F5B256403B800B4E4F5 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE551F5A256403AE00B4E4F5 /* login */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
 				CE0EF10A25558AE70054D2AA /* AppDelegate */,
@@ -175,6 +178,14 @@
 				CE0EF11C25558B500054D2AA /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE551F5A256403AE00B4E4F5 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				CE551F5B256403B800B4E4F5 /* LoginView.swift */,
+			);
+			path = login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE551F5C256403B800B4E4F5 /* LoginView.swift in Sources */,
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
 			);
