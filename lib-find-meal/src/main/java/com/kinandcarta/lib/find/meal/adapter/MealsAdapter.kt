@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal
+package com.kinandcarta.lib.find.meal.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kinandcarta.lib.find.meal.R
 
 class MealsAdapter (var mealsList: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 

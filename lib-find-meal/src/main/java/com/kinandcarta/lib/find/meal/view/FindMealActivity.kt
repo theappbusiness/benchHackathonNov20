@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal
+package com.kinandcarta.lib.find.meal.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.kcc.kmmhackathon.shared.MealsSDK
+import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
+import com.kinandcarta.lib.find.meal.R
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
