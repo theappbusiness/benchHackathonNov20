@@ -1,5 +1,6 @@
 import UIKit
 import SwiftUI
+import LandingScreen
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

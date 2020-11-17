@@ -14,7 +14,7 @@ public struct Strings { // TODO: these can all be public enums, plus public exte
 		public static let subheading = "Add a meal to help out someone in your local community or browse the meals that others have added"
 		public static let plusButtonText = "Add a Meal"
 		public static let findButtonText = "Find a Meal"
-        public static let enableLocationText = "We will need access to your location in order to show you meals that are in your area.\n\nTo enable, tap the link below then navigate to:\nPrivacy\n↓\nLocation Services\n↓\nCommunityKitchen"
+        public static let enableLocationText = "We will need access to your location in order to show you meals that are in your area.\n\nTo enable, tap the link below then navigate to:\n\nPrivacy\n↓\nLocation Services\n↓\nCommunityKitchen"
         public static let settingsLinkText = "Allow location"
 
 		public struct Images {
