@@ -108,7 +108,6 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
-				CE9AE6C1255961F500EA7A9B /* Components */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
 				CE0EF10A25558AE70054D2AA /* AppDelegate */,
@@ -176,13 +175,6 @@
 				CE0EF11C25558B500054D2AA /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		CE9AE6C1255961F500EA7A9B /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -15,11 +15,11 @@ public struct LocationNeededMessageBox: View {
     private let cornerRadius: CGFloat = 16
     private let paddingRatio: CGFloat = 10
 
-    var width: CGFloat
-    var buttonColor: Color
-    var image: String
-    var text: String
-    var paddingSize: CGFloat
+    private var width: CGFloat
+    private var buttonColor: Color
+    private var image: String
+    private var text: String
+    private var paddingSize: CGFloat
 
     public init(width: CGFloat,
                 buttonColor: Color,

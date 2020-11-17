@@ -22,8 +22,9 @@ public struct GreyTextFieldStyle: ViewModifier {
 }
 
 public struct AddButtonStyle: ViewModifier {
-    var width: CGFloat
-    var backgroundColor: Color
+
+    private var width: CGFloat
+    private var backgroundColor: Color
 
     public init(width: CGFloat, backgroundColor: Color) {
         self.width = width
@@ -41,7 +42,8 @@ public struct AddButtonStyle: ViewModifier {
 }
 
 public struct IconButtonImageStyle: ViewModifier {
-    var color: Color
+
+    private var color: Color
 
     public init(color: Color) {
         self.color = color

@@ -11,15 +11,15 @@ import Strings
 
 public struct CustomButton: View {
 
-    let cornerRadius: CGFloat = 16
-    let paddingRatio: CGFloat = 0.12
-    let imageFrameRatio: CGFloat = 0.25
-    let shadowRadius: CGFloat = 5
+    private let cornerRadius: CGFloat = 16
+    private let paddingRatio: CGFloat = 0.12
+    private let imageFrameRatio: CGFloat = 0.25
+    private let shadowRadius: CGFloat = 5
 
-    var width: CGFloat
-    var buttonColor: Color
-    var image: String
-    var text: String
+    private var width: CGFloat
+    private var buttonColor: Color
+    private var image: String
+    private var text: String
 
     public init(width: CGFloat,
                 buttonColor: Color,

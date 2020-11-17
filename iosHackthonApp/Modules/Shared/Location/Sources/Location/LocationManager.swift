@@ -38,10 +38,6 @@ extension LocationManager {
         let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
         return mealLocation.distance(from: userLocation)/1000
     }
-
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.status = status
-    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -62,5 +58,9 @@ extension LocationManager: CLLocationManagerDelegate {
                 self.address = "\(placemark?.postalCode ?? ""), \(placemark?.locality ?? ""),  \(placemark?.administrativeArea ?? ""), \(placemark?.country ?? "")"
             }
         }
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.status = status
     }
 }
