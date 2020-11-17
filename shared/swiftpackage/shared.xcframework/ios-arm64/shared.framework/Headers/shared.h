@@ -234,6 +234,14 @@ __attribute__((swift_name("MealEndpoint")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LocationUtil")))
+@interface SharedLocationUtil : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 inMiles:(BOOL)inMiles __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:inMiles:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Meal")))
 @interface SharedMeal : SharedBase
 - (instancetype)initWithId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong __attribute__((swift_name("init(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:)"))) __attribute__((objc_designated_initializer));
@@ -303,6 +311,13 @@ __attribute__((swift_name("Quantity.Companion")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 - (id<SharedKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ExtensionsKt")))
+@interface SharedExtensionsKt : SharedBase
++ (double)round:(double)receiver decimals:(int32_t)decimals __attribute__((swift_name("round(_:decimals:)")));
++ (double)toKilometres:(double)receiver __attribute__((swift_name("toKilometres(_:)")));
 @end;
 
 __attribute__((swift_name("KotlinThrowable")))

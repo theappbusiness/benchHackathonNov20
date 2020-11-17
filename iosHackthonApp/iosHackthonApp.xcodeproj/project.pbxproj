@@ -7,21 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		465E5EE72563D5A4000722D6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E5EE62563D5A4000722D6 /* LoginView.swift */; };
-		46A05071255C4E8D00A1DF75 /* TabAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A05070255C4E8D00A1DF75 /* TabAppView.swift */; };
-		46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		7555FFA1242A565B00829871 /* iosHackthonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */; };
 		C39352982562C09E0087DEF8 /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = C39352972562C09E0087DEF8 /* MealList */; };
 		CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF10B25558B160054D2AA /* AppDelegate.swift */; };
-		CE0EF11125558B290054D2AA /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11025558B290054D2AA /* LandingView.swift */; };
 		CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */; };
 		CE0EF12325558B510054D2AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11E25558B500054D2AA /* Assets.xcassets */; };
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
-		CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */; };
-		CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */; };
-		CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE6C22559620700EA7A9B /* CustomButton.swift */; };
+		CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */ = {isa = PBXBuildFile; productRef = CE48C6922563C9F700EB29FD /* AddMeal */; };
+		CE551F5C256403B800B4E4F5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE551F5B256403B800B4E4F5 /* LoginView.swift */; };
+		CE9EEEEB2563C3F1005F5432 /* LandingScreen in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEEA2563C3F1005F5432 /* LandingScreen */; };
+		CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEFE2563C820005F5432 /* TabBar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,9 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		465E5EE62563D5A4000722D6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		46A05070255C4E8D00A1DF75 /* TabAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAppView.swift; sourceTree = "<group>"; };
-		46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosHackthonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosHackthonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF87242A565B00829871 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7555FF91242A565B00829871 /* iosHackthonAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosHackthonAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,15 +49,12 @@
 		7555FFB1242A642300829871 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = "../shared/build/xcode-frameworks/shared.framework"; sourceTree = "<group>"; };
 		C39352872562BE260087DEF8 /* MealList */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MealList; path = Modules/Features/MealList; sourceTree = "<group>"; };
 		CE0EF10B25558B160054D2AA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE0EF11025558B290054D2AA /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CE0EF11C25558B500054D2AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0EF11E25558B500054D2AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
-		CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewModel.swift; sourceTree = "<group>"; };
-		CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
-		CE9AE6C22559620700EA7A9B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CE551F5B256403B800B4E4F5 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9EEEEB2563C3F1005F5432 /* LandingScreen in Frameworks */,
 				C39352982562C09E0087DEF8 /* MealList in Frameworks */,
+				CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */,
+				CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,22 +86,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		465E5EE52563D595000722D6 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				465E5EE62563D5A4000722D6 /* LoginView.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		46A0506F255C4E7A00A1DF75 /* TabView */ = {
-			isa = PBXGroup;
-			children = (
-				46A05070255C4E8D00A1DF75 /* TabAppView.swift */,
-			);
-			path = TabView;
-			sourceTree = "<group>";
-		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -132,11 +110,7 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
-				465E5EE52563D595000722D6 /* Login */,
-				CE9AE6C1255961F500EA7A9B /* Components */,
-				46A0506F255C4E7A00A1DF75 /* TabView */,
-				CE9AE6B92559533400EA7A9B /* Add Meal Screen */,
-				CE0EF10F25558B1F0054D2AA /* Landing Screen */,
+				CE551F5A256403AE00B4E4F5 /* login */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
 				CE0EF10A25558AE70054D2AA /* AppDelegate */,
@@ -188,14 +162,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		CE0EF10F25558B1F0054D2AA /* Landing Screen */ = {
-			isa = PBXGroup;
-			children = (
-				CE0EF11025558B290054D2AA /* LandingView.swift */,
-			);
-			path = "Landing Screen";
-			sourceTree = "<group>";
-		};
 		CE0EF11625558B320054D2AA /* Scene Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,22 +180,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		CE9AE6B92559533400EA7A9B /* Add Meal Screen */ = {
+		CE551F5A256403AE00B4E4F5 /* login */ = {
 			isa = PBXGroup;
 			children = (
-				CE9AE6BA2559534A00EA7A9B /* AddMealView.swift */,
-				CE2BA18B255AD774006AFF20 /* AddMealViewModel.swift */,
+				CE551F5B256403B800B4E4F5 /* LoginView.swift */,
 			);
-			path = "Add Meal Screen";
-			sourceTree = "<group>";
-		};
-		CE9AE6C1255961F500EA7A9B /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				CE9AE6C22559620700EA7A9B /* CustomButton.swift */,
-				46A57FA9255ABBB70076BB88 /* ViewModifiers.swift */,
-			);
-			path = Components;
+			path = login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +208,9 @@
 			name = iosHackthonApp;
 			packageProductDependencies = (
 				C39352972562C09E0087DEF8 /* MealList */,
+				CE9EEEEA2563C3F1005F5432 /* LandingScreen */,
+				CE9EEEFE2563C820005F5432 /* TabBar */,
+				CE48C6922563C9F700EB29FD /* AddMeal */,
 			);
 			productName = iosHackthonApp;
 			productReference = 7555FF7B242A565900829871 /* iosHackthonApp.app */;
@@ -406,15 +365,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46A05071255C4E8D00A1DF75 /* TabAppView.swift in Sources */,
+				CE551F5C256403B800B4E4F5 /* LoginView.swift in Sources */,
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
-				CE0EF11125558B290054D2AA /* LandingView.swift in Sources */,
-				465E5EE72563D5A4000722D6 /* LoginView.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
-				46A57FAA255ABBB70076BB88 /* ViewModifiers.swift in Sources */,
-				CE9AE6BB2559534A00EA7A9B /* AddMealView.swift in Sources */,
-				CE9AE6C32559620700EA7A9B /* CustomButton.swift in Sources */,
-				CE2BA18C255AD774006AFF20 /* AddMealViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +686,18 @@
 		C39352972562C09E0087DEF8 /* MealList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MealList;
+		};
+		CE48C6922563C9F700EB29FD /* AddMeal */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AddMeal;
+		};
+		CE9EEEEA2563C3F1005F5432 /* LandingScreen */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LandingScreen;
+		};
+		CE9EEEFE2563C820005F5432 /* TabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TabBar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -21,11 +21,3 @@ and then running the line below to spin up the server locally:
 ```
 json-server --watch db.json
 ```
-
-### Simulator settings for localhost
-
-In order for the app to access the server from Android simulator, we need to adjust the endpoint declared i the companion object in. (line 31 or 34) 
-
-`commonMain/kotlin/.../network/MealApi`
-
-
