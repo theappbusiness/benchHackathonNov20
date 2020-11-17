@@ -1,5 +1,5 @@
 //
-//  LocationMessageBox.swift
+//  LocationNeededMessageBox.swift
 //  
 //
 //  Created by Gareth Miller on 17/11/2020.

@@ -12,15 +12,14 @@ import CoreLocation
 
 public class LocationManager: NSObject, ObservableObject {
 
+    private let locationManager = CLLocationManager()
+
     @Published public var userLatitude: Double = 0
     @Published public var userLongitude: Double = 0
     @Published public var address: String = ""
     @Published public var status: CLAuthorizationStatus? {
         willSet { objectWillChange.send() }
     }
-
-    private let locationManager = CLLocationManager()
-
     public let objectWillChange = PassthroughSubject<Void, Never>()
 
     public override init() {

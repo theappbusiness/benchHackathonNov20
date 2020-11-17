@@ -14,46 +14,46 @@ public struct GreyTextFieldStyle: ViewModifier {
 
     public init() {} 
 
-	public func body(content: Content) -> some View {
-		content
-			.padding(.all)
-			.background(ColorManager.textfieldGrey)
-	}
+    public func body(content: Content) -> some View {
+        content
+            .padding(.all)
+            .background(ColorManager.textfieldGrey)
+    }
 }
 
 public struct AddButtonStyle: ViewModifier {
-	var width: CGFloat
-	var backgroundColor: Color
+    var width: CGFloat
+    var backgroundColor: Color
 
     public init(width: CGFloat, backgroundColor: Color) {
         self.width = width
         self.backgroundColor = backgroundColor
     }
-	
-	public func body(content: Content) -> some View {
-		content
-			.foregroundColor(.white)
-			.padding(10)
-			.frame(minWidth: width, maxWidth: .infinity)
-			.background(backgroundColor)
-			.cornerRadius(10)
-	}
+    
+    public func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .padding(10)
+            .frame(minWidth: width, maxWidth: .infinity)
+            .background(backgroundColor)
+            .cornerRadius(10)
+    }
 }
 
 public struct IconButtonImageStyle: ViewModifier {
-	var color: Color
-	
-	public init(color: Color) {
-		self.color = color
-	}
+    var color: Color
+
+    public init(color: Color) {
+        self.color = color
+    }
     
-	public func body(content: Content) -> some View {
-		content
-			.foregroundColor(color)
-			.padding(10)
-			.frame(minWidth: 0, maxWidth: 50)
-			.background(Color.clear)
-			.border(color, width: 2)
-			.cornerRadius(5)
-	}
+    public func body(content: Content) -> some View {
+        content
+            .foregroundColor(color)
+            .padding(10)
+            .frame(minWidth: 0, maxWidth: 50)
+            .background(Color.clear)
+            .border(color, width: 2)
+            .cornerRadius(5)
+    }
 }

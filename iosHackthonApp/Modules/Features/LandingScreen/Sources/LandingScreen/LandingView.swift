@@ -61,12 +61,10 @@ public struct LandingView: View {
                                            text: Strings.LandingScreen.enableLocationText)
                     }
                 }
-
             }
             .navigationBarTitle(Text(Strings.LandingScreen.heading))
             .navigationBarBackButtonHidden(true)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
