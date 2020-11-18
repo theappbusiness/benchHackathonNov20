@@ -96,7 +96,7 @@ private extension AddMealView {
 
     struct InfoTextFieldsGroup: View {
 
-        @Binding fileprivate var title: String
+        @Binding var title: String
         @Binding var info: String
         @Binding var quantity: Int
 
