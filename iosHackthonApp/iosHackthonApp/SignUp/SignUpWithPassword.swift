@@ -23,7 +23,7 @@ struct SignUpWithPassword: View {
 			GeometryReader { geometry in
 				let height = geometry.frame(in: .local).height
 				VStack {
-					TextField(Strings.SignUp.signUpWithPasswordPlaceHolder, text: $password)
+					SecureField(Strings.SignUp.signUpWithPasswordPlaceHolder, text: $password)
 						.modifier(GreyTextFieldStyle())
 					NavigationLink(destination: LandingView()) {
 						Text(Strings.SignUp.signUpWithPasswordButtonTitle)
