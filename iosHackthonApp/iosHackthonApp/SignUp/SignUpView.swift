@@ -16,10 +16,11 @@ struct SignUpView: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.welcomeScreenTitle, description: Strings.SignUp.welcomeScreenInfo)
+
 			Spacer().frame(maxHeight: .infinity)
 
 			GeometryReader { geometry in
-				VStack(alignment:.trailing) {
+				VStack(alignment: .trailing) {
 					Spacer()
 					HStack {
 						NavigationLink(destination: SignUpWithEmail()) {

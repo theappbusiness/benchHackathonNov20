@@ -9,10 +9,11 @@
 import SwiftUI
 
 public struct SignUpInfoView: View {
-	var title: String
-	var description: String
-	public init(title: String,
-				description: String) {
+
+	private var title: String
+	private var description: String
+	
+	public init(title: String, description: String) {
 		self.title = title
 		self.description = description
 	}

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Strings
-import Theming
 import Components
 
 struct SignUpWithEmail: View {
@@ -17,6 +16,7 @@ struct SignUpWithEmail: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithEmailTitle, description: Strings.SignUp.signUpWithEmailInfo)
+
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in

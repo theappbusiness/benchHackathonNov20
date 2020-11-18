@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Strings
-import Theming
 import Components
 import LandingScreen
 
@@ -18,11 +17,13 @@ struct SignUpWithPassword: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithPasswordTitle, description: Strings.SignUp.signUpWithPasswordInfo)
+
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
 				SignUpUserEntryView(isSignupWithEmail: false,
-									textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder, buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
+									textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
+									buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
 									width: geometry.size.width,
 									destinationView: LandingView(),
 									entryField: $password)

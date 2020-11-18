@@ -11,15 +11,14 @@ import Strings
 import Theming
 
 public struct SignUpUserEntryView<Content: View>: View {
-
-	var isSignupWithEmail: Bool
-	var textFieldPlaceholder: String
-	var buttonTitle: String
-	var width: CGFloat
-	var destinationView: Content
-	@Binding var entryField: String
-
-
+	
+	private var isSignupWithEmail: Bool
+	private var textFieldPlaceholder: String
+	private var buttonTitle: String
+	private var width: CGFloat
+	private var destinationView: Content
+	@Binding private var entryField: String
+	
 	public init(isSignupWithEmail: Bool,
 				textFieldPlaceholder: String,
 				buttonTitle: String,
@@ -31,12 +30,11 @@ public struct SignUpUserEntryView<Content: View>: View {
 		self.buttonTitle = buttonTitle
 		self.width = width
 		self.destinationView = destinationView
-		self._entryField = entryField
+		_entryField = entryField
 	}
-
-
+	
 	public var body: some View {
-		VStack(alignment:.trailing) {
+		VStack(alignment: .trailing) {
 			Spacer()
 			HStack {
 				if isSignupWithEmail {
