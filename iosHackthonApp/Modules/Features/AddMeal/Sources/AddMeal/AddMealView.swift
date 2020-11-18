@@ -37,11 +37,11 @@ public struct AddMealView: View {
     @State private var longitude: Float = 0
     @State private var isHot: Bool = true
 
-    var buttonIsDisabled: Bool {
+    private var buttonIsDisabled: Bool {
         title.isEmpty || additionalInfo.isEmpty || address.isEmpty || quantity == 0
     }
 
-    var buttonColor: Color {
+    private var buttonColor: Color {
         buttonIsDisabled ? ColorManager.gray : ColorManager.appPrimary
     }
 
@@ -96,7 +96,7 @@ private extension AddMealView {
 
     struct InfoTextFieldsGroup: View {
 
-        @Binding var title: String
+        @Binding fileprivate var title: String
         @Binding var info: String
         @Binding var quantity: Int
 
