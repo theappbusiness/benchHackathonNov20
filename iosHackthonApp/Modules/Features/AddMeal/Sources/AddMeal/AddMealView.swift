@@ -215,13 +215,13 @@ private extension AddMealView {
             guard
                 let meal = meal,
                 error == nil else {
-                self.activeAlert = .error
-                self.showingAlert.toggle()
+                activeAlert = .error
+                showingAlert.toggle()
                 return
             }
-            self.code = meal.id.last4Chars()
-            self.activeAlert = .collection
-            self.showingAlert.toggle()
+            code = meal.id.last4Chars()
+            activeAlert = .collection
+            showingAlert.toggle()
         })
     }
 }
