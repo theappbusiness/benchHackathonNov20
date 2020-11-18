@@ -39,7 +39,7 @@ public struct Strings { // TODO: these can all be public enums, plus public exte
 		public static let welcomeButtonTitle = "Register with email"
 		public static let signUpWithEmailTitle = "Email"
 		public static let signUpWithEmailPlaceHolder = "Enter your email address"
-		public static let signUpWithEmailInfo = "First we ll need to know the email address you want to sign up with.\n \nWe will never share your email with any 3rd parties or send you any emails you dont request."
+		public static let signUpWithEmailInfo = "First we'll need to know the email address you want to sign up with.\n \nWe will never share your email with any 3rd parties or send you any emails you dont request."
 		public static let signUpWithEmailButtonTitle = "Continue to password"
 		public static let signUpWithPasswordTitle = "Password"
 		public static let signUpWithPasswordPlaceHolder = "Enter a password"
