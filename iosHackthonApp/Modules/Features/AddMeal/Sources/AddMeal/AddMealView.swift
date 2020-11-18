@@ -11,25 +11,31 @@ import shared
 import Strings
 import Theming
 import Location
+import Extensions
 import Components
 
 public struct AddMealView: View {
 
-    public init(viewModel: AddMealViewModel) {
-        self.viewModel = viewModel
+    private let sdk: MealsSDK
+    private let locationManager: LocationManager
+
+    public init(sdk: MealsSDK, locationManager: LocationManager) {
+        self.sdk = sdk
+        self.locationManager = locationManager
     }
 
-    @ObservedObject var viewModel: AddMealViewModel
-
-    @State var title: String = ""
-    @State var additionalInfo: String = ""
-    @State var quantity: Int = 0
-    @State var availableFromDate = Date()
-    @State var useByDate = Date()
-    @State var address: String = ""
-    @State var latitude: Float = 0
-    @State var longitude: Float = 0
-    @State var isHot: Bool = true
+    @State private var code = ""
+    @State private var showingAlert = false
+    @State private var activeAlert: ActiveAlert = .collection
+    @State private var title: String = ""
+    @State private var additionalInfo: String = ""
+    @State private var quantity: Int = 0
+    @State private var availableFromDate = Date()
+    @State private var useByDate = Date()
+    @State private var address: String = ""
+    @State private var latitude: Float = 0
+    @State private var longitude: Float = 0
+    @State private var isHot: Bool = true
 
     var buttonIsDisabled: Bool {
         title.isEmpty || additionalInfo.isEmpty || address.isEmpty || quantity == 0
@@ -48,11 +54,11 @@ public struct AddMealView: View {
                     Spacer()
                     DatePickers(availableFromDate: $availableFromDate, useByDate: $useByDate)
                     Spacer()
-                    AddressTextField(locationManager: viewModel.locationManager, address: $address, latitude: $latitude, longitude: $longitude)
+                    AddressTextField(locationManager: locationManager, address: $address, latitude: $latitude, longitude: $longitude)
                     Spacer()
                     GeometryReader { geometry in
                         Button(action: {
-                            self.viewModel.postMeal(meal: createMeal())
+                            postMeal(meal: createMeal())
                         }) {
                             Text(Strings.AddMealScreen.addMeal)
                                 .modifier(AddButtonStyle(width: geometry.size.width,
@@ -65,14 +71,14 @@ public struct AddMealView: View {
             }
             .navigationBarTitle(Strings.AddMealScreen.addMeal)
             .onAppear() {
-                address = "\(viewModel.locationManager.address)"
+                address = "\(locationManager.address)"
             }
         }
-        .alert(isPresented: $viewModel.showingAlert) {
-            switch viewModel.activeAlert {
+        .alert(isPresented: $showingAlert) {
+            switch activeAlert {
             case .collection:
                 return Alert(
-                    title: Text(viewModel.code),
+                    title: Text(code),
                     message: Text(Strings.AddMealScreen.CollectionAlert.message),
                     dismissButton: .default(Text(Strings.Common.ok)))
             default:
@@ -193,7 +199,7 @@ extension AddMealView {
 extension AddMealView {
     private func createMeal() -> Meal {
 
-        Meal(id: "\(viewModel.sdk.getUUID())",
+        Meal(id: "\(sdk.getUUID())",
              name: "\(title)",
              quantity: Int32(quantity),
              availableFromDate: "\(availableFromDate)",
@@ -203,10 +209,26 @@ extension AddMealView {
              locationLat: latitude,
              locationLong:  longitude)
     }
+
+    private func postMeal(meal: Meal) {
+
+        sdk.postMeal(meal: meal, completionHandler: { meal, error in
+            guard
+                let meal = meal,
+                error == nil else {
+                self.activeAlert = .error
+                self.showingAlert.toggle()
+                return
+            }
+            self.code = meal.id.last4Chars()
+            self.activeAlert = .collection
+            self.showingAlert.toggle()
+        })
+    }
 }
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMealView(viewModel: AddMealViewModel(sdk: MealsSDK(), locationManager: LocationManager()))
+        AddMealView(sdk: MealsSDK(), locationManager: LocationManager())
     }
 }
