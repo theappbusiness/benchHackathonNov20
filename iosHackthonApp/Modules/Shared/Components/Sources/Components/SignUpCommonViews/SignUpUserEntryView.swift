@@ -9,9 +9,8 @@
 import SwiftUI
 import Strings
 import Theming
-import Components
 
-struct SignUpUserEntryView<Content: View>: View {
+public struct SignUpUserEntryView<Content: View>: View {
 
 	var isSignupWithEmail: Bool
 	var textFieldPlaceholder: String
@@ -20,7 +19,23 @@ struct SignUpUserEntryView<Content: View>: View {
 	var destinationView: Content
 	@Binding var entryField: String
 
-	var body: some View {
+
+	public init(isSignupWithEmail: Bool,
+				textFieldPlaceholder: String,
+				buttonTitle: String,
+				width: CGFloat,
+				destinationView: Content,
+				entryField: Binding<String>) {
+		self.isSignupWithEmail = isSignupWithEmail
+		self.textFieldPlaceholder = textFieldPlaceholder
+		self.buttonTitle = buttonTitle
+		self.width = width
+		self.destinationView = destinationView
+		self._entryField = entryField
+	}
+
+
+	public var body: some View {
 		VStack(alignment:.trailing) {
 			Spacer()
 			HStack {

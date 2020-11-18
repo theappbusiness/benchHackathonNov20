@@ -8,10 +8,16 @@
 
 import SwiftUI
 
-struct SignUpInfoView: View {
+public struct SignUpInfoView: View {
 	var title: String
 	var description: String
-	var body: some View {
+	public init(title: String,
+				description: String) {
+		self.title = title
+		self.description = description
+	}
+	
+	public var body: some View {
 		Text(title)
 			.fontWeight(.bold)
 			.font(.largeTitle)
