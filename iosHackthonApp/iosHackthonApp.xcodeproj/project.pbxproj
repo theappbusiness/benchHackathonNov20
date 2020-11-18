@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4693453B25651A6F005DADF9 /* SignUpWithEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4693453A25651A6F005DADF9 /* SignUpWithEmail.swift */; };
+		4693454025651B7C005DADF9 /* SignUpWithPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4693453F25651B7C005DADF9 /* SignUpWithPassword.swift */; };
+		46C28C8425641D3800A2D2E5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C28C8325641D3800A2D2E5 /* SignUpView.swift */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		7555FFA1242A565B00829871 /* iosHackthonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */; };
 		C39352982562C09E0087DEF8 /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = C39352972562C09E0087DEF8 /* MealList */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4693453A25651A6F005DADF9 /* SignUpWithEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWithEmail.swift; sourceTree = "<group>"; };
+		4693453F25651B7C005DADF9 /* SignUpWithPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWithPassword.swift; sourceTree = "<group>"; };
+		46C28C8325641D3800A2D2E5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosHackthonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosHackthonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF87242A565B00829871 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7555FF91242A565B00829871 /* iosHackthonAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosHackthonAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46C28C8225641D2400A2D2E5 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				46C28C8325641D3800A2D2E5 /* SignUpView.swift */,
+				4693453A25651A6F005DADF9 /* SignUpWithEmail.swift */,
+				4693453F25651B7C005DADF9 /* SignUpWithPassword.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +126,7 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
+				46C28C8225641D2400A2D2E5 /* SignUp */,
 				CE551F5A256403AE00B4E4F5 /* login */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
@@ -365,7 +382,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4693454025651B7C005DADF9 /* SignUpWithPassword.swift in Sources */,
+				46C28C8425641D3800A2D2E5 /* SignUpView.swift in Sources */,
 				CE551F5C256403B800B4E4F5 /* LoginView.swift in Sources */,
+				4693453B25651A6F005DADF9 /* SignUpWithEmail.swift in Sources */,
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
 			);
