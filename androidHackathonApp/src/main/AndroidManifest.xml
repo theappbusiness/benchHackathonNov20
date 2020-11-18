@@ -18,9 +18,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FindMealActivity"
-            android:label="@string/find_meal_activity_header"/>
-        <activity
             android:name=".AddMealActivity"
             android:label="@string/add_meal_activity_header" />
     </application>

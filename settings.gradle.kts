@@ -1,3 +1,5 @@
+include(":lib-theming")
+include(":lib-find-meal")
 pluginManagement {
     repositories {
         gradlePluginPortal()

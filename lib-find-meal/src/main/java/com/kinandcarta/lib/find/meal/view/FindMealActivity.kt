@@ -1,8 +1,7 @@
-package com.kcc.kmmhackathon.androidHackathonApp
+package com.kinandcarta.lib.find.meal.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -10,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.kcc.kmmhackathon.shared.MealsSDK
-import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
+import com.kinandcarta.lib.find.meal.R
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -47,7 +47,7 @@ class FindMealActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mainScope.cancel()
+        mainScope.cancel() // TODO: We'd get this for free in a ViewModel?
     }
 
     private fun displayMeals(needReload: Boolean) {

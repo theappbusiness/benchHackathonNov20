@@ -3,6 +3,7 @@ package com.kcc.kmmhackathon.androidHackathonApp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kinandcarta.lib.find.meal.view.FindMealActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

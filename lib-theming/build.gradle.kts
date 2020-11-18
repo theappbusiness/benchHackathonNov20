@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     id("kotlin-android-extensions")
 }
@@ -16,15 +16,7 @@ repositories {
 val recyclerVersion = "1.1.0"
 
 dependencies {
-
-    // Our project modules
-    implementation(project(":lib-find-meal"))
-    implementation(project(":lib-theming"))
-
-    // Shared multiplatform lib
     implementation(project(":shared"))
-
-    // External dependencies
     implementation("com.google.android.material:material:1.2.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
@@ -38,7 +30,6 @@ dependencies {
 android {
     compileSdkVersion(30)
     defaultConfig {
-        applicationId = "com.kcc.kmmhackathon.androidHackathonApp"
         minSdkVersion(24)
         targetSdkVersion(30)
         versionCode = 1
