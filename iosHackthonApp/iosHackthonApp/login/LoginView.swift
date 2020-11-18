@@ -66,17 +66,18 @@ struct LoginView: View {
 				Spacer()
 				VStack {
 					Spacer(minLength: 20)
-					Button(action: {
-						print("Go to sign up")
-					}) {
-						Text(Strings.Login.signupButtonTitle)
-							.frame(alignment: .center)
-							.foregroundColor(ColorManager.appPrimary)
+					GeometryReader { geometry in
+						NavigationLink(destination: SignUpView()) {
+							Text(Strings.Login.signupButtonTitle)
+								.frame(width: geometry.size.width, alignment: .center)
+								.foregroundColor(ColorManager.appPrimary)
+						}
 					}
 				}
 			}
             .navigationBarTitle(Text(Strings.LandingScreen.heading))
 		}
+		.accentColor(.white)
 	}
 }
 
