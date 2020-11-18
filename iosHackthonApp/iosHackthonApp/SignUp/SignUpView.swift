@@ -17,34 +17,20 @@ struct SignUpView: View {
 
 	var body: some View {
 		VStack(alignment: .leading) {
-			Text(Strings.SignUp.welcomeScreenTitle)
-				.fontWeight(.bold)
-				.font(.title)
-				.font(.system(size: 100))
-			Spacer()
-			Text(Strings.SignUp.welcomeScreenInfo)
+			SignUpInfoView(title: Strings.SignUp.welcomeScreenTitle, description: Strings.SignUp.welcomeScreenInfo)
 			Spacer().frame(maxHeight: .infinity)
 
 			GeometryReader { geometry in
-
 				let height = geometry.frame(in: .local).height
 				VStack {
-					TextField(Strings.SignUp.registerWithEmailPlaceHolder, text: $email)
-						.modifier(GreyTextFieldStyle())
-
-					Button(action: {
-					}) {
+					NavigationLink(destination: SignUpWithEmail()) {
 						Text(Strings.SignUp.welcomeButtonTitle)
 							.modifier(AddButtonStyle(width: geometry.size.width,
-													 backgroundColor:
-														ColorManager.appPrimary))
+													 backgroundColor:ColorManager.appPrimary))
 					}
 				}
-				.offset(y: height - 100)
+				.offset(y: height - 30)
 			}
-
-
-
 		}.padding()
 	}
 }
