@@ -29,7 +29,7 @@ public struct TabAppView: View {
     public var body: some View {
         TabView(selection: $selectedView, content: {
             NavigationView {
-                AddMealView(viewModel: .init(sdk: self.sdk, locationManager: self.locationManager))
+                AddMealView(sdk: sdk, locationManager: locationManager)
             }
             .navigationBarHidden(true)
             .tabItem {
@@ -39,7 +39,7 @@ public struct TabAppView: View {
             .accentColor(ColorManager.appPrimary)
 
             NavigationView {
-                MealListView(viewModel: .init(sdk: self.sdk, locationManager: locationManager))
+                MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
             }
             .navigationBarHidden(true)
             .tabItem {
