@@ -12,8 +12,6 @@ import Theming
 import Components
 
 struct SignUpView: View {
-	@State private var email: String = ""
-	@State private var password: String = ""
 
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -21,15 +19,16 @@ struct SignUpView: View {
 			Spacer().frame(maxHeight: .infinity)
 
 			GeometryReader { geometry in
-				let height = geometry.frame(in: .local).height
-				VStack {
-					NavigationLink(destination: SignUpWithEmail()) {
-						Text(Strings.SignUp.welcomeButtonTitle)
-							.modifier(AddButtonStyle(width: geometry.size.width,
-													 backgroundColor:ColorManager.appPrimary))
+				VStack(alignment:.trailing) {
+					Spacer()
+					HStack {
+						NavigationLink(destination: SignUpWithEmail()) {
+							Text(Strings.SignUp.welcomeButtonTitle)
+								.modifier(AddButtonStyle(width: geometry.size.width,
+														 backgroundColor:ColorManager.appPrimary))
+						}
 					}
 				}
-				.offset(y: height - 30)
 			}
 		}.padding()
 	}

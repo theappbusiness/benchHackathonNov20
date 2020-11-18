@@ -21,13 +21,11 @@ struct SignUpWithPassword: View {
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
-				let height = geometry.frame(in: .local).height
 				SignUpUserEntryView(isSignupWithEmail: false,
 									textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder, buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
 									width: geometry.size.width,
 									destinationView: LandingView(),
 									entryField: $password)
-					.offset(y: height - 100)
 			}
 		}.padding()
 	}

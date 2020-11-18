@@ -21,21 +21,25 @@ struct SignUpUserEntryView<Content: View>: View {
 	@Binding var entryField: String
 
 	var body: some View {
-		VStack {
-			if isSignupWithEmail {
-				TextField(textFieldPlaceholder, text: $entryField)
-					.modifier(GreyTextFieldStyle())
-			} else {
-				SecureField(textFieldPlaceholder, text: $entryField)
-					.modifier(GreyTextFieldStyle())
+		VStack(alignment:.trailing) {
+			Spacer()
+			HStack {
+				if isSignupWithEmail {
+					TextField(textFieldPlaceholder, text: $entryField)
+						.modifier(GreyTextFieldStyle())
+				} else {
+					SecureField(textFieldPlaceholder, text: $entryField)
+						.modifier(GreyTextFieldStyle())
+				}
 			}
-
-			NavigationLink(destination: destinationView) {
-				Text(buttonTitle)
-					.modifier(AddButtonStyle(width: width,
-											 backgroundColor: entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
+			HStack {
+				NavigationLink(destination: destinationView) {
+					Text(buttonTitle)
+						.modifier(AddButtonStyle(width: width,
+												 backgroundColor: entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
+				}
+				.disabled(entryField.isEmpty)
 			}
-			.disabled(entryField.isEmpty)
 		}
 	}
 }
