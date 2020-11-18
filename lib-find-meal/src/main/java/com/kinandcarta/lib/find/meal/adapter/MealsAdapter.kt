@@ -53,7 +53,7 @@ class MealsAdapter(var mealsList: List<MealWithDistance>) :
             }
 
             // TODO calculate distance (this could be done in the shared layer)
-            distanceView.text = item.meal.distance.toString()
+            distanceView.text = item.distance.toString()
 
             availableView.text = "Available: ${parseDate(item.meal.availableFromDate)}"
             expiryView.text = "Expires: ${parseDate(item.meal.expiryDate)}"
