@@ -4,11 +4,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -21,7 +21,6 @@ import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
 import com.kinandcarta.lib.find.meal.R
-import com.kcc.kmmhackathon.android.R.string
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -36,10 +35,10 @@ class FindMealActivity : AppCompatActivity() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var lastLocation: Location
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private var locationUpdateState = false
+    private lateinit var lastLocation: Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +47,7 @@ class FindMealActivity : AppCompatActivity() {
         title = getString(R.string.find_meal_title) // TODO figure out how to reach strings from main res/strings
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        updateLastLocation()
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult?) {
@@ -55,7 +55,6 @@ class FindMealActivity : AppCompatActivity() {
 
                 if (p0 != null) {
                     lastLocation = p0.lastLocation
-                    toastLastLocation()
                 }
             }
         }
@@ -71,14 +70,23 @@ class FindMealActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             displayMeals(false, true)
-            toastLastLocation()
         }
         displayMeals(false, false)
     }
 
-    private fun toastLastLocation() {
-        Toast.makeText(this@FindMealActivity, "You current location is \n Lat: ${lastLocation.latitude} \n Lon: ${lastLocation.longitude}", Toast.LENGTH_LONG)
-            .show()
+    private fun updateLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location ->
+                if (location != null) {
+                    lastLocation = location
+                    displayMeals(false, false)
+                }
+            }
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        }
     }
 
     private fun startLocationUpdates() {
@@ -153,8 +161,7 @@ class FindMealActivity : AppCompatActivity() {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()
             }.onFailure {
-                Toast.makeText(this@FindMealActivity, it.localizedMessage, Toast.LENGTH_SHORT)
-                    .show()
+                // Handle error
             }
             progressBarView.isVisible = false
         }
