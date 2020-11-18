@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kinandcarta.lib.find.meal.R
 
-class MealsAdapter(var mealsList: List<Meal>) :
+class MealsAdapter(var mealsList: List<MealWithDistance>) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -39,28 +39,28 @@ class MealsAdapter(var mealsList: List<Meal>) :
         private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
         private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
 
-        fun bindData(meal: Meal) {
-            nameView.text = meal.name
-            val tempString = if (meal.hot) "Hot" else "Cold"
-            val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
+        fun bindData(item: MealWithDistance) {
+            nameView.text = item.meal.name
+            val tempString = if (item.meal.hot) "Hot" else "Cold"
+            val tempColor = if (item.meal.hot) R.color.colorHot else R.color.colorCold
             tempView.text = tempString
             tempView.setTextColor(ContextCompat.getColor(itemView.context, tempColor))
 
-            if (meal.info.isNullOrEmpty()) {
+            if (item.meal.info.isNullOrEmpty()) {
                 infoView.isVisible = false
             } else {
-                infoView.text = "Info: ${meal.info}"
+                infoView.text = "Info: ${item.meal.info}"
             }
 
             // TODO calculate distance (this could be done in the shared layer)
-            distanceView.text = "8637.35km"
+            distanceView.text = item.meal.distance.toString()
 
-            availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
-            expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
+            availableView.text = "Available: ${parseDate(item.meal.availableFromDate)}"
+            expiryView.text = "Expires: ${parseDate(item.meal.expiryDate)}"
 
-            portionsView.text = getQuantityText(meal.quantity)
+            portionsView.text = getQuantityText(item.meal.quantity)
 
-            val hasPortions = meal.quantity > 0
+            val hasPortions = item.meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
             val reserveButtonColor =
                 if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
@@ -74,9 +74,9 @@ class MealsAdapter(var mealsList: List<Meal>) :
             if (hasPortions) {
                 reserveButton.setOnClickListener {
                     // TODO link up to sdk and adjust quantity and show user reservation code
-                    val id = meal.id
+                    val id = item.meal.id
                     val code = id.subSequence(id.length - 4, id.length)
-                    Log.i("Reserve button tapped", "${meal.name} reservation code ${code}")
+                    Log.i("Reserve button tapped", "${item.meal.name} reservation code ${code}")
                 }
             }
         }

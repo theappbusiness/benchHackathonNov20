@@ -21,6 +21,7 @@ import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
 import com.kinandcarta.lib.find.meal.R
+import com.kcc.kmmhackathon.android.R.string
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -43,8 +44,8 @@ class FindMealActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        title = "Find a meal"
-        setContentView(R.layout.find_meal_activity)
+        setContentView(com.kinandcarta.lib.find.meal.R.layout.find_meal_activity)
+        title = getString(R.string.find_meal_title) // TODO figure out how to reach strings from main res/strings
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -60,19 +61,19 @@ class FindMealActivity : AppCompatActivity() {
         }
         createLocationRequest()
 
-        mealsRecyclerView = findViewById(R.id.rvMeals)
-        progressBarView = findViewById(R.id.progressBar)
-        swipeRefreshLayout = findViewById(R.id.swipeContainer)
+        mealsRecyclerView = findViewById(com.kinandcarta.lib.find.meal.R.id.rvMeals)
+        progressBarView = findViewById(com.kinandcarta.lib.find.meal.R.id.progressBar)
+        swipeRefreshLayout = findViewById(com.kinandcarta.lib.find.meal.R.id.swipeContainer)
 
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(this)
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            displayMeals(true)
+            displayMeals(false, true)
             toastLastLocation()
         }
-        displayMeals(false)
+        displayMeals(false, false)
     }
 
     private fun toastLastLocation() {
@@ -143,11 +144,11 @@ class FindMealActivity : AppCompatActivity() {
         mainScope.cancel() // TODO: We'd get this for free in a ViewModel?
     }
 
-    private fun displayMeals(needReload: Boolean) {
+    private fun displayMeals(inMiles: Boolean, needReload: Boolean) {
         progressBarView.isVisible = true
         mainScope.launch {
             kotlin.runCatching {
-                sdk.getMeals(needReload)
+                sdk.getMeals(lastLocation.latitude, lastLocation.longitude, inMiles, needReload)
             }.onSuccess {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()

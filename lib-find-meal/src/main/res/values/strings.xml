@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="find_meal_activity_header">This is the find meal activity screen</string>
+    //Titles
+    <string name="find_meal_title">Find a Meal</string>
+
+    //Meals
+    <string name="portion">portion remaining</string>
+    <string name="portions">portions remaining</string>
+    <string name="reserved">portion remaining</string>
+    <string name="available">Available</string>
+    <string name="expires">Expires</string>
+    <string name="info">Info</string>
+    <string name="hot">Hot</string>
+    <string name="cold">Cold</string>
+    <string name="reserve_button">Reserve a portion</string>
+    <string name="unavailable_button">Unavailable</string>
 </resources>

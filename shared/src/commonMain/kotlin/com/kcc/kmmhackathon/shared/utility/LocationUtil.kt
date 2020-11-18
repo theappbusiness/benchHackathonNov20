@@ -7,7 +7,7 @@ typealias Degree = Double
 
 class LocationUtil {
 
-    fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double, inMiles: Boolean): Double {
+    fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double, inMiles: Boolean = false): Double {
 
         // Haversine formula  https://www.movable-type.co.uk/scripts/latlong.html
         val earthRadius = 3958.75
