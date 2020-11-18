@@ -27,6 +27,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.android.gms:play-services-location:11.8.0")
 }
 
 android {
