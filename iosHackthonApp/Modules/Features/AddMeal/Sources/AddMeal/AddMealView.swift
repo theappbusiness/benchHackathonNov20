@@ -49,12 +49,12 @@ public struct AddMealView: View {
         ZStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
-                    infoTextFieldsGroup(title: $title, info: $additionalInfo, quantity: $quantity)
+                    InfoTextFieldsGroup(title: $title, info: $additionalInfo, quantity: $quantity)
                     TemperatureButtonsGroup(isHot: $isHot)
                     Spacer()
                     DatePickers(availableFromDate: $availableFromDate, useByDate: $useByDate)
                     Spacer()
-                    AddressTextField(locationManager: locationManager, address: $address, latitude: $latitude, longitude: $longitude)
+                    AddressTextFieldGroup(locationManager: locationManager, address: $address, latitude: $latitude, longitude: $longitude)
                     Spacer()
                     GeometryReader { geometry in
                         Button(action: {
@@ -94,7 +94,7 @@ public struct AddMealView: View {
 // MARK:- Views
 extension AddMealView {
 
-    private struct infoTextFieldsGroup: View {
+    private struct InfoTextFieldsGroup: View {
 
         @Binding var title: String
         @Binding var info: String
@@ -164,7 +164,7 @@ extension AddMealView {
         }
     }
 
-    private struct AddressTextField: View {
+    private struct AddressTextFieldGroup: View {
 
         let locationManager: LocationManager
         @Binding var address: String
