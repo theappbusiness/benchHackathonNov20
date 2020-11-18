@@ -18,20 +18,15 @@ struct SignUpWithEmail: View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithEmailTitle, description: Strings.SignUp.signUpWithEmailInfo)
 			Spacer().frame(maxHeight: .infinity)
-
+			
 			GeometryReader { geometry in
 				let height = geometry.frame(in: .local).height
-				VStack {
-					TextField(Strings.SignUp.signUpWithEmailPlaceHolder, text: $email)
-						.modifier(GreyTextFieldStyle())
-					NavigationLink(destination: SignUpWithPassword()) {
-						Text(Strings.SignUp.signUpWithEmailButtonTitle)
-							.modifier(AddButtonStyle(width: geometry.size.width,
-													 backgroundColor: email.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
-					}
-					.disabled(email.isEmpty)
-				}
-				.offset(y: height - 100)
+				SignUpUserEntryView(isSignupWithEmail: true,
+									textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder, buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
+									width: geometry.size.width,
+									destinationView: SignUpWithPassword(),
+									entryField: $email)
+					.offset(y: height - 100)
 			}
 		}.padding()
 	}
