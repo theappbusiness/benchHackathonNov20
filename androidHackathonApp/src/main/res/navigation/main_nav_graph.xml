@@ -3,7 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/mapsFragment">
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.kcc.kmmhackathon.androidHackathonApp.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <action
+        android:id="@+id/action_studiesListFragment_to_aboutFragment"
+        app:destination="@id/aboutFragment"
+        app:enterAnim="@animator/animator_default_screen_enter"
+        app:exitAnim="@animator/animator_default_screen_exit"
+        app:popEnterAnim="@android:animator/fade_in"
+        app:popExitAnim="@animator/animator_default_screen_exit" />
+    <action
+        android:id="@+id/action_studiesListFragment_to_studyDetailsFragment"
+        app:destination="@id/studyDetailsFragment" />
 
     <activity
         android:id="@+id/mainActivity"
@@ -20,4 +36,5 @@
         android:name="com.kinandcarta.lib.find.meal.view.FindMealActivity"
         android:label="find_meal_activity"
         tools:layout="@layout/find_meal_activity" />
+
 </navigation>
