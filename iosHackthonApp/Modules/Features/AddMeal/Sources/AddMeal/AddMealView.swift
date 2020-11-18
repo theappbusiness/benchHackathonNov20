@@ -92,9 +92,9 @@ public struct AddMealView: View {
 }
 
 // MARK:- Views
-extension AddMealView {
+private extension AddMealView {
 
-    private struct InfoTextFieldsGroup: View {
+    struct InfoTextFieldsGroup: View {
 
         @Binding var title: String
         @Binding var info: String
@@ -117,7 +117,7 @@ extension AddMealView {
         }
     }
 
-    private struct TemperatureButtonsGroup: View {
+    struct TemperatureButtonsGroup: View {
 
         @Binding var isHot: Bool
 
@@ -151,7 +151,7 @@ extension AddMealView {
         }
     }
 
-    private struct DatePickers: View {
+    struct DatePickers: View {
 
         @Binding var availableFromDate: Date
         @Binding var useByDate: Date
@@ -164,7 +164,7 @@ extension AddMealView {
         }
     }
 
-    private struct AddressTextFieldGroup: View {
+    struct AddressTextFieldGroup: View {
 
         let locationManager: LocationManager
         @Binding var address: String
@@ -196,9 +196,9 @@ extension AddMealView {
 }
 
 //MARK:- Functions
-extension AddMealView {
-    private func createMeal() -> Meal {
+private extension AddMealView {
 
+    func createMeal() -> Meal {
         Meal(id: "\(sdk.getUUID())",
              name: "\(title)",
              quantity: Int32(quantity),
@@ -210,8 +210,7 @@ extension AddMealView {
              locationLong:  longitude)
     }
 
-    private func postMeal(meal: Meal) {
-
+    func postMeal(meal: Meal) {
         sdk.postMeal(meal: meal, completionHandler: { meal, error in
             guard
                 let meal = meal,
