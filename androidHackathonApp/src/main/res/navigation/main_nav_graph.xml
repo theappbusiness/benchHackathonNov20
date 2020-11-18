@@ -7,30 +7,12 @@
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.kcc.kmmhackathon.androidHackathonApp.MapsFragment"
+        android:name="com.kcc.kmmhackathon.androidHackathonApp.view.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
-    <action
-        android:id="@+id/action_studiesListFragment_to_aboutFragment"
-        app:destination="@id/aboutFragment" />
-    <action
-        android:id="@+id/action_studiesListFragment_to_studyDetailsFragment"
-        app:destination="@id/studyDetailsFragment" />
-
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.kcc.kmmhackathon.androidHackathonApp.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/addMealActivity"
-        android:name="com.kcc.kmmhackathon.androidHackathonApp.AddMealActivity"
-        android:label="add_meal_activity"
-        tools:layout="@layout/add_meal_activity" />
-    <activity
-        android:id="@+id/findMealActivity"
-        android:name="com.kinandcarta.lib.find.meal.view.FindMealActivity"
-        android:label="find_meal_activity"
-        tools:layout="@layout/find_meal_activity" />
-
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.kcc.kmmhackathon.androidHackathonApp.view.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

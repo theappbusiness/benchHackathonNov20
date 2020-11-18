@@ -1,7 +1,8 @@
-package com.kcc.kmmhackathon.androidHackathonApp
+package com.kcc.kmmhackathon.androidHackathonApp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kcc.kmmhackathon.androidHackathonApp.R
 
 class AddMealActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

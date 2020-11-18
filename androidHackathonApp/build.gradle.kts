@@ -15,6 +15,7 @@ repositories {
 }
 
 val recyclerVersion = "1.1.0"
+val nav_version = "2.3.1"
 
 dependencies {
 
@@ -38,6 +39,14 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("com.google.android.gms:play-services-maps:17.0.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation ("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+    implementation ("androidx.navigation:navigation-compose:1.0.0-alpha02")
+    androidTestImplementation ("androidx.navigation:navigation-testing:$nav_version")
 }
 
 android {
