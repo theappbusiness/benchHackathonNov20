@@ -35,8 +35,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("com.google.android.gms:play-services-maps:17.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
