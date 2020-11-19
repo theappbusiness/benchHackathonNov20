@@ -10,9 +10,21 @@
         android:name="com.kcc.kmmhackathon.androidHackathonApp.view.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+    <action android:id="@+id/mapsFragment_to_settingsFragment"
+        app:destination="@+id/settingsFragment"/>
+    <action android:id="@+id/mapsFragment_to_listFragment"
+        app:destination="@+id/findMealFragment"/>
     <fragment
-        android:id="@+id/settingsFragment2"
+        android:id="@+id/settingsFragment"
         android:name="com.kcc.kmmhackathon.androidHackathonApp.view.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
+    <action android:id="@+id/settingsFragment_to_mapsFragment"
+        app:destination="@+id/mapsFragment"/>
+    <fragment
+        android:id="@+id/findMealFragment"
+        android:name="com.kinandcarta.lib.find.meal.view.FindMealFragment"
+        android:label="FindMealFragment" />
+    <action android:id="@+id/findMealFragment_to_mapsFragment"
+        app:destination="@+id/mapsFragment" />
 </navigation>

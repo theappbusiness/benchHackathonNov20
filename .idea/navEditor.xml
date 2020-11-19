@@ -8,37 +8,25 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="addMealActivity">
+                  <entry key="mapsFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-351" />
-                            <option name="y" value="-292" />
+                            <option name="x" value="40" />
+                            <option name="y" value="40" />
                           </Point>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="findMealActivity">
+                  <entry key="settingsFragment2">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-353" />
-                            <option name="y" value="36" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="mainActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-559" />
-                            <option name="y" value="-78" />
+                            <option name="x" value="236" />
+                            <option name="y" value="40" />
                           </Point>
                         </option>
                       </LayoutPositions>

@@ -44,9 +44,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation ("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-    implementation ("androidx.navigation:navigation-compose:1.0.0-alpha02")
-    androidTestImplementation ("androidx.navigation:navigation-testing:$nav_version")
 }
 
 android {
