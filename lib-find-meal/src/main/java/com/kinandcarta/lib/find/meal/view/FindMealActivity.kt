@@ -19,6 +19,7 @@ import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
 import com.kinandcarta.lib.find.meal.R
+import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -42,6 +43,8 @@ class FindMealActivity : AppCompatActivity() {
         LocationServices.getFusedLocationProviderClient(this)
     }
 
+    private val permissionResultParser: PermissionResultParser by lazy { PermissionResultParser() }
+
     private var lastLocation: Location? = null
 
     private var locationUpdateState = false
@@ -59,8 +62,7 @@ class FindMealActivity : AppCompatActivity() {
         setContentView(com.kinandcarta.lib.find.meal.R.layout.find_meal_activity)
         title = getString(R.string.find_meal_title)
 
-        updateLastLocation()
-        createLocationRequest()
+        requestPermissions()
 
         mealsRecyclerView = findViewById(com.kinandcarta.lib.find.meal.R.id.rvMeals)
         progressBarView = findViewById(com.kinandcarta.lib.find.meal.R.id.progressBar)
@@ -73,42 +75,38 @@ class FindMealActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
             displayMeals(true)
         }
-        displayMeals(false)
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            LOCATION_PERMISSION_REQUEST_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
+            updateLastLocation()
+            createLocationRequest()
+            startLocationUpdates()
+        } else {
+            // Ask user to update settings
+        }
     }
 
     private fun updateLastLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PERMISSION_GRANTED
-        ) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location ->
-                lastLocation = location
-                displayMeals(false)
-            }
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location ->
+            lastLocation = location
             displayMeals(false)
         }
     }
 
     private fun startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-            return
-        }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
