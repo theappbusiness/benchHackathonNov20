@@ -17,8 +17,8 @@ class MealsSDK {
         return api.getAllMeals()
     }
 
-    @Throws(Exception::class) suspend fun getMeals(userLat: Double, userLon: Double, inMiles: Boolean, forceReload: Boolean): List<MealWithDistance> {
-        return api.getAllMeals(userLat, userLon, inMiles)
+    @Throws(Exception::class) suspend fun getMeals(userLat: Double, userLon: Double, distanceUnit: Int, forceReload: Boolean): List<MealWithDistance> {
+        return api.getAllMeals(userLat, userLon, distanceUnit)
     }
 
     @Throws(Exception::class) suspend fun postMeal(meal: Meal): Meal {

@@ -8,9 +8,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,11 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
+enum class DistanceUnit {
+    kilometres,
+    miles
+}
+
 class FindMealActivity : AppCompatActivity() {
     private val mainScope = MainScope()
     private val sdk = MealsSDK()
@@ -33,31 +36,30 @@ class FindMealActivity : AppCompatActivity() {
     private lateinit var mealsRecyclerView: RecyclerView
     private lateinit var progressBarView: FrameLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
+
+    private val fusedLocationProviderClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(this)
+    }
+
+    private var lastLocation: Location? = null
+
     private var locationUpdateState = false
-    private lateinit var lastLocation: Location
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            val location = locationResult?.lastLocation ?: return
+            lastLocation = location
+        }
+    }
+    private var distanceUnit = DistanceUnit.miles
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(com.kinandcarta.lib.find.meal.R.layout.find_meal_activity)
-        title = getString(R.string.find_meal_title) // TODO figure out how to reach strings from main res/strings
+        title = getString(R.string.find_meal_title)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         updateLastLocation()
-
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult?) {
-                super.onLocationResult(p0)
-
-                if (p0 != null) {
-                    lastLocation = p0.lastLocation
-                }
-            }
-        }
         createLocationRequest()
 
         mealsRecyclerView = findViewById(com.kinandcarta.lib.find.meal.R.id.rvMeals)
@@ -69,29 +71,42 @@ class FindMealActivity : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            displayMeals(false, true)
+            displayMeals(true)
         }
-        displayMeals(false, false)
+        displayMeals(false)
     }
 
     private fun updateLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PERMISSION_GRANTED
         ) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location ->
-                if (location != null) {
-                    lastLocation = location
-                    displayMeals(false, false)
-                }
+                lastLocation = location
+                displayMeals(false)
             }
-        }
-        else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+            displayMeals(false)
         }
     }
 
     private fun startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
@@ -152,11 +167,12 @@ class FindMealActivity : AppCompatActivity() {
         mainScope.cancel() // TODO: We'd get this for free in a ViewModel?
     }
 
-    private fun displayMeals(inMiles: Boolean, needReload: Boolean) {
+    private fun displayMeals(needReload: Boolean) {
+        val location = lastLocation ?: return
         progressBarView.isVisible = true
         mainScope.launch {
             kotlin.runCatching {
-                sdk.getMeals(lastLocation.latitude, lastLocation.longitude, inMiles, needReload)
+                sdk.getMeals(location.latitude, location.longitude, distanceUnit.ordinal, needReload)
             }.onSuccess {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()

@@ -30,11 +30,11 @@ class MealApi {
         return httpClient.get(endpoint)
     }
 
-    suspend fun getAllMeals(userLat: Double, userLon: Double, inMiles: Boolean): List<MealWithDistance> {
+    suspend fun getAllMeals(userLat: Double, userLon: Double, distanceUnit: Int): List<MealWithDistance> {
         var meals = getAllMeals()
         var mealsWithDistance = mutableListOf<MealWithDistance>()
         return meals.mapTo(mealsWithDistance, { meal ->
-            val distance = locationUtil.getDistance(userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), inMiles)
+            val distance = locationUtil.getDistance(userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), distanceUnit)
             MealWithDistance(meal, distance)
         })
     }
