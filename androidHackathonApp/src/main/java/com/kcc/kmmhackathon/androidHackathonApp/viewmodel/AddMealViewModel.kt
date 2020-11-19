@@ -1,4 +1,4 @@
-package com.kcc.kmmhackathon.androidHackathonApp
+package com.kcc.kmmhackathon.androidHackathonApp.viewmodel
 
 import androidx.lifecycle.ViewModel
 

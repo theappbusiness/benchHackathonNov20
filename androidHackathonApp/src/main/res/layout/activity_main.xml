@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_view"
-    tools:context=".view.MainActivity">
+    tools:context=".MainActivity">
 
   <fragment
       android:id="@+id/fragment"
@@ -31,7 +31,5 @@
       app:itemIconTint="@drawable/bottom_nav_selector"
       app:itemTextColor="@drawable/bottom_nav_selector"
       app:menu="@menu/bottom_nav_menu" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
