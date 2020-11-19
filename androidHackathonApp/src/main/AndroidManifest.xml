@@ -3,7 +3,6 @@
     package="com.kcc.kmmhackathon.androidHackathonApp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:label="@string/app_name"
         android:allowBackup="false"

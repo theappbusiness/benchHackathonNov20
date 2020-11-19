@@ -11,8 +11,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kinandcarta.lib.find.meal.R
+import com.kinandcarta.lib.find.meal.utility.DistanceUnit
 
-class MealsAdapter(var mealsList: List<MealWithDistance>) :
+class MealsAdapter(var mealsList: List<MealWithDistance>, var distanceUnit: DistanceUnit) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -52,8 +53,7 @@ class MealsAdapter(var mealsList: List<MealWithDistance>) :
                 infoView.text = "Info: ${item.meal.info}"
             }
 
-            // TODO calculate distance (this could be done in the shared layer)
-            distanceView.text = item.distance.toString()
+            distanceView.text = "${item.distance.toString()} ${distanceUnit}"
 
             availableView.text = "Available: ${parseDate(item.meal.availableFromDate)}"
             expiryView.text = "Expires: ${parseDate(item.meal.expiryDate)}"

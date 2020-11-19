@@ -4,12 +4,14 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,25 +21,21 @@ import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
 import com.kinandcarta.lib.find.meal.R
+import com.kinandcarta.lib.find.meal.utility.DistanceUnit
 import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-enum class DistanceUnit {
-    kilometres,
-    miles
-}
-
 class FindMealActivity : AppCompatActivity() {
     private val mainScope = MainScope()
     private val sdk = MealsSDK()
-    private val mealsAdapter = MealsAdapter(listOf())
+    private var distanceUnit = DistanceUnit.miles
+    private val mealsAdapter = MealsAdapter(listOf(), distanceUnit)
 
     private lateinit var mealsRecyclerView: RecyclerView
     private lateinit var progressBarView: FrameLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var locationRequest: LocationRequest
 
     private val fusedLocationProviderClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
@@ -46,23 +44,21 @@ class FindMealActivity : AppCompatActivity() {
     private val permissionResultParser: PermissionResultParser by lazy { PermissionResultParser() }
 
     private var lastLocation: Location? = null
-
+    private var hasSetupLocationUpdates = false
     private var locationUpdateState = false
+
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
             val location = locationResult?.lastLocation ?: return
             lastLocation = location
         }
     }
-    private var distanceUnit = DistanceUnit.miles
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(com.kinandcarta.lib.find.meal.R.layout.find_meal_activity)
         title = getString(R.string.find_meal_title)
-
-        requestPermissions()
 
         mealsRecyclerView = findViewById(com.kinandcarta.lib.find.meal.R.id.rvMeals)
         progressBarView = findViewById(com.kinandcarta.lib.find.meal.R.id.progressBar)
@@ -75,14 +71,24 @@ class FindMealActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
             displayMeals(true)
         }
+
+        checkLocationPermission()
     }
 
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            LOCATION_PERMISSION_REQUEST_CODE
-        )
+    private fun checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) !== PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            updateLastLocation()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -92,7 +98,6 @@ class FindMealActivity : AppCompatActivity() {
     ) {
         if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
             updateLastLocation()
-            createLocationRequest()
             startLocationUpdates()
         } else {
             // Ask user to update settings
@@ -107,16 +112,19 @@ class FindMealActivity : AppCompatActivity() {
     }
 
     private fun startLocationUpdates() {
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
-    }
-
-    private fun createLocationRequest() {
-        locationRequest = LocationRequest()
+        val locationRequest = LocationRequest()
 
         locationRequest.interval = 100000
         locationRequest.fastestInterval = 5000
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
+        if (!hasSetupLocationUpdates) {
+            setupLocationUpdates(locationRequest)
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    private fun setupLocationUpdates(locationRequest: LocationRequest) {
         val builder = LocationSettingsRequest.Builder()
             .addLocationRequest(locationRequest)
 
@@ -125,7 +133,6 @@ class FindMealActivity : AppCompatActivity() {
 
         task.addOnSuccessListener {
             locationUpdateState = true
-            startLocationUpdates()
         }
         task.addOnFailureListener { e ->
             if (e is ResolvableApiException) {
@@ -136,6 +143,7 @@ class FindMealActivity : AppCompatActivity() {
                 }
             }
         }
+        hasSetupLocationUpdates = true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -143,7 +151,6 @@ class FindMealActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             if (resultCode == Activity.RESULT_OK) {
                 locationUpdateState = true
-                startLocationUpdates()
             }
         }
     }
@@ -156,7 +163,6 @@ class FindMealActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!locationUpdateState) {
-            startLocationUpdates()
         }
     }
 
@@ -170,7 +176,12 @@ class FindMealActivity : AppCompatActivity() {
         progressBarView.isVisible = true
         mainScope.launch {
             kotlin.runCatching {
-                sdk.getMeals(location.latitude, location.longitude, distanceUnit.ordinal, needReload)
+                sdk.getMeals(
+                    location.latitude,
+                    location.longitude,
+                    distanceUnit.ordinal,
+                    needReload
+                )
             }.onSuccess {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()
