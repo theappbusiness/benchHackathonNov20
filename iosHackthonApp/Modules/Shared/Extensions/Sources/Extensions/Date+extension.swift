@@ -10,16 +10,14 @@ import Foundation
 import Strings
 
 public extension Date {
-    static func dateFrom(dateString: String) -> Self {
-        let dateFormatter = DateFormatter() // TODO: Cache formatters because they're expensive to create
-        dateFormatter.dateFormat = Strings.Common.Date.americanFormat
-        return dateFormatter.date(from: dateString) ?? Date()
+    static func dateFrom(_ timeIntervalString: String) -> Self {
+        return Date(timeIntervalSince1970: Double(timeIntervalString) ?? 0)
     }
 
-    static func readableDateString(from dateString: String) -> String {
-        let formatDate = DateFormatter()
+    static func readableDateString(from timeIntervalString: String) -> String {
+        let formatDate = DateFormatter() // TODO: Cache formatters because they're expensive to create
         formatDate.dateFormat = Strings.Common.Date.nameDayMonth
-        let drawDate = formatDate.string(from: dateFrom(dateString: dateString))
+        let drawDate = formatDate.string(from: dateFrom(timeIntervalString))
         return drawDate
     }
 }

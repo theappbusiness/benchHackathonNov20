@@ -22,7 +22,9 @@ data class Meal(
     @SerialName("locationLat")
     val locationLat: Float,
     @SerialName("locationLong")
-    val locationLong: Float
+    val locationLong: Float,
+    @SerialName("distance")
+    var distance: Double? = null
 )
 
 @Serializable

@@ -3,9 +3,6 @@
     package="com.kinandcarta.lib.find.meal">
 
     <application>
-        <activity
-            android:name=".view.FindMealActivity"
-            android:label="@string/find_meal_activity_header" />
     </application>
 
 </manifest>
