@@ -2,6 +2,8 @@
 <resources>
     //Core
     <string name="app_name">CommunityKitchen</string>
+    <string name="map_tab_label">Find a meal</string>
+    <string name="settings_tab_label">Settings</string>
 
     //Auth
     <string name="login_button">Login</string>
@@ -13,6 +15,7 @@
     <string name="activity_add_meal_title">AddMealActivity</string>
     <string name="title_email">Email</string>
     <string name="title_password">Password</string>
+    <string name="title_switch_to_list">List View</string>
 
     //Hints
     <string name="hint_email_address">Enter Email address</string>
