@@ -1,7 +1,11 @@
 package com.kinandcarta.lib.find.meal.view
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -9,13 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.kcc.kmmhackathon.shared.MealsSDK
-import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
 import com.kinandcarta.lib.find.meal.R
+import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
+import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class FindMealActivity : AppCompatActivity() {
+class FindMealFragment : Fragment() {
+
     private val mainScope = MainScope()
 
     private lateinit var mealsRecyclerView: RecyclerView
@@ -25,29 +30,39 @@ class FindMealActivity : AppCompatActivity() {
     private val sdk = MealsSDK()
     private val mealsAdapter = MealsAdapter(listOf())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    companion object {
+        fun newInstance() = FindMealFragment()
+    }
 
-        title = "Find a meal"
-        setContentView(R.layout.find_meal_activity)
+    private lateinit var viewModel: FindMealViewModel
 
-        mealsRecyclerView = findViewById(R.id.rvMeals)
-        progressBarView = findViewById(R.id.progressBar)
-        swipeRefreshLayout = findViewById(R.id.swipeContainer)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
+        val view: View = inflater.inflate(R.layout.find_meal_fragment, container, false)
+
+        progressBarView = view.findViewById(R.id.progressBar)
+        mealsRecyclerView = view.findViewById(R.id.rvMeals)
         mealsRecyclerView.adapter = mealsAdapter
-        mealsRecyclerView.layoutManager = LinearLayoutManager(this)
+        mealsRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        swipeRefreshLayout = view.findViewById(R.id.swipeContainer)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             displayMeals(true)
         }
+
         displayMeals(false)
+
+        return view
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mainScope.cancel() // TODO: We'd get this for free in a ViewModel?
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(FindMealViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
     private fun displayMeals(needReload: Boolean) {
@@ -59,7 +74,7 @@ class FindMealActivity : AppCompatActivity() {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()
             }.onFailure {
-                Toast.makeText(this@FindMealActivity, it.localizedMessage, Toast.LENGTH_SHORT)
+                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
                     .show()
             }
             progressBarView.isVisible = false
