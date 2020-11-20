@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedUuidUuid, SharedMealWithDistance, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode, SharedKotlinEnum<E>;
+@class SharedMeal, SharedMealWithDistance, SharedUuidUuid, SharedKotlinEnum<E>, SharedDistanceUnit, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
-@protocol SharedKotlinx_serialization_coreKSerializer, SharedKotlinComparable, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
+@protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -163,6 +163,18 @@ __attribute__((swift_name("MealsSDK")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)getMealsForceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(forceReload:completionHandler:)")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
 - (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
 
 /**
@@ -202,7 +214,19 @@ __attribute__((swift_name("MealApi")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
+- (void)getAllMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(userLat:userLon:distanceUnit:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
 - (void)getMealId:(NSString *)id completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeal(id:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
@@ -233,19 +257,47 @@ __attribute__((swift_name("MealEndpoint")))
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
 @end;
 
+__attribute__((swift_name("KotlinComparable")))
+@protocol SharedKotlinComparable
+@required
+- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((swift_name("KotlinEnum")))
+@interface SharedKotlinEnum<E> : SharedBase <SharedKotlinComparable>
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
+- (int32_t)compareToOther:(E)other __attribute__((swift_name("compareTo(other:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
+@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DistanceUnit")))
+@interface SharedDistanceUnit : SharedKotlinEnum<SharedDistanceUnit *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly) SharedDistanceUnit *km __attribute__((swift_name("km")));
+@property (class, readonly) SharedDistanceUnit *miles __attribute__((swift_name("miles")));
+@end;
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("LocationUtil")))
 @interface SharedLocationUtil : SharedBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 inMiles:(BOOL)inMiles __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:inMiles:)")));
+- (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 distanceUnit:(int32_t)distanceUnit __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:distanceUnit:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Meal")))
 @interface SharedMeal : SharedBase
-- (instancetype)initWithId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong __attribute__((swift_name("init(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong distance:(SharedDouble * _Nullable)distance __attribute__((swift_name("init(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:distance:)"))) __attribute__((objc_designated_initializer));
 - (NSString *)component1 __attribute__((swift_name("component1()")));
+- (SharedDouble * _Nullable)component10 __attribute__((swift_name("component10()")));
 - (NSString *)component2 __attribute__((swift_name("component2()")));
 - (int32_t)component3 __attribute__((swift_name("component3()")));
 - (NSString *)component4 __attribute__((swift_name("component4()")));
@@ -254,11 +306,12 @@ __attribute__((swift_name("Meal")))
 - (BOOL)component7 __attribute__((swift_name("component7()")));
 - (float)component8 __attribute__((swift_name("component8()")));
 - (float)component9 __attribute__((swift_name("component9()")));
-- (SharedMeal *)doCopyId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong __attribute__((swift_name("doCopy(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:)")));
+- (SharedMeal *)doCopyId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong distance:(SharedDouble * _Nullable)distance __attribute__((swift_name("doCopy(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:distance:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) NSString *availableFromDate __attribute__((swift_name("availableFromDate")));
+@property SharedDouble * _Nullable distance __attribute__((swift_name("distance")));
 @property (readonly) NSString *expiryDate __attribute__((swift_name("expiryDate")));
 @property (readonly) BOOL hot __attribute__((swift_name("hot")));
 @property (readonly) NSString *id __attribute__((swift_name("id")));
@@ -341,12 +394,6 @@ __attribute__((swift_name("KotlinException")))
 - (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithMessage:(NSString * _Nullable)message cause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithCause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-@end;
-
-__attribute__((swift_name("KotlinComparable")))
-@protocol SharedKotlinComparable
-@required
-- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -581,17 +628,6 @@ __attribute__((swift_name("Kotlinx_serialization_coreCompositeDecoder")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("KotlinNothing")))
 @interface SharedKotlinNothing : SharedBase
-@end;
-
-__attribute__((swift_name("KotlinEnum")))
-@interface SharedKotlinEnum<E> : SharedBase <SharedKotlinComparable>
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
-- (int32_t)compareToOther:(E)other __attribute__((swift_name("compareTo(other:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *name __attribute__((swift_name("name")));
-@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

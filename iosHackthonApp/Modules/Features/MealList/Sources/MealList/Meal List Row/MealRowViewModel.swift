@@ -18,29 +18,29 @@ final class MealRowViewModel: ObservableObject {
     let spacing: CGFloat = 10.0
     let cornerRadius: CGFloat = 15.0
 
-    var mealWithDistance: MealWithDistance
+    var meal: Meal
 
     // MARK:- Init
-    init(mealWithDistance: MealWithDistance) {
-        self.mealWithDistance = mealWithDistance
+    init(meal: Meal) {
+        self.meal = meal
     }
 
     // MARK:- Computed properties
     var isButtonDisabled: Bool {
-        mealWithDistance.meal.quantity < 1
+        meal.quantity < 1
     }
 
     var isOneMealLeft: Bool {
-        mealWithDistance.meal.quantity == 1
+        meal.quantity == 1
     }
 
     var quantityText: String {
         let portionText = isOneMealLeft ? Strings.MealListScreen.portion: Strings.MealListScreen.portions
-        return "\(mealWithDistance.meal.quantity) \(portionText)"
+        return "\(meal.quantity) \(portionText)"
     }
 
     var mealImage: String {
-        mealWithDistance.meal.hot
+        meal.hot
             ? isButtonDisabled ? Strings.MealListScreen.Images.hotFoodGrey : Strings.MealListScreen.Images.hotFood
             : isButtonDisabled ? Strings.MealListScreen.Images.coldFoodGrey : Strings.MealListScreen.Images.coldFood
     }
@@ -51,7 +51,7 @@ final class MealRowViewModel: ObservableObject {
 
     var temperatureImageColor: Color {
         isButtonDisabled
-            ? .gray : mealWithDistance.meal.hot
+            ? .gray : meal.hot
             ? .red : .blue
     }
 
@@ -60,7 +60,7 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var temperatureImage: String {
-        mealWithDistance.meal.hot ? Strings.Common.Images.hotFood : Strings.Common.Images.coldFood
+        meal.hot ? Strings.Common.Images.hotFood : Strings.Common.Images.coldFood
     }
 
     var buttonTextColor: Color {
@@ -72,15 +72,15 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var locationText: String {
-        String(format: Strings.Common.twoDecimal, mealWithDistance.distance) + Strings.Common.km
+        String(format: Strings.Common.twoDecimal, Double(meal.distance ?? 0)) + Strings.Common.km #warning("change this")
     }
 
     var fromTimeText: String {
-        "\(Strings.MealListScreen.available) \(Date.readableDateString(from: mealWithDistance.meal.availableFromDate))"
+        "\(Strings.MealListScreen.available) \(Date.readableDateString(from: meal.availableFromDate))"
     }
 
     var expiresAtText: String {
-        "\(Strings.MealListScreen.expiresAt) \(Date.readableDateString(from: mealWithDistance.meal.expiryDate))"
+        "\(Strings.MealListScreen.expiresAt) \(Date.readableDateString(from: meal.expiryDate))"
     }
 
     var buttonText: String {

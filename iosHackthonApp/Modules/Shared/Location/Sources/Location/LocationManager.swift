@@ -31,15 +31,6 @@ public class LocationManager: NSObject, ObservableObject {
     }
 }
 
-extension LocationManager {
-
-    public func userDistanceFrom(_ lat: Float, _ long: Float) -> Double {
-        let mealLocation = CLLocation(latitude: Double(lat), longitude: Double(long))
-        let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
-        return mealLocation.distance(from: userLocation)/1000
-    }
-}
-
 extension LocationManager: CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

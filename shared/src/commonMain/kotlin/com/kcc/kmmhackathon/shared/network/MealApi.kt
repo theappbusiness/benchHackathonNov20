@@ -14,7 +14,7 @@ import io.ktor.http.*
 
 class MealApi {
 
-    val locationUtil = LocationUtil()
+    private val locationUtil = LocationUtil()
 
     private val httpClient = HttpClient {
         install(JsonFeature) {
@@ -40,7 +40,18 @@ class MealApi {
         })
     }
 
-    suspend fun postMeal(meal: Meal): Meal {
+    suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: Int): List<Meal> {
+        var meals: List<Meal> = getAllMeals()
+        for (meal in meals) {
+            meal.distance = locationUtil.getDistance(
+                userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), distanceUnit
+            )
+        }
+        // TODO: Filter meals that have expired here
+        return meals.sortedWith(compareBy { it.distance })
+    }
+
+        suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(endpoint) {
             contentType(ContentType.Application.Json)
             body = meal

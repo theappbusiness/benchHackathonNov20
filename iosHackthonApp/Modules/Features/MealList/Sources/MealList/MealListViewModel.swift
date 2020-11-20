@@ -17,7 +17,7 @@ public final class MealListViewModel: ObservableObject {
     let sdk: MealsSDK
     let locationManager: LocationManager
 
-    @Published var meals = [MealWithDistance]()
+    @Published var meals = [Meal]()
     @Published var code = ""
     @Published var showingAlert = false
     @Published var activeAlert: ActiveAlert = .unavailable
@@ -33,14 +33,16 @@ public final class MealListViewModel: ObservableObject {
     }
 
     func loadMeals(forceReload: Bool) {
-        sdk.getMeals(forceReload: forceReload, completionHandler: { meals, error in
+        sdk.getSortedMeals(userLat: locationManager.userLatitude,
+                           userLon: locationManager.userLongitude,
+                           distanceUnit: 0,
+                           forceReload: forceReload,
+                           completionHandler: { meals, error in
             guard
                 let meals = meals,
                 error == nil else { return }
             self.meals = meals
                 .filter { self.mealNotExpired($0.expiryDate) }
-                .map { MealWithDistance(meal: $0, distance: self.locationManager.userDistanceFrom($0.locationLat, $0.locationLong)) }
-                .sorted(by: { $0.distance < $1.distance })
 
             for meal in meals {
                 let mapAnnotation = MKPointAnnotation()
@@ -63,7 +65,10 @@ public final class MealListViewModel: ObservableObject {
     }
 
     private func mealNotExpired(_ expiry: String) -> Bool {
-        Date() < Date.dateFrom(dateString: expiry)
+        guard let expiry = Double(expiry) else {
+            return false
+        }
+        return Date().timeIntervalSince1970 < Double(expiry)
     }
 
     func patchMeal(meal: Meal) {
