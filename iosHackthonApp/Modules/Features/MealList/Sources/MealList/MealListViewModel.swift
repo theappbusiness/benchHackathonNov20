@@ -66,13 +66,6 @@ public final class MealListViewModel: ObservableObject {
         return "\(Strings.MealListScreen.Map.reserved)"
     }
 
-    private func mealNotExpired(_ expiry: String) -> Bool {
-        guard let expiry = Double(expiry) else {
-            return false
-        }
-        return Date().timeIntervalSince1970 < Double(expiry)
-    }
-
     func patchMeal(meal: Meal) {
         sdk.getMeal(id: meal.id) { updatedMeal, error in
 
