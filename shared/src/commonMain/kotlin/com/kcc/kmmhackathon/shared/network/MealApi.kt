@@ -51,7 +51,7 @@ class MealApi {
         return meals.sortedWith(compareBy { it.distance })
     }
 
-        suspend fun postMeal(meal: Meal): Meal {
+    suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(endpoint) {
             contentType(ContentType.Application.Json)
             body = meal
