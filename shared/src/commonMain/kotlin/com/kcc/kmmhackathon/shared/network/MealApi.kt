@@ -3,6 +3,7 @@ package com.kcc.kmmhackathon.shared.network
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.entity.Quantity
+import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kcc.kmmhackathon.shared.utility.LocationUtil
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
@@ -31,7 +32,7 @@ class MealApi {
         return httpClient.get(endpoint)
     }
 
-    suspend fun getAllMeals(userLat: Double, userLon: Double, distanceUnit: Int): List<MealWithDistance> {
+    suspend fun getAllMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<MealWithDistance> {
         var meals = getAllMeals()
         var mealsWithDistance = mutableListOf<MealWithDistance>()
         return meals.mapTo(mealsWithDistance, { meal ->
@@ -40,7 +41,7 @@ class MealApi {
         })
     }
 
-    suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: Int): List<Meal> {
+    suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {
         var meals: List<Meal> = getAllMeals()
         for (meal in meals) {
             meal.distance = locationUtil.getDistance(

@@ -72,7 +72,10 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var locationText: String {
-        String(format: Strings.Common.twoDecimal, meal.distance ?? 0) + Strings.Common.km
+        guard Double(meal.distance ?? - 1) >= 0 else {
+            return Strings.MealListScreen.Error.distanceError
+        }
+        return "\(distance) \(DistanceUnit.km)"
     }
 
     var fromTimeText: String {

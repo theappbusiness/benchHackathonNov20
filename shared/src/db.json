@@ -8,8 +8,8 @@
       "expiryDate": "1905802429",
       "info": "Vegetarian",
       "hot": false,
-      "locationLat": 51.508865,
-      "locationLong": -0.132492,
+      "locationLat": 57.508865,
+      "locationLong": -6.292,
       "distance": null
     },
     {
@@ -32,8 +32,8 @@
       "expiryDate": "1905802429",
       "info": "Vegan",
       "hot": false,
-      "locationLat": 51.509465,
-      "locationLong": -0.1343392,
+      "locationLat": 40.509465,
+      "locationLong": -0.2343392,
       "distance": null
     }
   ]

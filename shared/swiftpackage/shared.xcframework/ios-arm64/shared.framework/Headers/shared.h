@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedMealWithDistance, SharedUuidUuid, SharedKotlinEnum<E>, SharedDistanceUnit, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedMeal, SharedDistanceUnit, SharedMealWithDistance, SharedUuidUuid, SharedKotlinEnum<E>, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
 @protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -168,13 +168,13 @@ __attribute__((swift_name("MealsSDK")))
  @note This method converts instances of Exception to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
+- (void)getMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
 
 /**
  @note This method converts instances of Exception to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
+- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
 - (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
 
 /**
@@ -214,7 +214,7 @@ __attribute__((swift_name("MealApi")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getAllMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(userLat:userLon:distanceUnit:completionHandler:)")));
+- (void)getAllMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
@@ -226,7 +226,7 @@ __attribute__((swift_name("MealApi")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(int32_t)distanceUnit completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:completionHandler:)")));
+- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
@@ -289,7 +289,7 @@ __attribute__((swift_name("LocationUtil")))
 @interface SharedLocationUtil : SharedBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 distanceUnit:(int32_t)distanceUnit __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:distanceUnit:)")));
+- (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 distanceUnit:(SharedDistanceUnit *)distanceUnit __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:distanceUnit:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

@@ -10,8 +10,6 @@ public extension Strings.Common {
 
     static let ok = "Ok"
     static let sorry = "Sorry!"
-    static let km = "km"
-    static let twoDecimal = "%.2f"
     static let unknown = "Unknown"
 }
 public extension Strings.Common.ErrorAlert {

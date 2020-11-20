@@ -35,7 +35,7 @@ public final class MealListViewModel: ObservableObject {
     func loadMeals(forceReload: Bool) {
         sdk.getSortedMeals(userLat: locationManager.userLatitude,
                            userLon: locationManager.userLongitude,
-                           distanceUnit: 0,
+                           distanceUnit: DistanceUnit.km,
                            forceReload: forceReload,
                            completionHandler: { meals, error in
             guard
