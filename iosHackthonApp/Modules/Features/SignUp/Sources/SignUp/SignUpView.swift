@@ -11,9 +11,13 @@ import Strings
 import Theming
 import Components
 
-struct SignUpView: View {
+public struct SignUpView: View {
 
-	var body: some View {
+	public init() {
+
+	}
+
+public var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.welcomeScreenTitle, description: Strings.SignUp.welcomeScreenInfo)
 

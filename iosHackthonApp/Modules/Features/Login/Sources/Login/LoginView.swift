@@ -11,14 +11,15 @@ import Strings
 import Theming
 import Components
 import LandingScreen
+import SignUp
 
-struct LoginView: View {
+public struct LoginView: View {
 	@State var email: String = ""
 	@State var password: String = ""
 	@State var loginSucessful: Bool = true
 	let coloredNavAppearance = UINavigationBarAppearance()
 
-	init() {
+	public init() {
 		coloredNavAppearance.configureWithOpaqueBackground()
 		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
 		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -27,7 +28,7 @@ struct LoginView: View {
 		UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
 	}
 
-	var body: some View {
+public var body: some View {
 		NavigationView {
 			ScrollView {
 				VStack {
