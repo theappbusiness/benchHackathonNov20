@@ -66,7 +66,7 @@ public struct MealListView: View {
                 ZStack {
                     MapView(annotations: viewModel.locations, selectedPlace: $viewModel.selectedPlace)
                         .edgesIgnoringSafeArea(.all)
-                    }
+                }
             }
         }
         .onAppear(perform: {
