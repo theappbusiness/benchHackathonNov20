@@ -10,12 +10,16 @@ public extension Strings.MealListScreen {
     enum CollectionAlert {}
     enum Button {}
     enum Images {}
+    enum Error {}
 
     static let title = "Meals in your area"
     static let portion = "portion remaining"
     static let portions = "portions remaining"
     static let available = "Available: "
     static let expiresAt = " Expires: "
+}
+public extension Strings.MealListScreen.Error {
+    static let distanceError = "Failed to get distance"
 }
 public extension Strings.MealListScreen.SegmentControl {
     static let map = "Map"

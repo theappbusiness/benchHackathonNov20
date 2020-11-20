@@ -28,7 +28,6 @@ class MealsAdapter(var mealsList: List<Meal>) :
         holder.bindData(mealsList[position])
     }
 
-
     inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameView = itemView.findViewById<TextView>(R.id.mealName)
         private val tempView = itemView.findViewById<TextView>(R.id.mealTemp)
@@ -55,8 +54,9 @@ class MealsAdapter(var mealsList: List<Meal>) :
             // TODO calculate distance (this could be done in the shared layer)
             distanceView.text = "8637.35km"
 
-            availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
-            expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
+            // TODO format these dates
+            availableView.text = "Available: ${meal.availableFromDate}"
+            expiryView.text = "Expires: ${meal.expiryDate}"
 
             portionsView.text = getQuantityText(meal.quantity)
 
@@ -82,6 +82,7 @@ class MealsAdapter(var mealsList: List<Meal>) :
         }
     }
 
+    // TODO: Change this to parse from Unix timestamp - could be done in shared code?
     fun parseDate(dateString: String): String {
         if (dateString.length > 8) {
             // TODO handle dates in kotlin

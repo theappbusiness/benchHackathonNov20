@@ -28,7 +28,7 @@ struct MealRow: View {
                         .padding()
                     VStack(alignment: .leading, spacing: rowViewModel.spacing) {
                         HStack {
-                            Text(rowViewModel.mealWithDistance.meal.name)
+                            Text(rowViewModel.meal.name)
                                 .font(.title)
                                 .foregroundColor(rowViewModel.textColor)
                             Spacer()
@@ -38,7 +38,7 @@ struct MealRow: View {
                         }
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.info)
-                            Text(rowViewModel.mealWithDistance.meal.info)
+                            Text(rowViewModel.meal.info)
                         }
                         HStack {
                             Image(systemName: Strings.MealListScreen.Images.location)
@@ -65,7 +65,7 @@ struct MealRow: View {
                 VStack {
                     HStack {
                         Button(action: {
-                            listViewModel.patchMeal(meal: rowViewModel.mealWithDistance.meal)
+                            listViewModel.patchMeal(meal: rowViewModel.meal)
                         }) {
                             HStack {
                                 Spacer()
@@ -94,6 +94,6 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(mealWithDistance: MealWithDistance(meal: Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12), distance: 12)))
+        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(meal: Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12, distance: 12)))
     }
 }

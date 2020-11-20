@@ -19,8 +19,8 @@ class LocationUtilTest {
         val latitude2 = 51.50809
         val longitude2 = -0.1302322
 
-        val distanceInMiles = locationUtil.getDistance(latitude1, longitude1, latitude2, longitude2, DistanceUnit.miles.ordinal)
-        val distanceInKM = locationUtil.getDistance(latitude1, longitude1, latitude2, longitude2, DistanceUnit.km.ordinal)
+        val distanceInMiles = locationUtil.getDistance(latitude1, longitude1, latitude2, longitude2, DistanceUnit.miles)
+        val distanceInKM = locationUtil.getDistance(latitude1, longitude1, latitude2, longitude2, DistanceUnit.km)
 
         assertEquals(1.7, distanceInMiles)
         assertEquals(2.74, distanceInKM)
