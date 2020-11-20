@@ -11,14 +11,16 @@ import Strings
 import Theming
 import Components
 
-struct SignUpView: View {
-
-	var body: some View {
+public struct SignUpView: View {
+	
+	public init() {}
+	
+	public var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.welcomeScreenTitle, description: Strings.SignUp.welcomeScreenInfo)
-
+			
 			Spacer().frame(maxHeight: .infinity)
-
+			
 			GeometryReader { geometry in
 				VStack(alignment: .trailing) {
 					Spacer()
@@ -36,7 +38,7 @@ struct SignUpView: View {
 }
 
 struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
+	static var previews: some View {
+		SignUpView()
+	}
 }
