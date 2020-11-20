@@ -28,7 +28,7 @@ public struct LoginView: View {
 		UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
 	}
 
-public var body: some View {
+	public var body: some View {
 		NavigationView {
 			ScrollView {
 				VStack {
@@ -76,7 +76,7 @@ public var body: some View {
 					}
 				}
 			}
-            .navigationBarTitle(Text(Strings.LandingScreen.heading))
+			.navigationBarTitle(Text(Strings.LandingScreen.heading))
 		}
 		.accentColor(.white)
 	}
