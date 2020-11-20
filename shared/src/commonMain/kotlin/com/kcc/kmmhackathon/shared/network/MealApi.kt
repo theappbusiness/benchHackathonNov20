@@ -5,6 +5,7 @@ import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.entity.Quantity
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kcc.kmmhackathon.shared.utility.LocationUtil
+import com.kcc.kmmhackathon.shared.utility.DateKMM
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
 import io.ktor.client.request.*
@@ -45,11 +46,16 @@ class MealApi {
         var meals: List<Meal> = getAllMeals()
         for (meal in meals) {
             meal.distance = locationUtil.getDistance(
-                userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), distanceUnit
+                userLat,
+                userLon,
+                meal.locationLat.toDouble(),
+                meal.locationLong.toDouble(),
+                distanceUnit
             )
         }
-        // TODO: Filter meals that have expired here
-        return meals.sortedWith(compareBy { it.distance })
+        return meals
+            .filterNot { DateKMM( it.expiryDate.toLong()).compareTo(DateKMM()) < 0 }
+            .sortedWith(compareBy { it.distance })
     }
 
     suspend fun postMeal(meal: Meal): Meal {

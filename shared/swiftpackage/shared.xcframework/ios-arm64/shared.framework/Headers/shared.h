@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedDistanceUnit, SharedMealWithDistance, SharedUuidUuid, SharedKotlinEnum<E>, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedMeal, SharedDistanceUnit, SharedMealWithDistance, SharedUuidUuid, NSDate, SharedDateKMM, SharedKotlinEnum<E>, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
 @protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -255,6 +255,18 @@ __attribute__((swift_name("MealEndpoint")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DateKMM")))
+@interface SharedDateKMM : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithTime:(int64_t)time __attribute__((swift_name("init(time:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithPlatformDate:(NSDate *)platformDate __attribute__((swift_name("init(platformDate:)"))) __attribute__((objc_designated_initializer));
+- (int32_t)compareToOther:(SharedDateKMM *)other __attribute__((swift_name("compareTo(other:)")));
+- (int64_t)getTime __attribute__((swift_name("getTime()")));
+- (NSDate *)toPlatformDate __attribute__((swift_name("toPlatformDate()")));
 @end;
 
 __attribute__((swift_name("KotlinComparable")))

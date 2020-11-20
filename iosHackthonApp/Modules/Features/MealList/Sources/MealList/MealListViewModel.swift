@@ -40,9 +40,11 @@ public final class MealListViewModel: ObservableObject {
                            completionHandler: { meals, error in
             guard
                 let meals = meals,
-                error == nil else { return }
+                error == nil else {
+                assertionFailure(String(describing: error?.localizedDescription))
+                return
+            }
             self.meals = meals
-                .filter { self.mealNotExpired($0.expiryDate) } // TODO filter in the shared code
 
             for meal in meals {
                 let mapAnnotation = MKPointAnnotation()
