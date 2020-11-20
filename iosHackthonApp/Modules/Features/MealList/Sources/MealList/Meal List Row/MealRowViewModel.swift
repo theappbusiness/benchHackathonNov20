@@ -72,7 +72,7 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var locationText: String {
-        String(format: Strings.Common.twoDecimal, Double(meal.distance ?? 0)) + Strings.Common.km #warning("change this")
+        String(format: Strings.Common.twoDecimal, meal.distance ?? 0) + Strings.Common.km
     }
 
     var fromTimeText: String {

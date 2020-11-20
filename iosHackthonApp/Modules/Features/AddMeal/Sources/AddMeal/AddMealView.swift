@@ -208,7 +208,7 @@ private extension AddMealView {
              hot: isHot,
              locationLat: latitude,
              locationLong:  longitude,
-             distance: 0)
+             distance: nil)
     }
 
     func postMeal(meal: Meal) {

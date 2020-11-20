@@ -42,7 +42,7 @@ public final class MealListViewModel: ObservableObject {
                 let meals = meals,
                 error == nil else { return }
             self.meals = meals
-                .filter { self.mealNotExpired($0.expiryDate) }
+                .filter { self.mealNotExpired($0.expiryDate) } // TODO filter in the shared code
 
             for meal in meals {
                 let mapAnnotation = MKPointAnnotation()
