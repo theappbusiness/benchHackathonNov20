@@ -1,7 +1,6 @@
 package com.kcc.kmmhackathon.shared.network
 
 import com.kcc.kmmhackathon.shared.entity.Meal
-import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.entity.Quantity
 import com.kcc.kmmhackathon.shared.utility.*
 import com.kcc.kmmhackathon.shared.utility.extensions.isBefore
@@ -29,15 +28,6 @@ class MealApi {
 
     suspend fun getAllMeals(): List<Meal> {
         return httpClient.get(endpoint)
-    }
-
-    suspend fun getAllMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<MealWithDistance> {
-        var meals = getAllMeals()
-        var mealsWithDistance = mutableListOf<MealWithDistance>()
-        return meals.mapTo(mealsWithDistance, { meal ->
-            val distance = locationUtil.getDistance(userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), distanceUnit)
-            MealWithDistance(meal, distance)
-        })
     }
 
     suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {

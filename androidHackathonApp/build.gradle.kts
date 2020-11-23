@@ -16,6 +16,8 @@ repositories {
 
 val recyclerVersion = "1.1.0"
 val nav_version = "2.3.1"
+val lifecycleVersion = "2.2.0"
+val googlePlayServicesVersion = "17.0.0"
 
 dependencies {
 
@@ -36,12 +38,13 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("com.google.android.gms:play-services-maps:17.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("com.google.android.gms:play-services-maps:$googlePlayServicesVersion")
+    implementation("com.google.android.gms:play-services-location:$googlePlayServicesVersion")
 }
 
 android {
