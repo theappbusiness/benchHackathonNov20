@@ -6,8 +6,8 @@ import kotlin.test.assertTrue
 
 class DateKMMTest {
 
-    val dateNow = DateKMM()
-    val pastDate = DateKMM(0)
+    val dateNow = SharedDate()
+    val pastDate = SharedDate(0)
     val pastDateInSeconds = pastDate.getTime()
     val dateNowInSeconds = dateNow.getTime()
 
@@ -16,8 +16,8 @@ class DateKMMTest {
         val day1: Long = 0
         val millenium: Long = 946684800
         assertEquals(pastDateInSeconds, day1)
-        assertEquals(DateKMM(946684800).getTime(), millenium)
-        assertTrue(DateKMM().toString().isNotEmpty())
+        assertEquals(SharedDate(946684800).getTime(), millenium)
+        assertTrue(SharedDate().toString().isNotEmpty())
     }
 
     @Test

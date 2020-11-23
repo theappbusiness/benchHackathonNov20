@@ -1,6 +1,6 @@
 package com.kcc.kmmhackathon.shared.utility
 
-expect class DateKMM {
+expect class SharedDate {
     constructor()
 
     constructor(time: Long)
@@ -12,7 +12,7 @@ expect class DateKMM {
      * @return 0 if the other is equal to this instance; a value less than 0 if this instance is before the other;
      *          and a value greater than 0 if this instance is after the other.
      */
-    fun compareTo(other: DateKMM): Int
+    fun compareTo(other: SharedDate): Int
 
     fun getTime(): Long
 }

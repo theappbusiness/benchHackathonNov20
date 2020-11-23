@@ -14,7 +14,9 @@ public struct MealListView: View {
     public var body: some View {
         
         VStack {
-            if viewModel.meals.count > 0 {
+            if viewModel.meals.isEmpty {
+                Text("No meals found") // TODO: Do something nicer than this
+            } else {
                 Picker(selection: $viewModel.showMap, label: Text("")) {
                     Text(Strings.MealListScreen.SegmentControl.list).tag(0)
                     Text(Strings.MealListScreen.SegmentControl.map).tag(1)
@@ -59,8 +61,6 @@ public struct MealListView: View {
                                 dismissButton: .default(Text(Strings.Common.ok)))
                         }
                     }
-                } else {
-                    Text("No meals found") // TODO: Do something nicer than this
                 }
             } else {
                 ZStack {

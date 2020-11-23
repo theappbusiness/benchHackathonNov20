@@ -2,7 +2,7 @@ package com.kcc.kmmhackathon.shared.utility
 
 import platform.Foundation.*
 
-actual class DateKMM {
+actual class SharedDate {
 
     private var date: NSDate
 
@@ -18,7 +18,7 @@ actual class DateKMM {
         date = platformDate
     }
 
-    actual fun compareTo(other: DateKMM): Int {
+    actual fun compareTo(other: SharedDate): Int {
         return when (this.date.compare(other.date)) {
             NSOrderedAscending -> -1
             NSOrderedDescending -> 1

@@ -5,9 +5,8 @@ import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.entity.Quantity
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kcc.kmmhackathon.shared.utility.LocationUtil
-import com.kcc.kmmhackathon.shared.utility.DateKMM
+import com.kcc.kmmhackathon.shared.utility.SharedDate
 import io.ktor.client.HttpClient
-import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -54,7 +53,7 @@ class MealApi {
             )
         }
         return meals
-            .filterNot { DateKMM( it.expiryDate.toLong()).compareTo(DateKMM()) < 0 }
+            .filterNot { SharedDate( it.expiryDate.toLong()).compareTo(SharedDate()) < 0 }
             .sortedWith(compareBy { it.distance })
     }
 
