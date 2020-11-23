@@ -14,11 +14,15 @@ public struct MealListView: View {
     public var body: some View {
         
         VStack {
-            Picker(selection: $viewModel.showMap, label: Text("")) {
-                Text(Strings.MealListScreen.SegmentControl.list).tag(0)
-                Text(Strings.MealListScreen.SegmentControl.map).tag(1)
-            }.pickerStyle(SegmentedPickerStyle())
-            .padding()
+            if viewModel.meals.isEmpty {
+                Text("No meals found") // TODO: Do something nicer than this
+            } else {
+                Picker(selection: $viewModel.showMap, label: Text("")) {
+                    Text(Strings.MealListScreen.SegmentControl.list).tag(0)
+                    Text(Strings.MealListScreen.SegmentControl.map).tag(1)
+                }.pickerStyle(SegmentedPickerStyle())
+                .padding()
+            }
             
             if viewModel.showMap == 0 {
                 ScrollView {
@@ -56,9 +60,6 @@ public struct MealListView: View {
                             dismissButton: .default(Text(Strings.Common.ok)))
                     }
                 }
-                .onAppear(perform: {
-                    viewModel.loadMeals(forceReload: true)
-                })
             } else {
                 ZStack {
                     MapView(annotations: viewModel.locations, selectedPlace: $viewModel.selectedPlace)
@@ -66,6 +67,9 @@ public struct MealListView: View {
                 }
             }
         }
+        .onAppear(perform: {
+            viewModel.loadMeals(forceReload: true)
+        })
     }
 }
 

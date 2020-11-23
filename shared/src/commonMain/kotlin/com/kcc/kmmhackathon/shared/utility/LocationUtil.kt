@@ -1,5 +1,7 @@
 package com.kcc.kmmhackathon.shared.utility
 
+import com.kcc.kmmhackathon.shared.utility.extensions.round
+import com.kcc.kmmhackathon.shared.utility.extensions.toKilometres
 import kotlin.math.*
 
 typealias Radian = Double

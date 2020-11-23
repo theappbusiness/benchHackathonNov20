@@ -33,13 +33,6 @@ data class Quantity(
     val quantity: Int
 )
 
-data class MealWithDistance(
-    @SerialName("meal")
-    val meal: Meal,
-    @SerialName("distance")
-    val distance: Double
-)
-
 @Serializable
 data class FirebaseAuthenticationResponse(
     val kind: String,

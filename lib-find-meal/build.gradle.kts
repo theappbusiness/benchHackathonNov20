@@ -15,6 +15,7 @@ repositories {
 }
 
 val recyclerVersion = "1.1.0"
+val googlePlayServicesVersion = "17.0.0"
 
 dependencies {
     implementation(project(":lib-theming"))
@@ -32,6 +33,8 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("com.google.android.gms:play-services-maps:$googlePlayServicesVersion")
+    implementation("com.google.android.gms:play-services-location:$googlePlayServicesVersion")
 }
 
 android {

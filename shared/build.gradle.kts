@@ -40,7 +40,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("com.benasher44:uuid:$uuidVersion")
             }
-
         }
         val commonTest by getting {
             dependencies {
