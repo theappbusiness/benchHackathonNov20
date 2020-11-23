@@ -1,11 +1,11 @@
-package com.kcc.kmmhackathon.shared.utility
+package com.kcc.kmmhackathon.shared.utility.extensions
 
-import com.kcc.kmmhackathon.shared.utility.round
-import com.kcc.kmmhackathon.shared.utility.toKilometres
+import com.kcc.kmmhackathon.shared.utility.extensions.round
+import com.kcc.kmmhackathon.shared.utility.extensions.toKilometres
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ExtensionsTest {
+class DoubleExtensionsTest {
 
     @Test
     fun testDouble_Round() {

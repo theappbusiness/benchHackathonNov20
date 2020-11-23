@@ -2,9 +2,10 @@ package com.kcc.kmmhackathon.shared.utility
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class DateKMMTest {
+class SharedDateTest {
 
     val dateNow = SharedDate()
     val pastDate = SharedDate(0)
@@ -12,7 +13,7 @@ class DateKMMTest {
     val dateNowInSeconds = dateNow.getTime()
 
     @Test
-    fun testDateKMM_createsDateUnixTimeSuccessfully() {
+    fun testSharedDate_createsDateUnixTimeSuccessfully() {
         val day1: Long = 0
         val millenium: Long = 946684800
         assertEquals(pastDateInSeconds, day1)
@@ -21,19 +22,19 @@ class DateKMMTest {
     }
 
     @Test
-    fun testDateKMM_dateComparedIsAfter_returnsNegativeNumber() {
+    fun testSharedDate_whenDateComparedIsAfter_returnsNegativeNumber() {
         assertTrue(pastDate.compareTo(dateNow) < 0)
         assertTrue(pastDateInSeconds.compareTo(dateNowInSeconds) < 0)
     }
 
     @Test
-    fun testDateKMM_comparedDateIsBefore_returnsPostiveNumber() {
+    fun testSharedDate_whenComparedDateIsBefore_returnsPostiveNumber() {
         assertTrue(dateNow.compareTo(pastDate) > 0)
         assertTrue(dateNowInSeconds.compareTo(pastDateInSeconds) > 0)
     }
 
     @Test
-    fun testDateKMM_comparedDateIsEqual_returnsZero() {
+    fun testSharedDate_whenComparedDateIsEqual_returnsZero() {
         assertEquals(pastDate.compareTo(pastDate), 0)
         assertEquals(pastDateInSeconds.compareTo(pastDateInSeconds), 0)
     }
