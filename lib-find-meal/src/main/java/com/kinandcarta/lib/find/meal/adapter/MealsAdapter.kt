@@ -59,8 +59,8 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
 
             distanceView.text = "${meal.distance} ${distanceUnit}"
 
-            availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
-            expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
+            availableView.text = "Available: ${getDateText(meal.availableFromDate)}"
+            expiryView.text = "Expires: ${getDateText(meal.expiryDate)}"
 
             portionsView.text = getQuantityText(meal.quantity)
 
@@ -86,7 +86,7 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
         }
     }
 
-    fun parseDate(timeInMillis: String): String {
+    fun getDateText(timeInMillis: String): String {
         return timeInMillisToReadableString(timeInMillis.toLong())
     }
 
