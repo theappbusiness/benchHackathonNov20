@@ -42,12 +42,12 @@ data class MealWithDistance(
 
 @Serializable
 data class FirebaseAuthenticationResponse(
-    val kind: String? = null,
-    val idToken: String? = null,
-    val email: String? = null,
-    val refreshToken: String? = null,
-    val expiresIn: String? = null,
-    val localId: String? = null,
+    val kind: String,
+    val idToken: String,
+    val email: String,
+    val refreshToken: String,
+    val expiresIn: String,
+    val localId: String,
     val code: Int? = null,
     val message: String? = null
 )
