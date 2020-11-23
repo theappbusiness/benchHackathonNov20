@@ -41,7 +41,7 @@ public final class MealListViewModel: ObservableObject {
             guard
                 let meals = meals,
                 error == nil else {
-                assertionFailure(String(describing: error?.localizedDescription))
+                assertionFailure(error!.localizedDescription)
                 return
             }
             self.meals = meals
