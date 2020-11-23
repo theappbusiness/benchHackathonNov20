@@ -52,7 +52,7 @@ class MealApi {
             )
         }
         return meals
-            .filter { SharedDate().isBefore(SharedDate((it.expiryDate.toLong()))) }
+            .filter { SharedDate().isBefore(SharedDate(it.expiryDate.toLong())) }
             .sortedWith(compareBy { it.distance })
     }
 
