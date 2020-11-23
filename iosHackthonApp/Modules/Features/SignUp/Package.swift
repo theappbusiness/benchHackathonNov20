@@ -18,7 +18,6 @@ let package = Package(
 		.package(path: "../Shared/Theming"),
 		.package(path: "../Shared/Strings"),
 		.package(path: "../Shared/Components"),
-		.package(path: "../Features/LandingScreen"),
 		.package(name: "shared", path: "../../../../shared/swiftpackage")
 	],
 	targets: [
@@ -26,7 +25,7 @@ let package = Package(
 		// Targets can depend on other targets in this package, and on products in packages this package depends on.
 		.target(
 			name: "SignUp",
-			dependencies: ["shared", "Theming", "Strings", "Components", "LandingScreen"]),
+			dependencies: ["shared", "Theming", "Strings", "Components"]),
 		.testTarget(
 			name: "SignUpTests",
 			dependencies: ["SignUp"]),

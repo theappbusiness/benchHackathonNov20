@@ -17,14 +17,13 @@ let package = Package(
 		.package(path: "../Shared/Theming"),
 		.package(path: "../Shared/Strings"),
 		.package(path: "../Shared/Components"),
-		.package(path: "../Features/LandingScreen"),
 		.package(path: "../Features/SignUp"),
 		.package(name: "shared", path: "../../../../shared/swiftpackage")
 	],
 	targets: [
 		.target(
 			name: "Login",
-			dependencies: ["shared", "Theming", "Strings", "Components", "LandingScreen", "SignUp"]),
+			dependencies: ["shared", "Theming", "Strings", "Components", "SignUp"]),
 		.testTarget(
 			name: "LoginTests",
 			dependencies: ["Login"]),

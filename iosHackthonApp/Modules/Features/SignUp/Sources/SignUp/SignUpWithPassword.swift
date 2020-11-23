@@ -9,7 +9,7 @@
 import SwiftUI
 import Strings
 import Components
-import LandingScreen
+import TabBar
 
 struct SignUpWithPassword: View {
 	@State private var password: String = ""
@@ -25,7 +25,7 @@ struct SignUpWithPassword: View {
 									textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
 									buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
 									width: geometry.size.width,
-									destinationView: LandingView(),
+									destinationView: TabAppView(selectedView: 0),
 									entryField: $password)
 			}
 		}.padding()
