@@ -38,20 +38,12 @@ class FirebaseAuthenticationStore : AuthenticationStore {
         email: String,
         password: String,
         returnSecureToken: Boolean
-    ): FirebaseAuthenticationResponse {
-        return try {
-            httpClient.post {
-                url("$BASE_URL$endpoint")
-                parameter("key", apiKey)
-                parameter("email", email)
-                parameter("password", password)
-                parameter("returnSecureToken", returnSecureToken)
-            }
-        } catch (cause: Throwable) {
-            FirebaseAuthenticationResponse(
-                message = cause.message ?: ""
-            )
-        }
+    ): FirebaseAuthenticationResponse = httpClient.post {
+        url("$BASE_URL$endpoint")
+        parameter("key", apiKey)
+        parameter("email", email)
+        parameter("password", password)
+        parameter("returnSecureToken", returnSecureToken)
     }
 
     companion object {
