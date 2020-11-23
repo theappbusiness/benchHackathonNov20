@@ -18,6 +18,7 @@ public struct GreyTextFieldStyle: ViewModifier {
         content
             .padding(.all)
             .background(ColorManager.textfieldGrey)
+			.accentColor(ColorManager.appPrimary)
     }
 }
 
