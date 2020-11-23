@@ -9,8 +9,7 @@ import java.util.*
 actual typealias SharedDate = Date
 
 fun timeInMillisToReadableString(timeInMillis: Long): String {
-    val formatter = DateTimeFormatter.ofPattern("dd MMM YYYY HH:mm")
+    val formatter = DateTimeFormatter.ofPattern("EEE dd MMM YYYY HH:mm")
     val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(timeInMillis), ZoneId.systemDefault())
-    val dayOfWeek = "${date.dayOfWeek}".slice(0..2).toLowerCase().capitalize()
-    return "$dayOfWeek ${date.format(formatter)}"
+    return "${date.format(formatter)}"
 }
