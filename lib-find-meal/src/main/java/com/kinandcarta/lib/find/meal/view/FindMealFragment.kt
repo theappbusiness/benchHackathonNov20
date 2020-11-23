@@ -15,7 +15,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.R
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
@@ -23,9 +22,15 @@ import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
+import kotlinx.coroutines.cancel
 
 class FindMealFragment : Fragment() {
 
@@ -34,17 +39,28 @@ class FindMealFragment : Fragment() {
     private lateinit var mealsRecyclerView: RecyclerView
     private lateinit var progressBarView: FrameLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private var lastLocation: Location? = null
 
     private val sdk = MealsSDK()
     private var distanceUnit: DistanceUnit = DistanceUnit.miles
     private val mealsAdapter = MealsAdapter(listOf(), distanceUnit)
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val permissionResultParser: PermissionResultParser by lazy { PermissionResultParser() }
+    private val permissionResultParser: PermissionResultParser by lazy {
+        PermissionResultParser()
+    }
+    private var lastLocation: Location? = null
+    private var hasSetupLocationUpdates = false
+    private var locationUpdateState = false
+
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            lastLocation = locationResult?.lastLocation ?: return
+        }
+    }
 
     companion object {
         val LOCATION_PERMISSION_REQUEST_CODE = 1
+        val REQUEST_CHECK_SETTINGS = 2
         fun newInstance() = FindMealFragment()
     }
 
@@ -106,12 +122,71 @@ class FindMealFragment : Fragment() {
     }
 
     fun getLastLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            if (location != null) {
-                lastLocation = location
-                updateMeals(false)
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location ->
+            lastLocation = location
+            updateMeals(false)
+        }
+    }
+
+    private fun startLocationUpdates() {
+        val locationRequest = LocationRequest()
+
+        locationRequest.interval = 100000
+        locationRequest.fastestInterval = 5000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        if (!hasSetupLocationUpdates) {
+            setupLocationUpdates(locationRequest)
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    private fun setupLocationUpdates(locationRequest: LocationRequest) {
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(this.requireActivity())
+        val task = client.checkLocationSettings(builder.build())
+
+        task.addOnSuccessListener {
+            locationUpdateState = true
+        }
+        task.addOnFailureListener { e ->
+           if (e is ResolvableApiException) {
+               try {
+                   e.startResolutionForResult(this.requireActivity(), REQUEST_CHECK_SETTINGS)
+               } catch (sendEx: IntentSender.SendIntentException) {
+                   //
+               }
+           }
+
+        }
+        hasSetupLocationUpdates = true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            if (resultCode == Activity.RESULT_OK) {
+                locationUpdateState = true
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!locationUpdateState) {
+            startLocationUpdates()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainScope.cancel() // TODO: We'd get this for free in a viewModel?
     }
 
     private fun updateMeals(needReload: Boolean) {
