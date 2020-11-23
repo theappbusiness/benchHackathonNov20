@@ -12,9 +12,9 @@ data class Meal(
     @SerialName("quantity")
     val quantity: Int,
     @SerialName("availableFromDate")
-    val availableFromDate: String,
+    var availableFromDate: String,
     @SerialName("expiryDate")
-    val expiryDate: String,
+    var expiryDate: String,
     @SerialName("info")
     val info: String,
     @SerialName("hot")

@@ -245,6 +245,19 @@ __attribute__((swift_name("MealEndpoint")))
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
 @end;
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DateFormattingUtil")))
+@interface SharedDateFormattingUtil : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (NSString *)convertTimeStampTimeStamp:(int64_t)timeStamp __attribute__((swift_name("convertTimeStamp(timeStamp:)")));
+@end;
+
+__attribute__((unavailable("Kotlin subclass of Objective-C class can't be imported")))
+__attribute__((swift_name("DateFormattingUtil.Formatter")))
+@interface SharedDateFormattingUtilFormatter : NSObject
+@end;
+
 __attribute__((swift_name("KotlinComparable")))
 @protocol SharedKotlinComparable
 @required
@@ -310,9 +323,9 @@ __attribute__((swift_name("Meal")))
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *availableFromDate __attribute__((swift_name("availableFromDate")));
+@property NSString *availableFromDate __attribute__((swift_name("availableFromDate")));
 @property SharedDouble * _Nullable distance __attribute__((swift_name("distance")));
-@property (readonly) NSString *expiryDate __attribute__((swift_name("expiryDate")));
+@property NSString *expiryDate __attribute__((swift_name("expiryDate")));
 @property (readonly) BOOL hot __attribute__((swift_name("hot")));
 @property (readonly) NSString *id __attribute__((swift_name("id")));
 @property (readonly) NSString *info __attribute__((swift_name("info")));
