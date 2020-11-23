@@ -11,7 +11,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
+import com.kcc.kmmhackathon.shared.utility.timeInMillisToReadableString
 import com.kinandcarta.lib.find.meal.R
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
@@ -54,8 +59,8 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
 
             distanceView.text = "${meal.distance} ${distanceUnit}"
 
-            availableView.text = "Available: ${meal.availableFromDate}"
-            expiryView.text = "Expires: ${meal.expiryDate}"
+            availableView.text = "Available: ${parseDate(meal.availableFromDate)}"
+            expiryView.text = "Expires: ${parseDate(meal.expiryDate)}"
 
             portionsView.text = getQuantityText(meal.quantity)
 
@@ -81,15 +86,8 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
         }
     }
 
-    // TODO: Change this to parse from Unix timestamp - could be done in shared code?
-    fun parseDate(dateString: String): String {
-        if (dateString.length > 8) {
-            // TODO handle dates in kotlin
-            val shortDate = dateString.slice(0..9)
-            val dateArr = shortDate.split("-")
-            return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
-        }
-        return dateString
+    fun parseDate(timeInMillis: String): String {
+        return timeInMillisToReadableString(timeInMillis.toLong())
     }
 
     fun getQuantityText(quantity: Int): String = when (quantity) {
