@@ -33,9 +33,8 @@ class MealApi {
 
     suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {
         var meals: List<Meal> = getAllMeals()
-            .filter { SharedDate().isBefore(SharedDate(it.expiryDate.toLong())) }
-
-        meals.forEach {
+        meals.filter { SharedDate().isBefore(SharedDate(it.expiryDate.toLong())) }
+            .forEach {
             it.distance = locationUtil.getDistance(
                 userLat,
                 userLon,
