@@ -32,15 +32,6 @@ class MealApi {
         return httpClient.get(endpoint)
     }
 
-    suspend fun getAllMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<MealWithDistance> {
-        var meals = getAllMeals()
-        var mealsWithDistance = mutableListOf<MealWithDistance>()
-        return meals.mapTo(mealsWithDistance, { meal ->
-            val distance = locationUtil.getDistance(userLat, userLon, meal.locationLat.toDouble(), meal.locationLong.toDouble(), distanceUnit)
-            MealWithDistance(meal, distance)
-        })
-    }
-
     suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {
         var meals: List<Meal> = getAllMeals()
         for (meal in meals) {
