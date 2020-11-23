@@ -3,7 +3,6 @@ package com.kcc.kmmhackathon.shared
 import com.benasher44.uuid.Uuid
 import com.benasher44.uuid.uuid4
 import com.kcc.kmmhackathon.shared.entity.Meal
-import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.network.MealApi
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 
