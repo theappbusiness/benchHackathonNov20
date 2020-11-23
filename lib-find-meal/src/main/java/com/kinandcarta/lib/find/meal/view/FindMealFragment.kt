@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.R
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
@@ -24,10 +23,7 @@ import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.util.Log
-import androidx.core.app.ActivityCompat
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
 
@@ -54,29 +50,43 @@ class FindMealFragment : Fragment() {
 
     private lateinit var viewModel: FindMealViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        confirmPermissions(context)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.find_meal_fragment, container, false)
+    }
 
-        val view: View = inflater.inflate(R.layout.find_meal_fragment, container, false)
-
-        fusedLocationClient = FusedLocationProviderClient(this.requireActivity())
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         progressBarView = view.findViewById(R.id.progressBar)
         mealsRecyclerView = view.findViewById(R.id.rvMeals)
+        swipeRefreshLayout = view.findViewById(R.id.swipeContainer)
+
+        viewModel = ViewModelProvider(this).get(FindMealViewModel::class.java)
+
+        fusedLocationClient = FusedLocationProviderClient(this.requireActivity())
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        swipeRefreshLayout = view.findViewById(R.id.swipeContainer)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             getLastLocation()
         }
 
         getLastLocation()
+    }
 
-        return view
+    private fun confirmPermissions(context: Context) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !== PackageManager.PERMISSION_GRANTED) {
+            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+        }
     }
 
     fun requestFineLocationPermission(requestCode: Int = 0) {
@@ -90,9 +100,8 @@ class FindMealFragment : Fragment() {
     ) {
         if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
             getLastLocation()
-            displayMeals(false)
         } else {
-            // Ask user to update settings
+            // TODO Ask user to update settings / location settings are required
         }
     }
 
@@ -100,32 +109,15 @@ class FindMealFragment : Fragment() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
                 lastLocation = location
-                Log.i("lastLocation", "${lastLocation}")
-                displayMeals(false)
+                updateMeals(false)
             }
         }
-        Log.i("getLastLocation", "Nothing to see")
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FindMealViewModel::class.java)
-    }
-
-    private fun confirmPermissions(context: Context) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !== PackageManager.PERMISSION_GRANTED) {
-            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        confirmPermissions(context)
-    }
-
-    private fun displayMeals(needReload: Boolean) {
+    private fun updateMeals(needReload: Boolean) {
         val location = lastLocation ?: return
         progressBarView.isVisible = true
+
         mainScope.launch {
             kotlin.runCatching {
                 sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit, needReload)
