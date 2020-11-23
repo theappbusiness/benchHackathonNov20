@@ -26,6 +26,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.util.Log
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
@@ -45,9 +46,8 @@ class FindMealFragment : Fragment() {
     private val mealsAdapter = MealsAdapter(listOf(), distanceUnit)
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val permissionResultParser: PermissionResultParser by lazy {
-        PermissionResultParser()
-    }
+    private val permissionResultParser = PermissionResultParser()
+
     private var lastLocation: Location? = null
     private var hasSetupLocationUpdates = false
     private var locationUpdateState = false
@@ -56,12 +56,6 @@ class FindMealFragment : Fragment() {
         override fun onLocationResult(locationResult: LocationResult?) {
             lastLocation = locationResult?.lastLocation ?: return
         }
-    }
-
-    companion object {
-        val LOCATION_PERMISSION_REQUEST_CODE = 1
-        val REQUEST_CHECK_SETTINGS = 2
-        fun newInstance() = FindMealFragment()
     }
 
     private lateinit var viewModel: FindMealViewModel
@@ -100,7 +94,11 @@ class FindMealFragment : Fragment() {
     }
 
     private fun confirmPermissions(context: Context) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !== PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) !== PackageManager.PERMISSION_GRANTED
+        ) {
             requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
         }
     }
@@ -151,24 +149,24 @@ class FindMealFragment : Fragment() {
             locationUpdateState = true
         }
         task.addOnFailureListener { e ->
-           if (e is ResolvableApiException) {
-               try {
-                   e.startResolutionForResult(this.requireActivity(), REQUEST_CHECK_SETTINGS)
-               } catch (sendEx: IntentSender.SendIntentException) {
-                   //
-               }
-           }
-
+            if (e is ResolvableApiException) {
+                try {
+                    e.startResolutionForResult(this.requireActivity(), REQUEST_CHECK_SETTINGS)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    Log.e(
+                        "SetupLocationUpdates Failure exception caught:",
+                        "${sendEx.localizedMessage}"
+                    )
+                }
+            }
         }
         hasSetupLocationUpdates = true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CHECK_SETTINGS) {
-            if (resultCode == Activity.RESULT_OK) {
-                locationUpdateState = true
-            }
+        if ((requestCode == REQUEST_CHECK_SETTINGS) && (resultCode == Activity.RESULT_OK)) {
+            locationUpdateState = true
         }
     }
 
@@ -205,5 +203,11 @@ class FindMealFragment : Fragment() {
             }
             progressBarView.isVisible = false
         }
+    }
+
+    companion object {
+        private val LOCATION_PERMISSION_REQUEST_CODE = 1
+        private val REQUEST_CHECK_SETTINGS = 2
+        fun newInstance() = FindMealFragment()
     }
 }

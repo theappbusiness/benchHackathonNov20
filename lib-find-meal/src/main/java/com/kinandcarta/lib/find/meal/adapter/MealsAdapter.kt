@@ -52,10 +52,8 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
                 infoView.text = "Info: ${meal.info}"
             }
 
-            // TODO calculate distance (this could be done in the shared layer)
             distanceView.text = "${meal.distance} ${distanceUnit}"
 
-            // TODO format these dates
             availableView.text = "Available: ${meal.availableFromDate}"
             expiryView.text = "Expires: ${meal.expiryDate}"
 
