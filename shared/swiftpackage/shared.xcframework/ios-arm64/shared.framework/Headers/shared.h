@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedDistanceUnit, SharedMealWithDistance, SharedUuidUuid, NSDate, SharedDateKMM, SharedKotlinEnum<E>, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
 @protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -168,12 +168,6 @@ __attribute__((swift_name("MealsSDK")))
  @note This method converts instances of Exception to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
-
-/**
- @note This method converts instances of Exception to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
 - (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
 - (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
 
@@ -209,12 +203,6 @@ __attribute__((swift_name("MealApi")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)getAllMealsWithCompletionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(completionHandler:)")));
-
-/**
- @note This method converts instances of CancellationException to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)getAllMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit completionHandler:(void (^)(NSArray<SharedMealWithDistance *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAllMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
@@ -257,18 +245,6 @@ __attribute__((swift_name("MealEndpoint")))
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
 @end;
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("DateKMM")))
-@interface SharedDateKMM : SharedBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (instancetype)initWithTime:(int64_t)time __attribute__((swift_name("init(time:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithPlatformDate:(NSDate *)platformDate __attribute__((swift_name("init(platformDate:)"))) __attribute__((objc_designated_initializer));
-- (int32_t)compareToOther:(SharedDateKMM *)other __attribute__((swift_name("compareTo(other:)")));
-- (int64_t)getTime __attribute__((swift_name("getTime()")));
-- (NSDate *)toPlatformDate __attribute__((swift_name("toPlatformDate()")));
-@end;
-
 __attribute__((swift_name("KotlinComparable")))
 @protocol SharedKotlinComparable
 @required
@@ -302,6 +278,18 @@ __attribute__((swift_name("LocationUtil")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (double)getDistanceLat1:(double)lat1 lon1:(double)lon1 lat2:(double)lat2 lon2:(double)lon2 distanceUnit:(SharedDistanceUnit *)distanceUnit __attribute__((swift_name("getDistance(lat1:lon1:lat2:lon2:distanceUnit:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SharedDate")))
+@interface SharedSharedDate : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithTime:(int64_t)time __attribute__((swift_name("init(time:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithPlatformDate:(NSDate *)platformDate __attribute__((swift_name("init(platformDate:)"))) __attribute__((objc_designated_initializer));
+- (int32_t)compareToOther:(SharedSharedDate *)other __attribute__((swift_name("compareTo(other:)")));
+- (int64_t)getTime __attribute__((swift_name("getTime()")));
+- (NSDate *)toPlatformDate __attribute__((swift_name("toPlatformDate()")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -344,20 +332,6 @@ __attribute__((swift_name("Meal.Companion")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("MealWithDistance")))
-@interface SharedMealWithDistance : SharedBase
-- (instancetype)initWithMeal:(SharedMeal *)meal distance:(double)distance __attribute__((swift_name("init(meal:distance:)"))) __attribute__((objc_designated_initializer));
-- (SharedMeal *)component1 __attribute__((swift_name("component1()")));
-- (double)component2 __attribute__((swift_name("component2()")));
-- (SharedMealWithDistance *)doCopyMeal:(SharedMeal *)meal distance:(double)distance __attribute__((swift_name("doCopy(meal:distance:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) double distance __attribute__((swift_name("distance")));
-@property (readonly) SharedMeal *meal __attribute__((swift_name("meal")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Quantity")))
 @interface SharedQuantity : SharedBase
 - (instancetype)initWithQuantity:(int32_t)quantity __attribute__((swift_name("init(quantity:)"))) __attribute__((objc_designated_initializer));
@@ -378,9 +352,15 @@ __attribute__((swift_name("Quantity.Companion")))
 - (id<SharedKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end;
 
+@interface SharedSharedDate (Extensions)
+- (BOOL)isAfterOther:(SharedSharedDate *)other __attribute__((swift_name("isAfter(other:)")));
+- (BOOL)isBeforeOther:(SharedSharedDate *)other __attribute__((swift_name("isBefore(other:)")));
+- (BOOL)isEqualOther:(SharedSharedDate *)other __attribute__((swift_name("isEqual(other:)")));
+@end;
+
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ExtensionsKt")))
-@interface SharedExtensionsKt : SharedBase
+__attribute__((swift_name("Double_ExtensionsKt")))
+@interface SharedDouble_ExtensionsKt : SharedBase
 + (double)round:(double)receiver decimals:(int32_t)decimals __attribute__((swift_name("round(_:decimals:)")));
 + (double)toKilometres:(double)receiver __attribute__((swift_name("toKilometres(_:)")));
 @end;
