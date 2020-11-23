@@ -1,12 +1,10 @@
 package com.kcc.kmmhackathon.shared.network
 
 import com.kcc.kmmhackathon.shared.entity.Meal
-import com.kcc.kmmhackathon.shared.entity.MealWithDistance
 import com.kcc.kmmhackathon.shared.entity.Quantity
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kcc.kmmhackathon.shared.utility.LocationUtil
 import io.ktor.client.HttpClient
-import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
