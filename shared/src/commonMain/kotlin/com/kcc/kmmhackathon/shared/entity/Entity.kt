@@ -32,10 +32,3 @@ data class Quantity(
     @SerialName("quantity")
     val quantity: Int
 )
-
-data class MealWithDistance(
-    @SerialName("meal")
-    val meal: Meal,
-    @SerialName("distance")
-    val distance: Double
-)
