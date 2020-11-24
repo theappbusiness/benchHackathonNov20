@@ -5,7 +5,7 @@
     <key>CFBundleExecutable</key>
     <string>shared</string>
     <key>CFBundleIdentifier</key>
-    <string>com.kcc.kmmhackathon.shared.shared</string>
+    <string>shared</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
