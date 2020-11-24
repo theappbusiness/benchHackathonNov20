@@ -17,7 +17,7 @@ import shared
 public struct LoginView: View {
 	@State var email: String = ""
 	@State var password: String = ""
-	@State var loginSucessful: Bool = true
+	@State var loginSucessful: Bool = false
 	let coloredNavAppearance = UINavigationBarAppearance()
 	private var firebase = FirebaseAuthenticationStore()
 
@@ -53,11 +53,16 @@ public struct LoginView: View {
 							.modifier(GreyTextFieldStyle())
 						Spacer()
 
-
 						GeometryReader { geometry in
+							NavigationLink(destination: TabAppView(selectedView: 0), isActive: $loginSucessful) {
+								Text("")
+							}
+
 							let isDisabled = email.isEmpty || password.isEmpty
 							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
-							NavigationLink(destination: TabAppView(selectedView: 0)) {
+							Button(action: {
+								login(email: email, password: password)
+							}) {
 								Text(Strings.Login.loginButtonTitle)
 									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 							}
@@ -69,18 +74,8 @@ public struct LoginView: View {
 				Spacer()
 				VStack {
 					Spacer(minLength: 20)
-//					GeometryReader { geometry in
-//						NavigationLink(destination: SignUpView()) {
-//							Text(Strings.Login.signupButtonTitle)
-//								.frame(width: geometry.size.width, alignment: .center)
-//								.foregroundColor(ColorManager.appPrimary)
-//						}
-//					}
-
 					GeometryReader { geometry in
-						Button(action: {
-							login(email: email, passoword: password)
-						}) {
+						NavigationLink(destination: SignUpView()) {
 							Text(Strings.Login.signupButtonTitle)
 								.frame(width: geometry.size.width, alignment: .center)
 								.foregroundColor(ColorManager.appPrimary)
@@ -95,8 +90,15 @@ public struct LoginView: View {
 }
 
 extension LoginView {
-	func login(email: String, passoword: String) {
-		firebase.signIn(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+	func login(email: String, password: String) {
+		//TODO: store this key somewhere else
+		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+			if (result != nil) {
+				self.loginSucessful = true
+
+			} else {
+				print("error")
+			}
 
 		})
 	}
