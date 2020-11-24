@@ -76,7 +76,7 @@ public struct LoginView: View {
 					}
 				}
 			}
-			.navigationBarTitle(Text(Strings.LandingScreen.heading))
+			.navigationBarTitle(Text(Strings.Login.heading))
 		}
 		.accentColor(.white)
 	}
