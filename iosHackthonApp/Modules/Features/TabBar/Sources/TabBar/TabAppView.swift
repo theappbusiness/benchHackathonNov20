@@ -33,8 +33,8 @@ public struct TabAppView: View {
             }
             .navigationBarHidden(true)
             .tabItem {
-                Image(systemName: Strings.LandingScreen.Images.find)
-                Text(Strings.LandingScreen.findButtonText)
+                Image(systemName: Strings.TabView.Images.find)
+                Text(Strings.TabView.findButtonText)
             }.tag(0)
             .accentColor(ColorManager.appPrimary)
 
@@ -43,8 +43,8 @@ public struct TabAppView: View {
 			}
 			.navigationBarHidden(true)
 			.tabItem {
-				Image(systemName: Strings.LandingScreen.Images.listView)
-				Text(Strings.LandingScreen.plusButtonText)
+				Image(systemName: Strings.TabView.Images.listView)
+				Text(Strings.TabView.listViewText)
 			}.tag(1)
 			.accentColor(ColorManager.appPrimary)
 
@@ -54,8 +54,8 @@ public struct TabAppView: View {
 			}
 			.navigationBarHidden(true)
 			.tabItem {
-				Image(systemName: Strings.LandingScreen.Images.settings)
-				Text(Strings.LandingScreen.settings)
+				Image(systemName: Strings.TabView.Images.settings)
+				Text(Strings.TabView.settings)
 			}.tag(2)
 			.accentColor(ColorManager.appPrimary)
         })
