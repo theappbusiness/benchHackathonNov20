@@ -4,20 +4,19 @@ import CoreLocation
 import Strings
 
 public struct MealListView: View {
-
+	
 	@ObservedObject private var viewModel: MealListViewModel
-
+	
 	public init(viewModel: MealListViewModel) {
 		self.viewModel = viewModel
 	}
-
+	
 	public var body: some View {
-
 		VStack {
 			if viewModel.meals.isEmpty {
 				Text("No meals found") // TODO: Do something nicer than this
 			}
-
+			
 			ScrollView {
 				LazyVStack {
 					ForEach((0 ..< viewModel.meals.count), id: \.self) {
