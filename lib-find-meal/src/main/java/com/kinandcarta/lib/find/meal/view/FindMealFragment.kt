@@ -1,68 +1,36 @@
 package com.kinandcarta.lib.find.meal.view
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.location.Location
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kinandcarta.lib.find.meal.R
 import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
-import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.IntentSender
-import android.content.pm.PackageManager
-import android.util.Log
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
-import com.kcc.kmmhackathon.shared.utility.DistanceUnit
+import com.kinandcarta.lib.find.meal.extension.requestFineLocationPermission
+import com.kinandcarta.lib.find.meal.extension.showToast
 import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
-import kotlinx.coroutines.cancel
+import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
-    private val mainScope = MainScope()
-
-    private lateinit var mealsRecyclerView: RecyclerView
-    private lateinit var progressBarView: FrameLayout
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-    private val sdk = MealsSDK()
-    private var distanceUnit: DistanceUnit = DistanceUnit.miles
-    private val mealsAdapter = MealsAdapter(listOf(), distanceUnit)
-
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val permissionResultParser = PermissionResultParser()
-
-    private var lastLocation: Location? = null
-    private var hasSetupLocationUpdates = false
-    private var locationUpdateState = false
-
-    private val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult?) {
-            lastLocation = locationResult?.lastLocation ?: return
-        }
-    }
-
-    private lateinit var viewModel: FindMealViewModel
+    private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
+    private val viewModel: FindMealViewModel by viewModels()
+    private val mealsAdapter = MealsAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        confirmPermissions(context)
+        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onCreateView(
@@ -73,141 +41,61 @@ class FindMealFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        progressBarView = view.findViewById(R.id.progressBar)
-        mealsRecyclerView = view.findViewById(R.id.rvMeals)
-        swipeRefreshLayout = view.findViewById(R.id.swipeContainer)
-
-        viewModel = ViewModelProvider(this).get(FindMealViewModel::class.java)
-
-        fusedLocationClient = FusedLocationProviderClient(this.requireActivity())
-        mealsRecyclerView.adapter = mealsAdapter
-        mealsRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = false
-            getLastLocation()
-        }
-
-        getLastLocation()
+        setupUI()
+        viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
     }
 
-    private fun confirmPermissions(context: Context) {
-        if (ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) !== PackageManager.PERMISSION_GRANTED
-        ) {
-            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-        }
-    }
-
-    fun requestFineLocationPermission(requestCode: Int = 0) {
-        requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestCode)
-    }
-
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        val permissionResultParser = PermissionResultParser()
         if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
-            getLastLocation()
+            viewModel.startUpdatingLocation()
         } else {
-            // TODO Ask user to update settings / location settings are required
+            showToast("Location permissions are required to find meals")
         }
     }
 
-    fun getLastLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location ->
-            lastLocation = location
-            updateMeals()
+    private fun setupUI() {
+        val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
+        mealsRecyclerView.adapter = mealsAdapter
+        mealsRecyclerView.layoutManager = LinearLayoutManager(context)
+        val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            viewModel.updateMeals()
         }
     }
 
-    private fun startLocationUpdates() {
-        val locationRequest = LocationRequest()
-
-        locationRequest.interval = 100000
-        locationRequest.fastestInterval = 5000
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-        if (!hasSetupLocationUpdates) {
-            setupLocationUpdates(locationRequest)
+    private fun onStateChanged(state: FindMealViewModel.State) {
+        when (state) {
+            FindMealViewModel.State.LoadingMeals ->
+                progressBarView.isVisible = true
+            is FindMealViewModel.State.LoadedMeals ->
+                onLoadedMeals(state)
+            is FindMealViewModel.State.Failed ->
+                onFailure(state.failure)
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
-    private fun setupLocationUpdates(locationRequest: LocationRequest) {
-        val builder = LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequest)
-        val client = LocationServices.getSettingsClient(this.requireActivity())
-        val task = client.checkLocationSettings(builder.build())
+    private fun onLoadedMeals(state: FindMealViewModel.State.LoadedMeals) {
+        progressBarView.isVisible = false
+        mealsAdapter.submit(state.meals, state.distanceUnit)
+    }
 
-        task.addOnSuccessListener {
-            locationUpdateState = true
-        }
-        task.addOnFailureListener { e ->
-            if (e is ResolvableApiException) {
-                try {
-                    e.startResolutionForResult(this.requireActivity(), REQUEST_CHECK_SETTINGS)
-                } catch (sendEx: IntentSender.SendIntentException) {
-                    Log.e(
-                        "SetupLocationUpdates Failure exception caught:",
-                        "${sendEx.localizedMessage}"
-                    )
-                }
+    private fun onFailure(failure: FindMealViewModel.Failure) {
+        when (failure) {
+            is FindMealViewModel.Failure.LoadingMealsFailed -> {
+                progressBarView.isVisible = false
+                showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
             }
-        }
-        hasSetupLocationUpdates = true
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if ((requestCode == REQUEST_CHECK_SETTINGS) && (resultCode == Activity.RESULT_OK)) {
-            locationUpdateState = true
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (!locationUpdateState) {
-            startLocationUpdates()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mainScope.cancel() // TODO: We'd get this for free in a viewModel?
-    }
-
-    private fun updateMeals() {
-        val location = lastLocation ?: return
-        progressBarView.isVisible = true
-
-        mainScope.launch {
-            kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
-            }.onSuccess {
-                mealsAdapter.mealsList = it
-                mealsAdapter.notifyDataSetChanged()
-            }.onFailure {
-                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
-                    .show()
-            }
-            progressBarView.isVisible = false
         }
     }
 
     companion object {
-        private val LOCATION_PERMISSION_REQUEST_CODE = 1
-        private val REQUEST_CHECK_SETTINGS = 2
-        fun newInstance() = FindMealFragment()
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 }
