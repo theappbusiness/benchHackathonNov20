@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, NSDateFormatter, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedFirebaseAuthenticationResponse, SharedMeal, SharedDistanceUnit, SharedUuidUuid, NSDateFormatter, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteArray, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
-@protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
+@protocol SharedAuthenticationStore, SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -136,6 +136,50 @@ __attribute__((swift_name("KotlinBoolean")))
 @interface SharedBoolean : SharedNumber
 - (instancetype)initWithBool:(BOOL)value;
 + (instancetype)numberWithBool:(BOOL)value;
+@end;
+
+__attribute__((swift_name("AuthenticationStore")))
+@protocol SharedAuthenticationStore
+@required
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signInApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(apiKey:email:password:returnSecureToken:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signUpApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(apiKey:email:password:returnSecureToken:completionHandler:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FirebaseAuthenticationStore")))
+@interface SharedFirebaseAuthenticationStore : SharedBase <SharedAuthenticationStore>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signInApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(apiKey:email:password:returnSecureToken:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signUpApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(apiKey:email:password:returnSecureToken:completionHandler:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FirebaseAuthenticationStore.Companion")))
+@interface SharedFirebaseAuthenticationStoreCompanion : SharedBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -310,6 +354,41 @@ __attribute__((swift_name("SharedDate")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FirebaseAuthenticationResponse")))
+@interface SharedFirebaseAuthenticationResponse : SharedBase
+- (instancetype)initWithKind:(NSString *)kind idToken:(NSString *)idToken email:(NSString *)email refreshToken:(NSString *)refreshToken expiresIn:(NSString *)expiresIn localId:(NSString *)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("init(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)component1 __attribute__((swift_name("component1()")));
+- (NSString *)component2 __attribute__((swift_name("component2()")));
+- (NSString *)component3 __attribute__((swift_name("component3()")));
+- (NSString *)component4 __attribute__((swift_name("component4()")));
+- (NSString *)component5 __attribute__((swift_name("component5()")));
+- (NSString *)component6 __attribute__((swift_name("component6()")));
+- (SharedInt * _Nullable)component7 __attribute__((swift_name("component7()")));
+- (NSString * _Nullable)component8 __attribute__((swift_name("component8()")));
+- (SharedFirebaseAuthenticationResponse *)doCopyKind:(NSString *)kind idToken:(NSString *)idToken email:(NSString *)email refreshToken:(NSString *)refreshToken expiresIn:(NSString *)expiresIn localId:(NSString *)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("doCopy(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) SharedInt * _Nullable code __attribute__((swift_name("code")));
+@property (readonly) NSString *email __attribute__((swift_name("email")));
+@property (readonly) NSString *expiresIn __attribute__((swift_name("expiresIn")));
+@property (readonly) NSString *idToken __attribute__((swift_name("idToken")));
+@property (readonly) NSString *kind __attribute__((swift_name("kind")));
+@property (readonly) NSString *localId __attribute__((swift_name("localId")));
+@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
+@property (readonly) NSString *refreshToken __attribute__((swift_name("refreshToken")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FirebaseAuthenticationResponse.Companion")))
+@interface SharedFirebaseAuthenticationResponseCompanion : SharedBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+- (id<SharedKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Meal")))
 @interface SharedMeal : SharedBase
 - (instancetype)initWithId:(NSString *)id name:(NSString *)name quantity:(int32_t)quantity availableFromDate:(NSString *)availableFromDate expiryDate:(NSString *)expiryDate info:(NSString *)info hot:(BOOL)hot locationLat:(float)locationLat locationLong:(float)locationLong distance:(SharedDouble * _Nullable)distance __attribute__((swift_name("init(id:name:quantity:availableFromDate:expiryDate:info:hot:locationLat:locationLong:distance:)"))) __attribute__((objc_designated_initializer));
@@ -405,19 +484,6 @@ __attribute__((swift_name("KotlinException")))
 - (instancetype)initWithCause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
 @end;
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("UuidUuid")))
-@interface SharedUuidUuid : SharedBase <SharedKotlinComparable>
-- (instancetype)initWithMsb:(int64_t)msb lsb:(int64_t)lsb __attribute__((swift_name("init(msb:lsb:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithUuidBytes:(SharedKotlinByteArray *)uuidBytes __attribute__((swift_name("init(uuidBytes:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use `uuidOf` instead.")));
-- (int32_t)compareToOther:(SharedUuidUuid *)other __attribute__((swift_name("compareTo(other:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) int64_t leastSignificantBits __attribute__((swift_name("leastSignificantBits")));
-@property (readonly) int64_t mostSignificantBits __attribute__((swift_name("mostSignificantBits")));
-@end;
-
 __attribute__((swift_name("KotlinRuntimeException")))
 @interface SharedKotlinRuntimeException : SharedKotlinException
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
@@ -443,6 +509,19 @@ __attribute__((swift_name("KotlinCancellationException")))
 - (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithMessage:(NSString * _Nullable)message cause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithCause:(SharedKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("UuidUuid")))
+@interface SharedUuidUuid : SharedBase <SharedKotlinComparable>
+- (instancetype)initWithMsb:(int64_t)msb lsb:(int64_t)lsb __attribute__((swift_name("init(msb:lsb:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithUuidBytes:(SharedKotlinByteArray *)uuidBytes __attribute__((swift_name("init(uuidBytes:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use `uuidOf` instead.")));
+- (int32_t)compareToOther:(SharedUuidUuid *)other __attribute__((swift_name("compareTo(other:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int64_t leastSignificantBits __attribute__((swift_name("leastSignificantBits")));
+@property (readonly) int64_t mostSignificantBits __attribute__((swift_name("mostSignificantBits")));
 @end;
 
 __attribute__((swift_name("Kotlinx_serialization_coreSerializationStrategy")))

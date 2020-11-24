@@ -2,6 +2,7 @@ import SwiftUI
 import shared
 import CoreLocation
 import Strings
+import AddMeal
 
 public struct MealListView: View {
 	
@@ -26,7 +27,14 @@ public struct MealListView: View {
 				}
 			}
 			.navigationBarTitle(Strings.MealListScreen.title)
-			.navigationBarItems(trailing:
+            .navigationBarItems(leading:
+                                    NavigationLink(destination: AddMealView(sdk: viewModel.sdk,
+                                                                            locationManager: viewModel.locationManager),
+                                                   label: {
+                                                    Image(systemName: "plus")
+                                                        .foregroundColor(.white)
+                                                   }),
+                                trailing:
 									Button(action: {
 										self.viewModel.loadMeals(forceReload: true)
 									}, label: {
