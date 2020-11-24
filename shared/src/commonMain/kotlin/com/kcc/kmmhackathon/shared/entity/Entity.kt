@@ -12,9 +12,9 @@ data class Meal(
     @SerialName("quantity")
     val quantity: Int,
     @SerialName("availableFromDate")
-    val availableFromDate: String,
+    var availableFromDate: String,
     @SerialName("expiryDate")
-    val expiryDate: String,
+    var expiryDate: String,
     @SerialName("info")
     val info: String,
     @SerialName("hot")
@@ -31,4 +31,16 @@ data class Meal(
 data class Quantity(
     @SerialName("quantity")
     val quantity: Int
+)
+
+@Serializable
+data class FirebaseAuthenticationResponse(
+    val kind: String,
+    val idToken: String,
+    val email: String,
+    val refreshToken: String,
+    val expiresIn: String,
+    val localId: String,
+    val code: Int? = null,
+    val message: String? = null
 )

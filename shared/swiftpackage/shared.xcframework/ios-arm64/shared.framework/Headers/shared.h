@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, NSDateFormatter, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
 @protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -245,6 +245,23 @@ __attribute__((swift_name("MealEndpoint")))
 @property (readonly) NSString *endpointString __attribute__((swift_name("endpointString")));
 @end;
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DateFormattingUtil")))
+@interface SharedDateFormattingUtil : SharedBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (NSString *)convertTimeStampTimeStamp:(int64_t)timeStamp __attribute__((swift_name("convertTimeStamp(timeStamp:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DateFormattingUtil.Companion")))
+@interface SharedDateFormattingUtilCompanion : SharedBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (readonly) NSDateFormatter *formatter __attribute__((swift_name("formatter")));
+@end;
+
 __attribute__((swift_name("KotlinComparable")))
 @protocol SharedKotlinComparable
 @required
@@ -310,9 +327,9 @@ __attribute__((swift_name("Meal")))
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *availableFromDate __attribute__((swift_name("availableFromDate")));
+@property NSString *availableFromDate __attribute__((swift_name("availableFromDate")));
 @property SharedDouble * _Nullable distance __attribute__((swift_name("distance")));
-@property (readonly) NSString *expiryDate __attribute__((swift_name("expiryDate")));
+@property NSString *expiryDate __attribute__((swift_name("expiryDate")));
 @property (readonly) BOOL hot __attribute__((swift_name("hot")));
 @property (readonly) NSString *id __attribute__((swift_name("id")));
 @property (readonly) NSString *info __attribute__((swift_name("info")));
