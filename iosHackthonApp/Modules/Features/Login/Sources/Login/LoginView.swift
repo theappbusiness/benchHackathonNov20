@@ -15,9 +15,10 @@ import SignUp
 import shared
 
 public struct LoginView: View {
-	@State var email: String = ""
-	@State var password: String = ""
-	@State var loginSucessful: Bool = false
+	@State private var email: String = ""
+	@State private var password: String = ""
+	@State private var loginSucessful: Bool = false
+	@State private var isUserLoggedIn = UserDefaults.standard.bool(forKey: "UserLoggedIn")
 	let coloredNavAppearance = UINavigationBarAppearance()
 	private var firebase = FirebaseAuthenticationStore()
 
@@ -86,6 +87,12 @@ public struct LoginView: View {
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
 		.accentColor(.white)
+		.onAppear() {
+			if isUserLoggedIn {
+				loginSucessful = true
+			}
+
+		}
 	}
 }
 
@@ -95,7 +102,7 @@ extension LoginView {
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result != nil) {
 				self.loginSucessful = true
-
+				UserDefaults.standard.set(self.loginSucessful, forKey: "UserLoggedIn")
 			} else {
 				print("error")
 			}
