@@ -32,3 +32,15 @@ data class Quantity(
     @SerialName("quantity")
     val quantity: Int
 )
+
+@Serializable
+data class FirebaseAuthenticationResponse(
+    val kind: String,
+    val idToken: String,
+    val email: String,
+    val refreshToken: String,
+    val expiresIn: String,
+    val localId: String,
+    val code: Int? = null,
+    val message: String? = null
+)
