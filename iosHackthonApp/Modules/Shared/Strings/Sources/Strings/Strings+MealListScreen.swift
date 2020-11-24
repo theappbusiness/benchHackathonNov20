@@ -12,7 +12,7 @@ public extension Strings.MealListScreen {
     enum Images {}
     enum Error {}
 
-    static let title = "Meals in your area"
+    static let title = "CommunityKitchen"
     static let portion = "portion remaining"
     static let portions = "portions remaining"
     static let available = "Available: "
