@@ -91,17 +91,6 @@ class MealsAdapter(
         }
     }
 
-    // TODO: Change this to parse from Unix timestamp - could be done in shared code?
-    fun parseDate(dateString: String): String {
-        if (dateString.length > 8) {
-            // TODO handle dates in kotlin
-            val shortDate = dateString.slice(0..9)
-            val dateArr = shortDate.split("-")
-            return "${dateArr[2]} ${dateArr[1]} ${dateArr[0]}"
-        }
-        return dateString
-    }
-
     fun getQuantityText(quantity: Int): String = when (quantity) {
         0 -> "#    Reserved"
         1 -> "#    $quantity portion remaining"
