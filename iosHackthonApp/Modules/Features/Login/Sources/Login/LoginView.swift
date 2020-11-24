@@ -12,12 +12,14 @@ import Theming
 import Components
 import TabBar
 import SignUp
+import shared
 
 public struct LoginView: View {
 	@State var email: String = ""
 	@State var password: String = ""
 	@State var loginSucessful: Bool = true
 	let coloredNavAppearance = UINavigationBarAppearance()
+	private var firebase = FirebaseAuthenticationStore()
 
 	public init() {
 		coloredNavAppearance.configureWithOpaqueBackground()
@@ -67,8 +69,18 @@ public struct LoginView: View {
 				Spacer()
 				VStack {
 					Spacer(minLength: 20)
+//					GeometryReader { geometry in
+//						NavigationLink(destination: SignUpView()) {
+//							Text(Strings.Login.signupButtonTitle)
+//								.frame(width: geometry.size.width, alignment: .center)
+//								.foregroundColor(ColorManager.appPrimary)
+//						}
+//					}
+
 					GeometryReader { geometry in
-						NavigationLink(destination: SignUpView()) {
+						Button(action: {
+							login(email: email, passoword: password)
+						}) {
 							Text(Strings.Login.signupButtonTitle)
 								.frame(width: geometry.size.width, alignment: .center)
 								.foregroundColor(ColorManager.appPrimary)
@@ -79,6 +91,14 @@ public struct LoginView: View {
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
 		.accentColor(.white)
+	}
+}
+
+extension LoginView {
+	func login(email: String, passoword: String) {
+		firebase.signIn(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+
+		})
 	}
 }
 
