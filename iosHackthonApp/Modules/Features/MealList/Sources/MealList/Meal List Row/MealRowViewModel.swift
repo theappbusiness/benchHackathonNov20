@@ -77,12 +77,10 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var fromTimeText: String {
-//        "\(Strings.MealListScreen.available) \(Date.readableDateString(from: meal.availableFromDate))"
         "\(Strings.MealListScreen.available) \(meal.availableFromDate)"
     }
 
     var expiresAtText: String {
-//        "\(Strings.MealListScreen.expiresAt) \(Date.readableDateString(from: meal.expiryDate))"
         "\(Strings.MealListScreen.expiresAt) \(meal.expiryDate)"
     }
 

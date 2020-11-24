@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
+@class SharedMeal, SharedDistanceUnit, SharedUuidUuid, NSDateFormatter, SharedKotlinEnum<E>, NSDate, SharedSharedDate, SharedQuantity, SharedKotlinThrowable, SharedKotlinArray<T>, SharedKotlinByteArray, SharedKotlinException, SharedKotlinRuntimeException, SharedKotlinIllegalStateException, SharedKotlinByteIterator, SharedKotlinx_serialization_coreSerializersModule, SharedKotlinx_serialization_coreSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_coreUpdateMode;
 
 @protocol SharedKotlinComparable, SharedKotlinx_serialization_coreKSerializer, SharedKotlinx_serialization_coreEncoder, SharedKotlinx_serialization_coreSerialDescriptor, SharedKotlinx_serialization_coreSerializationStrategy, SharedKotlinx_serialization_coreDecoder, SharedKotlinx_serialization_coreDeserializationStrategy, SharedKotlinIterator, SharedKotlinx_serialization_coreCompositeEncoder, SharedKotlinAnnotation, SharedKotlinx_serialization_coreCompositeDecoder, SharedKotlinx_serialization_coreSerializersModuleCollector, SharedKotlinKClass, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
@@ -253,9 +253,13 @@ __attribute__((swift_name("DateFormattingUtil")))
 - (NSString *)convertTimeStampTimeStamp:(int64_t)timeStamp __attribute__((swift_name("convertTimeStamp(timeStamp:)")));
 @end;
 
-__attribute__((unavailable("Kotlin subclass of Objective-C class can't be imported")))
-__attribute__((swift_name("DateFormattingUtil.Formatter")))
-@interface SharedDateFormattingUtilFormatter : NSObject
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DateFormattingUtil.Companion")))
+@interface SharedDateFormattingUtilCompanion : SharedBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (readonly) NSDateFormatter *formatter __attribute__((swift_name("formatter")));
 @end;
 
 __attribute__((swift_name("KotlinComparable")))
