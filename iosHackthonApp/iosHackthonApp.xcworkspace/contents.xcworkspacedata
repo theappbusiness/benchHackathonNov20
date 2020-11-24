@@ -20,9 +20,6 @@
          location = "group:Modules/Features/TabBar">
       </FileRef>
       <FileRef
-         location = "group:Modules/Features/LandingScreen">
-      </FileRef>
-      <FileRef
          location = "group:Modules/Features/MealList">
       </FileRef>
    </Group>
