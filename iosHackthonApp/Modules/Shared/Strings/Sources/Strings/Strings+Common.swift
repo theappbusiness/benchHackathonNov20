@@ -21,7 +21,3 @@ public extension Strings.Common.Images {
     static let location = "location"
     static let add = "plus"
 }
-public extension Strings.Common.Date {
-    static let americanFormat = "yyyy-MM-dd' 'HH:mm:ssZ"
-    static let nameDayMonth = "E d MMM"
-}

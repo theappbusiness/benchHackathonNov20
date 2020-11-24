@@ -17,8 +17,7 @@ import Components
 
 public struct TabAppView: View {
 
-    private let sdk = MealsSDK()
-    private let locationManager = LocationManager()
+    private let mealListViewModel = MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager())
 
     @State var selectedView: Int
 
@@ -30,13 +29,13 @@ public struct TabAppView: View {
     public var body: some View {
         TabView(selection: $selectedView, content: {
             TabNavigationItem(
-                destination: AnyView(MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))),
+                destination: AnyView(MealMapView(viewModel: mealListViewModel)),
                 image: Strings.TabView.Images.find,
                 title: Strings.TabView.findButtonText,
                 tagNumber: 0)
 
             TabNavigationItem(
-                destination: AnyView(MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))),
+                destination: AnyView(MealListView(viewModel: mealListViewModel)),
                 image: Strings.TabView.Images.listView,
                 title: Strings.TabView.listViewText,
                 tagNumber: 1)
