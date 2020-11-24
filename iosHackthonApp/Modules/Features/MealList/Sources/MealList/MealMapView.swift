@@ -31,7 +31,9 @@ public struct MealMapView: View {
 		}
 		.navigationBarTitle(Strings.MealListScreen.title)
         .navigationBarItems(leading:
-                                Button(action: { viewModel.isAddMealShowing = true }) {
+                                Button(action: {
+                                    viewModel.isAddMealShowing = true
+                                }) {
                                     Image(systemName: Strings.Common.Images.add)
                                 },
                             trailing:
