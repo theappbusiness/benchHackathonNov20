@@ -36,7 +36,7 @@ public struct MealMapView: View {
                                 },
                             trailing:
                                 Button(action: {
-                                    self.viewModel.loadMeals(forceReload: true)
+                                    self.viewModel.loadMeals()
                                 }, label: {
                                     Image(systemName: Strings.MealListScreen.Images.reload)
                                 }))
@@ -45,7 +45,7 @@ public struct MealMapView: View {
             AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
         })
 		.onAppear(perform: {
-			viewModel.loadMeals(forceReload: true)
+			viewModel.loadMeals()
 		})
 	}
 }

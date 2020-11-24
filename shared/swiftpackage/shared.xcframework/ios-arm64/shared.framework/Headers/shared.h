@@ -206,13 +206,7 @@ __attribute__((swift_name("MealsSDK")))
  @note This method converts instances of Exception to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getMealsForceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeals(forceReload:completionHandler:)")));
-
-/**
- @note This method converts instances of Exception to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit forceReload:(BOOL)forceReload completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:forceReload:completionHandler:)")));
+- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 - (SharedUuidUuid *)getUUID __attribute__((swift_name("getUUID()")));
 
 /**

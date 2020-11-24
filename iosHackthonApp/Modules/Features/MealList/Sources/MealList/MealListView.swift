@@ -33,7 +33,7 @@ public struct MealListView: View {
                                     },
                                 trailing:
                                     Button(action: {
-                                        self.viewModel.loadMeals(forceReload: true)
+                                        self.viewModel.loadMeals()
                                     }, label: {
                                         Image(systemName: Strings.MealListScreen.Images.reload)
 
@@ -63,7 +63,7 @@ public struct MealListView: View {
 			}
 		}
 		.onAppear(perform: {
-			viewModel.loadMeals(forceReload: true)
+			viewModel.loadMeals()
 		})
 	}
 }

@@ -13,11 +13,7 @@ class MealsSDK {
         return api.getMeal(id)
     }
 
-    @Throws(Exception::class) suspend fun getMeals(forceReload: Boolean): List<Meal> {
-        return api.getAllMeals()
-    }
-
-    @Throws(Exception::class) suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit, forceReload: Boolean): List<Meal> {
+    @Throws(Exception::class) suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {
         return api.getSortedMeals(userLat, userLon, distanceUnit)
     }
 

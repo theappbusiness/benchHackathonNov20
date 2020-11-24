@@ -66,7 +66,7 @@ class FindMealFragment : Fragment() {
         val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            viewModel.updateMeals(true)
+            viewModel.updateMeals()
         }
     }
 

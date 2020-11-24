@@ -40,7 +40,7 @@ class FindMealViewModel @ViewModelInject constructor(
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
             lastLocation = locationResult?.lastLocation
-            updateMeals(true) // TODO: Check param value
+            updateMeals()
         }
     }
 
@@ -52,7 +52,7 @@ class FindMealViewModel @ViewModelInject constructor(
     fun startUpdatingLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener {
             lastLocation = it
-            updateMeals(true)
+            updateMeals()
         }
         fusedLocationClient.requestLocationUpdates(
             createLocationRequest(),
@@ -61,13 +61,13 @@ class FindMealViewModel @ViewModelInject constructor(
         )
     }
 
-    fun updateMeals(needReload: Boolean) {
+    fun updateMeals() {
         val location = lastLocation ?: return
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit, needReload)
+                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
                 _state.value = State.LoadedMeals(it, distanceUnit)
             }.onFailure {
