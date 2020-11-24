@@ -8,7 +8,7 @@ public extension Strings.LandingScreen {
 
     static let heading = "CommunityKitchen"
     static let subheading = "Add a meal to help out someone in your local community or browse the meals that others have added"
-    static let plusButtonText = "Add a Meal"
+    static let plusButtonText = "ListView"
     static let findButtonText = "Find a Meal"
     static let enableLocationText = "We will need access to your location in order to show you meals that are in your area.\n\nTo enable, tap the link below then navigate to:\n\nPrivacy\n↓\nLocation Services\n↓\nCommunityKitchen"
     static let settingsLinkText = "Allow location"
@@ -16,7 +16,8 @@ public extension Strings.LandingScreen {
 }
 public extension Strings.LandingScreen.Images {
     static let plus = "plus.app"
-    static let find = "magnifyingglass"
+    static let find = "map"
     static let exclamation = "exclamationmark.circle"
-	static let settings = "exclamationmark.circle"
+	static let settings = "gear"
+	static let listView = "list.bullet"
 }

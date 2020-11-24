@@ -43,7 +43,7 @@ public struct TabAppView: View {
 			}
 			.navigationBarHidden(true)
 			.tabItem {
-				Image(systemName: Strings.LandingScreen.Images.plus)
+				Image(systemName: Strings.LandingScreen.Images.listView)
 				Text(Strings.LandingScreen.plusButtonText)
 			}.tag(1)
 			.accentColor(ColorManager.appPrimary)
