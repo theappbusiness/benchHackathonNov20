@@ -8,7 +8,7 @@
       location = "container:"
       name = "Features">
       <FileRef
-         location = "group:../../GTG/Features/Settings">
+         location = "group:Modules/Features/Settings">
       </FileRef>
       <FileRef
          location = "group:Modules/Features/SignUp">
