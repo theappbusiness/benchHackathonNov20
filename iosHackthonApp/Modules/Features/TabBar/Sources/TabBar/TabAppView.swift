@@ -29,24 +29,35 @@ public struct TabAppView: View {
     public var body: some View {
         TabView(selection: $selectedView, content: {
             NavigationView {
-                AddMealView(sdk: sdk, locationManager: locationManager)
-            }
-            .navigationBarHidden(true)
-            .tabItem {
-                Image(systemName: Strings.LandingScreen.Images.plus)
-                Text(Strings.LandingScreen.plusButtonText)
-            }.tag(0)
-            .accentColor(ColorManager.appPrimary)
-
-            NavigationView {
-                MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
+				MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))
             }
             .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: Strings.LandingScreen.Images.find)
                 Text(Strings.LandingScreen.findButtonText)
-            }.tag(1)
+            }.tag(0)
             .accentColor(ColorManager.appPrimary)
+
+			NavigationView {
+				MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
+			}
+			.navigationBarHidden(true)
+			.tabItem {
+				Image(systemName: Strings.LandingScreen.Images.plus)
+				Text(Strings.LandingScreen.plusButtonText)
+			}.tag(1)
+			.accentColor(ColorManager.appPrimary)
+
+			NavigationView {
+				//TODO: Change this to the settings screen, once it is implemented.
+				AddMealView(sdk: sdk, locationManager: locationManager)
+			}
+			.navigationBarHidden(true)
+			.tabItem {
+				Image(systemName: Strings.LandingScreen.Images.settings)
+				Text(Strings.LandingScreen.settings)
+			}.tag(2)
+			.accentColor(ColorManager.appPrimary)
         })
         .accentColor(.white)
     }
