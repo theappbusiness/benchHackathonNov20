@@ -13,5 +13,7 @@ actual class DateFormattingUtil actual constructor() {
         return format(date)
     }
 
-    actual companion object Formatter: SimpleDateFormat()
+    actual companion object {
+        val formatter = SimpleDateFormat()
+    }
 }
