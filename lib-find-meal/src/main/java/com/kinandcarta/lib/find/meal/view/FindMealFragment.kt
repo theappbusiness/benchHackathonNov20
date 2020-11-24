@@ -122,7 +122,7 @@ class FindMealFragment : Fragment() {
     fun getLastLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location ->
             lastLocation = location
-            updateMeals(false)
+            updateMeals()
         }
     }
 
@@ -187,13 +187,13 @@ class FindMealFragment : Fragment() {
         mainScope.cancel() // TODO: We'd get this for free in a viewModel?
     }
 
-    private fun updateMeals(needReload: Boolean) {
+    private fun updateMeals() {
         val location = lastLocation ?: return
         progressBarView.isVisible = true
 
         mainScope.launch {
             kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit, needReload)
+                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
                 mealsAdapter.mealsList = it
                 mealsAdapter.notifyDataSetChanged()
