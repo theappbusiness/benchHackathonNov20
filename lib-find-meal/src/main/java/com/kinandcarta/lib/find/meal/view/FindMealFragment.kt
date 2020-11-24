@@ -25,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
-    private val swipeRefreshLayout: SwipeRefreshLayout by lazy { requireView().findViewById(R.id.swipeContainer) }
     private val viewModel: FindMealViewModel by viewModels()
     private val mealsAdapter = MealsAdapter()
 
@@ -42,7 +41,7 @@ class FindMealFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupUIWithView(view)
+        setupUI()
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
     }
 
@@ -60,10 +59,11 @@ class FindMealFragment : Fragment() {
         }
     }
 
-    private fun setupUIWithView(view: View) {
-        val mealsRecyclerView: RecyclerView = view.findViewById(R.id.rvMeals)
+    private fun setupUI() {
+        val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(context)
+        val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             viewModel.updateMeals(true)
@@ -97,6 +97,5 @@ class FindMealFragment : Fragment() {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
-        private const val REQUEST_CHECK_SETTINGS = 2 // TODO: Need to re-add this check somewhere?
     }
 }
