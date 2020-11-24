@@ -10,7 +10,7 @@ import SwiftUI
 import Strings
 import Theming
 import Components
-import LandingScreen
+import TabBar
 import SignUp
 
 public struct LoginView: View {
@@ -55,7 +55,7 @@ public struct LoginView: View {
 						GeometryReader { geometry in
 							let isDisabled = email.isEmpty || password.isEmpty
 							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
-							NavigationLink(destination: LandingView()) {
+							NavigationLink(destination: TabAppView(selectedView: 0)) {
 								Text(Strings.Login.loginButtonTitle)
 									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
 							}
