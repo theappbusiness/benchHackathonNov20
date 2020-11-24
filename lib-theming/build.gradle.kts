@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("kotlin-android-extensions")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 group = "com.kcc.kmmhackathon"
 version = "1.0-SNAPSHOT"
@@ -25,6 +27,11 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
 }
 
 android {

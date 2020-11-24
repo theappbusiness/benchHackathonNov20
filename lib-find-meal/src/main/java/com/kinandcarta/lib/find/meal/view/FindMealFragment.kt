@@ -31,8 +31,10 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.cancel
 
+@AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
     private val mainScope = MainScope()
