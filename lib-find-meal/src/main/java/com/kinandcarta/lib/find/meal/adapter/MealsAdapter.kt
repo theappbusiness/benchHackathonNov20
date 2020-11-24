@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.lib.find.meal.R
+import com.kinandcarta.lib.find.meal.viewmodel.Meals
 
-class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
+class MealsAdapter(
+    private var mealsList: List<Meal> = listOf(),
+    private var distanceUnit: DistanceUnit = DistanceUnit.miles
+) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -27,6 +31,12 @@ class MealsAdapter(var mealsList: List<Meal>, var distanceUnit: DistanceUnit) :
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
         holder.bindData(mealsList[position])
+    }
+
+    fun submit(meals: Meals, unit: DistanceUnit) {
+        mealsList = meals
+        distanceUnit = unit
+        notifyDataSetChanged()
     }
 
     inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

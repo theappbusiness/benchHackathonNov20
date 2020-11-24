@@ -32,6 +32,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.28-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
 }
 
 android {
