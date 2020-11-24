@@ -45,7 +45,7 @@ class MealApi {
             it.expiryDate = dateFormattingUtil.convertTimeStamp(it.expiryDate.toLong())
             it.availableFromDate = dateFormattingUtil.convertTimeStamp(it.availableFromDate.toLong())
         }
-        return meals.sortedWith(compareBy { it.distance })
+        return meals.sortedBy { it.distance }
     }
 
     suspend fun postMeal(meal: Meal): Meal {
