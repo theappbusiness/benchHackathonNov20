@@ -12,7 +12,7 @@ import Location
 import Theming
 import MealList
 import Strings
-import AddMeal
+import Settings
 
 public struct TabAppView: View {
 	
@@ -31,32 +31,31 @@ public struct TabAppView: View {
 			NavigationView {
 				MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))
 			}
-			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.TabView.Images.find)
 				Text(Strings.TabView.findButtonText)
 			}.tag(0)
 			.accentColor(ColorManager.appPrimary)
+            .navigationBarHidden(true)
 			
 			NavigationView {
 				MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
 			}
-			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.TabView.Images.listView)
 				Text(Strings.TabView.listViewText)
 			}.tag(1)
 			.accentColor(ColorManager.appPrimary)
+            .navigationBarHidden(true)
 			
 			NavigationView {
-				//TODO: Change this to the settings screen, once it is implemented.
-				AddMealView(sdk: sdk, locationManager: locationManager)
+                SettingsView()
 			}
-			.navigationBarHidden(true)
 			.tabItem {
 				Image(systemName: Strings.TabView.Images.settings)
 				Text(Strings.TabView.settings)
 			}.tag(2)
+            .navigationBarHidden(true)
 			.accentColor(ColorManager.appPrimary)
 		})
 		.accentColor(.white)

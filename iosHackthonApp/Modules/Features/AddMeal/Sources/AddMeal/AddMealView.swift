@@ -46,46 +46,48 @@ public struct AddMealView: View {
     }
 
     public var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 10) {
-                    InfoTextFieldsGroup(title: $title, info: $additionalInfo, quantity: $quantity)
-                    TemperatureButtonsGroup(isHot: $isHot)
-                    Spacer()
-                    DatePickers(availableFromDate: $availableFromDate, useByDate: $useByDate)
-                    Spacer()
-                    AddressTextFieldGroup(locationManager: locationManager, address: $address, latitude: $latitude, longitude: $longitude)
-                    Spacer()
-                    GeometryReader { geometry in
-                        Button(action: {
-                            postMeal(meal: createMeal())
-                        }) {
-                            Text(Strings.AddMealScreen.addMeal)
-                                .modifier(AddButtonStyle(width: geometry.size.width,
-                                                         backgroundColor: buttonColor))
+        NavigationView {
+            ZStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 10) {
+                        InfoTextFieldsGroup(title: $title, info: $additionalInfo, quantity: $quantity)
+                        TemperatureButtonsGroup(isHot: $isHot)
+                        Spacer()
+                        DatePickers(availableFromDate: $availableFromDate, useByDate: $useByDate)
+                        Spacer()
+                        AddressTextFieldGroup(locationManager: locationManager, address: $address, latitude: $latitude, longitude: $longitude)
+                        Spacer()
+                        GeometryReader { geometry in
+                            Button(action: {
+                                postMeal(meal: createMeal())
+                            }) {
+                                Text(Strings.AddMealScreen.addMeal)
+                                    .modifier(AddButtonStyle(width: geometry.size.width,
+                                                             backgroundColor: buttonColor))
+                            }
+                            .disabled(buttonIsDisabled)
                         }
-                        .disabled(buttonIsDisabled)
-                    }
-                    Spacer()
-                }.padding()
+                        Spacer()
+                    }.padding()
+                }
+                .navigationBarTitle(Strings.AddMealScreen.addMeal)
+                .onAppear() {
+                    address = "\(locationManager.address)"
+                }
             }
-            .navigationBarTitle(Strings.AddMealScreen.addMeal)
-            .onAppear() {
-                address = "\(locationManager.address)"
-            }
-        }
-        .alert(isPresented: $showingAlert) {
-            switch activeAlert {
-            case .collection:
-                return Alert(
-                    title: Text(code),
-                    message: Text(Strings.AddMealScreen.CollectionAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
-            default:
-                return Alert(
-                    title: Text(Strings.Common.sorry),
-                    message: Text(Strings.Common.ErrorAlert.message),
-                    dismissButton: .default(Text(Strings.Common.ok)))
+            .alert(isPresented: $showingAlert) {
+                switch activeAlert {
+                case .collection:
+                    return Alert(
+                        title: Text(code),
+                        message: Text(Strings.AddMealScreen.CollectionAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                default:
+                    return Alert(
+                        title: Text(Strings.Common.sorry),
+                        message: Text(Strings.Common.ErrorAlert.message),
+                        dismissButton: .default(Text(Strings.Common.ok)))
+                }
             }
         }
     }
@@ -134,7 +136,7 @@ private extension AddMealView {
                 Text(Strings.AddMealScreen.temperature)
                 HStack {
                     Button(action: {
-                    isHot.toggle()
+                        isHot.toggle()
                     }) {
                         Image(systemName: Strings.Common.Images.hotFood)
                             .modifier(IconButtonImageStyle(color: hotFoodColor))

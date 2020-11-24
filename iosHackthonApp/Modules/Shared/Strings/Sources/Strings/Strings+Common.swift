@@ -19,6 +19,7 @@ public extension Strings.Common.Images {
     static let hotFood = "flame"
     static let coldFood = "snow"
     static let location = "location"
+    static let add = "plus"
 }
 public extension Strings.Common.Date {
     static let americanFormat = "yyyy-MM-dd' 'HH:mm:ssZ"

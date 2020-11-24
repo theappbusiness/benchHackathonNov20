@@ -28,19 +28,20 @@ public struct MealListView: View {
 			}
 			.navigationBarTitle(Strings.MealListScreen.title)
             .navigationBarItems(leading:
-                                    NavigationLink(destination: AddMealView(sdk: viewModel.sdk,
-                                                                            locationManager: viewModel.locationManager),
-                                                   label: {
-                                                    Image(systemName: "plus")
-                                                        .foregroundColor(.white)
-                                                   }),
+                                    Button(action: { viewModel.isAddMealShowing = true }) {
+                                        Image(systemName: Strings.Common.Images.add)
+                                    },
                                 trailing:
-									Button(action: {
-										self.viewModel.loadMeals(forceReload: true)
-									}, label: {
-										Image(systemName: Strings.MealListScreen.Images.reload)
-											.foregroundColor(.white)
-									}))
+                                    Button(action: {
+                                        self.viewModel.loadMeals(forceReload: true)
+                                    }, label: {
+                                        Image(systemName: Strings.MealListScreen.Images.reload)
+
+                                    }))
+                .foregroundColor(.white)
+            .sheet(isPresented: $viewModel.isAddMealShowing, content: {
+                AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
+            })
 			.alert(isPresented: $viewModel.showingAlert) {
 				switch viewModel.activeAlert {
 				case .unavailable:
