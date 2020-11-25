@@ -18,6 +18,8 @@ public struct LoginView: View {
 	@State private var email: String = ""
 	@State private var password: String = ""
 	@State private var loginSucessful: Bool = false
+	@State private var showingAlert = false
+	@State private var activeAlert: ActiveAlert = .collection
 	private let coloredNavAppearance = UINavigationBarAppearance()
 	private let firebase: FirebaseAuthenticationStore
 	private let authorizationStore: AuthorizationStoreType
@@ -92,6 +94,12 @@ public struct LoginView: View {
 		.onAppear() {
 			loginSucessful = authorizationStore.isUserAuthorized()
 		}
+		.alert(isPresented: $showingAlert) {
+				return Alert(
+					title: Text(Strings.Login.invalidLoginTitle),
+					message: Text(Strings.Login.invalidLoginMessage),
+					dismissButton: .default(Text(Strings.Common.ok)))
+		}
 	}
 }
 
@@ -99,11 +107,12 @@ extension LoginView {
 	func login(email: String, password: String) {
 		//TODO: API key should be in the shared layer
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
-			if (result != nil) {
+			if (result?.idToken != nil) {
 				self.loginSucessful = true
 				authorizationStore.storeUserLoggedInStatus(true)
 			} else {
 				print("error")
+				showingAlert.toggle()
 			}
 		})
 	}

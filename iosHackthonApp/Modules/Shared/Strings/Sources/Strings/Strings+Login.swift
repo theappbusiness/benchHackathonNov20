@@ -11,4 +11,6 @@ public extension Strings.Login {
 	static let passwordPlaceholder = "Enter your password"
 	static let loginButtonTitle = "Login"
 	static let signupButtonTitle = "Don't have an account? Sign up"
+	static let invalidLoginTitle = "Sorry"
+	static let invalidLoginMessage = "You have entered invalid credentials"
 }
