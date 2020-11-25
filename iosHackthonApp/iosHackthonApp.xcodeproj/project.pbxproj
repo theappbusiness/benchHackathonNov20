@@ -11,7 +11,6 @@
 		46CF22DE2567ED9900CD15D7 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = 46CF22DD2567ED9900CD15D7 /* SignUp */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		7555FFA1242A565B00829871 /* iosHackthonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */; };
-		C39352982562C09E0087DEF8 /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = C39352972562C09E0087DEF8 /* MealList */; };
 		CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF10B25558B160054D2AA /* AppDelegate.swift */; };
 		CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */; };
 		CE0EF12325558B510054D2AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11E25558B500054D2AA /* Assets.xcassets */; };
@@ -48,7 +47,6 @@
 		7555FFA0242A565B00829871 /* iosHackthonAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosHackthonAppUITests.swift; sourceTree = "<group>"; };
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7555FFB1242A642300829871 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = "../shared/build/xcode-frameworks/shared.framework"; sourceTree = "<group>"; };
-		C39352872562BE260087DEF8 /* MealList */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MealList; path = Modules/Features/MealList; sourceTree = "<group>"; };
 		CE0EF10B25558B160054D2AA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CE0EF11C25558B500054D2AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C39352982562C09E0087DEF8 /* MealList in Frameworks */,
 				CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */,
 				46CF22CD2567E69200CD15D7 /* Login in Frameworks */,
 				CEE262C0256E552800721A2D /* Settings in Frameworks */,
@@ -149,7 +146,6 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C39352872562BE260087DEF8 /* MealList */,
 				7555FFB1242A642300829871 /* shared.framework */,
 			);
 			name = Frameworks;
@@ -200,7 +196,6 @@
 			);
 			name = iosHackthonApp;
 			packageProductDependencies = (
-				C39352972562C09E0087DEF8 /* MealList */,
 				CE9EEEFE2563C820005F5432 /* TabBar */,
 				CE48C6922563C9F700EB29FD /* AddMeal */,
 				46CF22CC2567E69200CD15D7 /* Login */,
@@ -684,10 +679,6 @@
 		46CF22DD2567ED9900CD15D7 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SignUp;
-		};
-		C39352972562C09E0087DEF8 /* MealList */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MealList;
 		};
 		CE48C6922563C9F700EB29FD /* AddMeal */ = {
 			isa = XCSwiftPackageProductDependency;
