@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import shared
 import Strings
 import Theming
 import Components
 import TabBar
 import SignUp
-import shared
+
 
 public struct LoginView: View {
 	@State private var email: String = ""
@@ -20,9 +21,10 @@ public struct LoginView: View {
 	@State private var loginSucessful: Bool = false
 	@State private var isUserLoggedIn = UserDefaults.standard.bool(forKey: "UserLoggedIn")
 	let coloredNavAppearance = UINavigationBarAppearance()
-	private var firebase = FirebaseAuthenticationStore()
+	private var firebase: FirebaseAuthenticationStore
 
-	public init() {
+	public init(firebase: FirebaseAuthenticationStore) {
+		self.firebase = firebase
 		coloredNavAppearance.configureWithOpaqueBackground()
 		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
 		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -113,7 +115,7 @@ extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
 	static var previews: some View {
-		LoginView()
+		LoginView(firebase: FirebaseAuthenticationStore())
 	}
 }
 
