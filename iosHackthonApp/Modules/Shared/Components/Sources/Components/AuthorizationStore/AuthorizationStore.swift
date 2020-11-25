@@ -8,7 +8,6 @@
 import Foundation
 
 public protocol AuthorizationStoreType {
-
 	func storeUserLoggedInStatus(_ isUserLoggedIn: Bool)
 	func isUserAuthorized() -> Bool
 	func clearCache()
@@ -17,7 +16,6 @@ public protocol AuthorizationStoreType {
 public final class AuthorizationStore: AuthorizationStoreType {
 
 	private let userLoggedInStatus = "userLoggedInStatus"
-
 	let backingStore: UserDefaults
 
 	public init(backingStore: UserDefaults) {
