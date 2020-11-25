@@ -1,5 +1,6 @@
 import UIKit
 import SwiftUI
+import Components
 import shared
 import Login
 
@@ -10,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-		let loginView = LoginView(firebase: FirebaseAuthenticationStore())
+		let loginView = LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(backingStore: UserDefaults.standard))
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

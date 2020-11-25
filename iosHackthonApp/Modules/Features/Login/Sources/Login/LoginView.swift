@@ -8,23 +8,23 @@
 
 import SwiftUI
 import shared
+import Components
 import Strings
 import Theming
-import Components
 import TabBar
 import SignUp
-
 
 public struct LoginView: View {
 	@State private var email: String = ""
 	@State private var password: String = ""
 	@State private var loginSucessful: Bool = false
-	@State private var isUserLoggedIn = UserDefaults.standard.bool(forKey: "UserLoggedIn")
-	let coloredNavAppearance = UINavigationBarAppearance()
-	private var firebase: FirebaseAuthenticationStore
+	private let coloredNavAppearance = UINavigationBarAppearance()
+	private let firebase: FirebaseAuthenticationStore
+	private let authorizationStore: AuthorizationStoreType
 
-	public init(firebase: FirebaseAuthenticationStore) {
+	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStoreType) {
 		self.firebase = firebase
+		self.authorizationStore = authorizationStore
 		coloredNavAppearance.configureWithOpaqueBackground()
 		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
 		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -90,10 +90,7 @@ public struct LoginView: View {
 		}
 		.accentColor(.white)
 		.onAppear() {
-			if isUserLoggedIn {
-				loginSucessful = true
-			}
-
+			loginSucessful = authorizationStore.isUserAuthorized()
 		}
 	}
 }
@@ -104,10 +101,11 @@ extension LoginView {
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result != nil) {
 				self.loginSucessful = true
-				UserDefaults.standard.set(self.loginSucessful, forKey: "UserLoggedIn")
+				authorizationStore.storeUserLoggedInStatus(true)
 			} else {
 				print("error")
 			}
+
 
 		})
 	}
@@ -115,7 +113,7 @@ extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
 	static var previews: some View {
-		LoginView(firebase: FirebaseAuthenticationStore())
+		LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(backingStore: UserDefaults.standard))
 	}
 }
 
