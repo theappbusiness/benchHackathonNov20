@@ -97,7 +97,7 @@ public struct LoginView: View {
 
 extension LoginView {
 	func login(email: String, password: String) {
-		//TODO: store the API key somewhere else securely
+		//TODO: API key should be in the shared layer
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result != nil) {
 				self.loginSucessful = true
