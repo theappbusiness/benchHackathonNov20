@@ -27,7 +27,7 @@ class FindMealFragment : Fragment() {
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()
 
-    private val mealsAdapter = MealsAdapter() { id -> viewModel.reserveAMeal(id)}
+    private val mealsAdapter = MealsAdapter() { id, position -> viewModel.reserveAMeal(id, position)}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -92,6 +92,7 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
+        mealsAdapter.notifyItemChanged(state.position)
         showToast("Your meal reservation code is ${state.code}")
     }
 

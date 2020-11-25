@@ -16,7 +16,7 @@ import com.kinandcarta.lib.find.meal.viewmodel.Meals
 class MealsAdapter(
     private var mealsList: List<Meal> = listOf(),
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
-    private var clickListener: (String) -> Unit
+    private val clickListener: (String, Int) -> Unit
 ) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
@@ -30,7 +30,7 @@ class MealsAdapter(
     }
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
-        holder.bindData(mealsList[position])
+        holder.bindData(mealsList[position], position)
     }
 
     fun submit(meals: Meals, unit: DistanceUnit) {
@@ -49,7 +49,7 @@ class MealsAdapter(
         private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
         private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
 
-        fun bindData(meal: Meal) {
+        fun bindData(meal: Meal, position: Int) {
             nameView.text = meal.name
             val tempString = if (meal.hot) "Hot" else "Cold"
             val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
@@ -83,7 +83,7 @@ class MealsAdapter(
 
             if (hasPortions) {
                 reserveButton.setOnClickListener {
-                    clickListener(meal.id)
+                    clickListener(meal.id, position)
                 }
             } else {
                 reserveButton.setOnClickListener(null)
