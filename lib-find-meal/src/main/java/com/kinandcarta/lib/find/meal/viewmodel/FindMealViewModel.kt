@@ -1,7 +1,6 @@
 package com.kinandcarta.lib.find.meal.viewmodel
 
 import android.location.Location
-import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -26,8 +25,8 @@ class FindMealViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class ReservedMeal(val code: String) : State()
         data class Failed(val failure: Failure) : State()
-        data class ReservedMeal(val meal: Meal) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
@@ -92,11 +91,15 @@ class FindMealViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 sdk.reserveAMeal(id)
             }.onSuccess {
-                _state.value = State.ReservedMeal(it)
+                _state.value = State.ReservedMeal(getReservationCode(it.id))
                 updateMeals()
             }.onFailure {
                 _state.value = State.Failed(Failure.ReserveAMealFailed(it))
             }
         }
+    }
+
+    private fun getReservationCode(id: String): String {
+        return "${id.subSequence(id.length - 4, id.length)}"
     }
 }

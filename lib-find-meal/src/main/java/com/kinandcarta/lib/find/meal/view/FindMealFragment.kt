@@ -77,10 +77,10 @@ class FindMealFragment : Fragment() {
                 progressBarView.isVisible = true
             is FindMealViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
-            is FindMealViewModel.State.Failed ->
-                onFailure(state.failure)
             is FindMealViewModel.State.ReservedMeal ->
                 onReservedMeal(state)
+            is FindMealViewModel.State.Failed ->
+                onFailure(state.failure)
         }
     }
 
@@ -90,9 +90,7 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
-        val id = state.meal.id
-        val code = id.subSequence(id.length - 4, id.length)
-        showToast("Your meal reservation code is ${code}")
+        showToast("Your meal reservation code is ${state.code}")
     }
 
     private fun onFailure(failure: FindMealViewModel.Failure) {
