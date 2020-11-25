@@ -2,10 +2,13 @@ import com.kcc.kmmhackathon.shared.entity.FirebaseAuthenticationResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.features.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.HttpStatement
+import io.ktor.client.statement.readText
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import kotlinx.serialization.json.Json
 import io.ktor.http.*
+
 
 class FirebaseAuthenticationStore : AuthenticationStore {
 
@@ -38,12 +41,20 @@ class FirebaseAuthenticationStore : AuthenticationStore {
         email: String,
         password: String,
         returnSecureToken: Boolean
-    ): FirebaseAuthenticationResponse = httpClient.post {
-        url("$BASE_URL$endpoint")
-        parameter("key", apiKey)
-        parameter("email", email)
-        parameter("password", password)
-        parameter("returnSecureToken", returnSecureToken)
+    ): FirebaseAuthenticationResponse {
+        return try {
+            httpClient.post {
+                url("$BASE_URL$endpoint")
+                parameter("key", apiKey)
+                parameter("email", email)
+                parameter("password", password)
+                parameter("returnSecureToken", returnSecureToken)
+            }
+        } catch (cause: Throwable) {
+            FirebaseAuthenticationResponse(
+                message = cause.message ?: ""
+            )
+        }
     }
 
     companion object {
