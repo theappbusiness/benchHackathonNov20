@@ -58,7 +58,7 @@ public struct MealListView: View {
                 case .error:
                     return Alert(
                         title: Text(Strings.Common.sorry),
-                        message: Text(Strings.Common.ErrorAlert.message),
+                        message: Text(Strings.Common.ErrorAlert.loadingMessage),
                         dismissButton: .default(Text(Strings.Common.ok)))
                 }
             }

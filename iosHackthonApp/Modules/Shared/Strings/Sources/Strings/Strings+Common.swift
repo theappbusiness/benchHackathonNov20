@@ -13,7 +13,8 @@ public extension Strings.Common {
     static let unknown = "Unknown"
 }
 public extension Strings.Common.ErrorAlert {
-    static let message = "There was an error creating your meal.\n please try again"
+    static let creatingMessage = "There was an error creating your meal.\n please try again"
+    static let loadingMessage = "There was an error loading the meals.\n please try again"
 }
 public extension Strings.Common.Images {
     static let hotFood = "flame"

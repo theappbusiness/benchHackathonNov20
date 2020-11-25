@@ -41,6 +41,8 @@ public final class MealListViewModel: ObservableObject {
             guard
                 let meals = meals,
                 error == nil else {
+                self.activeAlert = .error
+                self.showingAlert.toggle()
                 print(error!.localizedDescription)
                 return
             }

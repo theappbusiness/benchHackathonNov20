@@ -85,7 +85,7 @@ public struct AddMealView: View {
                 default:
                     return Alert(
                         title: Text(Strings.Common.sorry),
-                        message: Text(Strings.Common.ErrorAlert.message),
+                        message: Text(Strings.Common.ErrorAlert.creatingMessage),
                         dismissButton: .default(Text(Strings.Common.ok)))
                 }
             }
