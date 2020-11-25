@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.adapter
+package com.kinandcarta.feature.find.meal.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
-import com.kinandcarta.lib.find.meal.R
-import com.kinandcarta.lib.find.meal.viewmodel.Meals
+import com.kinandcarta.feature.find.meal.R
+import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var mealsList: List<Meal> = listOf(),

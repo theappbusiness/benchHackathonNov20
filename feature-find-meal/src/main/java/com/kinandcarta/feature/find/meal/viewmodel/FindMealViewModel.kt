@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.viewmodel
+package com.kinandcarta.feature.find.meal.viewmodel
 
 import android.location.Location
 import androidx.annotation.RequiresPermission

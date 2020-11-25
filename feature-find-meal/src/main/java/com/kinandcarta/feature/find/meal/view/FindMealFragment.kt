@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.view
+package com.kinandcarta.feature.find.meal.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,12 +13,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.kinandcarta.lib.find.meal.R
-import com.kinandcarta.lib.find.meal.adapter.MealsAdapter
-import com.kinandcarta.lib.find.meal.extension.requestFineLocationPermission
-import com.kinandcarta.lib.find.meal.extension.showToast
-import com.kinandcarta.lib.find.meal.utility.PermissionResultParser
-import com.kinandcarta.lib.find.meal.viewmodel.FindMealViewModel
+import com.kinandcarta.feature.find.meal.R
+import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
+import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
+import com.kinandcarta.feature.find.meal.extension.showToast
+import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
+import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
