@@ -29,14 +29,13 @@ public final class MealListViewModel: ObservableObject {
     public init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk
         self.locationManager = locationManager
-        self.loadMeals(forceReload: false)
+        self.loadMeals()
     }
 
-    func loadMeals(forceReload: Bool) {
+    func loadMeals() {
         sdk.getSortedMeals(userLat: locationManager.userLatitude,
                            userLon: locationManager.userLongitude,
                            distanceUnit: DistanceUnit.km,
-                           forceReload: forceReload,
                            completionHandler: { meals, error in
             guard
                 let meals = meals,
@@ -74,7 +73,7 @@ public final class MealListViewModel: ObservableObject {
                 error == nil else {
                 self.activeAlert = .error
                 self.showingAlert.toggle()
-                self.loadMeals(forceReload: true)
+                self.loadMeals()
                 return
             }
             if updatedMeal.quantity > 0 {
@@ -82,19 +81,18 @@ public final class MealListViewModel: ObservableObject {
                     guard let meal = meal else {
                         self.activeAlert = .error
                         self.showingAlert.toggle()
-                        self.loadMeals(forceReload: true)
+                        self.loadMeals()
                         return
                     }
                     self.code = meal.id.last4Chars()
                     self.activeAlert = .collection
                     self.showingAlert.toggle()
-                    self.loadMeals(forceReload: true)
                 }
             } else {
                 self.activeAlert = .unavailable
                 self.showingAlert.toggle()
-                self.loadMeals(forceReload: true)
             }
+            self.loadMeals()
         }
     }
 }

@@ -31,13 +31,13 @@ public struct MealMapView: View {
 		.navigationBarTitle(Strings.MealListScreen.title)
 		.navigationBarItems(trailing:
 								Button(action: {
-									self.viewModel.loadMeals(forceReload: true)
+									self.viewModel.loadMeals()
 								}, label: {
 									Image(systemName: Strings.MealListScreen.Images.reload)
 										.foregroundColor(.white)
 								}))
 		.onAppear(perform: {
-			viewModel.loadMeals(forceReload: true)
+			viewModel.loadMeals()
 		})
 	}
 }
