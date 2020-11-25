@@ -19,6 +19,7 @@
 		CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */ = {isa = PBXBuildFile; productRef = CE48C6922563C9F700EB29FD /* AddMeal */; };
 		CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEFE2563C820005F5432 /* TabBar */; };
 		CEE262C0256E552800721A2D /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = CEE262BF256E552800721A2D /* Settings */; };
+		CEE262C8256E648E00721A2D /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = CEE262C7256E648E00721A2D /* MealList */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 				CEE262C0256E552800721A2D /* Settings in Frameworks */,
 				46CF22DE2567ED9900CD15D7 /* SignUp in Frameworks */,
 				CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */,
+				CEE262C8256E648E00721A2D /* MealList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +203,7 @@
 				46CF22CC2567E69200CD15D7 /* Login */,
 				46CF22DD2567ED9900CD15D7 /* SignUp */,
 				CEE262BF256E552800721A2D /* Settings */,
+				CEE262C7256E648E00721A2D /* MealList */,
 			);
 			productName = iosHackthonApp;
 			productReference = 7555FF7B242A565900829871 /* iosHackthonApp.app */;
@@ -691,6 +694,10 @@
 		CEE262BF256E552800721A2D /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Settings;
+		};
+		CEE262C7256E648E00721A2D /* MealList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MealList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
