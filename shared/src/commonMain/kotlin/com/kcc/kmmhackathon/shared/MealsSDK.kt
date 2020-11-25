@@ -17,6 +17,10 @@ class MealsSDK {
         return api.getSortedMeals(userLat, userLon, distanceUnit)
     }
 
+    @Throws(Exception::class) suspend fun reserveAMeal(id: String): Meal {
+        return api.reserveAMeal(id)
+    }
+
     @Throws(Exception::class) suspend fun postMeal(meal: Meal): Meal {
         return api.postMeal(meal)
     }

@@ -62,6 +62,14 @@ class MealApi {
         }
     }
 
+    suspend fun reserveAMeal(id: String): Meal {
+        var meal = getMeal(id)
+        if (meal.quantity > 0) {
+            return patchMeal(id, meal.quantity - 1)
+        }
+        return meal
+    }
+
     companion object {
         private val endpoint = MealEndpoint().endpointString
     }
