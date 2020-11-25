@@ -2,8 +2,6 @@ package com.kcc.kmmhackathon.shared.network
 
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.entity.Quantity
-import com.kcc.kmmhackathon.shared.utility.*
-import com.kcc.kmmhackathon.shared.utility.extensions.isBefore
 import io.ktor.client.HttpClient
 import io.ktor.client.request.*
 import io.ktor.client.features.json.JsonFeature
@@ -12,9 +10,6 @@ import kotlinx.serialization.json.Json
 import io.ktor.http.*
 
 class MealApi {
-
-    private val locationUtil = LocationUtil()
-    private val dateFormattingUtil = DateFormattingUtil()
 
     private val httpClient = HttpClient {
         install(JsonFeature) {
@@ -31,23 +26,6 @@ class MealApi {
         return httpClient.get(endpoint)
     }
 
-    suspend fun getSortedMeals(userLat: Double, userLon: Double, distanceUnit: DistanceUnit): List<Meal> {
-        var meals: List<Meal> = getAllMeals()
-        meals.filter { SharedDate().isBefore(SharedDate(it.expiryDate.toLong())) }
-        meals.forEach {
-            it.distance = locationUtil.getDistance(
-                userLat,
-                userLon,
-                it.locationLat.toDouble(),
-                it.locationLong.toDouble(),
-                distanceUnit
-            )
-            it.expiryDate = dateFormattingUtil.convertTimeStamp(it.expiryDate.toLong())
-            it.availableFromDate = dateFormattingUtil.convertTimeStamp(it.availableFromDate.toLong())
-        }
-        return meals.sortedBy { it.distance }
-    }
-
     suspend fun postMeal(meal: Meal): Meal {
         return httpClient.post(endpoint) {
             contentType(ContentType.Application.Json)
@@ -60,14 +38,6 @@ class MealApi {
             contentType(ContentType.Application.Json)
             body = Quantity(quantity)
         }
-    }
-
-    suspend fun reserveAMeal(id: String): Meal {
-        var meal = getMeal(id)
-        if (meal.quantity > 0) {
-            return patchMeal(id, meal.quantity - 1)
-        }
-        return meal
     }
 
     companion object {
