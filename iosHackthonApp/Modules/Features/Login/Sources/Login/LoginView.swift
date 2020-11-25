@@ -97,7 +97,7 @@ public struct LoginView: View {
 
 extension LoginView {
 	func login(email: String, password: String) {
-		//TODO: store this key somewhere else
+		//TODO: store the API key somewhere else securely
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result != nil) {
 				self.loginSucessful = true
@@ -105,8 +105,6 @@ extension LoginView {
 			} else {
 				print("error")
 			}
-
-
 		})
 	}
 }
