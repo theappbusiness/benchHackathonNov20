@@ -119,7 +119,7 @@ extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
 	static var previews: some View {
-		LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(backingStore: UserDefaults.standard))
+		LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 	}
 }
 

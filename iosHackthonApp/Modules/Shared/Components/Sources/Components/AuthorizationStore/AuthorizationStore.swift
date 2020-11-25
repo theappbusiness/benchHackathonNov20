@@ -16,24 +16,24 @@ public protocol AuthorizationStoreType {
 public final class AuthorizationStore: AuthorizationStoreType {
 
 	private let userLoggedInStatus = "userLoggedInStatus"
-	let backingStore: UserDefaults
+	let cache: UserDefaults
 
-	public init(backingStore: UserDefaults) {
-		self.backingStore = backingStore
+	public init(cache: UserDefaults) {
+		self.cache = cache
 	}
 
 	public func storeUserLoggedInStatus(_ isUserLoggedIn: Bool) {
-		backingStore.set(isUserLoggedIn, forKey: userLoggedInStatus)
+		cache.set(isUserLoggedIn, forKey: userLoggedInStatus)
 	}
 
 	public func isUserAuthorized() -> Bool {
-		guard let isUserLoggedIn = backingStore.value(forKey: userLoggedInStatus) as? Bool else {
+		guard let isUserLoggedIn = cache.value(forKey: userLoggedInStatus) as? Bool else {
 			return false
 		}
 		return isUserLoggedIn
 	}
 
 	public func clearCache() {
-		backingStore.set(nil, forKey: userLoggedInStatus)
+		cache.set(nil, forKey: userLoggedInStatus)
 	}
 }
