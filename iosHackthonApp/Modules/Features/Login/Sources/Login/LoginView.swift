@@ -53,6 +53,7 @@ public struct LoginView: View {
 						Text(Strings.Login.email)
 						TextField(Strings.Login.emailPlaceholder, text: $email)
 							.modifier(GreyTextFieldStyle())
+							.autocapitalization(.none)
 						Text(Strings.Login.password)
 						SecureField(Strings.Login.passwordPlaceholder, text: $password)
 							.modifier(GreyTextFieldStyle())
@@ -62,7 +63,6 @@ public struct LoginView: View {
 							NavigationLink(destination: TabAppView(selectedView: 0), isActive: $loginSucessful) {
 								Text("")
 							}
-
 							let isDisabled = email.isEmpty || password.isEmpty
 							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
 							Button(action: {
@@ -95,10 +95,10 @@ public struct LoginView: View {
 			loginSucessful = authorizationStore.isUserAuthorized()
 		}
 		.alert(isPresented: $showingAlert) {
-				return Alert(
-					title: Text(Strings.Login.invalidLoginTitle),
-					message: Text(Strings.Login.invalidLoginMessage),
-					dismissButton: .default(Text(Strings.Common.ok)))
+			return Alert(
+				title: Text(Strings.Login.invalidLoginTitle),
+				message: Text(Strings.Login.invalidLoginMessage),
+				dismissButton: .default(Text(Strings.Common.ok)))
 		}
 	}
 }
@@ -111,7 +111,6 @@ extension LoginView {
 				self.loginSucessful = true
 				authorizationStore.storeUserLoggedInStatus(true)
 			} else {
-				print("error")
 				showingAlert.toggle()
 			}
 		})
