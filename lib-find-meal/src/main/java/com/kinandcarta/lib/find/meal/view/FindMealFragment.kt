@@ -79,6 +79,8 @@ class FindMealFragment : Fragment() {
                 onLoadedMeals(state)
             is FindMealViewModel.State.Failed ->
                 onFailure(state.failure)
+            is FindMealViewModel.State.ReservedMeal ->
+                onReservedMeal(state)
         }
     }
 
@@ -87,11 +89,20 @@ class FindMealFragment : Fragment() {
         mealsAdapter.submit(state.meals, state.distanceUnit)
     }
 
+    private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
+        val id = state.meal.id
+        val code = id.subSequence(id.length - 4, id.length)
+        showToast("Your meal reservation code is ${code}")
+    }
+
     private fun onFailure(failure: FindMealViewModel.Failure) {
         when (failure) {
             is FindMealViewModel.Failure.LoadingMealsFailed -> {
                 progressBarView.isVisible = false
                 showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
+            }
+            is FindMealViewModel.Failure.ReserveAMealFailed -> {
+                showToast(failure.localizedMessage ?: "An unexpected error occurred reserving a meal")
             }
         }
     }

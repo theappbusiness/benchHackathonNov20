@@ -27,6 +27,7 @@ class FindMealViewModel @ViewModelInject constructor(
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
         data class Failed(val failure: Failure) : State()
+        data class ReservedMeal(val meal: Meal) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
@@ -91,7 +92,7 @@ class FindMealViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 sdk.reserveAMeal(id)
             }.onSuccess {
-                Log.i("Reserve a meal", "${it.quantity}")
+                _state.value = State.ReservedMeal(it)
                 updateMeals()
             }.onFailure {
                 _state.value = State.Failed(Failure.ReserveAMealFailed(it))
