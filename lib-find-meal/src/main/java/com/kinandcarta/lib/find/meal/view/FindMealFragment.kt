@@ -26,7 +26,8 @@ class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()
-    private val mealsAdapter = MealsAdapter()
+
+    private val mealsAdapter = MealsAdapter() { id -> viewModel.reserveAMeal(id)}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

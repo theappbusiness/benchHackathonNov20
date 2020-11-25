@@ -16,7 +16,8 @@ import com.kinandcarta.lib.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var mealsList: List<Meal> = listOf(),
-    private var distanceUnit: DistanceUnit = DistanceUnit.miles
+    private var distanceUnit: DistanceUnit = DistanceUnit.miles,
+    private var clickListener: (String) -> Unit
 ) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
@@ -82,10 +83,7 @@ class MealsAdapter(
             )
             if (hasPortions) {
                 reserveButton.setOnClickListener {
-                    // TODO link up to sdk and adjust quantity and show user reservation code
-                    val id = meal.id
-                    val code = id.subSequence(id.length - 4, id.length)
-                    Log.i("Reserve button tapped", "${meal.name} reservation code ${code}")
+                    clickListener(meal.id)
                 }
             }
         }
