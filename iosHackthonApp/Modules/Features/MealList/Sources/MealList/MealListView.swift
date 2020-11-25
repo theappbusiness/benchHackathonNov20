@@ -56,7 +56,15 @@ public struct MealListView: View {
 		.onAppear(perform: {
 			viewModel.loadMeals()
 		})
-	}
+        .gesture(
+            DragGesture().onChanged( { value in
+                print(value)
+                if value.location.y < 50 {
+                    viewModel.didDragToDismiss.toggle()
+                }
+            }
+        ))
+    }
 }
 
 extension Meal: Identifiable { }

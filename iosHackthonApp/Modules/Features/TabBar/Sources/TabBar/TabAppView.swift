@@ -38,15 +38,15 @@ public struct TabAppView: View {
 			}.tag(0)
 			.accentColor(ColorManager.appPrimary)
 			
-			NavigationView {
-				MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
-			}
-			.navigationBarHidden(true)
-			.tabItem {
-				Image(systemName: Strings.TabView.Images.listView)
-				Text(Strings.TabView.listViewText)
-			}.tag(1)
-			.accentColor(ColorManager.appPrimary)
+//			NavigationView {
+//				MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
+//			}
+//			.navigationBarHidden(true)
+//			.tabItem {
+//				Image(systemName: Strings.TabView.Images.listView)
+//				Text(Strings.TabView.listViewText)
+//			}.tag(1)
+//			.accentColor(ColorManager.appPrimary)
 			
 			NavigationView {
 				//TODO: Change this to the settings screen, once it is implemented.
@@ -56,7 +56,7 @@ public struct TabAppView: View {
 			.tabItem {
 				Image(systemName: Strings.TabView.Images.settings)
 				Text(Strings.TabView.settings)
-			}.tag(2)
+			}.tag(1)
 			.accentColor(ColorManager.appPrimary)
 		})
 		.accentColor(.white)
