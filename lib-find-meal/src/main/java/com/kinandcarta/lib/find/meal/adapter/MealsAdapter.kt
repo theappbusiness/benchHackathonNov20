@@ -1,6 +1,5 @@
 package com.kinandcarta.lib.find.meal.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,8 @@ import com.kinandcarta.lib.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var mealsList: List<Meal> = listOf(),
-    private var distanceUnit: DistanceUnit = DistanceUnit.miles
+    private var distanceUnit: DistanceUnit = DistanceUnit.miles,
+    private val clickListener: (String, Int) -> Unit
 ) :
     RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
 
@@ -30,7 +30,7 @@ class MealsAdapter(
     }
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
-        holder.bindData(mealsList[position])
+        holder.bindData(mealsList[position], position)
     }
 
     fun submit(meals: Meals, unit: DistanceUnit) {
@@ -49,7 +49,7 @@ class MealsAdapter(
         private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
         private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
 
-        fun bindData(meal: Meal) {
+        fun bindData(meal: Meal, position: Int) {
             nameView.text = meal.name
             val tempString = if (meal.hot) "Hot" else "Cold"
             val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
@@ -80,13 +80,13 @@ class MealsAdapter(
                     reserveButtonColor
                 )
             )
+
             if (hasPortions) {
                 reserveButton.setOnClickListener {
-                    // TODO link up to sdk and adjust quantity and show user reservation code
-                    val id = meal.id
-                    val code = id.subSequence(id.length - 4, id.length)
-                    Log.i("Reserve button tapped", "${meal.name} reservation code ${code}")
+                    clickListener(meal.id, position)
                 }
+            } else {
+                reserveButton.setOnClickListener(null)
             }
         }
     }
