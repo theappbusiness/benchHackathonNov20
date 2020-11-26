@@ -15,26 +15,19 @@ import TabBar
 import SignUp
 
 public struct LoginView: View {
-	@State private var email: String = ""
-	@State private var password: String = ""
-	@State private var showingAlert = false
-	@State private var activeAlert: ActiveAlert = .collection
-	@State var isLoading: Bool = false
-	private let coloredNavAppearance = UINavigationBarAppearance()
-	private let firebase: FirebaseAuthenticationStore
-	@ObservedObject private var authorizationStore: AuthorizationStore
-	
-	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
-		self.firebase = firebase
-		self.authorizationStore = authorizationStore
-		coloredNavAppearance.configureWithOpaqueBackground()
-		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
-		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-		coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-		UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-		UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+
+	@ObservedObject private var loginViewModel: LoginViewModel
+
+	public init(viewModel: LoginViewModel) {
+		self.loginViewModel = viewModel
+		self.loginViewModel.coloredNavAppearance.configureWithOpaqueBackground()
+		self.loginViewModel.coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
+		self.loginViewModel.coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+		self.loginViewModel.coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+		UINavigationBar.appearance().standardAppearance = self.loginViewModel.coloredNavAppearance
+		UINavigationBar.appearance().scrollEdgeAppearance = self.loginViewModel.coloredNavAppearance
 	}
-	
+
 	public var body: some View {
 		
 		NavigationView {
@@ -52,29 +45,29 @@ public struct LoginView: View {
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
 						Text(Strings.Login.email)
-						TextField(Strings.Login.emailPlaceholder, text: $email)
+						TextField(Strings.Login.emailPlaceholder, text: $loginViewModel.email)
 							.modifier(GreyTextFieldStyle())
 							.autocapitalization(.none)
 							.disableAutocorrection(true)
 						Text(Strings.Login.password)
-						SecureField(Strings.Login.passwordPlaceholder, text: $password)
+						SecureField(Strings.Login.passwordPlaceholder, text: $loginViewModel.password)
 							.modifier(GreyTextFieldStyle())
 						Spacer()
 						
 						GeometryReader { geometry in
 							ZStack {
-								if self.isLoading {
+								if loginViewModel.isLoading {
 									ProgressView()
 										.zIndex(1)
 								}
 								
-								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(authorizationStore.isAuthorised)) {
+								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(loginViewModel.authorizationStore.isAuthorised)) {
 									Text("")
 								}
-								let isDisabled = email.isEmpty || password.isEmpty
+								let isDisabled = loginViewModel.email.isEmpty || loginViewModel.password.isEmpty
 								let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
 								Button(action: {
-									login(email: email, password: password)
+									loginViewModel.login(email: loginViewModel.email, password: loginViewModel.password)
 								}) {
 									Text(Strings.Login.loginButtonTitle)
 										.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
@@ -101,36 +94,15 @@ public struct LoginView: View {
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
 		.onAppear() {
-			authorizationStore.isUserAuthorized()
+			loginViewModel.authorizationStore.isUserAuthorized()
 		}
 		.accentColor(.white)
-		.alert(isPresented: $showingAlert) {
+		.alert(isPresented: $loginViewModel.showingAlert) {
 			return Alert(
 				title: Text(Strings.Login.invalidLoginTitle),
 				message: Text(Strings.Login.invalidLoginMessage),
 				dismissButton: .default(Text(Strings.Common.ok)))
 		}
-	}
-}
-
-extension LoginView {
-	func login(email: String, password: String) {
-		//TODO: API key should be in the shared layer
-		self.isLoading = true
-		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
-			if (result?.idToken != nil) {
-				authorizationStore.storeUserLoggedInStatus(true)
-			} else {
-				showingAlert.toggle()
-			}
-			self.isLoading = false
-		})
-	}
-}
-
-struct LoginView_Previews: PreviewProvider {
-	static var previews: some View {
-		LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 	}
 }
 

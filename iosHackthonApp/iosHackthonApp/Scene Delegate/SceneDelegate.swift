@@ -7,12 +7,11 @@ import Login
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
 	var window: UIWindow?
-	
+	private let loginViewModel = LoginViewModel(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 	
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		
-		let loginView = LoginView(firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
-		
+
+		let loginView = LoginView(viewModel: loginViewModel)
 		if let windowScene = scene as? UIWindowScene {
 			let window = UIWindow(windowScene: windowScene)
 			window.rootViewController = UIHostingController(rootView: loginView)
