@@ -3,6 +3,7 @@ import shared
 import CoreLocation
 import Strings
 import Theming
+import AddMeal
 
 public struct MealListView: View {
     
@@ -26,13 +27,22 @@ public struct MealListView: View {
                 }
             }
             .navigationBarTitle(Strings.MealListScreen.title)
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        viewModel.isAddMealShowing = true
+                                    }) {
+                                        Image(systemName: Strings.Common.Images.add)
+                                    },
+                                trailing:
                                     Button(action: {
                                         self.viewModel.loadMeals()
                                     }, label: {
                                         Image(systemName: Strings.MealListScreen.Images.reload)
-                                            .foregroundColor(.white)
                                     }))
+            .foregroundColor(.white)
+            .sheet(isPresented: $viewModel.isAddMealShowing, content: {
+                AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
+            })
             .alert(isPresented: $viewModel.showingAlert) {
                 switch viewModel.activeAlert {
                 case .unavailable:
@@ -48,7 +58,7 @@ public struct MealListView: View {
                 case .error:
                     return Alert(
                         title: Text(Strings.Common.sorry),
-                        message: Text(Strings.Common.ErrorAlert.message),
+                        message: Text(Strings.Common.ErrorAlert.loadingMessage),
                         dismissButton: .default(Text(Strings.Common.ok)))
                 }
             }

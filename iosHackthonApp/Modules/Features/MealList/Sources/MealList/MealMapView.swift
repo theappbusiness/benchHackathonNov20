@@ -10,16 +10,17 @@ import shared
 import Theming
 import Strings
 import Components
+import AddMeal
 
 public struct MealMapView: View {
-	
-	@ObservedObject private var viewModel: MealListViewModel
-
+    
+    @ObservedObject private var viewModel: MealListViewModel
+    
     public init(viewModel: MealListViewModel) {
-		self.viewModel = viewModel
-	}
-	
-	public var body: some View {
+        self.viewModel = viewModel
+    }
+    
+    public var body: some View {
         GeometryReader { geometry in
             VStack {
                 if viewModel.meals.isEmpty {
@@ -28,22 +29,33 @@ public struct MealMapView: View {
                 ZStack {
                     MapView(annotations: viewModel.locations, selectedPlace: $viewModel.selectedPlace)
                         .edgesIgnoringSafeArea(.all)
-                    BottomSheetView(isOpen: $viewModel.bottomSheetOpen, maxHeight: geometry.size.height * 0.7) {
+                    BottomSheetView(isOpen: $viewModel.bottomSheetOpen,
+                                    maxHeight: geometry.size.height * 0.7,
+                                    labelText: Strings.MealListScreen.bottomSheetLabel) {
                         MealListView(viewModel: viewModel)
                     }
                 }
             }
             .navigationBarTitle(Strings.MealListScreen.title)
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        viewModel.isAddMealShowing = true
+                                    }) {
+                                        Image(systemName: Strings.Common.Images.add)
+                                    },
+                                trailing:
                                     Button(action: {
                                         self.viewModel.loadMeals()
                                     }, label: {
                                         Image(systemName: Strings.MealListScreen.Images.reload)
-                                            .foregroundColor(.white)
                                     }))
+            .foregroundColor(.white)
+            .sheet(isPresented: $viewModel.isAddMealShowing, content: {
+                AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
+            })
             .onAppear(perform: {
                 viewModel.loadMeals()
             })
         }
-	}
+    }
 }

@@ -12,12 +12,12 @@ import Location
 import Theming
 import MealList
 import Strings
-import AddMeal
+import Settings
+import Components
 
 public struct TabAppView: View {
 
-    private let sdk = MealsSDK()
-    private let locationManager = LocationManager()
+    private let mealListViewModel = MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager())
 
     @State var selectedView: Int
 
@@ -28,26 +28,17 @@ public struct TabAppView: View {
 
     public var body: some View {
         TabView(selection: $selectedView, content: {
-            NavigationView {
-                MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))
-            }
-            .navigationBarHidden(true)
-            .tabItem {
-                Image(systemName: Strings.TabView.Images.find)
-                Text(Strings.TabView.findButtonText)
-            }.tag(0)
-            .accentColor(ColorManager.appPrimary)
-
-            NavigationView {
-                //TODO: Change this to the settings screen, once it is implemented.
-                AddMealView(sdk: sdk, locationManager: locationManager)
-            }
-            .navigationBarHidden(true)
-            .tabItem {
-                Image(systemName: Strings.TabView.Images.settings)
-                Text(Strings.TabView.settings)
-            }.tag(1)
-            .accentColor(ColorManager.appPrimary)
+            TabNavigationItem(
+                destination: AnyView(MealMapView(viewModel: mealListViewModel)),
+                image: Strings.TabView.Images.find,
+                title: Strings.TabView.findButtonText,
+                tagNumber: 0)
+            
+            TabNavigationItem(
+                destination: AnyView(SettingsView()),
+                image: Strings.TabView.Images.settings,
+                title: Strings.TabView.settings,
+                tagNumber: 1)
         })
         .accentColor(.white)
     }

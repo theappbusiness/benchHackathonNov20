@@ -14,10 +14,11 @@ let package = Package(
         .package(path: "../Shared/Extensions"),
         .package(path: "../Shared/Location"),
         .package(path: "../Shared/Components"),
+        .package(path: "../Shared/AddMeal"),
         .package(name: "shared", path: "../../../../shared/swiftpackage")
     ],
     targets: [
-        .target(name: "MealList", dependencies: ["shared", "Extensions", "Location", "Components"]),
+        .target(name: "MealList", dependencies: ["shared", "Extensions", "Location", "Components", "AddMeal"]),
         .testTarget(name: "MealListTests", dependencies: ["MealList"]),
     ]
 )

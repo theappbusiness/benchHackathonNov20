@@ -98,6 +98,56 @@
                ReferencedContainer = "container:Modules/Shared/Theming">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AddMealTests"
+               BuildableName = "AddMealTests"
+               BlueprintName = "AddMealTests"
+               ReferencedContainer = "container:Modules/Features/AddMeal">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "LoginTests"
+               BuildableName = "LoginTests"
+               BlueprintName = "LoginTests"
+               ReferencedContainer = "container:Modules/Features/Login">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "SettingsTests"
+               BuildableName = "SettingsTests"
+               BlueprintName = "SettingsTests"
+               ReferencedContainer = "container:Modules/Features/Settings">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TabBarTests"
+               BuildableName = "TabBarTests"
+               BlueprintName = "TabBarTests"
+               ReferencedContainer = "container:Modules/Features/TabBar">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "SignUpTests"
+               BuildableName = "SignUpTests"
+               BlueprintName = "SignUpTests"
+               ReferencedContainer = "container:Modules/Features/SignUp">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

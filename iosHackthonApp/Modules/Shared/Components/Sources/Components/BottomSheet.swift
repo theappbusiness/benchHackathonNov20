@@ -8,17 +8,20 @@
 import Foundation
 import SwiftUI
 import Theming
+import Strings
 
 public struct BottomSheetView<Content: View>: View {
 
     let maxHeight: CGFloat
     let minHeight: CGFloat
     let content: Content
+    let labelText: String
 
-    public init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
+    public init(isOpen: Binding<Bool>, maxHeight: CGFloat, labelText: String, @ViewBuilder content: () -> Content) {
         self.minHeight = maxHeight * 0.1
         self.maxHeight = maxHeight
         self.content = content()
+        self.labelText = labelText
         _isOpen = isOpen
     }
 
@@ -43,9 +46,12 @@ public struct BottomSheetView<Content: View>: View {
                             isOpen.toggle()
                         }
                 } else {
-                    Button("Show list") {
+                    Button(action: {
                         isOpen.toggle()
-                    }
+                    }, label: {
+                        Text(labelText)
+                            .foregroundColor(ColorManager.appPrimary)
+                    })
                     .padding()
                 }
                 content
@@ -56,7 +62,6 @@ public struct BottomSheetView<Content: View>: View {
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: max(self.offset + self.translation, 0))
             .animation(.easeInOut)
-            .animation(.interactiveSpring())
             .gesture(
                 DragGesture().updating(self.$translation) { value, state, _ in
                     state = value.translation.height
