@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.utility
+package com.kinandcarta.feature.find.meal.utility
 
 import android.Manifest
 import android.content.pm.PackageManager

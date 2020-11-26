@@ -1,5 +1,3 @@
-include(":lib-theming")
-include(":lib-find-meal")
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -18,6 +16,7 @@ pluginManagement {
 rootProject.name = "KMMHackathon"
 
 include(":androidHackathonApp")
+include(":lib-theming")
+include(":feature-find-meal")
 include(":shared")
 enableFeaturePreview("GRADLE_METADATA")
-

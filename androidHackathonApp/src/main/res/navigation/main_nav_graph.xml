@@ -17,6 +17,6 @@
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/findMealFragment"
-        android:name="com.kinandcarta.lib.find.meal.view.FindMealFragment"
+        android:name="com.kinandcarta.feature.find.meal.view.FindMealFragment"
         android:label="FindMealFragment" />
 </navigation>
