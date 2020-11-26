@@ -26,7 +26,7 @@ public final class MealListViewModel: ObservableObject {
     @Published var centerCoordinate = CLLocationCoordinate2D()
     @Published var selectedPlace: MKPointAnnotation?
 
-    @Published var didDragToDismiss = false
+    @Published var isOpen = false
 
     public init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk

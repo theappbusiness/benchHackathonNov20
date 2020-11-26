@@ -24,6 +24,14 @@ public struct MealListView: View {
 							.padding()
 					}
 				}
+                .gesture(
+                    DragGesture().onChanged( { value in
+                        print(value)
+                        if value.location.y < 100 {
+                            viewModel.isOpen.toggle()
+                        }
+                    }
+                ))
 			}
 			.navigationBarTitle(Strings.MealListScreen.title)
 			.navigationBarItems(trailing:
@@ -56,14 +64,6 @@ public struct MealListView: View {
 		.onAppear(perform: {
 			viewModel.loadMeals()
 		})
-        .gesture(
-            DragGesture().onChanged( { value in
-                print(value)
-                if value.location.y < 50 {
-                    viewModel.didDragToDismiss.toggle()
-                }
-            }
-        ))
     }
 }
 

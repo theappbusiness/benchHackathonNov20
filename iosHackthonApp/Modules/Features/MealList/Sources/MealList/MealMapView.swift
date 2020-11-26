@@ -8,6 +8,7 @@
 import SwiftUI
 import shared
 import CoreLocation
+import Theming
 import Strings
 
 public struct MealMapView: View {
@@ -63,26 +64,21 @@ struct BottomSheetView<Content: View>: View {
     }
 
     private var offset: CGFloat {
-        if viewModel.didDragToDismiss {
-            return 0
-        }
-        return maxHeight - minHeight
+        viewModel.isOpen ? 0 : maxHeight - minHeight
     }
 
     private var indicator: some View {
-        return Button("show list") {
-            viewModel.didDragToDismiss.toggle()
+        return Button("Show list") {
+            viewModel.isOpen.toggle()
         }
     }
-
-//    @GestureState private var translation: CGFloat = 0
 
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                if !viewModel.didDragToDismiss {
+                if !viewModel.isOpen {
                     self.indicator.padding()
-                }
+                } 
                 self.content
             }
             .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
@@ -90,17 +86,7 @@ struct BottomSheetView<Content: View>: View {
             .cornerRadius(5)
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: self.offset)
-//            .gesture(
-//                DragGesture().updating(self.$translation) { value, state, _ in
-//                    state = value.translation.height
-//                }.onEnded { value in
-//                    let snapDistance = self.maxHeight * 0.2
-//                    guard abs(value.translation.height) > snapDistance else {
-//                        return
-//                    }
-//                    self.isOpen = value.translation.height < 0
-//                }
-//            )
+            .animation(.easeInOut)
         }
     }
 }
