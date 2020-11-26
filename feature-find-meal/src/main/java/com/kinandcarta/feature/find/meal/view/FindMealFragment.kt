@@ -26,7 +26,8 @@ class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()
-    private val mealsAdapter = MealsAdapter()
+
+    private val mealsAdapter = MealsAdapter() { id, position -> viewModel.reserveAMeal(id, position)}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,6 +77,10 @@ class FindMealFragment : Fragment() {
                 progressBarView.isVisible = true
             is FindMealViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
+            is FindMealViewModel.State.ReservedMeal ->
+                onReservedMeal(state)
+            is FindMealViewModel.State.MealUnavailable ->
+                onMealUnavailable(state)
             is FindMealViewModel.State.Failed ->
                 onFailure(state.failure)
         }
@@ -86,11 +91,22 @@ class FindMealFragment : Fragment() {
         mealsAdapter.submit(state.meals, state.distanceUnit)
     }
 
+    private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
+        mealsAdapter.notifyItemChanged(state.position)
+        showToast("Your meal reservation code is ${state.code}")
+    }
+
+    private fun onMealUnavailable(state: FindMealViewModel.State.MealUnavailable) {
+        showToast("Unfortunately this meal is unavailable")
+    }
     private fun onFailure(failure: FindMealViewModel.Failure) {
         when (failure) {
             is FindMealViewModel.Failure.LoadingMealsFailed -> {
                 progressBarView.isVisible = false
                 showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
+            }
+            is FindMealViewModel.Failure.ReserveAMealFailed -> {
+                showToast(failure.localizedMessage ?: "An unexpected error occurred reserving a meal")
             }
         }
     }

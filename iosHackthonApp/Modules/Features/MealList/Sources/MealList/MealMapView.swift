@@ -9,6 +9,7 @@ import SwiftUI
 import shared
 import CoreLocation
 import Strings
+import AddMeal
 
 public struct MealMapView: View {
 	
@@ -29,13 +30,22 @@ public struct MealMapView: View {
 			}
 		}
 		.navigationBarTitle(Strings.MealListScreen.title)
-		.navigationBarItems(trailing:
-								Button(action: {
-									self.viewModel.loadMeals()
-								}, label: {
-									Image(systemName: Strings.MealListScreen.Images.reload)
-										.foregroundColor(.white)
-								}))
+        .navigationBarItems(leading:
+                                Button(action: {
+                                    viewModel.isAddMealShowing = true
+                                }) {
+                                    Image(systemName: Strings.Common.Images.add)
+                                },
+                            trailing:
+                                Button(action: {
+                                    self.viewModel.loadMeals()
+                                }, label: {
+                                    Image(systemName: Strings.MealListScreen.Images.reload)
+                                }))
+        .foregroundColor(.white)
+        .sheet(isPresented: $viewModel.isAddMealShowing, content: {
+            AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
+        })
 		.onAppear(perform: {
 			viewModel.loadMeals()
 		})

@@ -16,11 +16,11 @@ let package = Package(
         .package(path: "../Shared/Location"),
         .package(path: "../Shared/Strings"),
         .package(path: "../Features/MealList"),
-        .package(path: "../Features/AddMeal"),
+        .package(path: "../Features/Settings"),
         .package(name: "shared", path: "../../../../shared/swiftpackage")
     ],
     targets: [
-        .target(name: "TabBar", dependencies: ["shared", "Theming", "Location", "Strings", "MealList", "AddMeal"]),
+        .target(name: "TabBar", dependencies: ["shared", "Theming", "Location", "Strings", "MealList", "Settings"]),
         .testTarget(name: "TabBarTests", dependencies: ["TabBar"]),
     ]
 )
