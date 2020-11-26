@@ -25,11 +25,14 @@ class FindMealViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class ReservedMeal(val code: String, val position: Int) : State()
+        data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
         class LoadingMealsFailed(cause: Throwable) : Failure(cause)
+        class ReserveAMealFailed(cause: Throwable) : Failure(cause)
     }
 
     val state: LiveData<State> get() = _state
@@ -83,4 +86,26 @@ class FindMealViewModel @ViewModelInject constructor(
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         return locationRequest
     }
+
+    fun reserveAMeal(id: String, position: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                sdk.reserveMeal(id)
+            }.onSuccess {
+                if (it != null) {
+                    val code = getReservationCode(it.id)
+                    _state.value = State.ReservedMeal(code, position)
+                } else {
+                    _state.value = State.MealUnavailable("Meal Unavailable")
+                }
+            }.onFailure {
+                _state.value = State.Failed(Failure.ReserveAMealFailed(it))
+            }
+        }
+    }
+
+    private fun getReservationCode(id: String): String {
+        return id.substring(id.length - 4, id.length)
+    }
+
 }
