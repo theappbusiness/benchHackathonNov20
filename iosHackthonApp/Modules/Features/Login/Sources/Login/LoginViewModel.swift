@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LoginViewModel.swift
 //  
 //
 //  Created by Raynelle Francisca on 26/11/2020.
@@ -16,7 +16,6 @@ public final class LoginViewModel: ObservableObject {
 	@Published var email: String = ""
 	@Published var password: String = ""
 	@Published var showingAlert = false
-	@Published var activeAlert: ActiveAlert = .collection
 	@Published var isLoading: Bool = false
 	@Published var coloredNavAppearance = UINavigationBarAppearance()
 	@Published var firebase: FirebaseAuthenticationStore
@@ -33,7 +32,7 @@ public final class LoginViewModel: ObservableObject {
 
 	func login(email: String, password: String) {
 		//TODO: API key should be in the shared layer
-		self.isLoading = true
+		isLoading = true
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
 				self.authorizationStore.storeUserLoggedInStatus(true)
