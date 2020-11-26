@@ -8,17 +8,26 @@
 import Foundation
 import SwiftUI
 import Theming
-import Strings
+
+fileprivate enum Constants {
+    static let cornerRadius: CGFloat = 16
+    static let indicatorWidth: CGFloat = 60
+    static let indicatorHeight: CGFloat = 6
+    static let minHeightRatio: CGFloat = 0.3
+}
 
 public struct BottomSheetView<Content: View>: View {
 
-    let maxHeight: CGFloat
-    let minHeight: CGFloat
-    let content: Content
-    let labelText: String
+    private let maxHeight: CGFloat
+    private let minHeight: CGFloat
+    private let content: Content
+    private let labelText: String
+
+    @GestureState private var translation: CGFloat = 0
+    @Binding private var isOpen: Bool
 
     public init(isOpen: Binding<Bool>, maxHeight: CGFloat, labelText: String, @ViewBuilder content: () -> Content) {
-        self.minHeight = maxHeight * 0.1
+        self.minHeight = maxHeight * Constants.minHeightRatio
         self.maxHeight = maxHeight
         self.content = content()
         self.labelText = labelText
@@ -29,18 +38,15 @@ public struct BottomSheetView<Content: View>: View {
         isOpen ? 0 : maxHeight - minHeight
     }
 
-    @GestureState private var translation: CGFloat = 0
-    @Binding var isOpen: Bool
-
     public var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 if isOpen {
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
                         .fill(ColorManager.appPrimary)
                         .frame(
-                            width: 60,
-                            height: 6)
+                            width: Constants.indicatorWidth,
+                            height: Constants.indicatorHeight)
                         .padding()
                         .onTapGesture {
                             isOpen.toggle()
@@ -56,21 +62,17 @@ public struct BottomSheetView<Content: View>: View {
                 }
                 content
             }
-            .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
+            .frame(width: geometry.size.width, height: maxHeight, alignment: .top)
             .background(Color.white)
-            .cornerRadius(16)
+            .cornerRadius(Constants.cornerRadius)
             .frame(height: geometry.size.height, alignment: .bottom)
-            .offset(y: max(self.offset + self.translation, 0))
+            .offset(y: max(offset + translation, 0))
             .animation(.easeInOut)
             .gesture(
-                DragGesture().updating(self.$translation) { value, state, _ in
+                DragGesture().updating($translation) { value, state, _ in
                     state = value.translation.height
                 }.onEnded { value in
-                    let snapDistance = self.maxHeight * 0.25
-                    guard abs(value.translation.height) > snapDistance else {
-                        return
-                    }
-                    self.isOpen = value.translation.height < 0
+                    isOpen = value.translation.height < 0
                 }
             )
         }
