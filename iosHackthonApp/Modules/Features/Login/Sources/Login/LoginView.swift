@@ -54,6 +54,7 @@ public struct LoginView: View {
 						TextField(Strings.Login.emailPlaceholder, text: $email)
 							.modifier(GreyTextFieldStyle())
 							.autocapitalization(.none)
+							.disableAutocorrection(true)
 						Text(Strings.Login.password)
 						SecureField(Strings.Login.passwordPlaceholder, text: $password)
 							.modifier(GreyTextFieldStyle())
