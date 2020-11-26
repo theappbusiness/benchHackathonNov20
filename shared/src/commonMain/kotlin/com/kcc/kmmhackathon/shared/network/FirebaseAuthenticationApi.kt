@@ -9,10 +9,9 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import kotlinx.serialization.json.Json
 import io.ktor.http.*
 
-
 class FirebaseAuthenticationStore : AuthenticationStore {
 
- private val httpClient = HttpClient {
+    private val httpClient = HttpClient {
         install(JsonFeature) {
             val json = Json { ignoreUnknownKeys = true }
             serializer = KotlinxSerializer(json)
@@ -24,16 +23,20 @@ class FirebaseAuthenticationStore : AuthenticationStore {
         email: String,
         password: String,
         returnSecureToken: Boolean
-    ) = handleAuthenticationRequest(apiKey,
-        ENDPOINT_SIGN_UP, email, password, returnSecureToken)
+    ) = handleAuthenticationRequest(
+        apiKey,
+        ENDPOINT_SIGN_UP, email, password, returnSecureToken
+    )
 
     override suspend fun signIn(
         apiKey: String,
         email: String,
         password: String,
         returnSecureToken: Boolean
-    ) = handleAuthenticationRequest(apiKey,
-        ENDPOINT_SIGN_IN, email, password, returnSecureToken)
+    ) = handleAuthenticationRequest(
+        apiKey,
+        ENDPOINT_SIGN_IN, email, password, returnSecureToken
+    )
 
     private suspend fun handleAuthenticationRequest(
         apiKey: String,
