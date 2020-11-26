@@ -6,17 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
-public protocol AuthorizationStoreType {
-	func storeUserLoggedInStatus(_ isUserLoggedIn: Bool)
-	func isUserAuthorized() -> Bool
-	func clearCache()
-}
+public final class AuthorizationStore: ObservableObject {
 
-public final class AuthorizationStore: AuthorizationStoreType {
-
+	@Published public var isAuthorised = false
 	private let userLoggedInStatus = "userLoggedInStatus"
-	let cache: UserDefaults
+	private let cache: UserDefaults
 
 	public init(cache: UserDefaults) {
 		self.cache = cache
@@ -24,13 +20,15 @@ public final class AuthorizationStore: AuthorizationStoreType {
 
 	public func storeUserLoggedInStatus(_ isUserLoggedIn: Bool) {
 		cache.set(isUserLoggedIn, forKey: userLoggedInStatus)
+		isUserAuthorized()
 	}
 
-	public func isUserAuthorized() -> Bool {
-		guard let isUserLoggedIn = cache.value(forKey: userLoggedInStatus) as? Bool else {
-			return false
+	public func isUserAuthorized() {
+		if let cacheValue = cache.value(forKey: userLoggedInStatus) as? Bool {
+			self.isAuthorised = cacheValue
+		} else {
+			self.isAuthorised = false
 		}
-		return isUserLoggedIn
 	}
 
 	public func clearCache() {

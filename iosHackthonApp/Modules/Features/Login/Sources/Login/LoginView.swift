@@ -17,14 +17,13 @@ import SignUp
 public struct LoginView: View {
 	@State private var email: String = ""
 	@State private var password: String = ""
-	@State private var loginSucessful: Bool = false
 	@State private var showingAlert = false
 	@State private var activeAlert: ActiveAlert = .collection
 	private let coloredNavAppearance = UINavigationBarAppearance()
 	private let firebase: FirebaseAuthenticationStore
-	private let authorizationStore: AuthorizationStoreType
+	@ObservedObject private var authorizationStore: AuthorizationStore
 
-	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStoreType) {
+	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
 		self.firebase = firebase
 		self.authorizationStore = authorizationStore
 		coloredNavAppearance.configureWithOpaqueBackground()
@@ -61,7 +60,7 @@ public struct LoginView: View {
 						Spacer()
 
 						GeometryReader { geometry in
-							NavigationLink(destination: TabAppView(selectedView: 0), isActive: $loginSucessful) {
+							NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(authorizationStore.isAuthorised)) {
 								Text("")
 							}
 							let isDisabled = email.isEmpty || password.isEmpty
@@ -91,10 +90,10 @@ public struct LoginView: View {
 			}
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
-		.accentColor(.white)
 		.onAppear() {
-			loginSucessful = authorizationStore.isUserAuthorized()
+			authorizationStore.isUserAuthorized()
 		}
+		.accentColor(.white)
 		.alert(isPresented: $showingAlert) {
 			return Alert(
 				title: Text(Strings.Login.invalidLoginTitle),
@@ -109,7 +108,6 @@ extension LoginView {
 		//TODO: API key should be in the shared layer
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
-				self.loginSucessful = true
 				authorizationStore.storeUserLoggedInStatus(true)
 			} else {
 				showingAlert.toggle()
