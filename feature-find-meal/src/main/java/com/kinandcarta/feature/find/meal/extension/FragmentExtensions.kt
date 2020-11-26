@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.extension
+package com.kinandcarta.feature.find.meal.extension
 
 import android.Manifest
 import android.widget.Toast

@@ -1,4 +1,4 @@
-package com.kinandcarta.lib.find.meal.injection
+package com.kinandcarta.feature.find.meal.injection
 
 import android.content.Context
 import com.google.android.gms.location.FusedLocationProviderClient

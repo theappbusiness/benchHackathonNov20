@@ -17,6 +17,6 @@ rootProject.name = "KMMHackathon"
 
 include(":androidHackathonApp")
 include(":lib-theming")
-include(":lib-find-meal")
+include(":feature-find-meal")
 include(":shared")
 enableFeaturePreview("GRADLE_METADATA")

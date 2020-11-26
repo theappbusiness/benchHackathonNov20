@@ -11,5 +11,5 @@ android {
 dependencies {
 
     // Feature modules
-    implementation project(":lib-find-meal") // TODO: Rename to feature-find-meal
+    implementation project(":feature-find-meal")
 }
