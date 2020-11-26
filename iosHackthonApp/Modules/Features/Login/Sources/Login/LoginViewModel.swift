@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import shared
 import Components
+import Theming
 
 public final class LoginViewModel: ObservableObject {
 
@@ -24,6 +25,10 @@ public final class LoginViewModel: ObservableObject {
 	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
 		self.firebase = firebase
 		self.authorizationStore = authorizationStore
+		coloredNavAppearance.configureWithOpaqueBackground()
+		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
+		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+		coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 	}
 
 	func login(email: String, password: String) {

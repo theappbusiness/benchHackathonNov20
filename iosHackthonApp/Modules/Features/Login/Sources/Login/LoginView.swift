@@ -20,10 +20,6 @@ public struct LoginView: View {
 
 	public init(viewModel: LoginViewModel) {
 		self.loginViewModel = viewModel
-		self.loginViewModel.coloredNavAppearance.configureWithOpaqueBackground()
-		self.loginViewModel.coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
-		self.loginViewModel.coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-		self.loginViewModel.coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 		UINavigationBar.appearance().standardAppearance = self.loginViewModel.coloredNavAppearance
 		UINavigationBar.appearance().scrollEdgeAppearance = self.loginViewModel.coloredNavAppearance
 	}
