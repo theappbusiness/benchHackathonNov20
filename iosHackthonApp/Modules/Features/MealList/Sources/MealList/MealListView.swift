@@ -2,12 +2,13 @@ import SwiftUI
 import shared
 import CoreLocation
 import Strings
+import Theming
 
 public struct MealListView: View {
 	
 	@ObservedObject private var viewModel: MealListViewModel
 	
-	public init(viewModel: MealListViewModel) {
+    public init(viewModel: MealListViewModel) {
 		self.viewModel = viewModel
 	}
 	
@@ -16,7 +17,6 @@ public struct MealListView: View {
 			if viewModel.meals.isEmpty {
 				Text("No meals found") // TODO: Do something nicer than this
 			}
-			
 			ScrollView {
 				LazyVStack {
 					ForEach((0 ..< viewModel.meals.count), id: \.self) {
@@ -24,15 +24,7 @@ public struct MealListView: View {
 							.padding()
 					}
 				}
-                .gesture(
-                    DragGesture().onChanged( { value in
-                        print(value)
-                        if value.location.y < 100 {
-                            viewModel.isOpen.toggle()
-                        }
-                    }
-                ))
-			}
+            }
 			.navigationBarTitle(Strings.MealListScreen.title)
 			.navigationBarItems(trailing:
 									Button(action: {
@@ -60,7 +52,7 @@ public struct MealListView: View {
 						dismissButton: .default(Text(Strings.Common.ok)))
 				}
 			}
-		}
+        }
 		.onAppear(perform: {
 			viewModel.loadMeals()
 		})

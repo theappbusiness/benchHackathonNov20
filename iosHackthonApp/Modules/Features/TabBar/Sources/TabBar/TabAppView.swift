@@ -29,7 +29,7 @@ public struct TabAppView: View {
 	public var body: some View {
 		TabView(selection: $selectedView, content: {
 			NavigationView {
-				MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))
+                MealMapView(viewModel: .init(sdk: sdk, locationManager: locationManager))
 			}
 			.navigationBarHidden(true)
 			.tabItem {
@@ -37,16 +37,6 @@ public struct TabAppView: View {
 				Text(Strings.TabView.findButtonText)
 			}.tag(0)
 			.accentColor(ColorManager.appPrimary)
-			
-//			NavigationView {
-//				MealListView(viewModel: .init(sdk: sdk, locationManager: locationManager))
-//			}
-//			.navigationBarHidden(true)
-//			.tabItem {
-//				Image(systemName: Strings.TabView.Images.listView)
-//				Text(Strings.TabView.listViewText)
-//			}.tag(1)
-//			.accentColor(ColorManager.appPrimary)
 			
 			NavigationView {
 				//TODO: Change this to the settings screen, once it is implemented.
