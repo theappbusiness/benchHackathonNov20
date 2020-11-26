@@ -25,6 +25,7 @@ public final class MealListViewModel: ObservableObject {
     @Published var showMap = 0
     @Published var centerCoordinate = CLLocationCoordinate2D()
     @Published var selectedPlace: MKPointAnnotation?
+    @Published var isAddMealShowing = false
 
     public init(sdk: MealsSDK, locationManager: LocationManager) {
         self.sdk = sdk
@@ -40,7 +41,9 @@ public final class MealListViewModel: ObservableObject {
             guard
                 let meals = meals,
                 error == nil else {
-                assertionFailure(error!.localizedDescription)
+                self.activeAlert = .error
+                self.showingAlert.toggle()
+                print(error!.localizedDescription)
                 return
             }
             self.meals = meals
