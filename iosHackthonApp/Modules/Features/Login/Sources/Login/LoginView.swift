@@ -19,10 +19,11 @@ public struct LoginView: View {
 	@State private var password: String = ""
 	@State private var showingAlert = false
 	@State private var activeAlert: ActiveAlert = .collection
+	@State var isLoading: Bool = false
 	private let coloredNavAppearance = UINavigationBarAppearance()
 	private let firebase: FirebaseAuthenticationStore
 	@ObservedObject private var authorizationStore: AuthorizationStore
-
+	
 	public init(firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
 		self.firebase = firebase
 		self.authorizationStore = authorizationStore
@@ -33,8 +34,9 @@ public struct LoginView: View {
 		UINavigationBar.appearance().standardAppearance = coloredNavAppearance
 		UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
 	}
-
+	
 	public var body: some View {
+		
 		NavigationView {
 			ScrollView {
 				VStack {
@@ -46,7 +48,7 @@ public struct LoginView: View {
 						.cornerRadius(10)
 				}
 				.padding()
-
+				
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
 						Text(Strings.Login.email)
@@ -58,20 +60,28 @@ public struct LoginView: View {
 						SecureField(Strings.Login.passwordPlaceholder, text: $password)
 							.modifier(GreyTextFieldStyle())
 						Spacer()
-
+						
 						GeometryReader { geometry in
-							NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(authorizationStore.isAuthorised)) {
-								Text("")
+							ZStack {
+								if self.isLoading {
+									ProgressView()
+										.zIndex(1)
+								}
+								
+								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(authorizationStore.isAuthorised)) {
+									Text("")
+								}
+								let isDisabled = email.isEmpty || password.isEmpty
+								let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
+								Button(action: {
+									login(email: email, password: password)
+								}) {
+									Text(Strings.Login.loginButtonTitle)
+										.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
+								}
+								.disabled(isDisabled)
+								.zIndex(0)
 							}
-							let isDisabled = email.isEmpty || password.isEmpty
-							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
-							Button(action: {
-								login(email: email, password: password)
-							}) {
-								Text(Strings.Login.loginButtonTitle)
-									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
-							}
-							.disabled(isDisabled)
 						}
 					}
 				}
@@ -106,12 +116,14 @@ public struct LoginView: View {
 extension LoginView {
 	func login(email: String, password: String) {
 		//TODO: API key should be in the shared layer
+		self.isLoading = true
 		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
 				authorizationStore.storeUserLoggedInStatus(true)
 			} else {
 				showingAlert.toggle()
 			}
+			self.isLoading = false
 		})
 	}
 }
