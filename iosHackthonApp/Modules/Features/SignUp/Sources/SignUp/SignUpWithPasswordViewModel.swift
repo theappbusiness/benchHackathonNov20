@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 import shared
 import Components
+import Strings
 
-public final class SignUpViewModel: ObservableObject {
+public final class SignUpWithPasswordViewModel: ObservableObject {
 
 	var email: String
 	@Published var password: String = ""
@@ -18,6 +19,10 @@ public final class SignUpViewModel: ObservableObject {
 	@Published var isLoading: Bool = false
 	@Published var firebase: FirebaseAuthenticationStore
 	@ObservedObject var authorizationStore: AuthorizationStore
+	var signUpWithPasswordTitle: String = Strings.SignUp.signUpWithPasswordTitle
+	var signUpWithPasswordInfo: String = Strings.SignUp.signUpWithPasswordInfo
+	var signUpWithPasswordPlaceHolder: String = Strings.SignUp.signUpWithPasswordPlaceHolder
+	var signUpWithPasswordButtonTitle: String = Strings.SignUp.signUpWithPasswordButtonTitle
 
 	public init(email: String, firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
 		self.email = email
