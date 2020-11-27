@@ -14,7 +14,7 @@ import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
-    private var mealsList: List<Meal> = listOf(),
+    private var mealsList: MutableList<Meal> = mutableListOf(),
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
     private val clickListener: (String, Int) -> Unit
 ) :
@@ -37,6 +37,11 @@ class MealsAdapter(
         mealsList = meals
         distanceUnit = unit
         notifyDataSetChanged()
+    }
+
+    fun updateMeal(position: Int, meal: Meal) {
+        mealsList[position] = meal
+        notifyItemChanged(position)
     }
 
     inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

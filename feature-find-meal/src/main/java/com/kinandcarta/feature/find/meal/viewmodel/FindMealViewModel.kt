@@ -16,7 +16,7 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import kotlinx.coroutines.launch
 
-typealias Meals = List<Meal>
+typealias Meals = MutableList<Meal>
 
 class FindMealViewModel @ViewModelInject constructor(
     private val fusedLocationClient: FusedLocationProviderClient
@@ -25,7 +25,7 @@ class FindMealViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
-        data class ReservedMeal(val code: String, val position: Int) : State()
+        data class ReservedMeal(val code: String, val position: Int, val meal: Meal) : State()
         data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
@@ -46,6 +46,7 @@ class FindMealViewModel @ViewModelInject constructor(
             updateMeals()
         }
     }
+    private val distanceUnit = DistanceUnit.miles
 
     override fun onCleared() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
@@ -66,13 +67,12 @@ class FindMealViewModel @ViewModelInject constructor(
 
     fun updateMeals() {
         val location = lastLocation ?: return
-        val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
                 sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
-                _state.value = State.LoadedMeals(it, distanceUnit)
+                _state.value = State.LoadedMeals(it.toMutableList(), distanceUnit)
             }.onFailure {
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
@@ -88,13 +88,14 @@ class FindMealViewModel @ViewModelInject constructor(
     }
 
     fun reserveAMeal(id: String, position: Int) {
+        val location = lastLocation ?: return
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.reserveMeal(id)
+                sdk.reserveMeal(id, location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
                 if (it != null) {
                     val code = getReservationCode(it.id)
-                    _state.value = State.ReservedMeal(code, position)
+                    _state.value = State.ReservedMeal(code, position, it)
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
@@ -107,5 +108,4 @@ class FindMealViewModel @ViewModelInject constructor(
     private fun getReservationCode(id: String): String {
         return id.substring(id.length - 4, id.length)
     }
-
 }

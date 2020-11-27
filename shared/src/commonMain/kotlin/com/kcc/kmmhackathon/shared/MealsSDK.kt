@@ -45,10 +45,18 @@ class MealsSDK {
         return api.patchMeal(id, quantity)
     }
 
-    @Throws(Exception::class) suspend fun reserveMeal(id: String): Meal? {
+    @Throws(Exception::class) suspend fun reserveMeal(id: String, userLat: Double, userLon: Double, distanceUnit: DistanceUnit): Meal? {
         val meal = getMeal(id)
         if (meal.quantity > 0) {
-            return api.patchMeal(meal.id, meal.quantity - 1)
+            val updatedMeal = api.patchMeal(meal.id, meal.quantity - 1)
+            updatedMeal.distance = locationUtil.getDistance(
+                userLat,
+                userLon,
+                updatedMeal.locationLat.toDouble(),
+                updatedMeal.locationLong.toDouble(),
+                distanceUnit
+            )
+            return updatedMeal
         }
         return null
     }
@@ -57,3 +65,4 @@ class MealsSDK {
         return uuid4()
     }
 }
+

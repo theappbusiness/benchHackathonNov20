@@ -92,13 +92,14 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
-        mealsAdapter.notifyItemChanged(state.position)
+        mealsAdapter.updateMeal(state.position, state.meal)
         showToast("Your meal reservation code is ${state.code}")
     }
 
     private fun onMealUnavailable(state: FindMealViewModel.State.MealUnavailable) {
         showToast("Unfortunately this meal is unavailable")
     }
+
     private fun onFailure(failure: FindMealViewModel.Failure) {
         when (failure) {
             is FindMealViewModel.Failure.LoadingMealsFailed -> {
