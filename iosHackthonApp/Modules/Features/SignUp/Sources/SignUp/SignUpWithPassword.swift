@@ -13,6 +13,7 @@ import TabBar
 
 struct SignUpWithPassword: View {
 	@State private var password: String = ""
+	@State private var movetonext: Bool = false
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -26,10 +27,16 @@ struct SignUpWithPassword: View {
 									buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
 									width: geometry.size.width,
 									destinationView: TabAppView(selectedView: 0),
-									entryField: $password)
+									entryField: $password,
+									signUp: self.signUp,
+									movetonext: $movetonext)
 			}
 		}.padding()
 	}
+
+	func signUp() {
+		  print("do something")
+	  }
 }
 
 struct SignUpWithPassword_Previews: PreviewProvider {

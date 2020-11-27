@@ -12,6 +12,8 @@ import Components
 
 struct SignUpWithEmail: View {
 	@State private var email: String = ""
+	@State private var movetonext: Bool = false
+
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -24,10 +26,18 @@ struct SignUpWithEmail: View {
 									textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder, buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
 									width: geometry.size.width,
 									destinationView: SignUpWithPassword(),
-									entryField: $email)
+									entryField: $email,
+									signUp: self.signUp,
+									movetonext: $movetonext)
 			}
 		}.padding()
 	}
+
+	func signUp() {
+		  print("do something")
+
+		self.movetonext = false
+	  }
 }
 
 struct SignUpWithEmail_Previews: PreviewProvider {
