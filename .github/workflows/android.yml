@@ -10,7 +10,7 @@ on:
 jobs:
   test:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -25,5 +25,6 @@ jobs:
       with:
         api-level: 30
         script: ./gradlew connectedCheck
+        target: google_apis
     - name: Check app launches
       run: ./gradlew installDebug
