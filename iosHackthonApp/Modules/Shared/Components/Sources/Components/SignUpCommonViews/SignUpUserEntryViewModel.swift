@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Theming
 
 public final class SignUpUserEntryViewModel: ObservableObject {
 	
@@ -35,5 +36,9 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 		self.signUp = signUp
 		_moveToNextScreen = moveToNextScreen
 		_isLoading = isLoading
+	}
+
+	func getbuttonBgColor() -> Color {
+		return entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary
 	}
 }
