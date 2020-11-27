@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosX64Main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosX64Main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosX64Test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iosX64Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature-find-meal/com.kcc.kmmhackathon.KMMHackathon.feature-find-meal.iml" filepath="$PROJECT_DIR$/.idea/modules/feature-find-meal/com.kcc.kmmhackathon.KMMHackathon.feature-find-meal.iml" />
     </modules>
   </component>
 </project>
