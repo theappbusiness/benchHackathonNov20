@@ -15,8 +15,7 @@ public struct SignUpUserEntryView<Content: View>: View {
 	@ObservedObject private var viewModel: SignUpUserEntryViewModel
 	private var destinationView: Content
 	
-	public init(viewModel: SignUpUserEntryViewModel,
-				destinationView: Content) {
+	public init(viewModel: SignUpUserEntryViewModel, destinationView: Content) {
 		self.viewModel = viewModel
 		self.destinationView = destinationView
 	}
