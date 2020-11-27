@@ -11,7 +11,6 @@ import shared
 import Components
 import Theming
 
-
 public final class SignUpViewModel: ObservableObject {
 
 	var email: String

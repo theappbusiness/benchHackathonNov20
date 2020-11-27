@@ -22,14 +22,15 @@ struct SignUpWithEmail: View {
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
-				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: true,
-														 textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder,
-														 buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
-														 width: geometry.size.width,
-														 entryField: $email,
-														 signUp: self.signUp,
-														 moveToNextScreen: $moveToNextScreen,
-														 isLoading: .constant(false))
+				let viewModel = SignUpUserEntryViewModel(
+					isSignupWithEmail: true,
+					textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder,
+					buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
+					width: geometry.size.width,
+					entryField: $email,
+					signUp: self.signUp,
+					moveToNextScreen: $moveToNextScreen,
+					isLoading: .constant(false))
 				
 				let signupViewModel = SignUpViewModel(email: self.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 
@@ -37,14 +38,17 @@ struct SignUpWithEmail: View {
 			}
 		}.padding()
 	}
-
-	func signUp() {
-		self.moveToNextScreen = true
-	}
 }
 
 struct SignUpWithEmail_Previews: PreviewProvider {
     static var previews: some View {
         SignUpWithEmail()
     }
+}
+
+//MARK:- Functions
+private extension SignUpWithEmail {
+	func signUp() {
+		self.moveToNextScreen = true
+	}
 }

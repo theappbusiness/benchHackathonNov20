@@ -23,25 +23,28 @@ struct SignUpWithPassword: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithPasswordTitle, description: Strings.SignUp.signUpWithPasswordInfo)
-			
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
 				
-				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: false,
-														 textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
-														 buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
-														 width: geometry.size.width,
-														 entryField: $signUpViewModel.password,
-														 signUp: self.signUp,
-														 moveToNextScreen: $signUpViewModel.moveToNextScreen,
-														 isLoading: $signUpViewModel.isLoading)
+				let viewModel = SignUpUserEntryViewModel(
+					isSignupWithEmail: false,
+					textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
+					buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
+					width: geometry.size.width,
+					entryField: $signUpViewModel.password,
+					signUp: self.signUp,
+					moveToNextScreen: $signUpViewModel.moveToNextScreen,
+					isLoading: $signUpViewModel.isLoading)
 				
 				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
 		}.padding()
 	}
-	
+}
+
+//MARK:- Functions
+private extension SignUpWithPassword {
 	func signUp() {
 		signUpViewModel.signUp(email: signUpViewModel.email, password: signUpViewModel.password)
 	}
