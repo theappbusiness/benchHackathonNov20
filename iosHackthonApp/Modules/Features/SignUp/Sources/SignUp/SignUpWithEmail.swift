@@ -22,11 +22,13 @@ struct SignUpWithEmail: View {
 			
 			GeometryReader { geometry in
 				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: true,
-														 textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder, buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
+														 textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder,
+														 buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
 														 width: geometry.size.width,
 														 entryField: $email,
 														 signUp: self.signUp,
-														 moveToNextScreen: $moveToNextScreen)
+														 moveToNextScreen: $moveToNextScreen,
+														 isLoading: .constant(false))
 
 				SignUpUserEntryView(viewModel: viewModel, destinationView:SignUpWithPassword())
 			}

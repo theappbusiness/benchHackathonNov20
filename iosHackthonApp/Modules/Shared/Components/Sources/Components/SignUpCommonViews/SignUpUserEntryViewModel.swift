@@ -10,17 +10,16 @@ import SwiftUI
 import Strings
 import Theming
 
-
-public final class SignUpUserEntryViewModel:  ObservableObject {
+public final class SignUpUserEntryViewModel: ObservableObject {
 	
 	var signUp : () -> ()
 	var isSignupWithEmail: Bool
 	var textFieldPlaceholder: String
 	var buttonTitle: String
 	var width: CGFloat
-	@Binding  var entryField: String
-	@Binding  var moveToNextScreen: Bool
-	@State var isLoading: Bool = false
+	@Binding var entryField: String
+	@Binding var moveToNextScreen: Bool
+	@Binding var isLoading: Bool
 
 	public init(isSignupWithEmail: Bool,
 				textFieldPlaceholder: String,
@@ -28,7 +27,8 @@ public final class SignUpUserEntryViewModel:  ObservableObject {
 				width: CGFloat,
 				entryField: Binding<String>,
 				signUp : @escaping () -> (),
-				moveToNextScreen: Binding<Bool>) {
+				moveToNextScreen: Binding<Bool>,
+				isLoading: Binding<Bool>) {
 		self.isSignupWithEmail = isSignupWithEmail
 		self.textFieldPlaceholder = textFieldPlaceholder
 		self.buttonTitle = buttonTitle
@@ -36,5 +36,6 @@ public final class SignUpUserEntryViewModel:  ObservableObject {
 		_entryField = entryField
 		self.signUp = signUp
 		_moveToNextScreen = moveToNextScreen
+		_isLoading = isLoading
 	}
 }

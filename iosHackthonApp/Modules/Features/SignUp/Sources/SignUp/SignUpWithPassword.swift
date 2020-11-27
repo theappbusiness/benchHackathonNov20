@@ -14,6 +14,7 @@ import TabBar
 struct SignUpWithPassword: View {
 	@State private var password: String = ""
 	@State private var moveToNextScreen: Bool = false
+	@State private var isLoading: Bool = false
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -29,7 +30,8 @@ struct SignUpWithPassword: View {
 														 width: geometry.size.width,
 														 entryField: $password,
 														 signUp: self.signUp,
-														 moveToNextScreen: $moveToNextScreen)
+														 moveToNextScreen: $moveToNextScreen,
+														 isLoading: $isLoading)
 
 				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
@@ -38,6 +40,7 @@ struct SignUpWithPassword: View {
 
 	func signUp() {
 		//TODO: Add firebase sign up and update moveToNextScreen is call is successful
+		// also update the loading state
 	}
 }
 
