@@ -7,28 +7,25 @@
 //
 
 import SwiftUI
+import shared
+import Components
 import Strings
 import Theming
-import Components
 import TabBar
 import SignUp
 
 public struct LoginView: View {
-	@State var email: String = ""
-	@State var password: String = ""
-	@State var loginSucessful: Bool = true
-	let coloredNavAppearance = UINavigationBarAppearance()
 
-	public init() {
-		coloredNavAppearance.configureWithOpaqueBackground()
-		coloredNavAppearance.backgroundColor = UIColor(ColorManager.appPrimary)
-		coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-		coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-		UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-		UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+	@ObservedObject private var loginViewModel: LoginViewModel
+
+	public init(viewModel: LoginViewModel) {
+		self.loginViewModel = viewModel
+		UINavigationBar.appearance().standardAppearance = self.loginViewModel.coloredNavAppearance
+		UINavigationBar.appearance().scrollEdgeAppearance = self.loginViewModel.coloredNavAppearance
 	}
 
 	public var body: some View {
+		
 		NavigationView {
 			ScrollView {
 				VStack {
@@ -40,26 +37,40 @@ public struct LoginView: View {
 						.cornerRadius(10)
 				}
 				.padding()
-
+				
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
 						Text(Strings.Login.email)
-						TextField(Strings.Login.emailPlaceholder, text: $email)
+						TextField(Strings.Login.emailPlaceholder, text: $loginViewModel.email)
 							.modifier(GreyTextFieldStyle())
+							.autocapitalization(.none)
+							.disableAutocorrection(true)
 						Text(Strings.Login.password)
-						SecureField(Strings.Login.passwordPlaceholder, text: $password)
+						SecureField(Strings.Login.passwordPlaceholder, text: $loginViewModel.password)
 							.modifier(GreyTextFieldStyle())
 						Spacer()
-
-
+						
 						GeometryReader { geometry in
-							let isDisabled = email.isEmpty || password.isEmpty
-							let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
-							NavigationLink(destination: TabAppView(selectedView: 0)) {
-								Text(Strings.Login.loginButtonTitle)
-									.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
+							ZStack {
+								if loginViewModel.isLoading {
+									ProgressView()
+										.zIndex(1)
+								}
+								
+								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(loginViewModel.authorizationStore.isAuthorised)) {
+									Text("")
+								}
+								let isDisabled = loginViewModel.email.isEmpty || loginViewModel.password.isEmpty
+								let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
+								Button(action: {
+									loginViewModel.login(email: loginViewModel.email, password: loginViewModel.password)
+								}) {
+									Text(Strings.Login.loginButtonTitle)
+										.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
+								}
+								.disabled(isDisabled)
+								.zIndex(0)
 							}
-							.disabled(isDisabled)
 						}
 					}
 				}
@@ -78,13 +89,16 @@ public struct LoginView: View {
 			}
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
+		.onAppear() {
+			loginViewModel.authorizationStore.isUserAuthorized()
+		}
 		.accentColor(.white)
-	}
-}
-
-struct LoginView_Previews: PreviewProvider {
-	static var previews: some View {
-		LoginView()
+		.alert(isPresented: $loginViewModel.showingAlert) {
+			return Alert(
+				title: Text(Strings.Login.invalidLoginTitle),
+				message: Text(Strings.Login.invalidLoginMessage),
+				dismissButton: .default(Text(Strings.Common.ok)))
+		}
 	}
 }
 
