@@ -20,7 +20,7 @@ jobs:
         java-version: 1.8
     - name: Run unit tests
       run: ./gradlew test
-    - name: Run Android tests (requires an emulator)
+    - name: Ensure installs onto an emulator
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 30
