@@ -38,27 +38,35 @@ public struct BottomSheetView<Content: View>: View {
         isOpen ? 0 : maxHeight - minHeight
     }
 
+    private var indicator: some View {
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(ColorManager.appPrimary)
+            .frame(
+                width: Constants.indicatorWidth,
+                height: Constants.indicatorHeight)
+            .padding()
+            .onTapGesture {
+                isOpen.toggle()
+            }
+    }
+
+    private var showListButton: some View {
+        Button(action: {
+            isOpen.toggle()
+        }, label: {
+            Text(labelText)
+                .foregroundColor(ColorManager.appPrimary)
+        })
+        .padding()
+    }
+
     public var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 if isOpen {
-                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                        .fill(ColorManager.appPrimary)
-                        .frame(
-                            width: Constants.indicatorWidth,
-                            height: Constants.indicatorHeight)
-                        .padding()
-                        .onTapGesture {
-                            isOpen.toggle()
-                        }
+                    indicator
                 } else {
-                    Button(action: {
-                        isOpen.toggle()
-                    }, label: {
-                        Text(labelText)
-                            .foregroundColor(ColorManager.appPrimary)
-                    })
-                    .padding()
+                    showListButton
                 }
                 content
             }
