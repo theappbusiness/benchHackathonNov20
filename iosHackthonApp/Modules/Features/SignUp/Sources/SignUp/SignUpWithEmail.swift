@@ -35,7 +35,7 @@ struct SignUpWithEmail: View {
 					entryField: $viewModel.email,
 					signUp: self.signUp,
 					moveToNextScreen: $viewModel.moveToNextScreen,
-					isLoading: .constant(false))
+					isLoading: .constant(self.viewModel.isLoading))
 				
 				let signupViewModel = SignUpWithPasswordViewModel(email: self.viewModel.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 

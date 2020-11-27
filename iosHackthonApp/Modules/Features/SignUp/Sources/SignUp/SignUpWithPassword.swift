@@ -46,6 +46,6 @@ struct SignUpWithPassword: View {
 //MARK:- Functions
 private extension SignUpWithPassword {
 	func signUp() {
-		viewModel.signUp(email: viewModel.email, password: viewModel.password)
+		viewModel.signUp(email: self.viewModel.email, password: self.viewModel.password)
 	}
 }
