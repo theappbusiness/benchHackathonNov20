@@ -12,46 +12,45 @@ import Theming
 
 public struct SignUpUserEntryView<Content: View>: View {
 	
-	private var isSignupWithEmail: Bool
-	private var textFieldPlaceholder: String
-	private var buttonTitle: String
-	private var width: CGFloat
+	@ObservedObject private var viewModel: SignUpUserEntryViewModel
 	private var destinationView: Content
-	@Binding private var entryField: String
 	
-	public init(isSignupWithEmail: Bool,
-				textFieldPlaceholder: String,
-				buttonTitle: String,
-				width: CGFloat,
-				destinationView: Content,
-				entryField: Binding<String>) {
-		self.isSignupWithEmail = isSignupWithEmail
-		self.textFieldPlaceholder = textFieldPlaceholder
-		self.buttonTitle = buttonTitle
-		self.width = width
+	public init(viewModel: SignUpUserEntryViewModel, destinationView: Content) {
+		self.viewModel = viewModel
 		self.destinationView = destinationView
-		_entryField = entryField
 	}
 	
 	public var body: some View {
 		VStack(alignment: .trailing) {
 			Spacer()
 			HStack {
-				if isSignupWithEmail {
-					TextField(textFieldPlaceholder, text: $entryField)
+				if viewModel.isSignupWithEmail {
+					TextField(viewModel.textFieldPlaceholder, text: $viewModel.entryField)
 						.modifier(GreyTextFieldStyle())
 				} else {
-					SecureField(textFieldPlaceholder, text: $entryField)
+					SecureField(viewModel.textFieldPlaceholder, text: $viewModel.entryField)
 						.modifier(GreyTextFieldStyle())
 				}
 			}
 			HStack {
-				NavigationLink(destination: destinationView) {
-					Text(buttonTitle)
-						.modifier(AddButtonStyle(width: width,
-												 backgroundColor: entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
+				ZStack {
+					if viewModel.isLoading {
+						ProgressView()
+							.zIndex(1)
+					}
+					
+					NavigationLink(destination: destinationView, isActive: $viewModel.moveToNextScreen ) {
+						Text("")
+					}
+					Button(action: {
+						viewModel.signUp()
+					}) {
+						Text(viewModel.buttonTitle)
+							.modifier(AddButtonStyle(width: viewModel.width, backgroundColor: viewModel.buttonBgColor))
+					}
+					.disabled(viewModel.entryField.isEmpty)
+					.zIndex(0)
 				}
-				.disabled(entryField.isEmpty)
 			}
 		}
 	}

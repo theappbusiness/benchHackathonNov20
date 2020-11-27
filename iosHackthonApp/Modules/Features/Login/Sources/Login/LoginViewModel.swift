@@ -31,9 +31,10 @@ public final class LoginViewModel: ObservableObject {
 	}
 
 	func login(email: String, password: String) {
-		//TODO: API key should be in the shared layer
+		//TODO: API key to be handled in shared layer. remove the apikey parameter once implemented
+		// To run the project for now, add the api key and run
 		isLoading = true
-		firebase.signIn(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+		firebase.signIn(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
 				self.authorizationStore.storeUserLoggedInStatus(true)
 			} else {
