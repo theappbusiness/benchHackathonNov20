@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import shared
 import Components
-import Theming
 
 public final class SignUpViewModel: ObservableObject {
 

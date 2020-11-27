@@ -7,8 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Strings
-import Theming
 
 public final class SignUpUserEntryViewModel: ObservableObject {
 	
