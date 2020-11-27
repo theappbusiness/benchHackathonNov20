@@ -10,8 +10,11 @@ import SwiftUI
 import shared
 import Components
 import Theming
+import Strings
 
 public final class LoginViewModel: ObservableObject {
+
+    typealias strings = Strings.Login
 
 	@Published var email: String = ""
 	@Published var password: String = ""
@@ -30,6 +33,28 @@ public final class LoginViewModel: ObservableObject {
 		coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 	}
 
+    let title = strings.heading
+    let emailTitle = strings.email
+    let emailPlaceholder = strings.emailPlaceholder
+    let passwordTitle = strings.password
+    let passwordPlaceholder = strings.passwordPlaceholder
+    let loginButtonTitle = strings.loginButtonTitle
+    let signupButtonTitle = strings.signupButtonTitle
+    let alertTitle = strings.invalidLoginTitle
+    let alertMessage = strings.invalidLoginMessage
+    let alertButton = Strings.Common.ok
+
+    var loginButtonIsDisabled: Bool {
+        email.isEmpty || password.isEmpty
+    }
+
+    var backgroundColor: Color {
+        loginButtonIsDisabled ? ColorManager.gray: ColorManager.appPrimary
+    }
+}
+
+// MARK:- Functions
+extension LoginViewModel {
 	func login(email: String, password: String) {
 		//TODO: API key should be in the shared layer
 		isLoading = true

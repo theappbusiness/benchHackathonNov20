@@ -9,19 +9,18 @@
 import SwiftUI
 import shared
 import Components
-import Strings
 import Theming
 import TabBar
 import SignUp
 
 public struct LoginView: View {
 
-	@ObservedObject private var loginViewModel: LoginViewModel
+	@ObservedObject private var viewModel: LoginViewModel
 
 	public init(viewModel: LoginViewModel) {
-		self.loginViewModel = viewModel
-		UINavigationBar.appearance().standardAppearance = self.loginViewModel.coloredNavAppearance
-		UINavigationBar.appearance().scrollEdgeAppearance = self.loginViewModel.coloredNavAppearance
+		self.viewModel = viewModel
+		UINavigationBar.appearance().standardAppearance = self.viewModel.coloredNavAppearance
+		UINavigationBar.appearance().scrollEdgeAppearance = self.viewModel.coloredNavAppearance
 	}
 
 	public var body: some View {
@@ -40,35 +39,33 @@ public struct LoginView: View {
 				
 				VStack(alignment: .leading, spacing: 10) {
 					Group {
-						Text(Strings.Login.email)
-						TextField(Strings.Login.emailPlaceholder, text: $loginViewModel.email)
+                        Text(viewModel.emailTitle)
+                        TextField(viewModel.emailPlaceholder, text: $viewModel.email)
 							.modifier(GreyTextFieldStyle())
 							.autocapitalization(.none)
 							.disableAutocorrection(true)
-						Text(Strings.Login.password)
-						SecureField(Strings.Login.passwordPlaceholder, text: $loginViewModel.password)
+                        Text(viewModel.password)
+                        SecureField(viewModel.passwordPlaceholder, text: $viewModel.password)
 							.modifier(GreyTextFieldStyle())
 						Spacer()
 						
 						GeometryReader { geometry in
 							ZStack {
-								if loginViewModel.isLoading {
+								if viewModel.isLoading {
 									ProgressView()
 										.zIndex(1)
 								}
 								
-								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(loginViewModel.authorizationStore.isAuthorised)) {
+								NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(viewModel.authorizationStore.isAuthorised)) {
 									Text("")
 								}
-								let isDisabled = loginViewModel.email.isEmpty || loginViewModel.password.isEmpty
-								let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
 								Button(action: {
-									loginViewModel.login(email: loginViewModel.email, password: loginViewModel.password)
+									viewModel.login(email: viewModel.email, password: viewModel.password)
 								}) {
-									Text(Strings.Login.loginButtonTitle)
-										.modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: backgroundColor))
+                                    Text(viewModel.loginButtonTitle)
+                                        .modifier(AddButtonStyle(width: geometry.size.width, backgroundColor: viewModel.backgroundColor))
 								}
-								.disabled(isDisabled)
+                                .disabled(viewModel.loginButtonIsDisabled)
 								.zIndex(0)
 							}
 						}
@@ -80,24 +77,25 @@ public struct LoginView: View {
 					Spacer(minLength: 20)
 					GeometryReader { geometry in
 						NavigationLink(destination: SignUpView()) {
-							Text(Strings.Login.signupButtonTitle)
+                            Text(viewModel.signupButtonTitle)
 								.frame(width: geometry.size.width, alignment: .center)
 								.foregroundColor(ColorManager.appPrimary)
 						}
 					}
 				}
 			}
-			.navigationBarTitle(Text(Strings.Login.heading))
+            .navigationBarTitle(viewModel.title)
 		}
 		.onAppear() {
-			loginViewModel.authorizationStore.isUserAuthorized()
+			viewModel.authorizationStore.isUserAuthorized()
 		}
 		.accentColor(.white)
-		.alert(isPresented: $loginViewModel.showingAlert) {
+		.alert(isPresented: $viewModel.showingAlert) {
 			return Alert(
-				title: Text(Strings.Login.invalidLoginTitle),
-				message: Text(Strings.Login.invalidLoginMessage),
-				dismissButton: .default(Text(Strings.Common.ok)))
+                title: Text(viewModel.alertTitle),
+                message: Text(viewModel.alertMessage),
+                dismissButton: .default(Text(viewModel.alertButton))
+            )
 		}
 	}
 }
