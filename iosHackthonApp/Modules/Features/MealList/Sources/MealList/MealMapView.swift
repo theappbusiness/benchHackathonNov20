@@ -29,9 +29,10 @@ public struct MealMapView: View {
                     MapView(annotations: viewModel.locations, selectedPlace: $viewModel.selectedPlace)
                         .edgesIgnoringSafeArea(.all)
                     BottomSheetView(isOpen: $viewModel.bottomSheetOpen,
-                                    maxHeight: geometry.size.height * 0.7,
-                                    labelText: Strings.MealListScreen.bottomSheetLabel) {
+                                        maxHeight: geometry.size.height * 0.7,
+                                        labelText: Strings.MealListScreen.bottomSheetLabel) {
                         MealListView(viewModel: viewModel)
+
                     }
                 }
             }
