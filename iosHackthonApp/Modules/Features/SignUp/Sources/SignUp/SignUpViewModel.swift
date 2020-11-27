@@ -26,9 +26,10 @@ public final class SignUpViewModel: ObservableObject {
 	}
 
 	func signUp(email: String, password: String) {
-		//TODO: API key should be in the shared layer
+		//TODO: API key to be handled in shared layer
+		// To run the project for now, add the api key and run
 		isLoading = true
-		firebase.signUp(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+		firebase.signUp(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
 				self.authorizationStore.storeUserLoggedInStatus(true)
 				self.moveToNextScreen = true
