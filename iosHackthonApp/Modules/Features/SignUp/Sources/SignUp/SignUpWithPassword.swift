@@ -15,7 +15,7 @@ import shared
 struct SignUpWithPassword: View {
 	
 	@ObservedObject private var signUpViewModel: SignUpViewModel
-
+	
 	public init(viewModel: SignUpViewModel) {
 		self.signUpViewModel = viewModel
 	}
@@ -23,11 +23,11 @@ struct SignUpWithPassword: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithPasswordTitle, description: Strings.SignUp.signUpWithPasswordInfo)
-
+			
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
-
+				
 				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: false,
 														 textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
 														 buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
@@ -36,12 +36,12 @@ struct SignUpWithPassword: View {
 														 signUp: self.signUp,
 														 moveToNextScreen: $signUpViewModel.moveToNextScreen,
 														 isLoading: $signUpViewModel.isLoading)
-
+				
 				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
 		}.padding()
 	}
-
+	
 	func signUp() {
 		signUpViewModel.signUp(email: signUpViewModel.email, password: signUpViewModel.password)
 	}

@@ -11,10 +11,10 @@ import Strings
 import Theming
 
 public struct SignUpUserEntryView<Content: View>: View {
-
+	
 	@ObservedObject private var viewModel: SignUpUserEntryViewModel
 	private var destinationView: Content
-
+	
 	public init(viewModel: SignUpUserEntryViewModel,
 				destinationView: Content) {
 		self.viewModel = viewModel
@@ -35,23 +35,23 @@ public struct SignUpUserEntryView<Content: View>: View {
 			}
 			HStack {
 				ZStack {
-						if viewModel.isLoading {
-							ProgressView()
-								.zIndex(1)
-						}
-
-					NavigationLink(destination: destinationView, isActive: $viewModel.moveToNextScreen ) {
-							Text("")
-						}
-						Button(action: {
-							viewModel.signUp()
-						}) {
-							Text(viewModel.buttonTitle)
-								.modifier(AddButtonStyle(width: viewModel.width, backgroundColor: viewModel.entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
-						}
-						.disabled(viewModel.entryField.isEmpty)
-						.zIndex(0)
+					if viewModel.isLoading {
+						ProgressView()
+							.zIndex(1)
 					}
+					
+					NavigationLink(destination: destinationView, isActive: $viewModel.moveToNextScreen ) {
+						Text("")
+					}
+					Button(action: {
+						viewModel.signUp()
+					}) {
+						Text(viewModel.buttonTitle)
+							.modifier(AddButtonStyle(width: viewModel.width, backgroundColor: viewModel.entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary))
+					}
+					.disabled(viewModel.entryField.isEmpty)
+					.zIndex(0)
+				}
 			}
 		}
 	}

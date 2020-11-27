@@ -20,7 +20,7 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 	@Binding var entryField: String
 	@Binding var moveToNextScreen: Bool
 	@Binding var isLoading: Bool
-
+	
 	public init(isSignupWithEmail: Bool,
 				textFieldPlaceholder: String,
 				buttonTitle: String,
