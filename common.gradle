@@ -7,10 +7,11 @@ group = "com.kcc.kmmhackathon"
 version = "1.0-SNAPSHOT"
 
 android {
-    compileSdkVersion 30
+    def sdkVersion = 30
+    compileSdkVersion sdkVersion
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion sdkVersion
         versionCode 1
         versionName "1.0"
     }
