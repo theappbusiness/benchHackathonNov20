@@ -46,7 +46,6 @@ class FindMealViewModel @ViewModelInject constructor(
             updateMeals()
         }
     }
-    private val distanceUnit = DistanceUnit.miles
 
     override fun onCleared() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
@@ -67,6 +66,7 @@ class FindMealViewModel @ViewModelInject constructor(
 
     fun updateMeals() {
         val location = lastLocation ?: return
+        val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
@@ -91,7 +91,7 @@ class FindMealViewModel @ViewModelInject constructor(
         val location = lastLocation ?: return
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.reserveMeal(id, location.latitude, location.longitude, distanceUnit)
+                sdk.reserveMeal(id)
             }.onSuccess {
                 if (it != null) {
                     val code = getReservationCode(it.id)
