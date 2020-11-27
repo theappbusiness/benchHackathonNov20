@@ -18,13 +18,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build and test with Gradle
+    - name: Run unit tests
       run: ./gradlew test
-    - name: Install emulator
+    - name: Run Android tests (requires an emulator)
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 30
         script: ./gradlew connectedCheck
         target: google_apis
-    - name: Check app launches
-      run: ./gradlew installDebug
