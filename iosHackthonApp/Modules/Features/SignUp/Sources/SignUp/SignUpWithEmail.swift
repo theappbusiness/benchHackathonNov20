@@ -9,6 +9,7 @@
 import SwiftUI
 import Strings
 import Components
+import shared
 
 struct SignUpWithEmail: View {
 	@State private var email: String = ""
@@ -29,8 +30,10 @@ struct SignUpWithEmail: View {
 														 signUp: self.signUp,
 														 moveToNextScreen: $moveToNextScreen,
 														 isLoading: .constant(false))
+				
+				let signupViewModel = SignUpViewModel(email: self.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 
-				SignUpUserEntryView(viewModel: viewModel, destinationView:SignUpWithPassword())
+				SignUpUserEntryView(viewModel: viewModel, destinationView: SignUpWithPassword(viewModel: signupViewModel))
 			}
 		}.padding()
 	}

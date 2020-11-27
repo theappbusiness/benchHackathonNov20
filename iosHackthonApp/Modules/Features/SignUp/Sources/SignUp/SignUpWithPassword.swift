@@ -10,11 +10,15 @@ import SwiftUI
 import Strings
 import Components
 import TabBar
+import shared
 
 struct SignUpWithPassword: View {
-	@State private var password: String = ""
-	@State private var moveToNextScreen: Bool = false
-	@State private var isLoading: Bool = false
+	
+	@ObservedObject private var signUpViewModel: SignUpViewModel
+
+	public init(viewModel: SignUpViewModel) {
+		self.signUpViewModel = viewModel
+	}
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -28,10 +32,10 @@ struct SignUpWithPassword: View {
 														 textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
 														 buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
 														 width: geometry.size.width,
-														 entryField: $password,
+														 entryField: $signUpViewModel.password,
 														 signUp: self.signUp,
-														 moveToNextScreen: $moveToNextScreen,
-														 isLoading: $isLoading)
+														 moveToNextScreen: $signUpViewModel.moveToNextScreen,
+														 isLoading: $signUpViewModel.isLoading)
 
 				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
@@ -39,13 +43,6 @@ struct SignUpWithPassword: View {
 	}
 
 	func signUp() {
-		//TODO: Add firebase sign up and update moveToNextScreen is call is successful
-		// also update the loading state
+		signUpViewModel.signUp(email: signUpViewModel.email, password: signUpViewModel.password)
 	}
-}
-
-struct SignUpWithPassword_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpWithPassword()
-    }
 }
