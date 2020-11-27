@@ -17,13 +17,10 @@ public extension Strings.MealListScreen {
     static let portions = "portions remaining"
     static let available = "Available: "
     static let expiresAt = " Expires: "
+    static let bottomSheetLabel = "Show list"
 }
 public extension Strings.MealListScreen.Error {
     static let distanceError = "Failed to get distance"
-}
-public extension Strings.MealListScreen.SegmentControl {
-    static let map = "Map"
-    static let list = "List"
 }
 public extension Strings.MealListScreen.Map {
     static let missing = "Missing place information"

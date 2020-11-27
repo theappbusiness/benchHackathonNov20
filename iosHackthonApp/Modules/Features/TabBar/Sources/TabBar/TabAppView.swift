@@ -33,18 +33,12 @@ public struct TabAppView: View {
                 image: Strings.TabView.Images.find,
                 title: Strings.TabView.findButtonText,
                 tagNumber: 0)
-
-            TabNavigationItem(
-                destination: AnyView(MealListView(viewModel: mealListViewModel)),
-                image: Strings.TabView.Images.listView,
-                title: Strings.TabView.listViewText,
-                tagNumber: 1)
             
             TabNavigationItem(
                 destination: AnyView(SettingsView()),
                 image: Strings.TabView.Images.settings,
                 title: Strings.TabView.settings,
-                tagNumber: 2)
+                tagNumber: 1)
         })
         .accentColor(.white)
     }
