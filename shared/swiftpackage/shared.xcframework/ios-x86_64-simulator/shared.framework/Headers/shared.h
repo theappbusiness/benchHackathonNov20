@@ -220,6 +220,12 @@ __attribute__((swift_name("MealsSDK")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)postMealMeal:(SharedMeal *)meal completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("postMeal(meal:completionHandler:)")));
+
+/**
+ @note This method converts instances of Exception to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)reserveMealId:(NSString *)id completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("reserveMeal(id:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -247,12 +253,6 @@ __attribute__((swift_name("MealApi")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)getMealId:(NSString *)id completionHandler:(void (^)(SharedMeal * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getMeal(id:completionHandler:)")));
-
-/**
- @note This method converts instances of CancellationException to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)getSortedMealsUserLat:(double)userLat userLon:(double)userLon distanceUnit:(SharedDistanceUnit *)distanceUnit completionHandler:(void (^)(NSArray<SharedMeal *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getSortedMeals(userLat:userLon:distanceUnit:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
