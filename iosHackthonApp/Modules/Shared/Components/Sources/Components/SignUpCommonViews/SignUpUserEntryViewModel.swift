@@ -38,7 +38,7 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 		_isLoading = isLoading
 	}
 
-	func getbuttonBgColor() -> Color {
-		return entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary
+	var buttonBgColor: Color {
+		 entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary
 	}
 }

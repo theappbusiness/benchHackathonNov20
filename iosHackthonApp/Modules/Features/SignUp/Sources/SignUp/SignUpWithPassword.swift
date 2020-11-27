@@ -40,6 +40,12 @@ struct SignUpWithPassword: View {
 				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
 		}.padding()
+		.alert(isPresented: $viewModel.showingAlert) {
+			return Alert(
+				title: Text(self.viewModel.signUpWithPasswordFailedTitle),
+				message: Text(self.viewModel.signUpWithPasswordFailedInfo),
+				dismissButton: .default(Text(Strings.Common.ok)))
+		}
 	}
 }
 

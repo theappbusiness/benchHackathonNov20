@@ -46,7 +46,7 @@ public struct SignUpUserEntryView<Content: View>: View {
 						viewModel.signUp()
 					}) {
 						Text(viewModel.buttonTitle)
-							.modifier(AddButtonStyle(width: viewModel.width, backgroundColor: viewModel.getbuttonBgColor()))
+							.modifier(AddButtonStyle(width: viewModel.width, backgroundColor: viewModel.buttonBgColor))
 					}
 					.disabled(viewModel.entryField.isEmpty)
 					.zIndex(0)
