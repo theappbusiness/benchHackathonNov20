@@ -12,9 +12,8 @@ import Components
 
 struct SignUpWithEmail: View {
 	@State private var email: String = ""
-	@State private var movetonext: Bool = false
+	@State private var moveToNextScreen: Bool = false
 
-	
 	var body: some View {
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: Strings.SignUp.signUpWithEmailTitle, description: Strings.SignUp.signUpWithEmailInfo)
@@ -22,22 +21,21 @@ struct SignUpWithEmail: View {
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
-				SignUpUserEntryView(isSignupWithEmail: true,
-									textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder, buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
-									width: geometry.size.width,
-									destinationView: SignUpWithPassword(),
-									entryField: $email,
-									signUp: self.signUp,
-									movetonext: $movetonext)
+				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: true,
+														 textFieldPlaceholder: Strings.SignUp.signUpWithEmailPlaceHolder, buttonTitle: Strings.SignUp.signUpWithEmailButtonTitle,
+														 width: geometry.size.width,
+														 entryField: $email,
+														 signUp: self.signUp,
+														 moveToNextScreen: $moveToNextScreen)
+
+				SignUpUserEntryView(viewModel: viewModel, destinationView:SignUpWithPassword())
 			}
 		}.padding()
 	}
 
 	func signUp() {
-		  print("do something")
-
-		self.movetonext = false
-	  }
+		self.moveToNextScreen = true
+	}
 }
 
 struct SignUpWithEmail_Previews: PreviewProvider {

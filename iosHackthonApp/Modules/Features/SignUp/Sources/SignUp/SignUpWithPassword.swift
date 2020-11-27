@@ -13,7 +13,7 @@ import TabBar
 
 struct SignUpWithPassword: View {
 	@State private var password: String = ""
-	@State private var movetonext: Bool = false
+	@State private var moveToNextScreen: Bool = false
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -22,21 +22,23 @@ struct SignUpWithPassword: View {
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
-				SignUpUserEntryView(isSignupWithEmail: false,
-									textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
-									buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
-									width: geometry.size.width,
-									destinationView: TabAppView(selectedView: 0),
-									entryField: $password,
-									signUp: self.signUp,
-									movetonext: $movetonext)
+
+				let viewModel = SignUpUserEntryViewModel(isSignupWithEmail: false,
+														 textFieldPlaceholder: Strings.SignUp.signUpWithPasswordPlaceHolder,
+														 buttonTitle: Strings.SignUp.signUpWithPasswordButtonTitle,
+														 width: geometry.size.width,
+														 entryField: $password,
+														 signUp: self.signUp,
+														 moveToNextScreen: $moveToNextScreen)
+
+				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
 			}
 		}.padding()
 	}
 
 	func signUp() {
-		  print("do something")
-	  }
+		//TODO: Add firebase sign up and update moveToNextScreen is call is successful
+	}
 }
 
 struct SignUpWithPassword_Previews: PreviewProvider {
