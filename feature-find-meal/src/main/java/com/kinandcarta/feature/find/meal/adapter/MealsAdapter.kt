@@ -39,8 +39,8 @@ class MealsAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateMeal(position: Int, meal: Meal) {
-        mealsList[position] = meal
+    fun updateMeal(position: Int, remainingQty: Int) {
+        mealsList[position].quantity = remainingQty
         notifyItemChanged(position)
     }
 

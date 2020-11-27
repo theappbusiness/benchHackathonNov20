@@ -92,7 +92,7 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
-        mealsAdapter.updateMeal(state.position, state.meal)
+        mealsAdapter.updateMeal(state.position, state.remainingQty)
         showToast("Your meal reservation code is ${state.code}")
     }
 

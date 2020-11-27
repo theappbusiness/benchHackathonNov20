@@ -25,7 +25,7 @@ class FindMealViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
-        data class ReservedMeal(val code: String, val position: Int, val meal: Meal) : State()
+        data class ReservedMeal(val code: String, val position: Int, val remainingQty: Int) : State()
         data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
@@ -95,7 +95,7 @@ class FindMealViewModel @ViewModelInject constructor(
             }.onSuccess {
                 if (it != null) {
                     val code = getReservationCode(it.id)
-                    _state.value = State.ReservedMeal(code, position, it)
+                    _state.value = State.ReservedMeal(code, position, it.quantity)
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
