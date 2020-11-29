@@ -2,12 +2,14 @@ package com.kcc.kmmhackathon.androidHackathonApp.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -22,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
 
+    private lateinit var map: GoogleMap
     private val viewModel: MapsViewModel by viewModels()
 
     override fun onAttach(context: Context) {
@@ -39,9 +42,10 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val kinAndCarta = LatLng(51.5320, -0.1189)
-        googleMap.addMarker(MarkerOptions().position(kinAndCarta).title("Kin+Carta Create"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kinAndCarta, 16.0f))
+        map = googleMap
+//        val kinAndCarta = LatLng(51.5320, -0.1189)
+//        googleMap.addMarker(MarkerOptions().position(kinAndCarta).title("Kin+Carta Create"))
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kinAndCarta, 16.0f))
     }
 
     override fun onCreateView(
@@ -89,6 +93,18 @@ class MapsFragment : Fragment() {
 
     private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
         Log.i("Maps", "Meals to display ${state.meals}") // TODO: Display markers
+        placeMarkerOnMap(state.userLocation, "My location")
+
+        state.meals.forEach {
+            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name)
+        }
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(state.userLocation, 10.0f))
+    }
+
+    private fun placeMarkerOnMap(location: LatLng, title: String) {
+        val markerOptions = MarkerOptions().position(location).title(title)
+        map.addMarker(markerOptions)
     }
 
     private fun onFailure(failure: MapsViewModel.Failure) {

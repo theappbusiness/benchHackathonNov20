@@ -11,6 +11,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.model.LatLng
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
@@ -25,7 +26,7 @@ class MapsViewModel @ViewModelInject constructor(
 
     sealed class State {
         object LoadingMeals : State()
-        data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit, val userLocation: LatLng) : State()
         data class Failed(val failure: Failure) : State()
     }
 
@@ -78,7 +79,7 @@ class MapsViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
-                _state.value = State.LoadedMeals(it, distanceUnit)
+                _state.value = State.LoadedMeals(it, distanceUnit, LatLng(location.latitude, location.longitude))
             }.onFailure {
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
