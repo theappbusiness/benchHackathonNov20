@@ -3,7 +3,6 @@ package com.kcc.kmmhackathon.androidHackathonApp.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kcc.kmmhackathon.androidHackathonApp.R
 import com.kcc.kmmhackathon.androidHackathonApp.viewmodel.MapsViewModel
-import com.kcc.kmmhackathon.shared.utility.extensions.getPortionsString
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
 import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
 import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
@@ -71,14 +70,13 @@ class MapsFragment : Fragment() {
 
     private fun onStateChanged(state: MapsViewModel.State) {
         when (state) {
-            MapsViewModel.State.LoadingMeals ->
-                Log.i("Map view", "Loading meals")
             is MapsViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
             is MapsViewModel.State.LocationUpdate ->
                 onLocationUpdate(state)
             is MapsViewModel.State.Failed ->
                 onFailure(state.failure)
+            else -> return
         }
     }
 
@@ -88,12 +86,13 @@ class MapsFragment : Fragment() {
 
     private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
         state.meals.forEach {
-            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name, it.quantity.getPortionsString())
+            val snippet = "${it.quantity.getPortionsString()} (${it.distance} ${state.distanceUnit})"
+            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name, snippet)
         }
     }
 
-    private fun placeMarkerOnMap(location: LatLng, title: String, mealsRemaining: String) {
-        val markerOptions = MarkerOptions().position(location).title(title).snippet(mealsRemaining)
+    private fun placeMarkerOnMap(location: LatLng, title: String, snippet: String) {
+        val markerOptions = MarkerOptions().position(location).title(title).snippet(snippet)
         map.addMarker(markerOptions)
     }
 

@@ -74,7 +74,7 @@ class MapsViewModel @ViewModelInject constructor(
         return locationRequest
     }
 
-    fun updateMeals() {
+    private fun updateMeals() {
         val location = lastLocation ?: return
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
@@ -89,7 +89,7 @@ class MapsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun updateUserLocation() {
+    private fun updateUserLocation() {
         val location = lastLocation ?: return
         _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
     }

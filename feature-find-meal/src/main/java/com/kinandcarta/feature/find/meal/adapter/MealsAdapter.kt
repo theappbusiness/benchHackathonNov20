@@ -10,8 +10,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
-import com.kcc.kmmhackathon.shared.utility.extensions.getPortionsString
 import com.kinandcarta.feature.find.meal.R
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
 import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
