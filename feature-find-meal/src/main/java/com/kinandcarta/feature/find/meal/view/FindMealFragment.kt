@@ -99,6 +99,7 @@ class FindMealFragment : Fragment() {
     private fun onMealUnavailable(state: FindMealViewModel.State.MealUnavailable) {
         showToast("Unfortunately this meal is unavailable")
     }
+
     private fun onFailure(failure: FindMealViewModel.Failure) {
         when (failure) {
             is FindMealViewModel.Failure.LoadingMealsFailed -> {
