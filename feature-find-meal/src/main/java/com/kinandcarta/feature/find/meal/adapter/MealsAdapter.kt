@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.feature.find.meal.R
-
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
+import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
@@ -58,7 +59,7 @@ class MealsAdapter(
             availableView.text = "Available: ${meal.availableFromDate}"
             expiryView.text = "Expires: ${meal.expiryDate}"
 
-            portionsView.text = getQuantityText(meal.quantity)
+            portionsView.text = "${meal.quantity.getPortionsString()}"
 
             val hasPortions = meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
@@ -80,12 +81,6 @@ class MealsAdapter(
                 reserveButton.setOnClickListener(null)
             }
         }
-    }
-
-    fun getQuantityText(quantity: Int): String = when (quantity) {
-        0 -> "#    Reserved"
-        1 -> "#    $quantity portion remaining"
-        else -> "#    $quantity portions remaining"
     }
 }
 
