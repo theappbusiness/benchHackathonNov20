@@ -57,3 +57,4 @@ class MealsSDK {
         return uuid4()
     }
 }
+
