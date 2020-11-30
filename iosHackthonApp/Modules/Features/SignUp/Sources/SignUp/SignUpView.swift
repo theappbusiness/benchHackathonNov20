@@ -25,7 +25,7 @@ public struct SignUpView: View {
 				VStack(alignment: .trailing) {
 					Spacer()
 					HStack {
-						NavigationLink(destination: SignUpWithEmail()) {
+						NavigationLink(destination: SignUpWithEmail(viewModel: SignUpWithEmailViewModel())) {
 							Text(Strings.SignUp.welcomeButtonTitle)
 								.modifier(AddButtonStyle(width: geometry.size.width,
 														 backgroundColor:ColorManager.appPrimary))
