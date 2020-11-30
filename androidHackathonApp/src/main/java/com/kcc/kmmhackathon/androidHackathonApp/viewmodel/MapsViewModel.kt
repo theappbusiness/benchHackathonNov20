@@ -67,9 +67,11 @@ class MapsViewModel @ViewModelInject constructor(
     }
 
     private fun createLocationRequest(): LocationRequest {
+        val oneMinuteFortySecondsInMs: Long = 100000
+        val fiveSecondsInMs: Long = 5000
         val locationRequest = LocationRequest()
-        locationRequest.interval = 100000
-        locationRequest.fastestInterval = 5000
+        locationRequest.interval = oneMinuteFortySecondsInMs
+        locationRequest.fastestInterval = fiveSecondsInMs
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         return locationRequest
     }
