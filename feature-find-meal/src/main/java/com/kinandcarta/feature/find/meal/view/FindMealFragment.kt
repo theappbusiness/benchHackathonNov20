@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.kinandcarta.feature.find.meal.R
@@ -63,7 +62,6 @@ class FindMealFragment : Fragment() {
     private fun setupUI() {
         val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
         mealsRecyclerView.adapter = mealsAdapter
-        mealsRecyclerView.layoutManager = LinearLayoutManager(context)
         val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
@@ -88,11 +86,10 @@ class FindMealFragment : Fragment() {
 
     private fun onLoadedMeals(state: FindMealViewModel.State.LoadedMeals) {
         progressBarView.isVisible = false
-        mealsAdapter.submit(state.meals, state.distanceUnit)
+        mealsAdapter.submitList(state.meals)
     }
 
     private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
-        mealsAdapter.updateMeal(state.position, state.remainingQty)
         showToast("Your meal reservation code is ${state.code}")
     }
 

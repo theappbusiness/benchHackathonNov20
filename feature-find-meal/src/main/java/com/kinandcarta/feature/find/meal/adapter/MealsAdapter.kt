@@ -7,41 +7,27 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.feature.find.meal.R
-import com.kinandcarta.feature.find.meal.viewmodel.Meals
+
 
 class MealsAdapter(
-    private var mealsList: MutableList<Meal> = mutableListOf(),
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
     private val clickListener: (String, Int) -> Unit
-) :
-    RecyclerView.Adapter<MealsAdapter.MealsViewHolder>() {
+) : ListAdapter<Meal, MealsAdapter.MealsViewHolder>(MealDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         LayoutInflater.from(parent.context)
             .inflate(R.layout.meal_item_row, parent, false)
             .run(::MealsViewHolder)
 
-    override fun getItemCount(): Int {
-        return mealsList.size
-    }
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
-        holder.bindData(mealsList[position], position)
-    }
-
-    fun submit(meals: Meals, unit: DistanceUnit) {
-        mealsList = meals
-        distanceUnit = unit
-        notifyDataSetChanged()
-    }
-
-    fun updateMeal(position: Int, remainingQty: Int) {
-        mealsList[position].quantity = remainingQty
-        notifyItemChanged(position)
+        val item = getItem(position)
+        holder.bindData(item, position)
     }
 
     inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -102,3 +88,4 @@ class MealsAdapter(
         else -> "#    $quantity portions remaining"
     }
 }
+
