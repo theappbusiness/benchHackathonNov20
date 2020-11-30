@@ -5,3 +5,4 @@ fun Int.getPortionsString(): String = when (this) {
     1 -> "$this portion remaining"
     else -> "$this portions remaining"
 }
+
