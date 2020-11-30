@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kcc.kmmhackathon.androidHackathonApp.R
 import com.kcc.kmmhackathon.androidHackathonApp.viewmodel.MapsViewModel
+import com.kcc.kmmhackathon.shared.utility.extensions.getPortionsString
 import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
 import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
@@ -33,19 +34,7 @@ class MapsFragment : Fragment() {
     }
 
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
         map = googleMap
-//        val kinAndCarta = LatLng(51.5320, -0.1189)
-//        googleMap.addMarker(MarkerOptions().position(kinAndCarta).title("Kin+Carta Create"))
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kinAndCarta, 16.0f))
     }
 
     override fun onCreateView(
@@ -70,6 +59,7 @@ class MapsFragment : Fragment() {
         val permissionResultParser = PermissionResultParser()
         if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
             viewModel.startUpdatingLocation()
+            map.isMyLocationEnabled = true
         } else {
             showToast("Location permissions are required to find meals")
         }
@@ -86,24 +76,25 @@ class MapsFragment : Fragment() {
                 Log.i("Map view", "Loading meals")
             is MapsViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
+            is MapsViewModel.State.LocationUpdate ->
+                onLocationUpdate(state)
             is MapsViewModel.State.Failed ->
                 onFailure(state.failure)
         }
     }
 
-    private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
-        Log.i("Maps", "Meals to display ${state.meals}") // TODO: Display markers
-        placeMarkerOnMap(state.userLocation, "My location")
-
-        state.meals.forEach {
-            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name)
-        }
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(state.userLocation, 10.0f))
+    private fun onLocationUpdate(state: MapsViewModel.State.LocationUpdate) {
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(state.userLatLng, 12.0f))
     }
 
-    private fun placeMarkerOnMap(location: LatLng, title: String) {
-        val markerOptions = MarkerOptions().position(location).title(title)
+    private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
+        state.meals.forEach {
+            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name, it.quantity.getPortionsString())
+        }
+    }
+
+    private fun placeMarkerOnMap(location: LatLng, title: String, mealsRemaining: String) {
+        val markerOptions = MarkerOptions().position(location).title(title).snippet(mealsRemaining)
         map.addMarker(markerOptions)
     }
 

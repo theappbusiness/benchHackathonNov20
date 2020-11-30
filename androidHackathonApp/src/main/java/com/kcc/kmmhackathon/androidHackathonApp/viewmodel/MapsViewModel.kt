@@ -15,7 +15,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
-import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import kotlinx.coroutines.launch
 
 typealias Meals = List<Meal>
@@ -26,7 +25,8 @@ class MapsViewModel @ViewModelInject constructor(
 
     sealed class State {
         object LoadingMeals : State()
-        data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit, val userLocation: LatLng) : State()
+        data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class LocationUpdate(val userLatLng: LatLng) : State()
         data class Failed(val failure: Failure) : State()
     }
 
@@ -53,7 +53,10 @@ class MapsViewModel @ViewModelInject constructor(
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     fun startUpdatingLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-            lastLocation = it
+            if (it != lastLocation) {
+                lastLocation = it
+                updateUserLocation()
+            }
             updateMeals()
         }
         fusedLocationProviderClient.requestLocationUpdates(
@@ -79,11 +82,15 @@ class MapsViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
-                _state.value = State.LoadedMeals(it, distanceUnit, LatLng(location.latitude, location.longitude))
+                _state.value = State.LoadedMeals(it, distanceUnit)
             }.onFailure {
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
         }
     }
 
+    fun updateUserLocation() {
+        val location = lastLocation ?: return
+        _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
+    }
 }
