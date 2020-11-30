@@ -4,6 +4,7 @@
     <string name="app_name">CommunityKitchen</string>
     <string name="map_tab_label">Find a meal</string>
     <string name="settings_tab_label">Settings</string>
+    <string name="fab_description">Switch View</string>
 
     //Auth
     <string name="login_button">Login</string>

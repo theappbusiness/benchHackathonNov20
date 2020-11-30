@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,6 +16,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kcc.kmmhackathon.androidHackathonApp.R
 import com.kcc.kmmhackathon.androidHackathonApp.viewmodel.MapsViewModel
 import com.kcc.kmmhackathon.shared.utility.extensions.getPortionsString
@@ -21,10 +27,13 @@ import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
 
     private lateinit var map: GoogleMap
+    private lateinit var fab: FloatingActionButton
+    private lateinit var layoutBottomSheet: LinearLayout
     private val viewModel: MapsViewModel by viewModels()
 
     override fun onAttach(context: Context) {
@@ -41,7 +50,17 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_maps, container, false)
+        layoutBottomSheet = view.findViewById(R.id.bottomSheet)
+
+        fab = view.findViewById(R.id.fab)
+        fab.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            dialog.setContentView(view)
+            dialog.show()
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,7 +107,11 @@ class MapsFragment : Fragment() {
 
     private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
         state.meals.forEach {
-            placeMarkerOnMap(LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()), it.name, it.quantity.getPortionsString())
+            placeMarkerOnMap(
+                LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()),
+                it.name,
+                it.quantity.getPortionsString()
+            )
         }
     }
 
