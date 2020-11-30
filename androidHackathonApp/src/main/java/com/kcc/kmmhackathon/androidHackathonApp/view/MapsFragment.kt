@@ -2,7 +2,6 @@ package com.kcc.kmmhackathon.androidHackathonApp.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
