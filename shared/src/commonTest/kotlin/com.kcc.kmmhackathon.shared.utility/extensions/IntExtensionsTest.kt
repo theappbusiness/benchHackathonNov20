@@ -16,6 +16,7 @@ class IntExtensionsTest {
         assertEquals(noneAvailable.getPortionsString(), "Reserved")
     }
 
+    @Test
     fun testInt_getPortionsString_negativeValues() {
         val negativeOneAvailable = -1
         val negativeLoadsAvailable = -200
