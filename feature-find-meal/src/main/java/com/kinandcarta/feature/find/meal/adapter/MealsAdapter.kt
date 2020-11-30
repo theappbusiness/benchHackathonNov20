@@ -59,7 +59,7 @@ class MealsAdapter(
             availableView.text = "Available: ${meal.availableFromDate}"
             expiryView.text = "Expires: ${meal.expiryDate}"
 
-            portionsView.text = "${meal.quantity.getPortionsString()}"
+            portionsView.text = "#    ${meal.quantity.getPortionsString()}"
 
             val hasPortions = meal.quantity > 0
             val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
