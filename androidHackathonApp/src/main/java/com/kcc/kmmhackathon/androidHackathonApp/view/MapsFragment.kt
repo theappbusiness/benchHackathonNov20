@@ -26,20 +26,15 @@ class MapsFragment : Fragment() {
     private lateinit var map: GoogleMap
     private val viewModel: MapsViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-    }
-
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
+        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
