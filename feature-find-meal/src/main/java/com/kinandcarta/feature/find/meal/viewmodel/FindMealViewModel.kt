@@ -16,8 +16,6 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import kotlinx.coroutines.launch
 
-typealias Meals = List<Meal>
-
 class FindMealViewModel @ViewModelInject constructor(
     private val fusedLocationClient: FusedLocationProviderClient
 ) : ViewModel() {

@@ -21,13 +21,14 @@ import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()
-
-    private val mealsAdapter = MealsAdapter() { id, position -> viewModel.reserveAMeal(id, position)}
+    private val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
+    private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,6 +39,7 @@ class FindMealFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.find_meal_fragment, container, false)
     }
 
@@ -61,7 +63,6 @@ class FindMealFragment : Fragment() {
     }
 
     private fun setupUI() {
-        val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(context)
         val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
@@ -107,7 +108,9 @@ class FindMealFragment : Fragment() {
                 showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
             }
             is FindMealViewModel.Failure.ReserveAMealFailed -> {
-                showToast(failure.localizedMessage ?: "An unexpected error occurred reserving a meal")
+                showToast(
+                    failure.localizedMessage ?: "An unexpected error occurred reserving a meal"
+                )
             }
         }
     }

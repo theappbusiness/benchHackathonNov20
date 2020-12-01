@@ -1,4 +1,4 @@
-package com.kcc.kmmhackathon.androidHackathonApp.viewmodel
+package com.kinandcarta.feature.find.meal.viewmodel
 
 import android.location.Location
 import androidx.annotation.RequiresPermission
