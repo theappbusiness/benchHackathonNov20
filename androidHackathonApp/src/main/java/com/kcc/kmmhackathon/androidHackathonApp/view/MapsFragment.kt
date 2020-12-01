@@ -26,10 +26,6 @@ class MapsFragment : Fragment() {
     private lateinit var map: GoogleMap
     private val viewModel: MapsViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
         requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
