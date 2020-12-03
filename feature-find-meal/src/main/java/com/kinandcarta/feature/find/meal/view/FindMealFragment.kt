@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
@@ -21,13 +22,12 @@ import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class FindMealFragment : Fragment() {
+class FindMealFragment : BottomSheetDialogFragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()
-    private val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
+    private lateinit var mealsRecyclerView: RecyclerView
     private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
 
     override fun onAttach(context: Context) {
@@ -36,11 +36,15 @@ class FindMealFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.find_meal_fragment, container, false)
+        val view: View = inflater.inflate(R.layout.find_meal_fragment, container, false)
+        mealsRecyclerView = view.findViewById(R.id.rvMeals)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +66,7 @@ class FindMealFragment : Fragment() {
         }
     }
 
-    private fun setupUI() {
+    fun setupUI() {
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(context)
         val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
