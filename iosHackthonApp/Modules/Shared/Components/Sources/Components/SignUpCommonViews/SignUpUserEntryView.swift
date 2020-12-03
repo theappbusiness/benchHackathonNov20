@@ -26,10 +26,10 @@ public struct SignUpUserEntryView<Content: View>: View {
 			HStack {
 				if viewModel.isSignupWithEmail {
 					TextField(viewModel.textFieldPlaceholder, text: $viewModel.entryField)
-						.modifier(GreyTextFieldStyle())
+                        .modifier(viewModel.textFieldStyle)
 				} else {
 					SecureField(viewModel.textFieldPlaceholder, text: $viewModel.entryField)
-						.modifier(GreyTextFieldStyle())
+                        .modifier(viewModel.textfieldStyle)
 				}
 			}
 			HStack {

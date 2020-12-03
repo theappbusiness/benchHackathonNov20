@@ -22,15 +22,16 @@ struct SignUpWithPassword: View {
 	
 	var body: some View {
 		VStack(alignment: .leading) {
-			SignUpInfoView(title: viewModel.signUpWithPasswordTitle, description: viewModel.signUpWithPasswordInfo)
+			SignUpInfoView(title: viewModel.signUpTitle, description: viewModel.signUpInfo)
+            
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
 				
 				let viewModel = SignUpUserEntryViewModel(
 					isSignupWithEmail: false,
-					textFieldPlaceholder: self.viewModel.signUpWithPasswordPlaceHolder,
-					buttonTitle: self.viewModel.signUpWithPasswordButtonTitle,
+					textFieldPlaceholder: self.viewModel.signUpPlaceHolder,
+					buttonTitle: self.viewModel.signUpButtonTitle,
 					width: geometry.size.width,
 					entryField: $viewModel.password,
 					signUp: self.signUp,
@@ -42,9 +43,9 @@ struct SignUpWithPassword: View {
 		}.padding()
 		.alert(isPresented: $viewModel.showingAlert) {
 			return Alert(
-				title: Text(self.viewModel.signUpWithPasswordFailedTitle),
-				message: Text(self.viewModel.signUpWithPasswordFailedInfo),
-				dismissButton: .default(Text(Strings.Common.ok)))
+				title: Text(self.viewModel.signUpFailedTitle),
+				message: Text(self.viewModel.signUpFailedInfo),
+                dismissButton: .default(Text(viewModel.ok)))
 		}
 	}
 }

@@ -41,12 +41,12 @@ public struct LoginView: View {
 					Group {
                         Text(viewModel.emailTitle)
                         TextField(viewModel.emailPlaceholder, text: $viewModel.email)
-							.modifier(GreyTextFieldStyle())
+                            .modifier(viewModel.textFieldStyle)
 							.autocapitalization(.none)
 							.disableAutocorrection(true)
                         Text(viewModel.password)
                         SecureField(viewModel.passwordPlaceholder, text: $viewModel.password)
-							.modifier(GreyTextFieldStyle())
+                            .modifier(viewModel.textFieldStyle)
 						Spacer()
 						
 						GeometryReader { geometry in
@@ -99,4 +99,3 @@ public struct LoginView: View {
 		}
 	}
 }
-

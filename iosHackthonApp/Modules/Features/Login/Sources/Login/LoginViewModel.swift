@@ -16,11 +16,6 @@ public final class LoginViewModel: ObservableObject {
 
     typealias strings = Strings.Login
 
-	@Published var email: String = ""
-	@Published var password: String = ""
-	@Published var showingAlert = false
-	@Published var isLoading: Bool = false
-	@Published var coloredNavAppearance = UINavigationBarAppearance()
 	@Published var firebase: FirebaseAuthenticationStore
 	@ObservedObject var authorizationStore: AuthorizationStore
 
@@ -33,6 +28,12 @@ public final class LoginViewModel: ObservableObject {
 		coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 	}
 
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var showingAlert = false
+    @Published var isLoading: Bool = false
+    @Published var coloredNavAppearance = UINavigationBarAppearance()
+
     let title = strings.heading
     let emailTitle = strings.email
     let emailPlaceholder = strings.emailPlaceholder
@@ -40,9 +41,12 @@ public final class LoginViewModel: ObservableObject {
     let passwordPlaceholder = strings.passwordPlaceholder
     let loginButtonTitle = strings.loginButtonTitle
     let signupButtonTitle = strings.signupButtonTitle
+
     let alertTitle = strings.invalidLoginTitle
     let alertMessage = strings.invalidLoginMessage
     let alertButton = Strings.Common.ok
+
+    let textFieldStyle = GreyTextFieldStyle()
 
     var loginButtonIsDisabled: Bool {
         email.isEmpty || password.isEmpty

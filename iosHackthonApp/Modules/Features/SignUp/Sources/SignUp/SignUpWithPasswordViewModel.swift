@@ -13,19 +13,17 @@ import Strings
 
 public final class SignUpWithPasswordViewModel: ObservableObject {
 
-	var email: String
-	@Published var password: String = ""
-	@Published var moveToNextScreen: Bool = false
-	@Published var isLoading: Bool = false
-	@Published var showingAlert = false
+    var email: String
 	@Published var firebase: FirebaseAuthenticationStore
 	@ObservedObject var authorizationStore: AuthorizationStore
-	var signUpWithPasswordTitle: String = Strings.SignUp.signUpWithPasswordTitle
-	var signUpWithPasswordInfo: String = Strings.SignUp.signUpWithPasswordInfo
-	var signUpWithPasswordPlaceHolder: String = Strings.SignUp.signUpWithPasswordPlaceHolder
-	var signUpWithPasswordButtonTitle: String = Strings.SignUp.signUpWithPasswordButtonTitle
-	var signUpWithPasswordFailedTitle: String = Strings.SignUp.signUpWithPasswordFailed
-	var signUpWithPasswordFailedInfo: String = Strings.SignUp.signUpWithPasswordFailedInfo
+
+	let signUpTitle = Strings.SignUp.signUpWithPasswordTitle
+	let signUpInfo = Strings.SignUp.signUpWithPasswordInfo
+	let signUpPlaceHolder = Strings.SignUp.signUpWithPasswordPlaceHolder
+	let signUpButtonTitle = Strings.SignUp.signUpWithPasswordButtonTitle
+	let signUpFailedTitle = Strings.SignUp.signUpWithPasswordFailed
+	let signUpFailedInfo = Strings.SignUp.signUpWithPasswordFailedInfo
+    let ok = Strings.Common.ok
 
 	public init(email: String, firebase: FirebaseAuthenticationStore, authorizationStore: AuthorizationStore) {
 		self.email = email
@@ -33,11 +31,16 @@ public final class SignUpWithPasswordViewModel: ObservableObject {
 		self.authorizationStore = authorizationStore
 	}
 
+    @Published var password: String = ""
+    @Published var moveToNextScreen: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var showingAlert = false
+
 	func signUp(email: String, password: String) {
 		//TODO: API key to be handled in shared layer. remove the apikey parameter once implemented
 		// To run the project for now, add the api key and run
 		isLoading = true
-		firebase.signUp(apiKey: "AIzaSyCXmrUtOgzc4kj8aimSkmjOcCV9PR438-o", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+        firebase.signUp(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
 			if (result?.idToken != nil) {
 				self.authorizationStore.storeUserLoggedInStatus(true)
 				self.moveToNextScreen = true

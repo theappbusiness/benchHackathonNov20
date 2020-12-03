@@ -16,6 +16,7 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 	var textFieldPlaceholder: String
 	var buttonTitle: String
 	var width: CGFloat
+    
 	@Binding var entryField: String
 	@Binding var moveToNextScreen: Bool
 	@Binding var isLoading: Bool
@@ -37,6 +38,8 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 		_moveToNextScreen = moveToNextScreen
 		_isLoading = isLoading
 	}
+
+    let textfieldStyle = GreyTextFieldStyle()
 
 	var buttonBgColor: Color {
 		 entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary

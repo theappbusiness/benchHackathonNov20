@@ -102,19 +102,21 @@ private extension AddMealView {
         @Binding var info: String
         @Binding var quantity: Int
 
+        let textFieldStyle = GreyTextFieldStyle()
+
         var body: some View {
             Group {
                 Text(Strings.AddMealScreen.title)
                 TextField(Strings.AddMealScreen.titlePlaceholder, text: $title)
-                    .modifier(GreyTextFieldStyle())
+                    .modifier(textFieldStyle)
 
                 Text(Strings.AddMealScreen.additionalInfo)
                 TextField(Strings.AddMealScreen.additionalInfoPlaceholder, text: $info)
-                    .modifier(GreyTextFieldStyle())
+                    .modifier(textFieldStyle)
 
                 Text(Strings.AddMealScreen.quantity)
                 TextField(Strings.AddMealScreen.quantity, value: $quantity, formatter: NumberFormatter())
-                    .modifier(GreyTextFieldStyle())
+                    .modifier(textFieldStyle)
             }
         }
     }
