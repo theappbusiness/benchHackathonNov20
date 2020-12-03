@@ -1,7 +1,5 @@
 package com.kinandcarta.lib.add.meal
 
-import com.kcc.kmmhackathon.shared.MealsSDK
-import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kinandcarta.lib.add.meal.viewmodel.AddMealViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
