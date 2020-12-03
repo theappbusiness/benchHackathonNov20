@@ -16,7 +16,7 @@ public struct MealListView: View {
     public var body: some View {
         VStack {
             if viewModel.meals.isEmpty {
-                Text("No meals found") // TODO: Do something nicer than this
+                Text(viewModel.noMeals) // TODO: Do something nicer than this
             }
             ScrollView {
                 LazyVStack {
@@ -26,20 +26,6 @@ public struct MealListView: View {
                     }
                 }
             }
-            .navigationBarTitle(Strings.MealListScreen.title)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        viewModel.isAddMealShowing = true
-                                    }) {
-                                        Image(systemName: Strings.Common.Images.add)
-                                    },
-                                trailing:
-                                    Button(action: {
-                                        self.viewModel.loadMeals()
-                                    }, label: {
-                                        Image(systemName: Strings.MealListScreen.Images.reload)
-                                    }))
-            .foregroundColor(.white)
             .sheet(isPresented: $viewModel.isAddMealShowing, content: {
                 AddMealView(sdk: viewModel.sdk, locationManager: viewModel.locationManager)
             })
@@ -47,19 +33,19 @@ public struct MealListView: View {
                 switch viewModel.activeAlert {
                 case .unavailable:
                     return  Alert(
-                        title: Text(Strings.Common.sorry),
-                        message: Text(Strings.MealListScreen.UnavailableAlert.message),
+                        title: Text(viewModel.sorry),
+                        message: Text(viewModel.unavailableMessage),
                         dismissButton: .default(Text(Strings.Common.ok)))
                 case .collection:
                     return Alert(
                         title: Text(viewModel.code),
-                        message: Text(Strings.MealListScreen.CollectionAlert.message),
-                        dismissButton: .default(Text(Strings.Common.ok)))
+                        message: Text(viewModel.collectionMessage),
+                        dismissButton: .default(Text(viewModel.ok)))
                 case .error:
                     return Alert(
-                        title: Text(Strings.Common.sorry),
-                        message: Text(Strings.Common.ErrorAlert.loadingMessage),
-                        dismissButton: .default(Text(Strings.Common.ok)))
+                        title: Text(viewModel.sorry),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .default(Text(viewModel.ok)))
                 }
             }
         }

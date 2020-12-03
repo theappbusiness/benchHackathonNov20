@@ -409,7 +409,7 @@ __attribute__((swift_name("Meal")))
 @property (readonly) float locationLat __attribute__((swift_name("locationLat")));
 @property (readonly) float locationLong __attribute__((swift_name("locationLong")));
 @property (readonly) NSString *name __attribute__((swift_name("name")));
-@property (readonly) int32_t quantity __attribute__((swift_name("quantity")));
+@property int32_t quantity __attribute__((swift_name("quantity")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

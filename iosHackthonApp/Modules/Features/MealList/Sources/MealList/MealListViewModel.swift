@@ -14,8 +14,17 @@ import Strings
 
 public final class MealListViewModel: ObservableObject {
 
+    typealias strings = Strings.MealListScreen
+    typealias images = strings.Images
+
     let sdk: MealsSDK
     let locationManager: LocationManager
+
+    public init(sdk: MealsSDK, locationManager: LocationManager) {
+        self.sdk = sdk
+        self.locationManager = locationManager
+        self.loadMeals()
+    }
 
     @Published var meals = [Meal]()
     @Published var code = ""
@@ -28,10 +37,26 @@ public final class MealListViewModel: ObservableObject {
     @Published var bottomSheetOpen: Bool = false
     @Published var isAddMealShowing = false
 
-    public init(sdk: MealsSDK, locationManager: LocationManager) {
-        self.sdk = sdk
-        self.locationManager = locationManager
-        self.loadMeals()
+    let title = strings.title
+    let bottomSheetLabel = strings.bottomSheetLabel
+    let noMeals = strings.noMeals
+
+    let sorry = Strings.Common.sorry
+    let unavailableMessage = strings.UnavailableAlert.message
+    let collectionMessage = strings.CollectionAlert.message
+    let errorMessage = Strings.Common.ErrorAlert.loadingMessage
+    let ok = Strings.Common.ok
+
+    let reloadImage = images.reload
+    let addImage = Strings.Common.Images.add
+
+    private func getQuantityText(_ quantity: Int) -> String {
+        if quantity > 1 {
+            return "\(quantity) \(strings.portions)"
+        } else if quantity == 1 {
+            return "\(quantity) \(strings.portion)"
+        }
+        return "\(strings.Map.reserved)"
     }
 
     func loadMeals() {
@@ -57,15 +82,6 @@ public final class MealListViewModel: ObservableObject {
                 self.locations.append(mapAnnotation)
             }
         })
-    }
-
-    private func getQuantityText(_ quantity: Int) -> String {
-        if quantity > 1 {
-            return "\(quantity) \(Strings.MealListScreen.portions)"
-        } else if quantity == 1 {
-            return "\(quantity) \(Strings.MealListScreen.portion)"
-        }
-        return "\(Strings.MealListScreen.Map.reserved)"
     }
 
     func patchMeal(meal: Meal) {

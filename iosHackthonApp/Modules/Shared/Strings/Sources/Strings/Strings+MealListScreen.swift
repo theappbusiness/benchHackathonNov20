@@ -18,6 +18,7 @@ public extension Strings.MealListScreen {
     static let available = "Available: "
     static let expiresAt = " Expires: "
     static let bottomSheetLabel = "Show list"
+    static let noMeals = "No meals found"
 }
 public extension Strings.MealListScreen.Error {
     static let distanceError = "Failed to get distance"

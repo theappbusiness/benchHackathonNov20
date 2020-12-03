@@ -23,31 +23,31 @@ public struct MealMapView: View {
         GeometryReader { geometry in
             VStack {
                 if viewModel.meals.isEmpty {
-                    Text("No meals found") // TODO: Do something nicer than this
+                    Text(viewModel.noMeals) // TODO: Do something nicer than this
                 }
                 ZStack {
                     MapView(annotations: viewModel.locations, selectedPlace: $viewModel.selectedPlace)
                         .edgesIgnoringSafeArea(.all)
                     BottomSheetView(isOpen: $viewModel.bottomSheetOpen,
                                         maxHeight: geometry.size.height * 0.7,
-                                        labelText: Strings.MealListScreen.bottomSheetLabel) {
+                                        labelText: viewModel.bottomSheetLabel) {
                         MealListView(viewModel: viewModel)
 
                     }
                 }
             }
-            .navigationBarTitle(Strings.MealListScreen.title)
+            .navigationBarTitle(viewModel.title)
             .navigationBarItems(leading:
                                     Button(action: {
                                         viewModel.isAddMealShowing = true
                                     }) {
-                                        Image(systemName: Strings.Common.Images.add)
+                                        Image(systemName: viewModel.addImage)
                                     },
                                 trailing:
                                     Button(action: {
                                         self.viewModel.loadMeals()
                                     }, label: {
-                                        Image(systemName: Strings.MealListScreen.Images.reload)
+                                        Image(systemName: viewModel.reloadImage)
                                     }))
             .foregroundColor(.white)
             .sheet(isPresented: $viewModel.isAddMealShowing, content: {
