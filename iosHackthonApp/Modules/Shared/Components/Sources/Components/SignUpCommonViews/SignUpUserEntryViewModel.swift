@@ -39,7 +39,7 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 		_isLoading = isLoading
 	}
 
-    let textfieldStyle = GreyTextFieldStyle()
+    let textFieldStyle = GreyTextFieldStyle()
 
 	var buttonBgColor: Color {
 		 entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary

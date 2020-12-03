@@ -44,7 +44,7 @@ public struct LoginView: View {
                             .modifier(viewModel.textFieldStyle)
 							.autocapitalization(.none)
 							.disableAutocorrection(true)
-                        Text(viewModel.password)
+                        Text(viewModel.passwordTitle)
                         SecureField(viewModel.passwordPlaceholder, text: $viewModel.password)
                             .modifier(viewModel.textFieldStyle)
 						Spacer()

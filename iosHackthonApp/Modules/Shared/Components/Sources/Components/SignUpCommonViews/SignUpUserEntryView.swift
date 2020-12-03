@@ -29,7 +29,7 @@ public struct SignUpUserEntryView<Content: View>: View {
                         .modifier(viewModel.textFieldStyle)
 				} else {
 					SecureField(viewModel.textFieldPlaceholder, text: $viewModel.entryField)
-                        .modifier(viewModel.textfieldStyle)
+                        .modifier(viewModel.textFieldStyle)
 				}
 			}
 			HStack {
