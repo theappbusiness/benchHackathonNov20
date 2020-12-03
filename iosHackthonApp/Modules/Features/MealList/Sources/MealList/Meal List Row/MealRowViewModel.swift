@@ -14,9 +14,17 @@ import Extensions
 
 final class MealRowViewModel: ObservableObject {
 
+    typealias strings = Strings.MealListScreen
+    typealias images = strings.Images
+
     // MARK:- Properties
     let spacing: CGFloat = 10.0
     let cornerRadius: CGFloat = 15.0
+    let infoImage = images.info
+    let locationImage = images.location
+    let fromTimeImage = images.fromTime
+    let expireTimeImage = images.expireTime
+    let quantityImage = images.quantity
 
     var meal: Meal
 
@@ -35,14 +43,14 @@ final class MealRowViewModel: ObservableObject {
     }
 
     var quantityText: String {
-        let portionText = isOneMealLeft ? Strings.MealListScreen.portion: Strings.MealListScreen.portions
+        let portionText = isOneMealLeft ? strings.portion: strings.portions
         return "\(meal.quantity) \(portionText)"
     }
 
     var mealImage: String {
         meal.hot
-            ? isButtonDisabled ? Strings.MealListScreen.Images.hotFoodGrey : Strings.MealListScreen.Images.hotFood
-            : isButtonDisabled ? Strings.MealListScreen.Images.coldFoodGrey : Strings.MealListScreen.Images.coldFood
+            ? isButtonDisabled ? images.hotFoodGrey : images.hotFood
+            : isButtonDisabled ? images.coldFoodGrey : images.coldFood
     }
 
     var textColor: Color {
@@ -73,19 +81,19 @@ final class MealRowViewModel: ObservableObject {
 
     var locationText: String {
         let distance = Double(meal.distance ?? -1)
-        return distance >= 0 ? "\(distance) \(DistanceUnit.km)" : Strings.MealListScreen.Error.distanceError
+        return distance >= 0 ? "\(distance) \(DistanceUnit.km)" : strings.Error.distanceError
     }
 
     var fromTimeText: String {
-        "\(Strings.MealListScreen.available) \(meal.availableFromDate)"
+        "\(strings.available) \(meal.availableFromDate)"
     }
 
     var expiresAtText: String {
-        "\(Strings.MealListScreen.expiresAt) \(meal.expiryDate)"
+        "\(strings.expiresAt) \(meal.expiryDate)"
     }
 
     var buttonText: String {
-        isButtonDisabled ? Strings.MealListScreen.Button.disabledText : Strings.MealListScreen.Button.enabledText
+        isButtonDisabled ? strings.Button.disabledText : strings.Button.enabledText
     }
 
     var viewShadowRadius: CGFloat {

@@ -13,7 +13,7 @@ fileprivate enum Constants {
     static let cornerRadius: CGFloat = 16
     static let indicatorWidth: CGFloat = 60
     static let indicatorHeight: CGFloat = 6
-    static let minHeightRatio: CGFloat = 0.3
+    static let minHeightRatio: CGFloat = 0.15
 }
 
 public struct BottomSheetView<Content: View>: View {
@@ -27,7 +27,7 @@ public struct BottomSheetView<Content: View>: View {
     @Binding private var isOpen: Bool
 
     public init(isOpen: Binding<Bool>, maxHeight: CGFloat, labelText: String, @ViewBuilder content: () -> Content) {
-        self.minHeight = maxHeight * Constants.minHeightRatio
+        self.minHeight = min(maxHeight * Constants.minHeightRatio, 50)
         self.maxHeight = maxHeight
         self.content = content()
         self.labelText = labelText
@@ -38,27 +38,43 @@ public struct BottomSheetView<Content: View>: View {
         isOpen ? 0 : maxHeight - minHeight
     }
 
+    private var indicator: some View {
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(ColorManager.appPrimary)
+            .frame(
+                width: Constants.indicatorWidth,
+                height: Constants.indicatorHeight)
+            .padding()
+            .onTapGesture {
+                isOpen.toggle()
+            }
+    }
+
+    private var showListButton: some View {
+        Button(action: {
+            isOpen.toggle()
+        }, label: {
+            Text(labelText)
+                .foregroundColor(ColorManager.appPrimary)
+        })
+        .padding()
+    }
+
+    private var dragGesture: some Gesture {
+        DragGesture().updating($translation) { value, state, _ in
+            state = value.translation.height
+        }.onEnded { value in
+            isOpen = value.translation.height < 0
+        }
+    }
+
     public var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 if isOpen {
-                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                        .fill(ColorManager.appPrimary)
-                        .frame(
-                            width: Constants.indicatorWidth,
-                            height: Constants.indicatorHeight)
-                        .padding()
-                        .onTapGesture {
-                            isOpen.toggle()
-                        }
+                    indicator
                 } else {
-                    Button(action: {
-                        isOpen.toggle()
-                    }, label: {
-                        Text(labelText)
-                            .foregroundColor(ColorManager.appPrimary)
-                    })
-                    .padding()
+                    showListButton
                 }
                 content
             }
@@ -69,11 +85,7 @@ public struct BottomSheetView<Content: View>: View {
             .offset(y: max(offset + translation, 0))
             .animation(.easeInOut)
             .gesture(
-                DragGesture().updating($translation) { value, state, _ in
-                    state = value.translation.height
-                }.onEnded { value in
-                    isOpen = value.translation.height < 0
-                }
+                dragGesture
             )
         }
     }

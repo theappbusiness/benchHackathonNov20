@@ -1,4 +1,4 @@
-package com.kinandcarta.feature.find.meal.viewmodel
+package com.kcc.kmmhackathon.androidHackathonApp.viewmodel
 
 import android.location.Location
 import androidx.annotation.RequiresPermission
@@ -11,28 +11,27 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.model.LatLng
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import kotlinx.coroutines.launch
 
-typealias Meals = MutableList<Meal>
+typealias Meals = List<Meal>
 
-class FindMealViewModel @ViewModelInject constructor(
-    private val fusedLocationClient: FusedLocationProviderClient
+class MapsViewModel @ViewModelInject constructor(
+    private val fusedLocationProviderClient: FusedLocationProviderClient
 ) : ViewModel() {
 
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
-        data class ReservedMeal(val code: String) : State()
-        data class MealUnavailable(val code: String) : State()
+        data class LocationUpdate(val userLatLng: LatLng) : State()
         data class Failed(val failure: Failure) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
         class LoadingMealsFailed(cause: Throwable) : Failure(cause)
-        class ReserveAMealFailed(cause: Throwable) : Failure(cause)
     }
 
     val state: LiveData<State> get() = _state
@@ -48,35 +47,23 @@ class FindMealViewModel @ViewModelInject constructor(
     }
 
     override fun onCleared() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     fun startUpdatingLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener {
-            lastLocation = it
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+            if (it != lastLocation) {
+                lastLocation = it
+                updateUserLocation()
+            }
             updateMeals()
         }
-        fusedLocationClient.requestLocationUpdates(
+        fusedLocationProviderClient.requestLocationUpdates(
             createLocationRequest(),
             locationCallback,
             null
         )
-    }
-
-    fun updateMeals() {
-        val location = lastLocation ?: return
-        val distanceUnit = DistanceUnit.miles
-        _state.value = State.LoadingMeals
-        viewModelScope.launch {
-            kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
-            }.onSuccess {
-                _state.value = State.LoadedMeals(it.toMutableList(), distanceUnit)
-            }.onFailure {
-                _state.value = State.Failed(Failure.LoadingMealsFailed(it))
-            }
-        }
     }
 
     private fun createLocationRequest(): LocationRequest {
@@ -89,26 +76,23 @@ class FindMealViewModel @ViewModelInject constructor(
         return locationRequest
     }
 
-    fun reserveAMeal(id: String, position: Int) {
+    private fun updateMeals() {
         val location = lastLocation ?: return
+        val distanceUnit = DistanceUnit.miles
+        _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.reserveMeal(id)
+                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
-                if (it != null) {
-                    val code = getReservationCode(it.id)
-                    _state.value = State.ReservedMeal(code)
-                    updateMeals()
-                } else {
-                    _state.value = State.MealUnavailable("Meal Unavailable")
-                }
+                _state.value = State.LoadedMeals(it, distanceUnit)
             }.onFailure {
-                _state.value = State.Failed(Failure.ReserveAMealFailed(it))
+                _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
         }
     }
 
-    private fun getReservationCode(id: String): String {
-        return id.substring(id.length - 4, id.length)
+    private fun updateUserLocation() {
+        val location = lastLocation ?: return
+        _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
     }
 }

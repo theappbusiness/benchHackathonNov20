@@ -8,7 +8,6 @@
 
 import SwiftUI
 import shared
-import Strings
 import Location
 
 struct MealRow: View {
@@ -37,23 +36,23 @@ struct MealRow: View {
                                 .padding(.trailing)
                         }
                         HStack {
-                            Image(systemName: Strings.MealListScreen.Images.info)
+                            Image(systemName: rowViewModel.infoImage)
                             Text(rowViewModel.meal.info)
                         }
                         HStack {
-                            Image(systemName: Strings.MealListScreen.Images.location)
+                            Image(systemName: rowViewModel.locationImage)
                             Text(rowViewModel.locationText)
                         }
                         HStack {
-                            Image(systemName: Strings.MealListScreen.Images.fromTime)
+                            Image(systemName: rowViewModel.fromTimeImage)
                             Text(rowViewModel.fromTimeText)
                         }
                         HStack {
-                            Image(systemName: Strings.MealListScreen.Images.expireTime)
+                            Image(systemName: rowViewModel.expireTimeImage)
                             Text(rowViewModel.expiresAtText)
                         }
                         HStack {
-                            Image(systemName: Strings.MealListScreen.Images.quantity)
+                            Image(systemName: rowViewModel.quantityImage)
                             Text(rowViewModel.quantityText)
                         }
                     }
