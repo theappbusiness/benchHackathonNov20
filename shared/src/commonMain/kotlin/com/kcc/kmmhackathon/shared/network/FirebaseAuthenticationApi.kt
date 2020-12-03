@@ -19,21 +19,18 @@ class FirebaseAuthenticationStore : AuthenticationStore {
     }
 
     override suspend fun signUp(
-        apiKey: String,
         email: String,
         password: String,
         returnSecureToken: Boolean
     ) = handleAuthenticationRequest( apiKey, ENDPOINT_SIGN_UP, email, password, returnSecureToken )
 
     override suspend fun signIn(
-        apiKey: String,
         email: String,
         password: String,
         returnSecureToken: Boolean
     ) = handleAuthenticationRequest( apiKey, ENDPOINT_SIGN_IN, email, password, returnSecureToken )
 
     private suspend fun handleAuthenticationRequest(
-        apiKey: String,
         endpoint: String,
         email: String,
         password: String,
@@ -42,7 +39,7 @@ class FirebaseAuthenticationStore : AuthenticationStore {
         return try {
             httpClient.post {
                 url("$BASE_URL$endpoint")
-                parameter("key", apiKey)
+                parameter("key", "")
                 parameter("email", email)
                 parameter("password", password)
                 parameter("returnSecureToken", returnSecureToken)

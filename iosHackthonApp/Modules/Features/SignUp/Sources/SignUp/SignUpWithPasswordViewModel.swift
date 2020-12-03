@@ -37,10 +37,8 @@ public final class SignUpWithPasswordViewModel: ObservableObject {
     @Published var showingAlert = false
 
     func signUp(email: String, password: String) {
-        //TODO: API key to be handled in shared layer. remove the apikey parameter once implemented
-        // To run the project for now, add the api key and run
         isLoading = true
-        firebase.signUp(apiKey: "", email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
+        firebase.signUp(email: email, password: password, returnSecureToken: true, completionHandler: { result, error in
             if (result?.idToken != nil) {
                 self.authorizationStore.storeUserLoggedInStatus(true)
                 self.moveToNextScreen = true
