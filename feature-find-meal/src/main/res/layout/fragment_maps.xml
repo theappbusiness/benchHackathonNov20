@@ -13,5 +13,9 @@
         tools:context="com.kinandcarta.feature.find.meal.view.MapsFragment">
     </fragment>
 
-    <include layout="@layout/find_meal_fragment"/>
+    <fragment
+        android:name="com.kinandcarta.feature.find.meal.view.FindMealFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

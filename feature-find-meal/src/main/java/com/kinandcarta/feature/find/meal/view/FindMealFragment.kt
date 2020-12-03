@@ -23,7 +23,7 @@ import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FindMealFragment : BottomSheetDialogFragment() {
+class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: FindMealViewModel by viewModels()

@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:text="Show List"
             android:textColor="@color/colorPrimary"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"></TextView>
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeContainer"
