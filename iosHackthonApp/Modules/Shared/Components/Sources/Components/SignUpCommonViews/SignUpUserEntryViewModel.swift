@@ -10,38 +10,38 @@ import SwiftUI
 import Theming
 
 public final class SignUpUserEntryViewModel: ObservableObject {
-	
-	var signUp : () -> ()
-	var isSignupWithEmail: Bool
-	var textFieldPlaceholder: String
-	var buttonTitle: String
-	var width: CGFloat
+
+    var signUp : () -> ()
+    var isSignupWithEmail: Bool
+    var textFieldPlaceholder: String
+    var buttonTitle: String
+    var width: CGFloat
     
-	@Binding var entryField: String
-	@Binding var moveToNextScreen: Bool
-	@Binding var isLoading: Bool
-	
-	public init(isSignupWithEmail: Bool,
-				textFieldPlaceholder: String,
-				buttonTitle: String,
-				width: CGFloat,
-				entryField: Binding<String>,
-				signUp : @escaping () -> (),
-				moveToNextScreen: Binding<Bool>,
-				isLoading: Binding<Bool>) {
-		self.isSignupWithEmail = isSignupWithEmail
-		self.textFieldPlaceholder = textFieldPlaceholder
-		self.buttonTitle = buttonTitle
-		self.width = width
-		_entryField = entryField
-		self.signUp = signUp
-		_moveToNextScreen = moveToNextScreen
-		_isLoading = isLoading
-	}
+    @Binding var entryField: String
+    @Binding var moveToNextScreen: Bool
+    @Binding var isLoading: Bool
+
+    public init(isSignupWithEmail: Bool,
+                textFieldPlaceholder: String,
+                buttonTitle: String,
+                width: CGFloat,
+                entryField: Binding<String>,
+                signUp : @escaping () -> (),
+                moveToNextScreen: Binding<Bool>,
+                isLoading: Binding<Bool>) {
+        self.isSignupWithEmail = isSignupWithEmail
+        self.textFieldPlaceholder = textFieldPlaceholder
+        self.buttonTitle = buttonTitle
+        self.width = width
+        _entryField = entryField
+        self.signUp = signUp
+        _moveToNextScreen = moveToNextScreen
+        _isLoading = isLoading
+    }
 
     let textFieldStyle = GreyTextFieldStyle()
 
-	var buttonBgColor: Color {
-		 entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary
-	}
+    var buttonBgColor: Color {
+        entryField.isEmpty ? ColorManager.gray: ColorManager.appPrimary
+    }
 }
