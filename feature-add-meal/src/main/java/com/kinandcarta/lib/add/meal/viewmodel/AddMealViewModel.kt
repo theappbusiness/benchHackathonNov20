@@ -1,7 +1,8 @@
 package com.kinandcarta.lib.add.meal.viewmodel
 
-import android.location.Location
-import android.location.LocationManager
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.*
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,15 +11,16 @@ import androidx.lifecycle.viewModelScope
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kcc.kmmhackathon.shared.entity.Meal
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.util.*
 
 data class MealForm constructor(
     var title: String = "",
     var additionalInformation: String = "",
     var quantity: String = "",
     var isHot: Boolean = true,
-    var availableFrom: LocalDateTime = LocalDateTime.now(),
-    var useBy: LocalDateTime = LocalDateTime.now(),
+    var availableFrom: LocalDate? = null,
+    var useBy: LocalDate? = null,
     var address: String = "",
     var location: Location = Location(LocationManager.GPS_PROVIDER)
 )
@@ -26,6 +28,7 @@ data class MealForm constructor(
 class AddMealViewModel : ViewModel() {
     sealed class State() {
         object Initial: State()
+        object LocationUpdated: State()
         object Loading: State()
         object Success: State()
         object Failed: State()
@@ -59,11 +62,11 @@ class AddMealViewModel : ViewModel() {
         meal.isHot = newValue
     }
 
-    fun onEditAvailableFrom(newValue: LocalDateTime) {
+    fun onEditAvailableFrom(newValue: LocalDate) {
         meal.availableFrom = newValue
     }
 
-    fun onEditUseBy(newValue: LocalDateTime) {
+    fun onEditUseBy(newValue: LocalDate) {
         meal.useBy = newValue
     }
 
@@ -95,6 +98,35 @@ class AddMealViewModel : ViewModel() {
                 state = State.Failed
             }
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun onRequestGetCurrentLocation(context: Context) {
+        val locationListener: LocationListener = object : LocationListener {
+            override fun onLocationChanged(location: Location) {
+                val geocoder = Geocoder(context, Locale.getDefault())
+                val addresses: List<Address> =
+                    geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                if (addresses.isEmpty()) {
+                    // Do nothing
+                } else {
+                    meal.address = addresses[0].getAddressLine(0)
+                    meal.location = location
+                    state = State.LocationUpdated
+                }
+            }
+        }
+
+        val minMS: Long = 30000 // 30s
+        val distanceMin: Float = 100.0f // 100m
+        val locationManager =
+            context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationManager.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            minMS,
+            distanceMin,
+            locationListener
+        )
     }
 
 }

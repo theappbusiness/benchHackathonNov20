@@ -8,18 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.kcc.kmmhackathon.shared.utility.DateFormattingUtil
 import com.vanpra.composematerialdialogs.MaterialDialog
-import com.vanpra.composematerialdialogs.datetime.datetimepicker
-import java.time.LocalDateTime
+import com.vanpra.composematerialdialogs.datetime.datepicker
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.ZoneOffset
 
 @Composable
-fun DateField(title: String, onValueChange: (LocalDateTime) -> Unit) {
-    var date = remember { mutableStateOf(title) }
+fun DateField(title: String, value: String, onValueChange: (LocalDate) -> Unit) {
+    var date = remember { mutableStateOf(value) }
     val dialog = MaterialDialog()
     dialog.build {
-        datetimepicker(title = date.value) { datetime ->
-            date.value = datetime.toString()
-            onValueChange(datetime)
+        datepicker { dateSelected ->
+            date.value = DateFormattingUtil().convertTimeStamp(dateSelected.atStartOfDay().toEpochSecond(ZoneOffset.UTC))
+            onValueChange(dateSelected)
         }
     }
     Row {

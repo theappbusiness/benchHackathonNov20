@@ -32,6 +32,9 @@ internal fun AddMealScreen(addMealViewModel: AddMealViewModel, context: Context)
         is AddMealViewModel.State.Loading -> {
             LoadingView()
         }
+        is AddMealViewModel.State.LocationUpdated -> {
+            LoadedView(addMealViewModel = addMealViewModel, context = context)
+        }
         is AddMealViewModel.State.Success -> {
             if (previousState.value != AddMealViewModel.State.Success) {
                 showDialog.value = true
@@ -107,11 +110,11 @@ internal fun LoadedView(addMealViewModel: AddMealViewModel, context: Context) {
             onValueChange = addMealViewModel::onEditTemperature
         )
         Spacer(modifier = Modifier.height(8.dp))
-        DateField(title = "Available From", addMealViewModel::onEditAvailableFrom)
+        DateField(title = "Available From", value = if (addMealViewModel.meal.availableFrom == null) "Available From" else addMealViewModel.meal.availableFrom.toString(), addMealViewModel::onEditAvailableFrom)
         Spacer(modifier = Modifier.height(8.dp))
-        DateField(title = "Use by", addMealViewModel::onEditUseBy)
+        DateField(title = "Use by", value = if (addMealViewModel.meal.useBy == null) "Use by" else addMealViewModel.meal.useBy.toString(), addMealViewModel::onEditUseBy)
         Spacer(modifier = Modifier.height(8.dp))
-        AddressField(context = context, addMealViewModel::onEditAddress)
+        AddressField(value = addMealViewModel.meal.address, onRequestCurrentLocation = { addMealViewModel.onRequestGetCurrentLocation(context) })
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = addMealViewModel::onSubmit) {
             Text(text = "Add a meal")

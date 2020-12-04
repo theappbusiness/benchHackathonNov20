@@ -15,17 +15,16 @@ import androidx.compose.runtime.remember
 import com.kinandcarta.lib.add.meal.util.LocationUtil
 
 @Composable
-fun AddressField(context: Context, onValueChange: (String) -> Unit) {
-    val location = remember { mutableStateOf("") }
+fun AddressField(
+    value: String,
+    onRequestCurrentLocation: () -> Unit,
+) {
     Column {
         Text("Address")
         Row {
-            TextField(value = location.value, onValueChange = { })
+            TextField(value = value, onValueChange = { })
             IconButton(onClick = {
-                LocationUtil.getCurrentLocation(context, onUpdate = {
-                    location.value = it
-                    onValueChange(it)
-                })
+                onRequestCurrentLocation()
             }) {
                 Icon(Icons.Filled.LocationOn)
             }
