@@ -11,7 +11,7 @@ import org.junit.After
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.Month
 
 /**
@@ -85,7 +85,7 @@ class AddMealViewModelTest {
 
     @Test
     fun test_whenOnEditAvailableFrom_then_updateAvailableFrom() {
-        val expected = LocalDateTime.of(2020, Month.DECEMBER, 1, 9, 42)
+        val expected = LocalDate.of(2020, Month.DECEMBER, 1)
         subject.onEditAvailableFrom(expected)
 
         assertEquals(expected, subject.meal.availableFrom)
@@ -94,7 +94,7 @@ class AddMealViewModelTest {
 
     @Test
     fun test_whenOnEditUseBy_then_updateUseBy() {
-        val expected = LocalDateTime.of(2020, Month.DECEMBER, 1, 9, 42)
+        val expected = LocalDate.of(2020, Month.DECEMBER, 1)
         subject.onEditUseBy(expected)
 
         assertEquals(expected, subject.meal.useBy)
