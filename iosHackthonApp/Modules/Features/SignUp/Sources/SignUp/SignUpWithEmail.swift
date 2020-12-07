@@ -14,7 +14,7 @@ import shared
 struct SignUpWithEmail: View {
 	
 	@ObservedObject private var viewModel: SignUpWithEmailViewModel
-	
+
 	public init(viewModel: SignUpWithEmailViewModel) {
 		self.viewModel = viewModel
 	}
