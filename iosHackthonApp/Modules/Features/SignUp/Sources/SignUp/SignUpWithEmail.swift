@@ -20,6 +20,8 @@ struct SignUpWithEmail: View {
 	}
 
 	var body: some View {
+
+		let signupViewModel = SignUpWithPasswordViewModel(email: self.viewModel.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 		
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: viewModel.signUpWithEmailTitle, description: viewModel.signUpWithEmailInfo)
@@ -36,8 +38,6 @@ struct SignUpWithEmail: View {
 					signUp: self.signUp,
 					moveToNextScreen: $viewModel.moveToNextScreen,
 					isLoading: .constant(self.viewModel.isLoading))
-				
-				let signupViewModel = SignUpWithPasswordViewModel(email: self.viewModel.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 
 				SignUpUserEntryView(viewModel: viewModel, destinationView: SignUpWithPassword(viewModel: signupViewModel))
 			}
