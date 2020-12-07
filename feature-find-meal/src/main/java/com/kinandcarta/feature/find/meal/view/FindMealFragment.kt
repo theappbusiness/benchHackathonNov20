@@ -13,7 +13,6 @@ import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kinandcarta.feature.find.meal.R
@@ -81,6 +80,7 @@ class FindMealFragment : Fragment() {
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
         mealsAdapter.notifyItemChanged(state.position)
+        mealsAdapter.submitList(state.meals)
         showToast("Your meal reservation code is ${state.code}")
     }
 

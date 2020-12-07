@@ -23,7 +23,7 @@ class FindMealViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
-        data class ReservedMeal(val code: String, val position: Int) : State()
+        data class ReservedMeal(val code: String) : State()
         data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
@@ -70,7 +70,7 @@ class FindMealViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
             }.onSuccess {
-                _state.value = State.LoadedMeals(it, distanceUnit)
+                _state.value = State.LoadedMeals(it.toMutableList(), distanceUnit)
             }.onFailure {
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
@@ -78,21 +78,25 @@ class FindMealViewModel @ViewModelInject constructor(
     }
 
     private fun createLocationRequest(): LocationRequest {
+        val oneMinuteFortySecondsInMs: Long = 100000
+        val fiveSecondsInMs: Long = 5000
         val locationRequest = LocationRequest()
-        locationRequest.interval = 100000
-        locationRequest.fastestInterval = 5000
+        locationRequest.interval = oneMinuteFortySecondsInMs
+        locationRequest.fastestInterval = fiveSecondsInMs
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         return locationRequest
     }
 
     fun reserveAMeal(id: String, position: Int) {
+        val location = lastLocation ?: return
         viewModelScope.launch {
             kotlin.runCatching {
                 sdk.reserveMeal(id)
             }.onSuccess {
                 if (it != null) {
                     val code = getReservationCode(it.id)
-                    _state.value = State.ReservedMeal(code, position)
+                    _state.value = State.ReservedMeal(code)
+                    updateMeals()
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
@@ -105,5 +109,4 @@ class FindMealViewModel @ViewModelInject constructor(
     private fun getReservationCode(id: String): String {
         return id.substring(id.length - 4, id.length)
     }
-
 }

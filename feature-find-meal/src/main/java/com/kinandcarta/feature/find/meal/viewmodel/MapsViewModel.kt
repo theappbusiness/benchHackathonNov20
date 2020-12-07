@@ -65,14 +65,16 @@ class MapsViewModel @ViewModelInject constructor(
     }
 
     private fun createLocationRequest(): LocationRequest {
+        val oneMinuteFortySecondsInMs: Long = 100000
+        val fiveSecondsInMs: Long = 5000
         val locationRequest = LocationRequest()
-        locationRequest.interval = 100000
-        locationRequest.fastestInterval = 5000
+        locationRequest.interval = oneMinuteFortySecondsInMs
+        locationRequest.fastestInterval = fiveSecondsInMs
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         return locationRequest
     }
 
-    fun updateMeals() {
+    private fun updateMeals() {
         val location = lastLocation ?: return
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
@@ -87,7 +89,7 @@ class MapsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun updateUserLocation() {
+    private fun updateUserLocation() {
         val location = lastLocation ?: return
         _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
     }
