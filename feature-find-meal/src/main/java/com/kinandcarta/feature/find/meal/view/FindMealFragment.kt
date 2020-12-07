@@ -40,7 +40,6 @@ class FindMealFragment : Fragment() {
         mealsRecyclerView = view.findViewById(R.id.rvMeals)
         mealsRecyclerView.adapter = mealsAdapter
         mealsRecyclerView.layoutManager = LinearLayoutManager(context)
-        println("hit oncv")
 
         return view
     }
@@ -48,13 +47,10 @@ class FindMealFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
         setupUI()
-        println("hit onvc")
     }
 
     fun setupUI() {
         viewModel.startUpdatingLocation()
-        println("hit setupUI")
-        if (mealsRecyclerView.isEmpty()) println("recycler empty") else println("${mealsRecyclerView[0]}")
     }
 
     private fun onStateChanged(state: DisplayMealsViewModel.State) {

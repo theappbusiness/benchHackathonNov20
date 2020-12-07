@@ -46,7 +46,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
             lastLocation = locationResult?.lastLocation
-            updateMeals("onLocationResult")
+            updateMeals()
         }
     }
 
@@ -61,7 +61,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
                 lastLocation = it
                 updateUserLocation()
             }
-            updateMeals("start updating location")
+            updateMeals()
         }
         fusedLocationProviderClient.requestLocationUpdates(
             createLocationRequest(),
@@ -78,7 +78,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         return locationRequest
     }
 
-    fun updateMeals(caller: String?) {
+    fun updateMeals() {
         val location = lastLocation ?: return
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
@@ -91,7 +91,6 @@ class DisplayMealsViewModel @ViewModelInject constructor(
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
         }
-        Log.i("update meals", "$caller")
     }
 
     fun reserveAMeal(id: String, position: Int) {
