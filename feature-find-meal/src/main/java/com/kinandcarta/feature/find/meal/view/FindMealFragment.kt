@@ -13,6 +13,7 @@ import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kinandcarta.feature.find.meal.R
@@ -47,12 +48,11 @@ class FindMealFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
         setupUI()
-        viewModel.updateMeals()
         println("hit onvc")
     }
 
     fun setupUI() {
-        viewModel.updateMeals()
+        viewModel.updateMeals("find meal")
         println("hit setupUI")
         if (mealsRecyclerView.isEmpty()) println("recycler empty") else println("${mealsRecyclerView[0]}")
     }
@@ -74,13 +74,11 @@ class FindMealFragment : Fragment() {
 
     private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
         progressBarView.isVisible = false
-        mealsAdapter.submit(state.meals, state.distanceUnit)
+        mealsAdapter.submitList(state.meals)
         Log.i("Find meal fragment", "onLoadedMeals ${state.meals}")
     }
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
-        mealsAdapter.notifyItemChanged(state.position)
-        mealsAdapter.submitList(state.meals)
         showToast("Your meal reservation code is ${state.code}")
     }
 

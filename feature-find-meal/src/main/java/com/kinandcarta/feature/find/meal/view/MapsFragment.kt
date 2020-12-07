@@ -1,7 +1,6 @@
 package com.kinandcarta.feature.find.meal.view
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,15 +16,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.kcc.kmmhackathon.shared.utility.extensions.getPortionsString
 import com.kinandcarta.feature.find.meal.R
-import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
 import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
 import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
-import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
-import com.kinandcarta.feature.find.meal.viewmodel.MapsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +30,6 @@ class MapsFragment : Fragment() {
     private lateinit var map: GoogleMap
     private val viewModel: DisplayMealsViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
-//    private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
 
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
