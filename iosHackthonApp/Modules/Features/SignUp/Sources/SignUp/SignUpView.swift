@@ -12,7 +12,7 @@ import Theming
 import Components
 
 public struct SignUpView: View {
-
+	
 	private let signUpWithEmailViewModel = SignUpWithEmail(viewModel: SignUpWithEmailViewModel())
 	
 	public init() {}

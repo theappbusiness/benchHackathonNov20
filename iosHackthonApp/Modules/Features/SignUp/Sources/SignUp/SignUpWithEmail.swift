@@ -12,20 +12,20 @@ import Components
 import shared
 
 struct SignUpWithEmail: View {
-
+	
 	@ObservedObject private var viewModel: SignUpWithEmailViewModel
-
+	
 	public init(viewModel: SignUpWithEmailViewModel) {
 		self.viewModel = viewModel
 	}
-
+	
 	var body: some View {
-
+		
 		let signupViewModel = SignUpWithPasswordViewModel(email: self.viewModel.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 		
 		VStack(alignment: .leading) {
 			SignUpInfoView(title: viewModel.signUpWithEmailTitle, description: viewModel.signUpWithEmailInfo)
-
+			
 			Spacer().frame(maxHeight: .infinity)
 			
 			GeometryReader { geometry in
@@ -38,7 +38,7 @@ struct SignUpWithEmail: View {
 					signUp: self.signUp,
 					moveToNextScreen: $viewModel.moveToNextScreen,
 					isLoading: .constant(self.viewModel.isLoading))
-
+				
 				SignUpUserEntryView(viewModel: viewModel, destinationView: SignUpWithPassword(viewModel: signupViewModel))
 			}
 		}.padding()
