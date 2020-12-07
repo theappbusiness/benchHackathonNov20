@@ -61,7 +61,6 @@ class MapsFragment : Fragment() {
                 }
             })
 
-
         return view
     }
 
