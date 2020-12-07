@@ -52,7 +52,7 @@ class FindMealFragment : Fragment() {
     }
 
     fun setupUI() {
-        viewModel.updateMeals("find meal")
+        viewModel.startUpdatingLocation()
         println("hit setupUI")
         if (mealsRecyclerView.isEmpty()) println("recycler empty") else println("${mealsRecyclerView[0]}")
     }

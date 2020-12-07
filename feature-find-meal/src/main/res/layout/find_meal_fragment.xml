@@ -12,7 +12,6 @@
         app:behavior_hideable="false"
         app:behavior_peekHeight="50dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@color/black"
         android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,8 +29,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMeals"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorHot"/>
+                android:layout_height="match_parent" />
 
     </LinearLayout>
 

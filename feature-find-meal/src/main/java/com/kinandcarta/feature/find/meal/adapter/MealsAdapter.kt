@@ -13,7 +13,6 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.extension.getPortionsString
-import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
