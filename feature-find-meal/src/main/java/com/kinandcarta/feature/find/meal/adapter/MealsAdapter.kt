@@ -38,6 +38,7 @@ class MealsAdapter(
         mealsList = meals
         distanceUnit = unit
         notifyDataSetChanged()
+        println("$meals")
     }
 
     inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

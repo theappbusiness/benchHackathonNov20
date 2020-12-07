@@ -25,6 +25,7 @@ import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
 import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
+import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
 import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
 import com.kinandcarta.feature.find.meal.viewmodel.MapsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,18 +34,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MapsFragment : Fragment() {
 
     private lateinit var map: GoogleMap
-    private val mapsViewModel: MapsViewModel by viewModels()
-    private val viewModel: FindMealViewModel by viewModels()
+    private val viewModel: DisplayMealsViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
-    private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-    }
+//    private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
 
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
+        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onCreateView(
@@ -52,6 +48,7 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_maps, container, false)
+        setupUI()
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.list_bottomSheet))
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -71,12 +68,13 @@ class MapsFragment : Fragment() {
                 }
             })
 
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupUI()
-        mapsViewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
+        viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
+
     }
 
     @SuppressLint("MissingPermission")
@@ -87,8 +85,9 @@ class MapsFragment : Fragment() {
     ) {
         val permissionResultParser = PermissionResultParser()
         if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
-            mapsViewModel.startUpdatingLocation()
+            viewModel.startUpdatingLocation()
             map.isMyLocationEnabled = true
+
         } else {
             showToast("Location permissions are required to find meals")
         }
@@ -97,31 +96,26 @@ class MapsFragment : Fragment() {
     private fun setupUI() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
-        //Recycler view and adapter for the bottom sheet
-        val rv: RecyclerView = requireView().findViewById(R.id.rvMeals)
-        rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = mealsAdapter
     }
 
-    private fun onStateChanged(state: MapsViewModel.State) {
+    private fun onStateChanged(state: DisplayMealsViewModel.State) {
         when (state) {
-            MapsViewModel.State.LoadingMeals ->
+            DisplayMealsViewModel.State.LoadingMeals ->
                 Log.i("Map view", "Loading meals")
-            is MapsViewModel.State.LoadedMeals ->
+            is DisplayMealsViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
-            is MapsViewModel.State.LocationUpdate ->
+            is DisplayMealsViewModel.State.LocationUpdate ->
                 onLocationUpdate(state)
-            is MapsViewModel.State.Failed ->
+            is DisplayMealsViewModel.State.Failed ->
                 onFailure(state.failure)
         }
     }
 
-    private fun onLocationUpdate(state: MapsViewModel.State.LocationUpdate) {
+    private fun onLocationUpdate(state: DisplayMealsViewModel.State.LocationUpdate) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(state.userLatLng, 12.0f))
     }
 
-    private fun onLoadedMeals(state: MapsViewModel.State.LoadedMeals) {
+    private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
         state.meals.forEach {
             placeMarkerOnMap(
                 LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()),
@@ -136,9 +130,9 @@ class MapsFragment : Fragment() {
         map.addMarker(markerOptions)
     }
 
-    private fun onFailure(failure: MapsViewModel.Failure) {
+    private fun onFailure(failure: DisplayMealsViewModel.Failure) {
         when (failure) {
-            is MapsViewModel.Failure.LoadingMealsFailed -> {
+            is DisplayMealsViewModel.Failure.LoadingMealsFailed -> {
                 showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
             }
         }

@@ -1,6 +1,7 @@
 package com.kinandcarta.feature.find.meal.viewmodel
 
 import android.location.Location
+import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -17,19 +18,24 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import kotlinx.coroutines.launch
 
-class MapsViewModel @ViewModelInject constructor(
+typealias Meals = List<Meal>
+
+class DisplayMealsViewModel @ViewModelInject constructor(
     private val fusedLocationProviderClient: FusedLocationProviderClient
 ) : ViewModel() {
 
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class ReservedMeal(val code: String, val position: Int) : State()
         data class LocationUpdate(val userLatLng: LatLng) : State()
+        data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
         class LoadingMealsFailed(cause: Throwable) : Failure(cause)
+        class ReserveAMealFailed(cause: Throwable) : Failure(cause)
     }
 
     val state: LiveData<State> get() = _state
@@ -85,10 +91,32 @@ class MapsViewModel @ViewModelInject constructor(
                 _state.value = State.Failed(Failure.LoadingMealsFailed(it))
             }
         }
+        Log.i("update meals", "")
     }
 
-    fun updateUserLocation() {
+    fun reserveAMeal(id: String, position: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                sdk.reserveMeal(id)
+            }.onSuccess {
+                if (it != null) {
+                    val code = getReservationCode(it.id)
+                    _state.value = State.ReservedMeal(code, position)
+                } else {
+                    _state.value = State.MealUnavailable("Meal Unavailable")
+                }
+            }.onFailure {
+                _state.value = State.Failed(Failure.ReserveAMealFailed(it))
+            }
+        }
+    }
+
+    private fun updateUserLocation() {
         val location = lastLocation ?: return
         _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
+    }
+
+    private fun getReservationCode(id: String): String {
+        return id.substring(id.length - 4, id.length)
     }
 }
