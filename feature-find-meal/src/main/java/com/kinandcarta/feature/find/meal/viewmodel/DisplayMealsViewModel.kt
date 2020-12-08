@@ -70,14 +70,10 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         )
     }
 
-    private fun createLocationRequest(): LocationRequest {
-        val locationRequest = LocationRequest()
-        val oneMinuteFortySecondsInMs: Long = 100000
-        val fiveSecondsInMs: Long = 5000
-        locationRequest.interval = oneMinuteFortySecondsInMs
-        locationRequest.fastestInterval = fiveSecondsInMs
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        return locationRequest
+    private fun createLocationRequest() = LocationRequest().apply {
+        interval = ONE_MIN_40S_MS
+        fastestInterval = FIVE_SEC_MS
+        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
     fun updateMeals() {
@@ -119,5 +115,10 @@ class DisplayMealsViewModel @ViewModelInject constructor(
 
     private fun getReservationCode(id: String): String {
         return id.substring(id.length - 4, id.length)
+    }
+
+    companion object {
+        private const val ONE_MIN_40S_MS: Long = 10000
+        private const val FIVE_SEC_MS: Long = 5000
     }
 }
