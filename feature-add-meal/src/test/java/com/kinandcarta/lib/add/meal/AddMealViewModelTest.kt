@@ -6,7 +6,6 @@ import com.kinandcarta.lib.add.meal.network.MealSDKRepository
 import com.kinandcarta.lib.add.meal.viewmodel.AddMealViewModel
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import kotlinx.coroutines.*
@@ -15,10 +14,6 @@ import org.junit.After
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
-import org.junit.Rule
-import org.junit.rules.TestRule
-import org.junit.runner.Description
-import org.junit.runners.model.Statement
 import java.time.LocalDate
 import java.time.Month
 
