@@ -1,8 +1,10 @@
 package com.kinandcarta.feature.find.meal.adapter
 
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +34,6 @@ class MealsAdapter(
 
         fun bindData(meal: Meal, position: Int) {
             itemBinding.mealName.text = meal.name
-            itemBinding.mealTemp.text = if (meal.hot) "Hot" else "Cold"
             setupMealTemp(meal.hot)
             setupMealInfo(meal.info)
             itemBinding.mealDistance.text = "${meal.distance} ${distanceUnit}"
