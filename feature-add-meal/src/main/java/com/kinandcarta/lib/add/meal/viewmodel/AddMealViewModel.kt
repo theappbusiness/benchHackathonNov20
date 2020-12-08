@@ -1,7 +1,7 @@
 package com.kinandcarta.lib.add.meal.viewmodel
 
 import android.annotation.SuppressLint
-import android.content.Context
+//import android.content.Context
 import android.location.*
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kcc.kmmhackathon.shared.MealsSDK
 import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kinandcarta.lib.add.meal.network.MealSDKRepository
+import com.kinandcarta.lib.add.meal.network.MealsSDKRepositoryImpl
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*
@@ -25,7 +27,7 @@ data class MealForm constructor(
     var location: Location = Location(LocationManager.GPS_PROVIDER)
 )
 
-class AddMealViewModel : ViewModel() {
+class AddMealViewModel(mealSDKRepository: MealSDKRepository = MealsSDKRepositoryImpl(mealsSDK = MealsSDK())): ViewModel() {
     sealed class State() {
         object Initial: State()
         object LocationUpdated: State()
@@ -40,10 +42,10 @@ class AddMealViewModel : ViewModel() {
     var meal: MealForm by mutableStateOf(MealForm())
         private set
 
-    private var mealsSDK: MealsSDK
+    private val mealSDKRepository: MealSDKRepository
 
     init {
-        this.mealsSDK = MealsSDK()
+        this.mealSDKRepository = mealSDKRepository
     }
 
     fun onEditTitle(newValue: String) {
@@ -74,12 +76,16 @@ class AddMealViewModel : ViewModel() {
         meal.address = newValue
     }
 
+    fun onEditLocation(newValue: Location) {
+        meal.location = newValue
+    }
+
     fun onSubmit() {
         state = State.Loading
         viewModelScope.launch {
             kotlin.runCatching {
                 val meal = Meal(
-                    id = mealsSDK.getUUID().toString(),
+                    id = mealSDKRepository.getUUID().toString(),
                     name = meal.title,
                     info = meal.additionalInformation,
                     quantity = meal.quantity.toInt(),
@@ -90,7 +96,7 @@ class AddMealViewModel : ViewModel() {
                     locationLong = meal.location.longitude.toFloat(),
                     distance = null
                 )
-                mealsSDK.postMeal(meal = meal)
+                mealSDKRepository.postMeal(meal = meal)
             }.onSuccess {
                 meal = MealForm()
                 state = State.Success
@@ -99,34 +105,4 @@ class AddMealViewModel : ViewModel() {
             }
         }
     }
-
-    @SuppressLint("MissingPermission")
-    fun onRequestGetCurrentLocation(context: Context) {
-        val locationListener: LocationListener = object : LocationListener {
-            override fun onLocationChanged(location: Location) {
-                val geocoder = Geocoder(context, Locale.getDefault())
-                val addresses: List<Address> =
-                    geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                if (addresses.isEmpty()) {
-                    // Do nothing
-                } else {
-                    meal.address = addresses[0].getAddressLine(0)
-                    meal.location = location
-                    state = State.LocationUpdated
-                }
-            }
-        }
-
-        val minMS: Long = 30000 // 30s
-        val distanceMin: Float = 100.0f // 100m
-        val locationManager =
-            context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationManager.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            minMS,
-            distanceMin,
-            locationListener
-        )
-    }
-
 }

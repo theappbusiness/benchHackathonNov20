@@ -1,6 +1,8 @@
 package com.kinandcarta.lib.add.meal.view
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.location.*
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
@@ -19,6 +21,7 @@ import com.kinandcarta.lib.add.meal.ui.components.DateField
 import com.kinandcarta.lib.add.meal.ui.components.InputTextField
 import com.kinandcarta.lib.add.meal.ui.components.TemperatureField
 import com.kinandcarta.lib.add.meal.viewmodel.AddMealViewModel
+import java.util.*
 
 @Composable
 internal fun AddMealScreen(addMealViewModel: AddMealViewModel, context: Context) {
@@ -114,7 +117,12 @@ internal fun LoadedView(addMealViewModel: AddMealViewModel, context: Context) {
         Spacer(modifier = Modifier.height(8.dp))
         DateField(title = "Use by", value = if (addMealViewModel.meal.useBy == null) "Use by" else addMealViewModel.meal.useBy.toString(), addMealViewModel::onEditUseBy)
         Spacer(modifier = Modifier.height(8.dp))
-        AddressField(value = addMealViewModel.meal.address, onRequestCurrentLocation = { addMealViewModel.onRequestGetCurrentLocation(context) })
+        AddressField(value = addMealViewModel.meal.address, onRequestCurrentLocation = {
+            onRequestLocationAndAddress(context) { location, address ->
+                addMealViewModel.onEditLocation(location)
+                addMealViewModel.onEditAddress(address.getAddressLine(0))
+            }
+        })
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = addMealViewModel::onSubmit) {
             Text(text = "Add a meal")
@@ -134,4 +142,31 @@ internal fun LoadingView() {
             color = Color.Black
         )
     }
+}
+
+@SuppressLint("MissingPermission")
+private fun onRequestLocationAndAddress(context: Context, onUpdatedLocation: (Location, Address) -> Unit) {
+    val locationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val addresses: List<Address> =
+                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            if (addresses.isEmpty()) {
+                // Do nothing
+            } else {
+                onUpdatedLocation(location, addresses[0])
+            }
+        }
+    }
+
+    val minMS: Long = 30000 // 30s
+    val distanceMin: Float = 100.0f // 100m
+    val locationManager =
+        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    locationManager.requestLocationUpdates(
+        LocationManager.GPS_PROVIDER,
+        minMS,
+        distanceMin,
+        locationListener
+    )
 }

@@ -2,13 +2,14 @@ apply plugin: "com.android.library"
 apply from: rootProject.file("common.gradle")
 
 def composeVersion = "1.0.0-alpha07"
-
+def mockk_version = "1.10.3"
 dependencies {
     // Feature module
     implementation project(":lib-theming")
     // Plugin
     implementation "com.vanpra.compose-material-dialogs:datetime:0.2.6"
     implementation("com.benasher44:uuid:0.2.2")
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
     // Compose
     implementation "androidx.compose.compiler:compiler:$composeVersion"
     implementation "androidx.compose.ui:ui:$composeVersion"
@@ -21,13 +22,10 @@ dependencies {
     // Material design icons
     implementation "androidx.compose.material:material-icons-core:$composeVersion"
     implementation "androidx.compose.material:material-icons-extended:$composeVersion"
-    // Integration with observables
-    implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
-    implementation "androidx.compose.runtime:runtime-rxjava2:$composeVersion"
-    implementation "com.google.android.gms:play-services-maps:17.0.0"
 
     // Tests
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
+    testImplementation "io.mockk:mockk:$mockk_version"
     implementation "junit:junit:4.12"
 }
 

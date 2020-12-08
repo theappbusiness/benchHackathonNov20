@@ -1,16 +1,24 @@
 package com.kinandcarta.lib.add.meal
 
+import androidx.lifecycle.viewModelScope
+import com.kcc.kmmhackathon.shared.entity.Meal
+import com.kinandcarta.lib.add.meal.network.MealSDKRepository
 import com.kinandcarta.lib.add.meal.viewmodel.AddMealViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.TestRule
+import org.junit.runner.Description
+import org.junit.runners.model.Statement
 import java.time.LocalDate
 import java.time.Month
 
@@ -24,11 +32,16 @@ class AddMealViewModelTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
-    var subject: AddMealViewModel = AddMealViewModel()
+    lateinit var subject: AddMealViewModel
+
+    @RelaxedMockK
+    lateinit var mealSDKRepository: MealSDKRepository
 
     @Before
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)
+        mealSDKRepository = mockk<MealSDKRepository>()
+        subject = AddMealViewModel(mealSDKRepository = mealSDKRepository)
     }
 
     @After
@@ -111,4 +124,49 @@ class AddMealViewModelTest {
             }
         }
     }
+
+    @Test
+    fun test_whenSubmit_and_returnsSuccess_then_updateStateToSuccess() {
+        val expectedMeal = Meal(
+            id = "id",
+            name = "name",
+            quantity = 4,
+            availableFromDate = "From",
+            expiryDate = "To",
+            info = "info",
+            hot = true,
+            locationLat = 42.0f,
+            locationLong = -42.0f,
+        )
+        subject.viewModelScope.launch {
+            coEvery { mealSDKRepository.postMeal(expectedMeal) } returns expectedMeal
+            assertEquals(AddMealViewModel.State.Initial, subject.state)
+            subject.onSubmit()
+            coVerify { mealSDKRepository.postMeal(expectedMeal) }
+            assertEquals(AddMealViewModel.State.Success, subject.state)
+        }
+    }
+
+    @Test
+    fun test_whenSubmit_and_returnsFailed_then_updateStateToFailed() {
+        val expectedMeal = Meal(
+            id = "id",
+            name = "name",
+            quantity = 4,
+            availableFromDate = "From",
+            expiryDate = "To",
+            info = "info",
+            hot = true,
+            locationLat = 42.0f,
+            locationLong = -42.0f,
+        )
+        subject.viewModelScope.launch {
+            coEvery { mealSDKRepository.postMeal(expectedMeal) } throws Exception("Test")
+            assertEquals(AddMealViewModel.State.Initial, subject.state)
+            subject.onSubmit()
+            coVerify { mealSDKRepository.postMeal(expectedMeal) }
+            assertEquals(AddMealViewModel.State.Failed, subject.state)
+        }
+    }
+
 }
