@@ -16,36 +16,36 @@ import Settings
 import Components
 
 public struct TabAppView: View {
-
-    private let mealListViewModel = MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager())
-
-    @State var selectedView: Int
-
-    public init(selectedView: Int) {
-        UITabBar.appearance().barTintColor = UIColor(ColorManager.appPrimary)
-        _selectedView = State(initialValue: selectedView)
-    }
-
-    public var body: some View {
-        TabView(selection: $selectedView, content: {
-            TabNavigationItem(
-                destination: AnyView(MealMapView(viewModel: mealListViewModel)),
-                image: Strings.TabView.Images.find,
-                title: Strings.TabView.findButtonText,
-                tagNumber: 0)
-            
-            TabNavigationItem(
-                destination: AnyView(SettingsView()),
-                image: Strings.TabView.Images.settings,
-                title: Strings.TabView.settings,
-                tagNumber: 1)
-        })
-        .accentColor(.white)
-    }
+  
+  private let mealListViewModel = MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager())
+  
+  @State var selectedView: Int
+  
+  public init(selectedView: Int) {
+    UITabBar.appearance().barTintColor = UIColor(ColorManager.appPrimary)
+    _selectedView = State(initialValue: selectedView)
+  }
+  
+  public var body: some View {
+    TabView(selection: $selectedView, content: {
+      TabNavigationItem(
+        destination: AnyView(MealMapView(viewModel: mealListViewModel)),
+        image: Strings.TabView.Images.find,
+        title: Strings.TabView.findButtonText,
+        tagNumber: 0)
+      
+      TabNavigationItem(
+        destination: AnyView(SettingsView()),
+        image: Strings.TabView.Images.settings,
+        title: Strings.TabView.settings,
+        tagNumber: 1)
+    })
+    .accentColor(.white)
+  }
 }
 
 struct TabAppView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabAppView(selectedView: 1)
-    }
+  static var previews: some View {
+    TabAppView(selectedView: 1)
+  }
 }

@@ -14,18 +14,18 @@ import Extensions
 
 final class MealRowViewModel: ObservableObject {
 
-    // MARK:- Properties
+    // MARK: - Properties
     let spacing: CGFloat = 10.0
     let cornerRadius: CGFloat = 15.0
 
     var meal: Meal
 
-    // MARK:- Init
+    // MARK: - Init
     init(meal: Meal) {
         self.meal = meal
     }
 
-    // MARK:- Computed properties
+    // MARK: - Computed properties
     var isButtonDisabled: Bool {
         meal.quantity < 1
     }

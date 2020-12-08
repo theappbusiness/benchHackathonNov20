@@ -9,8 +9,7 @@
 import Foundation
 
 public extension String {
-
-    func last4Chars() -> Self {
-        return self.suffix(4).uppercased()
-    }
+  func last4Chars() -> Self {
+    return self.suffix(4).uppercased()
+  }
 }
