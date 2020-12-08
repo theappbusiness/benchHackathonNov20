@@ -12,6 +12,8 @@ import Theming
 import Components
 
 public struct SignUpView: View {
+
+	private let signUpWithEmail = SignUpWithEmail(viewModel: SignUpWithEmailViewModel())
 	
 	public init() {}
 	
@@ -25,7 +27,7 @@ public struct SignUpView: View {
 				VStack(alignment: .trailing) {
 					Spacer()
 					HStack {
-						NavigationLink(destination: SignUpWithEmail(viewModel: SignUpWithEmailViewModel())) {
+						NavigationLink(destination: signUpWithEmail) {
 							Text(Strings.SignUp.welcomeButtonTitle)
 								.modifier(AddButtonStyle(width: geometry.size.width,
 														 backgroundColor: ColorManager.appPrimary))
