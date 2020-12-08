@@ -10,9 +10,10 @@
         android:id="@+id/list_bottomSheet"
         android:fitsSystemWindows="true"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="50dp"
+        app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:nestedScrollingEnabled="false"
+        android:background="@drawable/bottom_sheet_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

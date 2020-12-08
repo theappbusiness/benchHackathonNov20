@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-
     def recyclerVersion = "1.1.0"
     def navVersion = "2.3.1"
     def lifecycleVersion = "2.2.0"
@@ -60,7 +59,8 @@ dependencies {
 
     // Google
     implementation "com.google.android.material:material:1.2.1"
-    implementation "com.google.android.gms:play-services-maps:$googlePlayServicesVersion" // TODO: Might be good to only include this in modules that need it
+    implementation "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
+    // TODO: Might be good to only include this in modules that need it
     implementation "com.google.android.gms:play-services-location:$googlePlayServicesVersion"
 
     // Hilt
