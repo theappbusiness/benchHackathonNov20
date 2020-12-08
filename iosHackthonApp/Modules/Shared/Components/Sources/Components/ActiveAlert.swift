@@ -7,5 +7,5 @@
 //
 
 public enum ActiveAlert {
-    case unavailable, collection, error
+  case unavailable, collection, error
 }

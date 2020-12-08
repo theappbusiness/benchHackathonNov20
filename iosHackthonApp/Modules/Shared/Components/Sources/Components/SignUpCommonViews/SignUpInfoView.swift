@@ -9,22 +9,22 @@
 import SwiftUI
 
 public struct SignUpInfoView: View {
-
-	private var title: String
-	private var description: String
-	
-	public init(title: String, description: String) {
-		self.title = title
-		self.description = description
-	}
-	
-	public var body: some View {
-		Text(title)
-			.fontWeight(.bold)
-			.font(.largeTitle)
-		Spacer()
-		Text(description)
-			.fontWeight(.bold)
-			.font(.subheadline)
-	}
+  
+  private var title: String
+  private var description: String
+  
+  public init(title: String, description: String) {
+    self.title = title
+    self.description = description
+  }
+  
+  public var body: some View {
+    Text(title)
+      .fontWeight(.bold)
+      .font(.largeTitle)
+    Spacer()
+    Text(description)
+      .fontWeight(.bold)
+      .font(.subheadline)
+  }
 }
