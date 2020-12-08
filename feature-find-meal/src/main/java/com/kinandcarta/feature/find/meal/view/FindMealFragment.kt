@@ -27,7 +27,7 @@ class FindMealFragment : Fragment() {
 
     private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
     private val viewModel: DisplayMealsViewModel by viewModels()
-    private lateinit var mealsRecyclerView: RecyclerView
+    private val mealsRecyclerView: RecyclerView by lazy { requireView().findViewById(R.id.rvMeals) }
     private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
 
     override fun onCreateView(
@@ -35,22 +35,22 @@ class FindMealFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view: View = inflater.inflate(R.layout.find_meal_fragment, container, false)
-        mealsRecyclerView = view.findViewById(R.id.rvMeals)
-        mealsRecyclerView.adapter = mealsAdapter
-        mealsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
-        setupUI()
+        setupRecyclerView()
+        viewModel.startUpdatingLocation()
     }
 
-    fun setupUI() {
-        viewModel.startUpdatingLocation()
+    fun setupRecyclerView() {
+        mealsRecyclerView.apply {
+            adapter = mealsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun onStateChanged(state: DisplayMealsViewModel.State) {
