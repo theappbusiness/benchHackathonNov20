@@ -11,7 +11,7 @@ import Theming
 
 public final class SignUpUserEntryViewModel: ObservableObject {
 	
-	var signUp : () -> ()
+	var signUp : () -> Void
 	var isSignupWithEmail: Bool
 	var textFieldPlaceholder: String
 	var buttonTitle: String
@@ -25,7 +25,7 @@ public final class SignUpUserEntryViewModel: ObservableObject {
 				buttonTitle: String,
 				width: CGFloat,
 				entryField: Binding<String>,
-				signUp : @escaping () -> (),
+				signUp : @escaping () -> Void,
 				moveToNextScreen: Binding<Bool>,
 				isLoading: Binding<Bool>) {
 		self.isSignupWithEmail = isSignupWithEmail

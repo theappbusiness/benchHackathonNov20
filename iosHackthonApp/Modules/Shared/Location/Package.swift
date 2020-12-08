@@ -8,10 +8,10 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-        .library(name: "Location", targets: ["Location"]),
+        .library(name: "Location", targets: ["Location"])
     ],
     targets: [
         .target(name: "Location"),
-        .testTarget(name: "LocationTests", dependencies: ["Location"]),
+        .testTarget(name: "LocationTests", dependencies: ["Location"])
     ]
 )

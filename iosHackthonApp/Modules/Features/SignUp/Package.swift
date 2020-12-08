@@ -9,7 +9,7 @@ let package = Package(
 		.iOS(.v14)
 	],
 	products: [
-		.library(name: "SignUp", targets: ["SignUp"]),
+		.library(name: "SignUp", targets: ["SignUp"])
 	],
 	dependencies: [
 		.package(path: "../Shared/Theming"),
@@ -20,6 +20,6 @@ let package = Package(
 	],
 	targets: [
 		.target(name: "SignUp", dependencies: ["shared", "Theming", "Strings", "Components", "TabBar"]),
-		.testTarget(name: "SignUpTests", dependencies: ["SignUp"]),
+		.testTarget(name: "SignUpTests", dependencies: ["SignUp"])
 	]
 )

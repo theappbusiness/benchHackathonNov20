@@ -28,7 +28,7 @@ public struct SignUpView: View {
 						NavigationLink(destination: SignUpWithEmail(viewModel: SignUpWithEmailViewModel())) {
 							Text(Strings.SignUp.welcomeButtonTitle)
 								.modifier(AddButtonStyle(width: geometry.size.width,
-														 backgroundColor:ColorManager.appPrimary))
+														 backgroundColor: ColorManager.appPrimary))
 						}
 					}
 				}

@@ -36,8 +36,8 @@ struct SignUpWithPassword: View {
 					signUp: self.signUp,
 					moveToNextScreen: $viewModel.moveToNextScreen,
 					isLoading: $viewModel.isLoading)
-				
-				SignUpUserEntryView(viewModel: viewModel, destinationView:TabAppView(selectedView: 0))
+
+				SignUpUserEntryView(viewModel: viewModel, destinationView: TabAppView(selectedView: 0))
 			}
 		}.padding()
 		.alert(isPresented: $viewModel.showingAlert) {
@@ -49,7 +49,7 @@ struct SignUpWithPassword: View {
 	}
 }
 
-//MARK:- Functions
+// MARK: - Functions
 private extension SignUpWithPassword {
 	func signUp() {
 		viewModel.signUp(email: self.viewModel.email, password: self.viewModel.password)

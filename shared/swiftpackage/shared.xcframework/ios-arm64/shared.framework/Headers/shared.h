@@ -350,27 +350,27 @@ __attribute__((swift_name("SharedDate")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("FirebaseAuthenticationResponse")))
 @interface SharedFirebaseAuthenticationResponse : SharedBase
-- (instancetype)initWithKind:(NSString *)kind idToken:(NSString *)idToken email:(NSString *)email refreshToken:(NSString *)refreshToken expiresIn:(NSString *)expiresIn localId:(NSString *)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("init(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)component1 __attribute__((swift_name("component1()")));
-- (NSString *)component2 __attribute__((swift_name("component2()")));
-- (NSString *)component3 __attribute__((swift_name("component3()")));
-- (NSString *)component4 __attribute__((swift_name("component4()")));
-- (NSString *)component5 __attribute__((swift_name("component5()")));
-- (NSString *)component6 __attribute__((swift_name("component6()")));
+- (instancetype)initWithKind:(NSString * _Nullable)kind idToken:(NSString * _Nullable)idToken email:(NSString * _Nullable)email refreshToken:(NSString * _Nullable)refreshToken expiresIn:(NSString * _Nullable)expiresIn localId:(NSString * _Nullable)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("init(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)"))) __attribute__((objc_designated_initializer));
+- (NSString * _Nullable)component1 __attribute__((swift_name("component1()")));
+- (NSString * _Nullable)component2 __attribute__((swift_name("component2()")));
+- (NSString * _Nullable)component3 __attribute__((swift_name("component3()")));
+- (NSString * _Nullable)component4 __attribute__((swift_name("component4()")));
+- (NSString * _Nullable)component5 __attribute__((swift_name("component5()")));
+- (NSString * _Nullable)component6 __attribute__((swift_name("component6()")));
 - (SharedInt * _Nullable)component7 __attribute__((swift_name("component7()")));
 - (NSString * _Nullable)component8 __attribute__((swift_name("component8()")));
-- (SharedFirebaseAuthenticationResponse *)doCopyKind:(NSString *)kind idToken:(NSString *)idToken email:(NSString *)email refreshToken:(NSString *)refreshToken expiresIn:(NSString *)expiresIn localId:(NSString *)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("doCopy(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)")));
+- (SharedFirebaseAuthenticationResponse *)doCopyKind:(NSString * _Nullable)kind idToken:(NSString * _Nullable)idToken email:(NSString * _Nullable)email refreshToken:(NSString * _Nullable)refreshToken expiresIn:(NSString * _Nullable)expiresIn localId:(NSString * _Nullable)localId code:(SharedInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("doCopy(kind:idToken:email:refreshToken:expiresIn:localId:code:message:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) SharedInt * _Nullable code __attribute__((swift_name("code")));
-@property (readonly) NSString *email __attribute__((swift_name("email")));
-@property (readonly) NSString *expiresIn __attribute__((swift_name("expiresIn")));
-@property (readonly) NSString *idToken __attribute__((swift_name("idToken")));
-@property (readonly) NSString *kind __attribute__((swift_name("kind")));
-@property (readonly) NSString *localId __attribute__((swift_name("localId")));
+@property (readonly) NSString * _Nullable email __attribute__((swift_name("email")));
+@property (readonly) NSString * _Nullable expiresIn __attribute__((swift_name("expiresIn")));
+@property (readonly) NSString * _Nullable idToken __attribute__((swift_name("idToken")));
+@property (readonly) NSString * _Nullable kind __attribute__((swift_name("kind")));
+@property (readonly) NSString * _Nullable localId __attribute__((swift_name("localId")));
 @property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
-@property (readonly) NSString *refreshToken __attribute__((swift_name("refreshToken")));
+@property (readonly) NSString * _Nullable refreshToken __attribute__((swift_name("refreshToken")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -409,7 +409,7 @@ __attribute__((swift_name("Meal")))
 @property (readonly) float locationLat __attribute__((swift_name("locationLat")));
 @property (readonly) float locationLong __attribute__((swift_name("locationLong")));
 @property (readonly) NSString *name __attribute__((swift_name("name")));
-@property (readonly) int32_t quantity __attribute__((swift_name("quantity")));
+@property int32_t quantity __attribute__((swift_name("quantity")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

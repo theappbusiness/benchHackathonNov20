@@ -37,7 +37,10 @@ struct SignUpWithEmail: View {
 					moveToNextScreen: $viewModel.moveToNextScreen,
 					isLoading: .constant(self.viewModel.isLoading))
 				
-				let signupViewModel = SignUpWithPasswordViewModel(email: self.viewModel.email ,firebase: FirebaseAuthenticationStore(), authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
+				let signupViewModel = SignUpWithPasswordViewModel(
+          email: self.viewModel.email,
+          firebase: FirebaseAuthenticationStore(),
+          authorizationStore: AuthorizationStore(cache: UserDefaults.standard))
 
 				SignUpUserEntryView(viewModel: viewModel, destinationView: SignUpWithPassword(viewModel: signupViewModel))
 			}
@@ -51,7 +54,7 @@ struct SignUpWithEmail_Previews: PreviewProvider {
 	}
 }
 
-//MARK:- Functions
+// MARK: - Functions
 private extension SignUpWithEmail {
 	func signUp() {
 		viewModel.moveToNextScreen = true

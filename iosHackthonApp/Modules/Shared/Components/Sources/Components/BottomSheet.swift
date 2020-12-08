@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Theming
 
-fileprivate enum Constants {
+private enum Constants {
     static let cornerRadius: CGFloat = 16
     static let indicatorWidth: CGFloat = 60
     static let indicatorHeight: CGFloat = 6
@@ -90,4 +90,3 @@ public struct BottomSheetView<Content: View>: View {
         }
     }
 }
-

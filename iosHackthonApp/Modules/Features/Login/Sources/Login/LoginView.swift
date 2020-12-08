@@ -89,7 +89,7 @@ public struct LoginView: View {
 			}
 			.navigationBarTitle(Text(Strings.Login.heading))
 		}
-		.onAppear() {
+		.onAppear {
 			loginViewModel.authorizationStore.isUserAuthorized()
 		}
 		.accentColor(.white)
@@ -101,4 +101,3 @@ public struct LoginView: View {
 		}
 	}
 }
-

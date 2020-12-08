@@ -8,13 +8,13 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-        .library(name: "Extensions", targets: ["Extensions"]),
+        .library(name: "Extensions", targets: ["Extensions"])
     ],
     dependencies: [
         .package(path: "../Shared/Strings")
     ],
     targets: [
         .target(name: "Extensions", dependencies: ["Strings"]),
-        .testTarget(name: "ExtensionsTests", dependencies: ["Extensions"]),
+        .testTarget(name: "ExtensionsTests", dependencies: ["Extensions"])
     ]
 )

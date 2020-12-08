@@ -71,7 +71,7 @@ public struct AddMealView: View {
                     }.padding()
                 }
                 .navigationBarTitle(Strings.AddMealScreen.addMeal)
-                .onAppear() {
+                .onAppear {
                     address = "\(locationManager.address)"
                 }
             }
@@ -93,7 +93,7 @@ public struct AddMealView: View {
     }
 }
 
-// MARK:- Views
+// MARK: - Views
 private extension AddMealView {
 
     struct InfoTextFieldsGroup: View {
@@ -197,7 +197,7 @@ private extension AddMealView {
     }
 }
 
-//MARK:- Functions
+// MARK: - Functions
 private extension AddMealView {
 
     func createMeal() -> Meal {
@@ -209,7 +209,7 @@ private extension AddMealView {
              info: "\(additionalInfo)",
              hot: isHot,
              locationLat: latitude,
-             locationLong:  longitude,
+             locationLong: longitude,
              distance: nil)
     }
 
