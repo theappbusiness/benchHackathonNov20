@@ -1,23 +1,19 @@
 package com.kinandcarta.feature.find.meal.view
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.get
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
+import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
 import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,19 +21,21 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
-    private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
+    private val progressBarView: FrameLayout by lazy { binding.progressBar }
     private val viewModel: DisplayMealsViewModel by viewModels()
-    private val mealsRecyclerView: RecyclerView by lazy { requireView().findViewById(R.id.rvMeals) }
+    private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
     private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
+    private var _binding: FindMealFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.find_meal_fragment, container, false)
+        _binding = FindMealFragmentBinding.inflate(inflater, container, false)
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
