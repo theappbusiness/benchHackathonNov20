@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/KMMHackathon.iml" filepath="$PROJECT_DIR$/.idea/modules/KMMHackathon.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidHackathonApp/KMMHackathon.androidHackathonApp.iml" filepath="$PROJECT_DIR$/.idea/modules/androidHackathonApp/KMMHackathon.androidHackathonApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature-find-meal/KMMHackathon.feature-find-meal.iml" filepath="$PROJECT_DIR$/.idea/modules/feature-find-meal/KMMHackathon.feature-find-meal.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib-theming/KMMHackathon.lib-theming.iml" filepath="$PROJECT_DIR$/.idea/modules/lib-theming/KMMHackathon.lib-theming.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.androidAndroidTestRelease.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/KMMHackathon.shared.androidAndroidTestRelease.iml" />
