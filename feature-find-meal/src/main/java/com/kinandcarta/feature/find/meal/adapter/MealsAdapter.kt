@@ -14,7 +14,7 @@ import com.kinandcarta.feature.find.meal.extension.getPortionsString
 
 class MealsAdapter(
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
-    private val clickListener: (String, Int) -> Unit
+    private val clickListener: (String) -> Unit
 ) : ListAdapter<Meal, MealsAdapter.MealsViewHolder>(MealDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsViewHolder {
@@ -39,7 +39,7 @@ class MealsAdapter(
             itemBinding.mealAvailable.text = "${ctx.getString(R.string.available_leader)} ${meal.availableFromDate}"
             itemBinding.mealExpiry.text = "${ctx.getString(R.string.expiry_leader)} ${meal.expiryDate}"
             itemBinding.mealPortions.text = "${meal.quantity.getPortionsString()}"
-            setupReserveButton(meal.quantity, meal.id, position)
+            setupReserveButton(meal.quantity, meal.id)
         }
 
         private fun setupMealTemp(isHot: Boolean) {
@@ -58,7 +58,7 @@ class MealsAdapter(
         }
 
 
-        private fun setupReserveButton(quantity: Int, mealId: String, position: Int) {
+        private fun setupReserveButton(quantity: Int, mealId: String) {
             val hasPortions = quantity > 0
             val reserveButton = itemBinding.reserveButton
 
@@ -69,7 +69,7 @@ class MealsAdapter(
 
             if (hasPortions) {
                 reserveButton.setOnClickListener {
-                    clickListener(mealId, position)
+                    clickListener(mealId)
                 }
             } else {
                 reserveButton.setOnClickListener(null)

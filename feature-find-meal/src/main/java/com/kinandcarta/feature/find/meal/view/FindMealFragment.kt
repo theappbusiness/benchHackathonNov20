@@ -23,7 +23,7 @@ class FindMealFragment : Fragment() {
     private val progressBarView: FrameLayout by lazy { binding.progressBar }
     private val viewModel: DisplayMealsViewModel by viewModels()
     private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
-    private val mealsAdapter = MealsAdapter { id, position -> viewModel.reserveAMeal(id, position) }
+    private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
     private var _binding: FindMealFragmentBinding? = null
     private val binding get() = _binding!!
 

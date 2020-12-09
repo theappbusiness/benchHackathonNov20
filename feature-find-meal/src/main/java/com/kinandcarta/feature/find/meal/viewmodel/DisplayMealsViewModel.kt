@@ -26,7 +26,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
-        data class ReservedMeal(val code: String, val position: Int) : State()
+        data class ReservedMeal(val code: String) : State()
         data class LocationUpdate(val userLatLng: LatLng) : State()
         data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
@@ -90,14 +90,14 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun reserveAMeal(id: String, position: Int) {
+    fun reserveAMeal(id: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 sdk.reserveMeal(id)
             }.onSuccess {
                 if (it != null) {
                     val code = getReservationCode(it.id)
-                    _state.value = State.ReservedMeal(code, position)
+                    _state.value = State.ReservedMeal(code)
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
