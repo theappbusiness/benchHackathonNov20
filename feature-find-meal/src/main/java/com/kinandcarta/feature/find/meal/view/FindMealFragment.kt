@@ -71,22 +71,22 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
-        showToast("Your meal reservation code is ${state.code}")
+        showToast("${getString(R.string.reservation_message)} ${state.code}")
     }
 
     private fun onMealUnavailable(state: DisplayMealsViewModel.State.MealUnavailable) {
-        showToast("Unfortunately this meal is unavailable")
+        showToast(getString(R.string.meal_unavailable_message))
     }
 
     private fun onFailure(failure: DisplayMealsViewModel.Failure) {
         when (failure) {
             is DisplayMealsViewModel.Failure.LoadingMealsFailed -> {
                 progressBarView.isVisible = false
-                showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
+                showToast(failure.localizedMessage ?: getString(R.string.error_loading_meals))
             }
             is DisplayMealsViewModel.Failure.ReserveAMealFailed -> {
                 showToast(
-                    failure.localizedMessage ?: "An unexpected error occurred reserving a meal"
+                    failure.localizedMessage ?: getString(R.string.error_reserving_meal)
                 )
             }
         }

@@ -29,20 +29,21 @@ class MealsAdapter(
     }
 
     inner class MealsViewHolder(private val itemBinding: MealItemRowBinding): RecyclerView.ViewHolder(itemBinding.root) {
+        private val ctx = itemBinding.root.context
 
         fun bindData(meal: Meal, position: Int) {
             itemBinding.mealName.text = meal.name
             setupMealTemp(meal.hot)
             setupMealInfo(meal.info)
             itemBinding.mealDistance.text = "${meal.distance} ${distanceUnit}"
-            itemBinding.mealAvailable.text = "Available: ${meal.availableFromDate}"
-            itemBinding.mealExpiry.text = "Expires: ${meal.expiryDate}"
-            itemBinding.mealPortions.text = "#    ${meal.quantity.getPortionsString()}"
+            itemBinding.mealAvailable.text = "${ctx.getString(R.string.available_leader)} ${meal.availableFromDate}"
+            itemBinding.mealExpiry.text = "${ctx.getString(R.string.expiry_leader)} ${meal.expiryDate}"
+            itemBinding.mealPortions.text = "${meal.quantity.getPortionsString()}"
             setupReserveButton(meal.quantity, meal.id, position)
         }
 
         private fun setupMealTemp(isHot: Boolean) {
-            val tempString = if (isHot) "Hot" else "Cold"
+            val tempString = if (isHot) ctx.getString(R.string.hot) else ctx.getString(R.string.cold)
             val tempColor = if (isHot) R.color.colorHot else R.color.colorCold
             itemBinding.mealTemp.text = tempString
             itemBinding.mealTemp.setTextColor(ContextCompat.getColor(itemBinding.root.context, tempColor))
@@ -52,7 +53,7 @@ class MealsAdapter(
             if (info.isNullOrEmpty()) {
                 itemBinding.mealInfo.isVisible = false
             } else {
-                itemBinding.mealInfo.text = "Info: ${info}"
+                itemBinding.mealInfo.text = "${ctx.getString(R.string.info_leader)} ${info}"
             }
         }
 
@@ -61,7 +62,7 @@ class MealsAdapter(
             val hasPortions = quantity > 0
             val reserveButton = itemBinding.reserveButton
 
-            reserveButton.text = if (hasPortions) "Reserve a portion" else "Unavailable"
+            reserveButton.text = if (hasPortions) ctx.getString(R.string.reserve_button_available) else ctx.getString(R.string.reserve_button_unavailable)
 
             val reserveButtonColor = if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
             reserveButton.setBackgroundColor(ContextCompat.getColor(itemBinding.root.context, reserveButtonColor))
