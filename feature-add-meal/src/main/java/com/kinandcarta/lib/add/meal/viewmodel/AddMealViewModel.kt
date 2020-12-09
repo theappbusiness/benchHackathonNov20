@@ -1,7 +1,5 @@
 package com.kinandcarta.lib.add.meal.viewmodel
 
-import android.annotation.SuppressLint
-//import android.content.Context
 import android.location.*
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
@@ -13,8 +11,10 @@ import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kinandcarta.lib.add.meal.network.MealSDKRepository
 import com.kinandcarta.lib.add.meal.network.MealsSDKRepositoryImpl
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
 import java.time.LocalDate
-import java.util.*
+import java.time.ZoneOffset
+import java.time.temporal.TemporalField
 
 data class MealForm constructor(
     var title: String = "",
@@ -82,6 +82,9 @@ class AddMealViewModel(mealSDKRepository: MealSDKRepository = MealsSDKRepository
 
     fun onSubmit() {
         state = State.Loading
+        val availableFrom = meal.availableFrom?.atStartOfDay()?.toEpochSecond(ZoneOffset.UTC).toString()
+        val useBy = meal.useBy?.atStartOfDay()?.toEpochSecond(ZoneOffset.UTC).toString()
+
         viewModelScope.launch {
             kotlin.runCatching {
                 val meal = Meal(
@@ -89,8 +92,8 @@ class AddMealViewModel(mealSDKRepository: MealSDKRepository = MealsSDKRepository
                     name = meal.title,
                     info = meal.additionalInformation,
                     quantity = meal.quantity.toInt(),
-                    availableFromDate = meal.availableFrom.toString() ,
-                    expiryDate = meal.useBy.toString(),
+                    availableFromDate = availableFrom,
+                    expiryDate = useBy,
                     hot = meal.isHot,
                     locationLat = meal.location.latitude.toFloat(),
                     locationLong = meal.location.longitude.toFloat(),
