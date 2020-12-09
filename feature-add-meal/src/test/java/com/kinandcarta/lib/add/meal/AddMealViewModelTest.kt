@@ -23,6 +23,7 @@ import java.time.Month
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
+@ExperimentalCoroutinesApi
 class AddMealViewModelTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
