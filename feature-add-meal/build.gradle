@@ -2,7 +2,7 @@ apply plugin: "com.android.library"
 apply from: rootProject.file("common.gradle")
 
 def composeVersion = "1.0.0-alpha07"
-def mockk_version = "1.10.3"
+def mockk_version = "1.10.3-jdk8"
 dependencies {
     // Feature module
     implementation project(":lib-theming")
