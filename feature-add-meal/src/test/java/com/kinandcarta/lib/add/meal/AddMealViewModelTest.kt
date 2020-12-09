@@ -47,7 +47,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenEditTitle_then_updateMealFormTitle() {
+    fun `WHEN Edit title - THEN Update Meal Form Title`() {
         val expected = "New Title"
         subject.onEditTitle(expected)
 
@@ -57,7 +57,7 @@ class AddMealViewModelTest {
 
 
     @Test
-    fun test_whenEditAdditionalInformation_then_updateMealFormAadditionalInformation() {
+    fun `WHEN Edit Additional Information - THEN Update Meal Form Additional Information`() {
         val expected = "New Additional Information"
         subject.onEditAdditionalInformation(expected)
 
@@ -66,7 +66,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenEditQuantity_then_updateQuantity() {
+    fun `WHEN Edit Quantity - THEN Update Meal Form Quantity`() {
         val expected = "42"
         subject.onEditQuantity(expected)
 
@@ -75,7 +75,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenEditTemperature_then_updateTemperature() {
+    fun `WHEN Edit Temperature - THEN Update Meal Form Temperature`() {
         val expected = false
         subject.onEditTemperature(false)
 
@@ -84,7 +84,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenEditAddress_then_updateAddress() {
+    fun `WHEN Edit Address - THEN Update Meal Form Address`() {
         val expected = "K+C Create Europe, 71 Collier Street, London N1 9BE"
         subject.onEditAddress(expected)
 
@@ -93,7 +93,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenOnEditAvailableFrom_then_updateAvailableFrom() {
+    fun `WHEN Edit Available From - THEN Update Meal Form Available From`() {
         val expected = LocalDate.of(2020, Month.DECEMBER, 1)
         subject.onEditAvailableFrom(expected)
 
@@ -102,7 +102,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenOnEditUseBy_then_updateUseBy() {
+    fun `WHEN Edit Use By - THEN Update Meal Form Use By`() {
         val expected = LocalDate.of(2020, Month.DECEMBER, 1)
         subject.onEditUseBy(expected)
 
@@ -111,7 +111,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenSubmit_then_updateStateToLoading() {
+    fun `WHEN Submit - THEN Update state to Loading`() {
         runBlocking {
             launch(Dispatchers.Main) {
                 assertEquals(AddMealViewModel.State.Initial, subject.state)
@@ -122,7 +122,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenSubmit_and_returnsSuccess_then_updateStateToSuccess() {
+    fun `WHEN Submit And Meal SDK returns Success - THEN Update state to Success`() {
         val expectedMeal = Meal(
             id = "id",
             name = "name",
@@ -144,7 +144,7 @@ class AddMealViewModelTest {
     }
 
     @Test
-    fun test_whenSubmit_and_returnsFailed_then_updateStateToFailed() {
+    fun `WHEN Submit And Meal SDK returns Failure - THEN Update state to Failed`() {
         val expectedMeal = Meal(
             id = "id",
             name = "name",
