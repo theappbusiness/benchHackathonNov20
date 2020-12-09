@@ -88,7 +88,7 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
-            android:drawableLeft="@drawable/ic_hashtag_svgrepo_com_20"
+            android:drawableLeft="@drawable/ic_hashtag_24"
             android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealExpiry" />
