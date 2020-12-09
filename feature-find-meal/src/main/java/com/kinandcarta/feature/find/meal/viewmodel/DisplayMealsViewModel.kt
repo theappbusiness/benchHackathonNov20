@@ -43,8 +43,8 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
             val location = locationResult?.lastLocation ?: return
-            val locationLatLng = LatLng(location.latitude, location.longitude)
-            updateMeals(locationLatLng)
+            val latLng = LatLng(location.latitude, location.longitude)
+            updateMeals(latLng)
         }
     }
 
