@@ -1,6 +1,5 @@
 package com.kinandcarta.feature.find.meal.viewmodel
 
-import android.location.Location
 import androidx.annotation.RequiresPermission
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -40,12 +39,12 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     val state: LiveData<State> get() = _state
 
     private val _state: MutableLiveData<State> = MutableLiveData(State.LoadingMeals)
-    private var lastLocation: Location? = null
     private val sdk = MealsSDK()
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
-            lastLocation = locationResult?.lastLocation
-            updateMeals()
+            val location = locationResult?.lastLocation ?: return
+            val locationLatLng = LatLng(location.latitude, location.longitude)
+            updateMeals(locationLatLng)
         }
     }
 
@@ -56,11 +55,9 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     fun startUpdatingLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-            if (it != lastLocation) {
-                lastLocation = it
-                updateUserLocation()
-            }
-            updateMeals()
+            val latLng = LatLng(it.latitude, it.longitude)
+            updateUserLocation(latLng)
+            updateMeals(latLng)
         }
         fusedLocationProviderClient.requestLocationUpdates(
             createLocationRequest(),
@@ -75,13 +72,12 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
-    fun updateMeals() {
-        val location = lastLocation ?: return
+    fun updateMeals(locationLatLng: LatLng) {
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
+                sdk.getSortedMeals(locationLatLng.latitude, locationLatLng.longitude, distanceUnit)
             }.onSuccess {
                 _state.value = State.LoadedMeals(it, distanceUnit)
             }.onFailure {
@@ -98,7 +94,6 @@ class DisplayMealsViewModel @ViewModelInject constructor(
                 if (it != null) {
                     val code = getReservationCode(it.id)
                     _state.value = State.ReservedMeal(code)
-                    updateMeals()
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
@@ -108,9 +103,8 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun updateUserLocation() {
-        val location = lastLocation ?: return
-        _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
+    private fun updateUserLocation(latLng: LatLng) {
+        _state.value = State.LocationUpdate(latLng)
     }
 
     private fun getReservationCode(id: String): String {

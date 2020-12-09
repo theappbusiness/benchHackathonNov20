@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
@@ -26,6 +27,7 @@ class FindMealFragment : Fragment() {
     private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
     private var _binding: FindMealFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var userLatLng: LatLng
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,6 +62,8 @@ class FindMealFragment : Fragment() {
                 onReservedMeal(state)
             is DisplayMealsViewModel.State.MealUnavailable ->
                 onMealUnavailable(state)
+            is DisplayMealsViewModel.State.LocationUpdate ->
+                onLocationUpdate(state)
             is DisplayMealsViewModel.State.Failed ->
                 onFailure(state.failure)
         }
@@ -71,11 +75,17 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
+        viewModel.updateMeals(userLatLng)
         showToast("${getString(R.string.reservation_message)} ${state.code}")
     }
 
     private fun onMealUnavailable(state: DisplayMealsViewModel.State.MealUnavailable) {
         showToast(getString(R.string.meal_unavailable_message))
+    }
+
+    private fun onLocationUpdate(state: DisplayMealsViewModel.State.LocationUpdate) {
+        userLatLng = state.userLatLng
+        viewModel.updateMeals(userLatLng)
     }
 
     private fun onFailure(failure: DisplayMealsViewModel.Failure) {
