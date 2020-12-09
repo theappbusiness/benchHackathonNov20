@@ -103,6 +103,6 @@ class FindMealFragment : Fragment() {
     }
 
     companion object {
-        val newInstance = FindMealFragment()
+        fun newInstance() = FindMealFragment()
     }
 }

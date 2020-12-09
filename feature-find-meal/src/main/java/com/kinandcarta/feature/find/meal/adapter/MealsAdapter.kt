@@ -31,29 +31,29 @@ class MealsAdapter(
     inner class MealsViewHolder(private val itemBinding: MealItemRowBinding): RecyclerView.ViewHolder(itemBinding.root) {
         private val ctx = itemBinding.root.context
 
-        fun bindData(meal: Meal, position: Int) {
-            itemBinding.mealName.text = meal.name
+        fun bindData(meal: Meal, position: Int) = with(itemBinding) {
+            mealName.text = meal.name
             setupMealTemp(meal.hot)
             setupMealInfo(meal.info)
-            itemBinding.mealDistance.text = "${meal.distance} ${distanceUnit}"
-            itemBinding.mealAvailable.text = "${ctx.getString(R.string.available_leader)} ${meal.availableFromDate}"
-            itemBinding.mealExpiry.text = "${ctx.getString(R.string.expiry_leader)} ${meal.expiryDate}"
-            itemBinding.mealPortions.text = "${meal.quantity.getPortionsString()}"
+            mealDistance.text = "${meal.distance} ${distanceUnit}"
+            mealAvailable.text = "${ctx.getString(R.string.available_leader)} ${meal.availableFromDate}"
+            mealExpiry.text = "${ctx.getString(R.string.expiry_leader)} ${meal.expiryDate}"
+            mealPortions.text = "${meal.quantity.getPortionsString()}"
             setupReserveButton(meal.quantity, meal.id)
         }
 
-        private fun setupMealTemp(isHot: Boolean) {
+        private fun setupMealTemp(isHot: Boolean) = with(itemBinding) {
             val tempString = if (isHot) ctx.getString(R.string.hot) else ctx.getString(R.string.cold)
             val tempColor = if (isHot) R.color.colorHot else R.color.colorCold
-            itemBinding.mealTemp.text = tempString
-            itemBinding.mealTemp.setTextColor(ContextCompat.getColor(itemBinding.root.context, tempColor))
+            mealTemp.text = tempString
+            mealTemp.setTextColor(ContextCompat.getColor(root.context, tempColor))
         }
 
-        private fun setupMealInfo(info: String?) {
+        private fun setupMealInfo(info: String?) = with(itemBinding) {
             if (info.isNullOrEmpty()) {
-                itemBinding.mealInfo.isVisible = false
+                mealInfo.isVisible = false
             } else {
-                itemBinding.mealInfo.text = "${ctx.getString(R.string.info_leader)} ${info}"
+                mealInfo.text = "${ctx.getString(R.string.info_leader)} ${info}"
             }
         }
 
