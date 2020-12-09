@@ -89,7 +89,7 @@ class AddMealViewModelTest {
         subject.onEditAddress(expected)
 
         assertEquals(expected, subject.meal.address)
-        assertEquals(AddMealViewModel.State.Initial, subject.state)
+        assertEquals(AddMealViewModel.State.LocationUpdated, subject.state)
     }
 
     @Test
