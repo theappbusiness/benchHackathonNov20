@@ -1,7 +1,5 @@
 package com.kinandcarta.feature.find.meal.view
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,106 +8,101 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.gms.maps.model.LatLng
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
-import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
+import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
 import com.kinandcarta.feature.find.meal.extension.showToast
-import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
-import com.kinandcarta.feature.find.meal.viewmodel.FindMealViewModel
+import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
-    private val progressBarView: FrameLayout by lazy { requireView().findViewById(R.id.progressBar) }
-    private val viewModel: FindMealViewModel by viewModels()
-
-    private val mealsAdapter = MealsAdapter() { id, position -> viewModel.reserveAMeal(id, position)}
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-    }
+    private val progressBarView: FrameLayout by lazy { binding.progressBar }
+    private val viewModel: DisplayMealsViewModel by viewModels()
+    private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
+    private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
+    private var _binding: FindMealFragmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var userLatLng: LatLng
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.find_meal_fragment, container, false)
+        _binding = FindMealFragmentBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupUI()
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
+        setupRecyclerView()
+        viewModel.startUpdatingLocation()
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        val permissionResultParser = PermissionResultParser()
-        if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
-            viewModel.startUpdatingLocation()
-        } else {
-            showToast("Location permissions are required to find meals")
+    fun setupRecyclerView() {
+        mealsRecyclerView.apply {
+            adapter = mealsAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 
-    private fun setupUI() {
-        val mealsRecyclerView: RecyclerView = requireView().findViewById(R.id.rvMeals)
-        mealsRecyclerView.adapter = mealsAdapter
-        val swipeRefreshLayout: SwipeRefreshLayout = requireView().findViewById(R.id.swipeContainer)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = false
-            viewModel.updateMeals()
-        }
-    }
-
-    private fun onStateChanged(state: FindMealViewModel.State) {
+    private fun onStateChanged(state: DisplayMealsViewModel.State) {
         when (state) {
-            FindMealViewModel.State.LoadingMeals ->
+            DisplayMealsViewModel.State.LoadingMeals ->
                 progressBarView.isVisible = true
-            is FindMealViewModel.State.LoadedMeals ->
+            is DisplayMealsViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
-            is FindMealViewModel.State.ReservedMeal ->
+            is DisplayMealsViewModel.State.ReservedMeal ->
                 onReservedMeal(state)
-            is FindMealViewModel.State.MealUnavailable ->
+            is DisplayMealsViewModel.State.MealUnavailable ->
                 onMealUnavailable(state)
-            is FindMealViewModel.State.Failed ->
+            is DisplayMealsViewModel.State.LocationUpdate ->
+                onLocationUpdate(state)
+            is DisplayMealsViewModel.State.Failed ->
                 onFailure(state.failure)
         }
     }
 
-    private fun onLoadedMeals(state: FindMealViewModel.State.LoadedMeals) {
+    private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
         progressBarView.isVisible = false
         mealsAdapter.submitList(state.meals)
     }
 
-    private fun onReservedMeal(state: FindMealViewModel.State.ReservedMeal) {
-        showToast("Your meal reservation code is ${state.code}")
+    private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
+        viewModel.updateMeals(userLatLng)
+        showToast("${getString(R.string.reservation_message)} ${state.code}")
     }
 
-    private fun onMealUnavailable(state: FindMealViewModel.State.MealUnavailable) {
-        showToast("Unfortunately this meal is unavailable")
+    private fun onMealUnavailable(state: DisplayMealsViewModel.State.MealUnavailable) {
+        showToast(getString(R.string.meal_unavailable_message))
     }
 
-    private fun onFailure(failure: FindMealViewModel.Failure) {
+    private fun onLocationUpdate(state: DisplayMealsViewModel.State.LocationUpdate) {
+        userLatLng = state.userLatLng
+        viewModel.updateMeals(userLatLng)
+    }
+
+    private fun onFailure(failure: DisplayMealsViewModel.Failure) {
         when (failure) {
-            is FindMealViewModel.Failure.LoadingMealsFailed -> {
+            is DisplayMealsViewModel.Failure.LoadingMealsFailed -> {
                 progressBarView.isVisible = false
-                showToast(failure.localizedMessage ?: "An unexpected error occurred loading meals")
+                showToast(failure.localizedMessage ?: getString(R.string.error_loading_meals))
             }
-            is FindMealViewModel.Failure.ReserveAMealFailed -> {
-                showToast(failure.localizedMessage ?: "An unexpected error occurred reserving a meal")
+            is DisplayMealsViewModel.Failure.ReserveAMealFailed -> {
+                showToast(
+                    failure.localizedMessage ?: getString(R.string.error_reserving_meal)
+                )
             }
         }
     }
 
     companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        fun newInstance() = FindMealFragment()
     }
 }

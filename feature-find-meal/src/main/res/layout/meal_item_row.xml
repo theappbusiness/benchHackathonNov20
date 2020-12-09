@@ -4,13 +4,13 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="@dimen/default_margin"
     card_view:cardCornerRadius="@dimen/row_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:paddingBottom="@dimen/default_padding">
 
         <TextView
             android:id="@+id/mealName"
@@ -40,7 +40,7 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             android:drawableLeft="@drawable/ic_outline_info_24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealTemp" />
@@ -52,7 +52,7 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             android:drawableLeft="@drawable/ic_baseline_pin_drop_24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealInfo" />
@@ -64,7 +64,7 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             android:drawableLeft="@drawable/ic_baseline_access_time_24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealDistance" />
@@ -76,7 +76,7 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             android:drawableLeft="@drawable/ic_baseline_hourglass_bottom_24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealAvailable" />
@@ -88,7 +88,8 @@
             android:layout_margin="@dimen/row_margin"
             android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
-            android:paddingLeft="6dp"
+            android:drawableLeft="@drawable/ic_hashtag_24"
+            android:drawablePadding="@dimen/icon_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mealExpiry" />
 

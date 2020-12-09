@@ -1,10 +1,7 @@
 package com.kinandcarta.feature.find.meal.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -12,70 +9,67 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kcc.kmmhackathon.shared.utility.DistanceUnit
 import com.kinandcarta.feature.find.meal.R
+import com.kinandcarta.feature.find.meal.databinding.MealItemRowBinding
 import com.kinandcarta.feature.find.meal.extension.getPortionsString
-import com.kinandcarta.feature.find.meal.viewmodel.Meals
 
 class MealsAdapter(
     private var distanceUnit: DistanceUnit = DistanceUnit.miles,
-    private val clickListener: (String, Int) -> Unit
+    private val clickListener: (String) -> Unit
 ) : ListAdapter<Meal, MealsAdapter.MealsViewHolder>(MealDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.meal_item_row, parent, false)
-            .run(::MealsViewHolder)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsViewHolder {
+       val itemBinding = MealItemRowBinding.inflate(
+           LayoutInflater.from(parent.context), parent, false)
+        return MealsViewHolder(itemBinding)
+    }
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
         val item = getItem(position)
         holder.bindData(item, position)
     }
 
-    inner class MealsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameView = itemView.findViewById<TextView>(R.id.mealName)
-        private val tempView = itemView.findViewById<TextView>(R.id.mealTemp)
-        private val infoView = itemView.findViewById<TextView>(R.id.mealInfo)
-        private val distanceView = itemView.findViewById<TextView>(R.id.mealDistance)
-        private val availableView = itemView.findViewById<TextView>(R.id.mealAvailable)
-        private val expiryView = itemView.findViewById<TextView>(R.id.mealExpiry)
-        private val portionsView = itemView.findViewById<TextView>(R.id.mealPortions)
-        private val reserveButton = itemView.findViewById<Button>(R.id.reserveButton)
+    inner class MealsViewHolder(private val itemBinding: MealItemRowBinding): RecyclerView.ViewHolder(itemBinding.root) {
+        private val ctx = itemBinding.root.context
 
-        fun bindData(meal: Meal, position: Int) {
-            nameView.text = meal.name
-            val tempString = if (meal.hot) "Hot" else "Cold"
-            val tempColor = if (meal.hot) R.color.colorHot else R.color.colorCold
-            tempView.text = tempString
-            tempView.setTextColor(ContextCompat.getColor(itemView.context, tempColor))
+        fun bindData(meal: Meal, position: Int) = with(itemBinding) {
+            mealName.text = meal.name
+            setupMealTemp(meal.hot)
+            setupMealInfo(meal.info)
+            mealDistance.text = "${meal.distance} ${distanceUnit}"
+            mealAvailable.text = "${ctx.getString(R.string.available_leader)} ${meal.availableFromDate}"
+            mealExpiry.text = "${ctx.getString(R.string.expiry_leader)} ${meal.expiryDate}"
+            mealPortions.text = "${meal.quantity.getPortionsString()}"
+            setupReserveButton(meal.quantity, meal.id)
+        }
 
-            if (meal.info.isNullOrEmpty()) {
-                infoView.isVisible = false
+        private fun setupMealTemp(isHot: Boolean) = with(itemBinding) {
+            val tempString = if (isHot) ctx.getString(R.string.hot) else ctx.getString(R.string.cold)
+            val tempColor = if (isHot) R.color.colorHot else R.color.colorCold
+            mealTemp.text = tempString
+            mealTemp.setTextColor(ContextCompat.getColor(root.context, tempColor))
+        }
+
+        private fun setupMealInfo(info: String?) = with(itemBinding) {
+            if (info.isNullOrEmpty()) {
+                mealInfo.isVisible = false
             } else {
-                infoView.text = "Info: ${meal.info}"
+                mealInfo.text = "${ctx.getString(R.string.info_leader)} ${info}"
             }
+        }
 
-            distanceView.text = "${meal.distance} ${distanceUnit}"
 
-            availableView.text = "Available: ${meal.availableFromDate}"
-            expiryView.text = "Expires: ${meal.expiryDate}"
+        private fun setupReserveButton(quantity: Int, mealId: String) {
+            val hasPortions = quantity > 0
+            val reserveButton = itemBinding.reserveButton
 
-            portionsView.text = "#    ${meal.quantity.getPortionsString()}"
+            reserveButton.text = if (hasPortions) ctx.getString(R.string.reserve_button_available) else ctx.getString(R.string.reserve_button_unavailable)
 
-            val hasPortions = meal.quantity > 0
-            val reserveButtonText = if (hasPortions) "Reserve a portion" else "Unavailable"
-            val reserveButtonColor =
-                if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
-            reserveButton.text = reserveButtonText
-            reserveButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    reserveButtonColor
-                )
-            )
+            val reserveButtonColor = if (hasPortions) R.color.colorReserve else R.color.colorUnavailable
+            reserveButton.setBackgroundColor(ContextCompat.getColor(itemBinding.root.context, reserveButtonColor))
 
             if (hasPortions) {
                 reserveButton.setOnClickListener {
-                    clickListener(meal.id, position)
+                    clickListener(mealId)
                 }
             } else {
                 reserveButton.setOnClickListener(null)

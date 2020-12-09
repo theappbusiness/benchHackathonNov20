@@ -1,6 +1,5 @@
-package com.kcc.kmmhackathon.androidHackathonApp.viewmodel
+package com.kinandcarta.feature.find.meal.viewmodel
 
-import android.location.Location
 import androidx.annotation.RequiresPermission
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -19,30 +18,33 @@ import kotlinx.coroutines.launch
 
 typealias Meals = List<Meal>
 
-class MapsViewModel @ViewModelInject constructor(
+class DisplayMealsViewModel @ViewModelInject constructor(
     private val fusedLocationProviderClient: FusedLocationProviderClient
 ) : ViewModel() {
 
     sealed class State {
         object LoadingMeals : State()
         data class LoadedMeals(val meals: Meals, val distanceUnit: DistanceUnit) : State()
+        data class ReservedMeal(val code: String) : State()
         data class LocationUpdate(val userLatLng: LatLng) : State()
+        data class MealUnavailable(val code: String) : State()
         data class Failed(val failure: Failure) : State()
     }
 
     sealed class Failure(cause: Throwable) : Throwable(cause) {
         class LoadingMealsFailed(cause: Throwable) : Failure(cause)
+        class ReserveAMealFailed(cause: Throwable) : Failure(cause)
     }
 
     val state: LiveData<State> get() = _state
 
     private val _state: MutableLiveData<State> = MutableLiveData(State.LoadingMeals)
-    private var lastLocation: Location? = null
     private val sdk = MealsSDK()
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
-            lastLocation = locationResult?.lastLocation
-            updateMeals()
+            val location = locationResult?.lastLocation ?: return
+            val latLng = LatLng(location.latitude, location.longitude)
+            updateMeals(latLng)
         }
     }
 
@@ -53,11 +55,9 @@ class MapsViewModel @ViewModelInject constructor(
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     fun startUpdatingLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-            if (it != lastLocation) {
-                lastLocation = it
-                updateUserLocation()
-            }
-            updateMeals()
+            val latLng = LatLng(it.latitude, it.longitude)
+            updateUserLocation(latLng)
+            updateMeals(latLng)
         }
         fusedLocationProviderClient.requestLocationUpdates(
             createLocationRequest(),
@@ -66,23 +66,18 @@ class MapsViewModel @ViewModelInject constructor(
         )
     }
 
-    private fun createLocationRequest(): LocationRequest {
-        val oneMinuteFortySecondsInMs: Long = 100000
-        val fiveSecondsInMs: Long = 5000
-        val locationRequest = LocationRequest()
-        locationRequest.interval = oneMinuteFortySecondsInMs
-        locationRequest.fastestInterval = fiveSecondsInMs
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        return locationRequest
+    private fun createLocationRequest() = LocationRequest().apply {
+        interval = ONE_MIN_40S_MS
+        fastestInterval = FIVE_SEC_MS
+        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
-    private fun updateMeals() {
-        val location = lastLocation ?: return
+    fun updateMeals(locationLatLng: LatLng) {
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
             kotlin.runCatching {
-                sdk.getSortedMeals(location.latitude, location.longitude, distanceUnit)
+                sdk.getSortedMeals(locationLatLng.latitude, locationLatLng.longitude, distanceUnit)
             }.onSuccess {
                 _state.value = State.LoadedMeals(it, distanceUnit)
             }.onFailure {
@@ -91,8 +86,33 @@ class MapsViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun updateUserLocation() {
-        val location = lastLocation ?: return
-        _state.value = State.LocationUpdate(LatLng(location.latitude, location.longitude))
+    fun reserveAMeal(id: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                sdk.reserveMeal(id)
+            }.onSuccess {
+                if (it != null) {
+                    val code = getReservationCode(it.id)
+                    _state.value = State.ReservedMeal(code)
+                } else {
+                    _state.value = State.MealUnavailable("Meal Unavailable")
+                }
+            }.onFailure {
+                _state.value = State.Failed(Failure.ReserveAMealFailed(it))
+            }
+        }
+    }
+
+    private fun updateUserLocation(latLng: LatLng) {
+        _state.value = State.LocationUpdate(latLng)
+    }
+
+    private fun getReservationCode(id: String): String {
+        return id.substring(id.length - 4, id.length)
+    }
+
+    companion object {
+        private const val ONE_MIN_40S_MS: Long = 10000
+        private const val FIVE_SEC_MS: Long = 5000
     }
 }

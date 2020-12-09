@@ -1,5 +1,8 @@
 buildscript {
 
+    ext {
+        kotlin_version = '1.4.20'
+    }
     repositories {
         gradlePluginPortal()
         jcenter()
@@ -7,9 +10,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.android.tools.build:gradle:4.1.1"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:1.4.10"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
     }
 }
