@@ -74,10 +74,12 @@ class AddMealViewModel(mealSDKRepository: MealSDKRepository = MealsSDKRepository
 
     fun onEditAddress(newValue: String) {
         meal.address = newValue
+        state = State.LocationUpdated
     }
 
     fun onEditLocation(newValue: Location) {
         meal.location = newValue
+        state = State.LocationUpdated
     }
 
     fun onSubmit() {
