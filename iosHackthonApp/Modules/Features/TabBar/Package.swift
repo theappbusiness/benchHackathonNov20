@@ -9,7 +9,7 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-        .library(name: "TabBar", targets: ["TabBar"]),
+        .library(name: "TabBar", targets: ["TabBar"])
     ],
     dependencies: [
         .package(path: "../Shared/Theming"),
@@ -21,6 +21,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "TabBar", dependencies: ["shared", "Theming", "Location", "Strings", "MealList", "Settings"]),
-        .testTarget(name: "TabBarTests", dependencies: ["TabBar"]),
+        .testTarget(name: "TabBarTests", dependencies: ["TabBar"])
     ]
 )

@@ -9,11 +9,11 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-        .library(name: "Settings", targets: ["Settings"]),
+        .library(name: "Settings", targets: ["Settings"])
     ],
     dependencies: [],
     targets: [
         .target(name: "Settings", dependencies: []),
-        .testTarget(name: "SettingsTests", dependencies: ["Settings"]),
+        .testTarget(name: "SettingsTests", dependencies: ["Settings"])
     ]
 )

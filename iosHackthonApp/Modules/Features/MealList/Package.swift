@@ -8,7 +8,7 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-        .library(name: "MealList", targets: ["MealList"]),
+        .library(name: "MealList", targets: ["MealList"])
     ],
     dependencies: [
         .package(path: "../Shared/Extensions"),
@@ -19,6 +19,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "MealList", dependencies: ["shared", "Extensions", "Location", "Components", "AddMeal"]),
-        .testTarget(name: "MealListTests", dependencies: ["MealList"]),
+        .testTarget(name: "MealListTests", dependencies: ["MealList"])
     ]
 )
