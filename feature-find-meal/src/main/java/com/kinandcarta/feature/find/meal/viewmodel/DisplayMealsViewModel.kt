@@ -98,6 +98,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
                 if (it != null) {
                     val code = getReservationCode(it.id)
                     _state.value = State.ReservedMeal(code)
+                    updateMeals()
                 } else {
                     _state.value = State.MealUnavailable("Meal Unavailable")
                 }
