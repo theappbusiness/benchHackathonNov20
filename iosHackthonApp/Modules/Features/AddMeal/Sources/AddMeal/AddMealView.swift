@@ -199,20 +199,20 @@ private extension AddMealView {
 
 // MARK: - Functions
 private extension AddMealView {
-  
+
   func createMeal() -> Meal {
     Meal(id: "\(sdk.getUUID())",
          name: "\(title)",
          quantity: Int32(quantity),
-         availableFromDate: "\(availableFromDate)",
-         expiryDate: "\(useByDate)",
+         availableFromDate: "\(Int(availableFromDate.timeIntervalSince1970))",
+         expiryDate: "\(Int(useByDate.timeIntervalSince1970))",
          info: "\(additionalInfo)",
          hot: isHot,
          locationLat: latitude,
          locationLong: longitude,
          distance: nil)
   }
-  
+
   func postMeal(meal: Meal) {
     sdk.postMeal(meal: meal, completionHandler: { meal, error in
       guard
