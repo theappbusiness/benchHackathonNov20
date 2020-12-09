@@ -1,7 +1,6 @@
 package com.kinandcarta.feature.find.meal.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +68,6 @@ class FindMealFragment : Fragment() {
     private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
         progressBarView.isVisible = false
         mealsAdapter.submitList(state.meals)
-        Log.i("Find meal fragment", "onLoadedMeals ${state.meals}")
     }
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
