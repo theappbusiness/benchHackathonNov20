@@ -39,7 +39,7 @@ class FirebaseAuthenticationStore : AuthenticationStore {
         return try {
             httpClient.post {
                 url("$BASE_URL$endpoint")
-                parameter("key", "") // add api key here
+                parameter("key", "") // Add api key here. To get the key go to -> https://console.firebase.google.com/project/communitychef-61133/overview
                 parameter("email", email)
                 parameter("password", password)
                 parameter("returnSecureToken", returnSecureToken)
