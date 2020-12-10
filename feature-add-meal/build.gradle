@@ -1,7 +1,7 @@
 apply plugin: "com.android.library"
 apply from: rootProject.file("common.gradle")
 
-def composeVersion = "1.0.0-alpha07"
+def composeVersion = "1.0.0-alpha08"
 def mockk_version = "1.10.3-jdk8"
 dependencies {
     // Feature module
@@ -34,10 +34,17 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion = "1.4.10"
+        kotlinCompilerVersion = "1.4.20"
         kotlinCompilerExtensionVersion = "$composeVersion"
     }
     packagingOptions {
         exclude("META-INF/*")
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check"]
     }
 }

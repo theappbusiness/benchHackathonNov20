@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 
 @Composable
 fun TemperatureField(
@@ -29,7 +31,7 @@ fun TemperatureField(
                 coldTintColor.value = Color.Black
             }) {
                 Icon(
-                    asset = Icons.Filled.LocalFireDepartment,
+                    imageVector = Icons.Filled.LocalFireDepartment,
                     tint = hotTintColor.value
                 )
             }
@@ -39,7 +41,7 @@ fun TemperatureField(
                 coldTintColor.value = Color.Blue
             }) {
                 Icon(
-                    asset = Icons.Filled.AcUnit,
+                    imageVector = Icons.Filled.AcUnit,
                     tint = coldTintColor.value
                 )
             }
