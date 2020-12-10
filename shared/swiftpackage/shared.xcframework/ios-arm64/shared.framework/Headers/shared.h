@@ -146,13 +146,13 @@ __attribute__((swift_name("AuthenticationStore")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signInApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(apiKey:email:password:returnSecureToken:completionHandler:)")));
+- (void)signInEmail:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(email:password:returnSecureToken:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signUpApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(apiKey:email:password:returnSecureToken:completionHandler:)")));
+- (void)signUpEmail:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(email:password:returnSecureToken:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -165,13 +165,13 @@ __attribute__((swift_name("FirebaseAuthenticationStore")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signInApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(apiKey:email:password:returnSecureToken:completionHandler:)")));
+- (void)signInEmail:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signIn(email:password:returnSecureToken:completionHandler:)")));
 
 /**
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signUpApiKey:(NSString *)apiKey email:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(apiKey:email:password:returnSecureToken:completionHandler:)")));
+- (void)signUpEmail:(NSString *)email password:(NSString *)password returnSecureToken:(BOOL)returnSecureToken completionHandler:(void (^)(SharedFirebaseAuthenticationResponse * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signUp(email:password:returnSecureToken:completionHandler:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
