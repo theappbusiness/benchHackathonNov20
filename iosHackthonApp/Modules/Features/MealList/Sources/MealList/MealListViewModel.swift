@@ -47,6 +47,7 @@ public final class MealListViewModel: ObservableObject {
                 return
             }
             self.meals = meals
+            self.locations = []
 
             for meal in meals {
                 let mapAnnotation = MKPointAnnotation()
