@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -50,16 +49,18 @@ class MapsFragment : Fragment() {
                 // handle onSlide
             }
 
-            override fun onStateChanged(bottomSheet: View, newState: Int) =
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(context, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(context, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(context, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(context, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(context, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(context, "OTHER_STATE", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("BottomSheet", "Hidden state")
+                    BottomSheetBehavior.STATE_SETTLING -> Log.i("BottomSheet", "Settling state")
+                    BottomSheetBehavior.STATE_DRAGGING -> Log.i("BottomSheet", "Dragging state")
+                    BottomSheetBehavior.STATE_EXPANDED -> Log.i("BottomSheet", "Expanded state")
+                    BottomSheetBehavior.STATE_COLLAPSED -> Log.i("BottomSheet", "Collapsed state")
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.i("BottomSheet", "Half expanded state")
+                    else -> Log.i("BottomSheet", "Other state")
                 }
-            })
+            }
+        })
 
         return view
     }

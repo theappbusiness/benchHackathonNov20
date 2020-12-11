@@ -26,3 +26,9 @@ jobs:
         api-level: 30
         script: ./gradlew installDebug
         target: google_apis
+    - name: Archive tests results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: failure-test
+        path: '**/build/reports/tests/testDebugUnitTest'

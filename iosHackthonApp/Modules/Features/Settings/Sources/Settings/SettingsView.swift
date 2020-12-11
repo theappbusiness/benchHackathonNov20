@@ -8,16 +8,16 @@
 import SwiftUI
 
 public struct SettingsView: View {
-
-    public init() { }
-
-    public var body: some View {
-        Text("Settings screen")
-    }
+  
+  public init() { }
+  
+  public var body: some View {
+    Text("Settings screen")
+  }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
+  static var previews: some View {
+    SettingsView()
+  }
 }

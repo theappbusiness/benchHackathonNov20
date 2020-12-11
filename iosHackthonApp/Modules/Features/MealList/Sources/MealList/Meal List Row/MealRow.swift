@@ -23,7 +23,7 @@ struct MealRow: View {
 
             VStack {
                 Spacer()
-                HStack() {
+                HStack {
                     Image(rowViewModel.mealImage)
                         .padding()
                     VStack(alignment: .leading, spacing: rowViewModel.spacing) {
@@ -94,6 +94,7 @@ struct MealRow: View {
 
 struct MealRow_Previews: PreviewProvider {
     static var previews: some View {
-        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(meal: Meal(id: "1", name: "lasagne", quantity: 2, availableFromDate: "today", expiryDate: "tomorrow", info: "Italian", hot: true, locationLat: 12, locationLong: 12, distance: 12)))
+      let meal = Meal(id: "1", name: "", quantity: 2, availableFromDate: "", expiryDate: "", info: "", hot: true, locationLat: 12, locationLong: 12, distance: 12)
+        MealRow(listViewModel: MealListViewModel(sdk: MealsSDK(), locationManager: LocationManager()), rowViewModel: MealRowViewModel(meal: meal))
     }
 }
