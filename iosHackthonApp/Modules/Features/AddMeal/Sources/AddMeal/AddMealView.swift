@@ -75,7 +75,6 @@ public struct AddMealView: View {
           address = "\(locationManager.address)"
           latitude = Float(locationManager.userLatitude)
           longitude = Float(locationManager.userLongitude)
-
         }
       }
       .alert(isPresented: $showingAlert) {
