@@ -73,6 +73,9 @@ public struct AddMealView: View {
         .navigationBarTitle(Strings.AddMealScreen.addMeal)
         .onAppear {
           address = "\(locationManager.address)"
+          latitude = Float(locationManager.userLatitude)
+          longitude = Float(locationManager.userLongitude)
+
         }
       }
       .alert(isPresented: $showingAlert) {
