@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/title_switch_to_list"
+            android:paddingBottom="@dimen/default_padding"
             android:textColor="@color/colorPrimary"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 

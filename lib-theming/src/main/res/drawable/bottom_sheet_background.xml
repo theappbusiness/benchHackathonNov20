@@ -8,5 +8,5 @@ android:shape="rectangle">
     android:top="@dimen/default_padding"
     android:left="@dimen/default_padding"
     android:right="@dimen/default_padding" />
-<solid android:color="@color/white" />
+<solid android:color="@color/bottomSheetBackground" />
 </shape>

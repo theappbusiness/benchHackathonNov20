@@ -8,6 +8,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="link">#3F51B5</color>
+    <color name="bottomSheetBackground">#F8F8F8</color>
 
     //Meal
     <color name="colorHot">#E74551</color>
