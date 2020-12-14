@@ -19,7 +19,7 @@ To use the location services and to view the available meals on the map, you wil
 ### Firebase Console
 We're using Firebse for authentication purposes - for viewing this data and making changes you'll need access to it. 
 
-### Please message one of us about either of these and we will send details over if you need access ^ ###
+### Please message the slack channel `ios-bench-hackathon-nov20` if you don't have these and we will send details over if you need access ^ ###
 
 ### Mock-Server
 We are currently using `json-server` as a mock server to run the project against. 
