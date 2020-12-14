@@ -11,6 +11,6 @@ android {
 dependencies {
 
     // Feature modules
-    implementation project(":feature-find-meal")
-    implementation project(':feature-add-meal')
+    implementation project(":android:feature:find-meal")
+    implementation project(':android:feature:add-meal')
 }

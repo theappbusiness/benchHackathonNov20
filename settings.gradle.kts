@@ -15,9 +15,9 @@ pluginManagement {
 }
 rootProject.name = "KMMHackathon"
 
-include(":androidHackathonApp")
-include(":lib-theming")
-include(":feature-find-meal")
-include(":feature-add-meal")
+include(":android:app")
+include(":android:lib:theming")
+include(":android:feature:find-meal")
+include(":android:feature:add-meal")
 include(":shared")
 enableFeaturePreview("GRADLE_METADATA")
