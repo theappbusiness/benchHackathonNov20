@@ -1,33 +1,51 @@
 package com.kinandcarta.feature.find.meal.view
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
+import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
 import com.kinandcarta.feature.find.meal.extension.showToast
+import com.kinandcarta.feature.find.meal.ui.BottomSheetBehaviourCallback
+import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FindMealFragment : Fragment() {
 
-    private val progressBarView: FrameLayout by lazy { binding.progressBar }
     private val viewModel: DisplayMealsViewModel by viewModels()
-    private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
-    private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
+
     private var _binding: FindMealFragmentBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var userLatLng: LatLng
+    private lateinit var map: GoogleMap
+
+    private val progressBarView: FrameLayout by lazy { binding.progressBar }
+    private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
+    private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
+
+    private val behaviourCallback by lazy { BottomSheetBehaviourCallback() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,21 +53,50 @@ class FindMealFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FindMealFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
-        setupRecyclerView()
-        viewModel.startUpdatingLocation()
+
+        setupUI()
+
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
     }
 
-    fun setupRecyclerView() {
-        mealsRecyclerView.apply {
-            adapter = mealsAdapter
-            layoutManager = LinearLayoutManager(context)
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        val permissionResultParser = PermissionResultParser()
+        if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
+            viewModel.startUpdatingLocation()
+            map.isMyLocationEnabled = true
+        } else {
+            showToast("Location permissions are required to find meals")
         }
+    }
+
+    private fun setupUI() {
+        mealsRecyclerView.adapter = mealsAdapter
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync { googleMap ->
+            map = googleMap
+            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+        }
+
+        behaviourCallback.setup(::onBottomSheetCollapsed, ::onBottomSheetExpanded)
+        BottomSheetBehavior.from(binding.listBottomSheet).addBottomSheetCallback(behaviourCallback)
     }
 
     private fun onStateChanged(state: DisplayMealsViewModel.State) {
@@ -72,6 +119,19 @@ class FindMealFragment : Fragment() {
     private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
         progressBarView.isVisible = false
         mealsAdapter.submitList(state.meals)
+
+        state.meals.forEach {
+            placeMarkerOnMap(
+                LatLng(it.locationLat.toDouble(), it.locationLong.toDouble()),
+                it.name,
+                it.quantity.getPortionsString()
+            )
+        }
+    }
+
+    private fun placeMarkerOnMap(location: LatLng, title: String, mealsRemaining: String) {
+        val markerOptions = MarkerOptions().position(location).title(title).snippet(mealsRemaining)
+        map.addMarker(markerOptions)
     }
 
     private fun onReservedMeal(state: DisplayMealsViewModel.State.ReservedMeal) {
@@ -85,7 +145,7 @@ class FindMealFragment : Fragment() {
 
     private fun onLocationUpdate(state: DisplayMealsViewModel.State.LocationUpdate) {
         userLatLng = state.userLatLng
-        viewModel.updateMeals(userLatLng)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(state.userLatLng, 12.0f))
     }
 
     private fun onFailure(failure: DisplayMealsViewModel.Failure) {
@@ -102,7 +162,15 @@ class FindMealFragment : Fragment() {
         }
     }
 
+    private fun onBottomSheetCollapsed() {
+        binding.bottomSheetTitle.text = getString(R.string.title_show_list)
+    }
+
+    private fun onBottomSheetExpanded() {
+        binding.bottomSheetTitle.text = getString(R.string.title_hide_list)
+    }
+
     companion object {
-        fun newInstance() = FindMealFragment()
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 }

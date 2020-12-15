@@ -76,7 +76,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
         val distanceUnit = DistanceUnit.miles
         _state.value = State.LoadingMeals
         viewModelScope.launch {
-            kotlin.runCatching {
+            runCatching {
                 sdk.getSortedMeals(locationLatLng.latitude, locationLatLng.longitude, distanceUnit)
             }.onSuccess {
                 _state.value = State.LoadedMeals(it, distanceUnit)
@@ -88,7 +88,7 @@ class DisplayMealsViewModel @ViewModelInject constructor(
 
     fun reserveAMeal(id: String) {
         viewModelScope.launch {
-            kotlin.runCatching {
+            runCatching {
                 sdk.reserveMeal(id)
             }.onSuccess {
                 if (it != null) {
