@@ -14,3 +14,10 @@ dependencies {
     implementation project(":android:feature:find-meal")
     implementation project(':android:feature:add-meal')
 }
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check"]
+    }
+}

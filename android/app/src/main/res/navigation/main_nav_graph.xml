@@ -7,20 +7,13 @@
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.kinandcarta.feature.find.meal.view.MapsFragment"
+        android:name="com.kcc.kmmhackathon.androidHackathonApp.view.FindMealContainerFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/find_meal_container_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.kcc.kmmhackathon.androidHackathonApp.view.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
-    <fragment
-        android:id="@+id/findMealFragment"
-        android:name="com.kinandcarta.feature.find.meal.view.FindMealFragment"
-        android:label="FindMealFragment" />
-    <fragment
-        android:id="@+id/addMealFragment"
-        android:name="com.kinandcarta.lib.add.meal.view.AddMealFragment"
-        android:label="AddMealFragment" />
+
 </navigation>

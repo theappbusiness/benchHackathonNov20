@@ -55,9 +55,11 @@ class DisplayMealsViewModel @ViewModelInject constructor(
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     fun startUpdatingLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-            val latLng = LatLng(it.latitude, it.longitude)
-            updateUserLocation(latLng)
-            updateMeals(latLng)
+            if (it != null) {
+                val latLng = LatLng(it.latitude, it.longitude)
+                updateUserLocation(latLng)
+                updateMeals(latLng)
+            }
         }
         fusedLocationProviderClient.requestLocationUpdates(
             createLocationRequest(),
