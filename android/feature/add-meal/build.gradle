@@ -1,0 +1,45 @@
+apply from: rootProject.file("common-feature.gradle")
+
+dependencies {
+    // Plugin
+    implementation Libs.com_vanpra_compose_material_dialogs_core
+    implementation Libs.datetime
+    implementation Libs.uuid
+    // Compose
+    implementation Libs.androidx_compose_compiler_compiler
+    implementation Libs.ui
+    // Tooling support (Previews, etc.)
+    implementation Libs.ui_tooling
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation Libs.foundation
+    // Material Design
+    implementation Libs.androidx_compose_material_material
+    // Material design icons
+    implementation Libs.material_icons_core
+    implementation Libs.material_icons_extended
+
+    // Tests
+    testImplementation Libs.kotlinx_coroutines_test
+    testImplementation Libs.mockk
+    implementation Libs.junit
+}
+
+android {
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerVersion = Versions.org_jetbrains_kotlin
+        kotlinCompilerExtensionVersion = Versions.androidx_compose_compiler_compiler
+    }
+    packagingOptions {
+        exclude("META-INF/*")
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check"]
+    }
+}

@@ -1,0 +1,16 @@
+apply plugin: "com.android.application"
+apply from: rootProject.file("common.gradle")
+
+android {
+
+    defaultConfig {
+        applicationId "com.kcc.kmmhackathon.androidHackathonApp"
+    }
+}
+
+dependencies {
+
+    // Feature modules
+    implementation project(":android:feature:find-meal")
+    implementation project(':android:feature:add-meal')
+}

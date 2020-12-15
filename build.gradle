@@ -1,10 +1,6 @@
+apply plugin: "de.fayard.buildSrcVersions"
 
 buildscript {
-
-    ext {
-        kotlin_version = "1.4.20"
-    }
-
     repositories {
         gradlePluginPortal()
         jcenter()
@@ -12,10 +8,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha02'
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
+        classpath Libs.kotlin_gradle_plugin
+        classpath Libs.com_android_tools_build_gradle
+        classpath Libs.kotlin_serialization
+        classpath Libs.hilt_android_gradle_plugin
+        classpath Libs.de_fayard_buildsrcversions_gradle_plugin
     }
 }
 
@@ -27,4 +24,3 @@ allprojects {
         mavenCentral()
     }
 }
-
