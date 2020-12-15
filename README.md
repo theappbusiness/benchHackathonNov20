@@ -21,6 +21,19 @@ We're using Firebse for authentication purposes - for viewing this data and maki
 
 ### Please message the slack channel `ios-bench-hackathon-nov20` if you don't have these and we will send details over if you need access ^ ###
 
+
+### Contributing
+We are using Github projects to keep a track of tickets.
+You can access it from the [`Projects`](https://github.com/theappbusiness/benchHackathonNov20/projects/1) tab in the repo.
+
+Tickets in the `To do` column are prioritised and have ACs associated with them.
+When picking up a ticket from the `To do` column, please assign yourself and move into `In progress`.
+
+Tickets in the `Backlog` column are _roughly_ prioritised and have a brief description.
+If moving cards from `Backlog` into `To do` please convert the card to an issue (you can do this by tapping the ... button on the top-right of the card) and add the relevant label (`ios`/`Android`/`kmm`) and ensure the AC's are correct and up to date.
+
+When opening a PR, please link it to the issue you are working on and this will ensure that the card will be automatically moved along to the correct column.
+
 ### Mock-Server
 We are currently using `json-server` as a mock server to run the project against. 
 This is required to display and post the meal data.
