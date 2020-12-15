@@ -8,7 +8,7 @@ Currently, a user can: create an account and login and search for meals in their
 ## Prerequisites
 
 ### Android Studio
-Version 4.2 > is required to compile this project. From the latest changes, Arctic Fox (Canary 2, Beta) is required due to using Compose.
+Version 4.3 > is required to compile this project. From the latest changes, Arctic Fox (Canary 2, Beta) is required due to using Compose.
 
 ### Xcode
 For running the iOS app via Xcode and for using the simulator, version 12.1 > is required.
@@ -32,7 +32,7 @@ When picking up a ticket from the `To do` column, please assign yourself and mov
 Tickets in the `Backlog` column are _roughly_ prioritised and have a brief description.
 If moving cards from `Backlog` into `To do` please convert the card to an issue (you can do this by tapping the ... button on the top-right of the card) and add the relevant label (`ios`/`Android`/`kmm`) and ensure the AC's are correct and up to date.
 
-When opening a PR, please link it to the issue you are working on and this will ensure that the card will be automatically moved along to the correct column.
+When opening a PR, please set the Projects option on the right to `Hackathon` and link it to the issue you are working on and this will ensure that the card will be automatically moved along to the correct column.
 
 ### Mock-Server
 We are currently using `json-server` as a mock server to run the project against. 
