@@ -1,18 +1,13 @@
 package com.kinandcarta.feature.find.meal.view
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -22,13 +17,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
-import com.kinandcarta.feature.find.meal.extension.getPortionsString
-import com.kinandcarta.feature.find.meal.extension.requestFineLocationPermission
-import com.kinandcarta.feature.find.meal.extension.showToast
+import com.kinandcarta.feature.find.meal.extension.*
 import com.kinandcarta.feature.find.meal.ui.BottomSheetBehaviourCallback
-import com.kinandcarta.feature.find.meal.utility.PermissionResultParser
 import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FindMealFragment : Fragment() {
@@ -41,11 +34,11 @@ class FindMealFragment : Fragment() {
     private lateinit var userLatLng: LatLng
     private lateinit var map: GoogleMap
 
-    private val progressBarView: FrameLayout by lazy { binding.progressBar }
-    private val mealsRecyclerView: RecyclerView by lazy { binding.rvMeals }
+    private val progressBar by lazy { binding.progressBar }
     private val mealsAdapter = MealsAdapter { id -> viewModel.reserveAMeal(id) }
 
-    private val behaviourCallback by lazy { BottomSheetBehaviourCallback() }
+    @Inject
+    lateinit var behaviourCallback: BottomSheetBehaviourCallback
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,38 +49,44 @@ class FindMealFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
 
         setupUI()
 
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
-            return
-        }
+        checkForLocationPermissions()
     }
 
     @SuppressLint("MissingPermission")
+    private fun checkForLocationPermissions() {
+        if (checkFineLocationPermissionGranted()) {
+            viewModel.startUpdatingLocation()
+            map.isMyLocationEnabled = true
+        } else {
+            if (shouldShowLocationRationale()) {
+                // TODO Change to a non-cancellable Dialog, and when the user clicks OK, ask again
+                showToast("Location permissions are required to find meals")
+            } else {
+                requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+            }
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        val permissionResultParser = PermissionResultParser()
-        if (permissionResultParser.isFineLocationPermissionsGranted(permissions, grantResults)) {
-            viewModel.startUpdatingLocation()
-            map.isMyLocationEnabled = true
-        } else {
-            showToast("Location permissions are required to find meals")
-        }
+        checkForLocationPermissions()
     }
 
     private fun setupUI() {
-        mealsRecyclerView.adapter = mealsAdapter
+        binding.rvMeals.adapter = mealsAdapter
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
@@ -102,13 +101,13 @@ class FindMealFragment : Fragment() {
     private fun onStateChanged(state: DisplayMealsViewModel.State) {
         when (state) {
             DisplayMealsViewModel.State.LoadingMeals ->
-                progressBarView.isVisible = true
+                progressBar.isVisible = true
             is DisplayMealsViewModel.State.LoadedMeals ->
                 onLoadedMeals(state)
             is DisplayMealsViewModel.State.ReservedMeal ->
                 onReservedMeal(state)
             is DisplayMealsViewModel.State.MealUnavailable ->
-                onMealUnavailable(state)
+                onMealUnavailable()
             is DisplayMealsViewModel.State.LocationUpdate ->
                 onLocationUpdate(state)
             is DisplayMealsViewModel.State.Failed ->
@@ -117,7 +116,7 @@ class FindMealFragment : Fragment() {
     }
 
     private fun onLoadedMeals(state: DisplayMealsViewModel.State.LoadedMeals) {
-        progressBarView.isVisible = false
+        progressBar.isVisible = false
         mealsAdapter.submitList(state.meals)
 
         state.meals.forEach {
@@ -139,7 +138,7 @@ class FindMealFragment : Fragment() {
         showToast("${getString(R.string.reservation_message)} ${state.code}")
     }
 
-    private fun onMealUnavailable(state: DisplayMealsViewModel.State.MealUnavailable) {
+    private fun onMealUnavailable() {
         showToast(getString(R.string.meal_unavailable_message))
     }
 
@@ -151,7 +150,7 @@ class FindMealFragment : Fragment() {
     private fun onFailure(failure: DisplayMealsViewModel.Failure) {
         when (failure) {
             is DisplayMealsViewModel.Failure.LoadingMealsFailed -> {
-                progressBarView.isVisible = false
+                progressBar.isVisible = false
                 showToast(failure.localizedMessage ?: getString(R.string.error_loading_meals))
             }
             is DisplayMealsViewModel.Failure.ReserveAMealFailed -> {
