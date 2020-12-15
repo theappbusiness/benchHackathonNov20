@@ -22,7 +22,7 @@ We're using Firebse for authentication purposes - for viewing this data and maki
 ### Please message the slack channel `ios-bench-hackathon-nov20` if you don't have these and we will send details over if you need access ^ ###
 
 
-### Contributing
+### Tickets and Issues
 We are using Github projects to keep a track of tickets.
 You can access it from the [`Projects`](https://github.com/theappbusiness/benchHackathonNov20/projects/1) tab in the repo.
 
