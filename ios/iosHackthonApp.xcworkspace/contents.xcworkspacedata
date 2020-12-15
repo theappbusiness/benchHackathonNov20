@@ -6,28 +6,6 @@
    </FileRef>
    <Group
       location = "container:"
-      name = "Features">
-      <FileRef
-         location = "group:Modules/Features/Settings">
-      </FileRef>
-      <FileRef
-         location = "group:Modules/Features/SignUp">
-      </FileRef>
-      <FileRef
-         location = "group:Modules/Features/Login">
-      </FileRef>
-      <FileRef
-         location = "group:Modules/Features/AddMeal">
-      </FileRef>
-      <FileRef
-         location = "group:Modules/Features/TabBar">
-      </FileRef>
-      <FileRef
-         location = "group:Modules/Features/MealList">
-      </FileRef>
-   </Group>
-   <Group
-      location = "container:"
       name = "Shared">
       <FileRef
          location = "group:Modules/Shared/Components">

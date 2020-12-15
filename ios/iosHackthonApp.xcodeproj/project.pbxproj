@@ -7,18 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46CF22CD2567E69200CD15D7 /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 46CF22CC2567E69200CD15D7 /* Login */; };
-		46CF22DE2567ED9900CD15D7 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = 46CF22DD2567ED9900CD15D7 /* SignUp */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF10B25558B160054D2AA /* AppDelegate.swift */; };
 		CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */; };
 		CE0EF12325558B510054D2AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11E25558B500054D2AA /* Assets.xcassets */; };
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
-		CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */ = {isa = PBXBuildFile; productRef = CE48C6922563C9F700EB29FD /* AddMeal */; };
-		CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EEEFE2563C820005F5432 /* TabBar */; };
-		CEE262C0256E552800721A2D /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = CEE262BF256E552800721A2D /* Settings */; };
-		CEE262C8256E648E00721A2D /* MealList in Frameworks */ = {isa = PBXBuildFile; productRef = CEE262C7256E648E00721A2D /* MealList */; };
+		CEF85F6E25890F8F00B97FF6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F6925890F8E00B97FF6 /* SignUpView.swift */; };
+		CEF85F6F25890F8F00B97FF6 /* SignUpWithEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F6A25890F8E00B97FF6 /* SignUpWithEmail.swift */; };
+		CEF85F7025890F8F00B97FF6 /* SignUpWithPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F6B25890F8E00B97FF6 /* SignUpWithPasswordViewModel.swift */; };
+		CEF85F7125890F8F00B97FF6 /* SignUpWithEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F6C25890F8E00B97FF6 /* SignUpWithEmailViewModel.swift */; };
+		CEF85F7225890F8F00B97FF6 /* SignUpWithPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F6D25890F8E00B97FF6 /* SignUpWithPassword.swift */; };
+		CEF85F7C2589101800B97FF6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F7A2589101800B97FF6 /* LoginViewModel.swift */; };
+		CEF85F7D2589101800B97FF6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F7B2589101800B97FF6 /* LoginView.swift */; };
+		CEF85F862589102A00B97FF6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F852589102A00B97FF6 /* SettingsView.swift */; };
+		CEF85F8C2589103C00B97FF6 /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F8B2589103C00B97FF6 /* AddMealView.swift */; };
+		CEF85F922589104E00B97FF6 /* TabAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F912589104E00B97FF6 /* TabAppView.swift */; };
+		CEF85F9D2589106600B97FF6 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F982589106500B97FF6 /* MealListViewModel.swift */; };
+		CEF85F9E2589106600B97FF6 /* MealMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F992589106600B97FF6 /* MealMapView.swift */; };
+		CEF85F9F2589106600B97FF6 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F9A2589106600B97FF6 /* MapView.swift */; };
+		CEF85FA02589106600B97FF6 /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85F9B2589106600B97FF6 /* MealListView.swift */; };
+		CEF85FA52589114900B97FF6 /* Components in Frameworks */ = {isa = PBXBuildFile; productRef = CEF85FA42589114900B97FF6 /* Components */; };
+		CEF85FA72589114D00B97FF6 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = CEF85FA62589114D00B97FF6 /* Extensions */; };
+		CEF85FA92589115000B97FF6 /* Location in Frameworks */ = {isa = PBXBuildFile; productRef = CEF85FA82589115000B97FF6 /* Location */; };
+		CEF85FAB2589115400B97FF6 /* Strings in Frameworks */ = {isa = PBXBuildFile; productRef = CEF85FAA2589115400B97FF6 /* Strings */; };
+		CEF85FAD2589115700B97FF6 /* Theming in Frameworks */ = {isa = PBXBuildFile; productRef = CEF85FAC2589115700B97FF6 /* Theming */; };
+		CEF85FB62589121600B97FF6 /* MealRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85FB42589121600B97FF6 /* MealRow.swift */; };
+		CEF85FB72589121600B97FF6 /* MealRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF85FB52589121600B97FF6 /* MealRowViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +67,22 @@
 		CE0EF11E25558B500054D2AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
+		CEF85F6925890F8E00B97FF6 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CEF85F6A25890F8E00B97FF6 /* SignUpWithEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithEmail.swift; sourceTree = "<group>"; };
+		CEF85F6B25890F8E00B97FF6 /* SignUpWithPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithPasswordViewModel.swift; sourceTree = "<group>"; };
+		CEF85F6C25890F8E00B97FF6 /* SignUpWithEmailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithEmailViewModel.swift; sourceTree = "<group>"; };
+		CEF85F6D25890F8E00B97FF6 /* SignUpWithPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithPassword.swift; sourceTree = "<group>"; };
+		CEF85F7A2589101800B97FF6 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CEF85F7B2589101800B97FF6 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CEF85F852589102A00B97FF6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CEF85F8B2589103C00B97FF6 /* AddMealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
+		CEF85F912589104E00B97FF6 /* TabAppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabAppView.swift; sourceTree = "<group>"; };
+		CEF85F982589106500B97FF6 /* MealListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
+		CEF85F992589106600B97FF6 /* MealMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealMapView.swift; sourceTree = "<group>"; };
+		CEF85F9A2589106600B97FF6 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		CEF85F9B2589106600B97FF6 /* MealListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
+		CEF85FB42589121600B97FF6 /* MealRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRow.swift; sourceTree = "<group>"; };
+		CEF85FB52589121600B97FF6 /* MealRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +90,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9EEEFF2563C820005F5432 /* TabBar in Frameworks */,
-				46CF22CD2567E69200CD15D7 /* Login in Frameworks */,
-				CEE262C0256E552800721A2D /* Settings in Frameworks */,
-				46CF22DE2567ED9900CD15D7 /* SignUp in Frameworks */,
-				CE48C6932563C9F700EB29FD /* AddMeal in Frameworks */,
-				CEE262C8256E648E00721A2D /* MealList in Frameworks */,
+				CEF85FAD2589115700B97FF6 /* Theming in Frameworks */,
+				CEF85FA72589114D00B97FF6 /* Extensions in Frameworks */,
+				CEF85FAB2589115400B97FF6 /* Strings in Frameworks */,
+				CEF85FA52589114900B97FF6 /* Components in Frameworks */,
+				CEF85FA92589115000B97FF6 /* Location in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +139,7 @@
 		7555FF7D242A565900829871 /* iosHackthonApp */ = {
 			isa = PBXGroup;
 			children = (
+				CEF85F6425890F6800B97FF6 /* Screens */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
 				CE0EF10A25558AE70054D2AA /* AppDelegate */,
@@ -176,6 +207,101 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		CEF85F6425890F6800B97FF6 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F962589105600B97FF6 /* FindMeal */,
+				CEF85F902589104400B97FF6 /* TabBar */,
+				CEF85F8A2589103200B97FF6 /* AddMeal */,
+				CEF85F812589102100B97FF6 /* Settings */,
+				CEF85F792589101100B97FF6 /* Login */,
+				CEF85F6525890F8400B97FF6 /* SignUp */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CEF85F6525890F8400B97FF6 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F6925890F8E00B97FF6 /* SignUpView.swift */,
+				CEF85F6A25890F8E00B97FF6 /* SignUpWithEmail.swift */,
+				CEF85F6C25890F8E00B97FF6 /* SignUpWithEmailViewModel.swift */,
+				CEF85F6D25890F8E00B97FF6 /* SignUpWithPassword.swift */,
+				CEF85F6B25890F8E00B97FF6 /* SignUpWithPasswordViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		CEF85F792589101100B97FF6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F7B2589101800B97FF6 /* LoginView.swift */,
+				CEF85F7A2589101800B97FF6 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CEF85F812589102100B97FF6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F852589102A00B97FF6 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CEF85F8A2589103200B97FF6 /* AddMeal */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F8B2589103C00B97FF6 /* AddMealView.swift */,
+			);
+			path = AddMeal;
+			sourceTree = "<group>";
+		};
+		CEF85F902589104400B97FF6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F912589104E00B97FF6 /* TabAppView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		CEF85F962589105600B97FF6 /* FindMeal */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85FC92589125A00B97FF6 /* Map  */,
+				CEF85FC52589124200B97FF6 /* Meal List */,
+			);
+			path = FindMeal;
+			sourceTree = "<group>";
+		};
+		CEF85FBE2589122F00B97FF6 /* MealRow */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85FB42589121600B97FF6 /* MealRow.swift */,
+				CEF85FB52589121600B97FF6 /* MealRowViewModel.swift */,
+			);
+			path = MealRow;
+			sourceTree = "<group>";
+		};
+		CEF85FC52589124200B97FF6 /* Meal List */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F9B2589106600B97FF6 /* MealListView.swift */,
+				CEF85F982589106500B97FF6 /* MealListViewModel.swift */,
+				CEF85FBE2589122F00B97FF6 /* MealRow */,
+			);
+			path = "Meal List";
+			sourceTree = "<group>";
+		};
+		CEF85FC92589125A00B97FF6 /* Map  */ = {
+			isa = PBXGroup;
+			children = (
+				CEF85F9A2589106600B97FF6 /* MapView.swift */,
+				CEF85F992589106600B97FF6 /* MealMapView.swift */,
+			);
+			path = "Map ";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -195,12 +321,11 @@
 			);
 			name = iosHackthonApp;
 			packageProductDependencies = (
-				CE9EEEFE2563C820005F5432 /* TabBar */,
-				CE48C6922563C9F700EB29FD /* AddMeal */,
-				46CF22CC2567E69200CD15D7 /* Login */,
-				46CF22DD2567ED9900CD15D7 /* SignUp */,
-				CEE262BF256E552800721A2D /* Settings */,
-				CEE262C7256E648E00721A2D /* MealList */,
+				CEF85FA42589114900B97FF6 /* Components */,
+				CEF85FA62589114D00B97FF6 /* Extensions */,
+				CEF85FA82589115000B97FF6 /* Location */,
+				CEF85FAA2589115400B97FF6 /* Strings */,
+				CEF85FAC2589115700B97FF6 /* Theming */,
 			);
 			productName = iosHackthonApp;
 			productReference = 7555FF7B242A565900829871 /* iosHackthonApp.app */;
@@ -329,7 +454,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n./gradlew createSwiftPackage\n";
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
 		};
 		CE9AE6C025595C1500EA7A9B /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -356,8 +481,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF85F7225890F8F00B97FF6 /* SignUpWithPassword.swift in Sources */,
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
+				CEF85FB72589121600B97FF6 /* MealRowViewModel.swift in Sources */,
+				CEF85F9E2589106600B97FF6 /* MealMapView.swift in Sources */,
+				CEF85FA02589106600B97FF6 /* MealListView.swift in Sources */,
+				CEF85F6E25890F8F00B97FF6 /* SignUpView.swift in Sources */,
+				CEF85F7D2589101800B97FF6 /* LoginView.swift in Sources */,
+				CEF85F8C2589103C00B97FF6 /* AddMealView.swift in Sources */,
+				CEF85F9D2589106600B97FF6 /* MealListViewModel.swift in Sources */,
+				CEF85FB62589121600B97FF6 /* MealRow.swift in Sources */,
+				CEF85F9F2589106600B97FF6 /* MapView.swift in Sources */,
+				CEF85F6F25890F8F00B97FF6 /* SignUpWithEmail.swift in Sources */,
+				CEF85F862589102A00B97FF6 /* SettingsView.swift in Sources */,
+				CEF85F7C2589101800B97FF6 /* LoginViewModel.swift in Sources */,
+				CEF85F7125890F8F00B97FF6 /* SignUpWithEmailViewModel.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
+				CEF85F922589104E00B97FF6 /* TabAppView.swift in Sources */,
+				CEF85F7025890F8F00B97FF6 /* SignUpWithPasswordViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,29 +813,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		46CF22CC2567E69200CD15D7 /* Login */ = {
+		CEF85FA42589114900B97FF6 /* Components */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Login;
+			productName = Components;
 		};
-		46CF22DD2567ED9900CD15D7 /* SignUp */ = {
+		CEF85FA62589114D00B97FF6 /* Extensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SignUp;
+			productName = Extensions;
 		};
-		CE48C6922563C9F700EB29FD /* AddMeal */ = {
+		CEF85FA82589115000B97FF6 /* Location */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AddMeal;
+			productName = Location;
 		};
-		CE9EEEFE2563C820005F5432 /* TabBar */ = {
+		CEF85FAA2589115400B97FF6 /* Strings */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = TabBar;
+			productName = Strings;
 		};
-		CEE262BF256E552800721A2D /* Settings */ = {
+		CEF85FAC2589115700B97FF6 /* Theming */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Settings;
-		};
-		CEE262C7256E648E00721A2D /* MealList */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MealList;
+			productName = Theming;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

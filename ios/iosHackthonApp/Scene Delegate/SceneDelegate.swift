@@ -2,7 +2,6 @@ import UIKit
 import SwiftUI
 import Components
 import shared
-import Login
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
