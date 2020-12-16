@@ -14,9 +14,6 @@ let package = Package(
   targets: [
     .target(
       name: "Strings",
-      dependencies: []),
-    .testTarget(
-      name: "StringsTests",
-      dependencies: ["Strings"])
+      dependencies: [])
   ]
 )
