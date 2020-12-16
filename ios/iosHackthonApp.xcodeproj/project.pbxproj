@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46A57FAF255ABFA10076BB88 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A57FAE255ABFA10076BB88 /* LocationManager.swift */; };
 		7555FF88242A565B00829871 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF87242A565B00829871 /* Preview Assets.xcassets */; };
 		7555FFB2242A642300829871 /* shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* shared.framework */; };
 		7555FFB3242A642300829871 /* shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -15,27 +14,13 @@
 		CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF11725558B3A0054D2AA /* SceneDelegate.swift */; };
 		CE0EF12325558B510054D2AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11E25558B500054D2AA /* Assets.xcassets */; };
 		CE0EF12425558B510054D2AA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE0EF11F25558B500054D2AA /* Base.lproj */; };
-		CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EF12B25558B740054D2AA /* ColorManager.swift */; };
-		CE2BA108255AD490006AFF20 /* Strings+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA107255AD490006AFF20 /* Strings+extension.swift */; };
 		CE2BA10E255AD5C4006AFF20 /* Strings+extensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */; };
-		CE4C0A95258A12E200D9C1C8 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A8E258A12E100D9C1C8 /* BottomSheet.swift */; };
-		CE4C0A98258A12E200D9C1C8 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A91258A12E100D9C1C8 /* ViewModifiers.swift */; };
-		CE4C0A99258A12E200D9C1C8 /* ActiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A92258A12E100D9C1C8 /* ActiveAlert.swift */; };
-		CE4C0A9A258A12E200D9C1C8 /* TabNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A93258A12E200D9C1C8 /* TabNavigationItem.swift */; };
-		CE4C0A9B258A12E200D9C1C8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A94258A12E200D9C1C8 /* CustomButton.swift */; };
-		CE4C0AA3258A135200D9C1C8 /* Strings+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A9C258A135200D9C1C8 /* Strings+Common.swift */; };
-		CE4C0AA4258A135200D9C1C8 /* Strings+SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A9D258A135200D9C1C8 /* Strings+SignUp.swift */; };
-		CE4C0AA5258A135200D9C1C8 /* Strings+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A9E258A135200D9C1C8 /* Strings+Login.swift */; };
-		CE4C0AA6258A135200D9C1C8 /* Strings+MealListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0A9F258A135200D9C1C8 /* Strings+MealListScreen.swift */; };
-		CE4C0AA7258A135200D9C1C8 /* Strings+AddMealScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AA0258A135200D9C1C8 /* Strings+AddMealScreen.swift */; };
-		CE4C0AA8258A135200D9C1C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AA1258A135200D9C1C8 /* Strings.swift */; };
-		CE4C0AA9258A135200D9C1C8 /* Strings+TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AA2258A135200D9C1C8 /* Strings+TabView.swift */; };
+		CE2F637E258A308A00F5C172 /* Location in Frameworks */ = {isa = PBXBuildFile; productRef = CE2F637D258A308A00F5C172 /* Location */; };
+		CE2F6393258A314D00F5C172 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = CE2F6392258A314D00F5C172 /* Extensions */; };
+		CE2F63A2258A334700F5C172 /* Strings in Frameworks */ = {isa = PBXBuildFile; productRef = CE2F63A1258A334700F5C172 /* Strings */; };
+		CE2F63B1258A412700F5C172 /* Components in Frameworks */ = {isa = PBXBuildFile; productRef = CE2F63B0258A412700F5C172 /* Components */; };
 		CE4C0ABC258A197500D9C1C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0ABA258A197400D9C1C8 /* LoginView.swift */; };
 		CE4C0ABD258A197500D9C1C8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0ABB258A197500D9C1C8 /* LoginViewModel.swift */; };
-		CE4C0AC4258A19F500D9C1C8 /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AC3258A19F500D9C1C8 /* AuthorizationStore.swift */; };
-		CE4C0AC9258A1A1000D9C1C8 /* SignUpUserEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AC6258A1A1000D9C1C8 /* SignUpUserEntryView.swift */; };
-		CE4C0ACA258A1A1000D9C1C8 /* SignUpInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AC7258A1A1000D9C1C8 /* SignUpInfoView.swift */; };
-		CE4C0ACB258A1A1000D9C1C8 /* SignUpUserEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AC8258A1A1000D9C1C8 /* SignUpUserEntryViewModel.swift */; };
 		CE4C0ACE258A1A3900D9C1C8 /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0ACD258A1A3900D9C1C8 /* AddMealView.swift */; };
 		CE4C0ADB258A1A5E00D9C1C8 /* MealMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AD9258A1A5E00D9C1C8 /* MealMapView.swift */; };
 		CE4C0ADC258A1A5E00D9C1C8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0ADA258A1A5E00D9C1C8 /* MapView.swift */; };
@@ -50,6 +35,7 @@
 		CE4C0AF5258A1AB200D9C1C8 /* SignUpWithPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AF0258A1AB200D9C1C8 /* SignUpWithPassword.swift */; };
 		CE4C0AF6258A1AB200D9C1C8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AF1258A1AB200D9C1C8 /* SignUpView.swift */; };
 		CE4C0AF9258A1AC000D9C1C8 /* TabAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C0AF8258A1AC000D9C1C8 /* TabAppView.swift */; };
+		CE4C0B19258A1F1600D9C1C8 /* Theming in Frameworks */ = {isa = PBXBuildFile; productRef = CE4C0B18258A1F1600D9C1C8 /* Theming */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +70,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		46A57FAE255ABFA10076BB88 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosHackthonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosHackthonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF87242A565B00829871 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7555FF91242A565B00829871 /* iosHackthonAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosHackthonAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,27 +82,12 @@
 		CE0EF11C25558B500054D2AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0EF11E25558B500054D2AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0EF11F25558B500054D2AA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
-		CE0EF12B25558B740054D2AA /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		CE2BA107255AD490006AFF20 /* Strings+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extension.swift"; sourceTree = "<group>"; };
 		CE2BA10D255AD5C4006AFF20 /* Strings+extensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensionTests.swift"; sourceTree = "<group>"; };
-		CE4C0A8E258A12E100D9C1C8 /* BottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
-		CE4C0A91258A12E100D9C1C8 /* ViewModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
-		CE4C0A92258A12E100D9C1C8 /* ActiveAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveAlert.swift; sourceTree = "<group>"; };
-		CE4C0A93258A12E200D9C1C8 /* TabNavigationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabNavigationItem.swift; sourceTree = "<group>"; };
-		CE4C0A94258A12E200D9C1C8 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		CE4C0A9C258A135200D9C1C8 /* Strings+Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Common.swift"; sourceTree = "<group>"; };
-		CE4C0A9D258A135200D9C1C8 /* Strings+SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+SignUp.swift"; sourceTree = "<group>"; };
-		CE4C0A9E258A135200D9C1C8 /* Strings+Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Login.swift"; sourceTree = "<group>"; };
-		CE4C0A9F258A135200D9C1C8 /* Strings+MealListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+MealListScreen.swift"; sourceTree = "<group>"; };
-		CE4C0AA0258A135200D9C1C8 /* Strings+AddMealScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+AddMealScreen.swift"; sourceTree = "<group>"; };
-		CE4C0AA1258A135200D9C1C8 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		CE4C0AA2258A135200D9C1C8 /* Strings+TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+TabView.swift"; sourceTree = "<group>"; };
+		CE2F638B258A30FD00F5C172 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extensions; sourceTree = "<group>"; };
+		CE2F639A258A331000F5C172 /* Strings */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Strings; sourceTree = "<group>"; };
+		CE2F63A9258A40C600F5C172 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
 		CE4C0ABA258A197400D9C1C8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE4C0ABB258A197500D9C1C8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		CE4C0AC3258A19F500D9C1C8 /* AuthorizationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationStore.swift; sourceTree = "<group>"; };
-		CE4C0AC6258A1A1000D9C1C8 /* SignUpUserEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpUserEntryView.swift; sourceTree = "<group>"; };
-		CE4C0AC7258A1A1000D9C1C8 /* SignUpInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpInfoView.swift; sourceTree = "<group>"; };
-		CE4C0AC8258A1A1000D9C1C8 /* SignUpUserEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpUserEntryViewModel.swift; sourceTree = "<group>"; };
 		CE4C0ACD258A1A3900D9C1C8 /* AddMealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		CE4C0AD9258A1A5E00D9C1C8 /* MealMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealMapView.swift; sourceTree = "<group>"; };
 		CE4C0ADA258A1A5E00D9C1C8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -132,6 +102,8 @@
 		CE4C0AF0258A1AB200D9C1C8 /* SignUpWithPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpWithPassword.swift; sourceTree = "<group>"; };
 		CE4C0AF1258A1AB200D9C1C8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CE4C0AF8258A1AC000D9C1C8 /* TabAppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabAppView.swift; sourceTree = "<group>"; };
+		CE4C0B11258A1EA700D9C1C8 /* Theming */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Theming; sourceTree = "<group>"; };
+		CE62C028258A2FEA0014A764 /* Location */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Location; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +112,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555FFB2242A642300829871 /* shared.framework in Frameworks */,
+				CE2F63A2258A334700F5C172 /* Strings in Frameworks */,
+				CE2F63B1258A412700F5C172 /* Components in Frameworks */,
+				CE4C0B19258A1F1600D9C1C8 /* Theming in Frameworks */,
+				CE2F6393258A314D00F5C172 /* Extensions in Frameworks */,
+				CE2F637E258A308A00F5C172 /* Location in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,17 +137,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		46A57FAD255ABF7D0076BB88 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				46A57FAE255ABFA10076BB88 /* LocationManager.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				CE4C0B0E258A1E8C00D9C1C8 /* Shared */,
 				7555FF7D242A565900829871 /* iosHackthonApp */,
 				7555FF94242A565B00829871 /* iosHackthonAppTests */,
 				7555FF9F242A565B00829871 /* iosHackthonAppUITests */,
@@ -193,9 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				CE4C0A81258A124700D9C1C8 /* Screens */,
-				CE2BA106255AD478006AFF20 /* Extensions */,
-				CE9AE6C1255961F500EA7A9B /* Components */,
-				46A57FAD255ABF7D0076BB88 /* Location */,
 				CE0EF11B25558B460054D2AA /* Resources */,
 				CE0EF11625558B320054D2AA /* Scene Delegate */,
 				CE0EF10A25558AE70054D2AA /* AppDelegate */,
@@ -256,43 +223,11 @@
 		CE0EF11B25558B460054D2AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE0EF13125558B7D0054D2AA /* Strings */,
-				CE0EF12A25558B580054D2AA /* Colors */,
 				CE0EF11E25558B500054D2AA /* Assets.xcassets */,
 				CE0EF11F25558B500054D2AA /* Base.lproj */,
 				CE0EF11C25558B500054D2AA /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		CE0EF12A25558B580054D2AA /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				CE0EF12B25558B740054D2AA /* ColorManager.swift */,
-			);
-			path = Colors;
-			sourceTree = "<group>";
-		};
-		CE0EF13125558B7D0054D2AA /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				CE4C0AA1258A135200D9C1C8 /* Strings.swift */,
-				CE4C0AA0258A135200D9C1C8 /* Strings+AddMealScreen.swift */,
-				CE4C0A9C258A135200D9C1C8 /* Strings+Common.swift */,
-				CE4C0A9E258A135200D9C1C8 /* Strings+Login.swift */,
-				CE4C0A9F258A135200D9C1C8 /* Strings+MealListScreen.swift */,
-				CE4C0A9D258A135200D9C1C8 /* Strings+SignUp.swift */,
-				CE4C0AA2258A135200D9C1C8 /* Strings+TabView.swift */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		CE2BA106255AD478006AFF20 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				CE2BA107255AD490006AFF20 /* Strings+extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CE4C0A81258A124700D9C1C8 /* Screens */ = {
@@ -315,24 +250,6 @@
 				CE4C0ABB258A197500D9C1C8 /* LoginViewModel.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		CE4C0AC2258A19E900D9C1C8 /* AuthorizationStore */ = {
-			isa = PBXGroup;
-			children = (
-				CE4C0AC3258A19F500D9C1C8 /* AuthorizationStore.swift */,
-			);
-			path = AuthorizationStore;
-			sourceTree = "<group>";
-		};
-		CE4C0AC5258A1A0600D9C1C8 /* SignUpCommonViews */ = {
-			isa = PBXGroup;
-			children = (
-				CE4C0AC7258A1A1000D9C1C8 /* SignUpInfoView.swift */,
-				CE4C0AC6258A1A1000D9C1C8 /* SignUpUserEntryView.swift */,
-				CE4C0AC8258A1A1000D9C1C8 /* SignUpUserEntryViewModel.swift */,
-			);
-			path = SignUpCommonViews;
 			sourceTree = "<group>";
 		};
 		CE4C0ACC258A1A3200D9C1C8 /* Add Meal */ = {
@@ -408,18 +325,16 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		CE9AE6C1255961F500EA7A9B /* Components */ = {
+		CE4C0B0E258A1E8C00D9C1C8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				CE4C0AC5258A1A0600D9C1C8 /* SignUpCommonViews */,
-				CE4C0AC2258A19E900D9C1C8 /* AuthorizationStore */,
-				CE4C0A92258A12E100D9C1C8 /* ActiveAlert.swift */,
-				CE4C0A8E258A12E100D9C1C8 /* BottomSheet.swift */,
-				CE4C0A94258A12E200D9C1C8 /* CustomButton.swift */,
-				CE4C0A93258A12E200D9C1C8 /* TabNavigationItem.swift */,
-				CE4C0A91258A12E100D9C1C8 /* ViewModifiers.swift */,
+				CE2F63A9258A40C600F5C172 /* Components */,
+				CE2F639A258A331000F5C172 /* Strings */,
+				CE2F638B258A30FD00F5C172 /* Extensions */,
+				CE62C028258A2FEA0014A764 /* Location */,
+				CE4C0B11258A1EA700D9C1C8 /* Theming */,
 			);
-			path = Components;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +356,13 @@
 			dependencies = (
 			);
 			name = iosHackthonApp;
+			packageProductDependencies = (
+				CE4C0B18258A1F1600D9C1C8 /* Theming */,
+				CE2F637D258A308A00F5C172 /* Location */,
+				CE2F6392258A314D00F5C172 /* Extensions */,
+				CE2F63A1258A334700F5C172 /* Strings */,
+				CE2F63B0258A412700F5C172 /* Components */,
+			);
 			productName = iosHackthonApp;
 			productReference = 7555FF7B242A565900829871 /* iosHackthonApp.app */;
 			productType = "com.apple.product-type.application";
@@ -488,7 +410,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
 					7555FF7A242A565900829871 = {
@@ -594,38 +516,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE4C0ACB258A1A1000D9C1C8 /* SignUpUserEntryViewModel.swift in Sources */,
 				CE4C0AE1258A1A7200D9C1C8 /* MealListViewModel.swift in Sources */,
-				CE4C0A9B258A12E200D9C1C8 /* CustomButton.swift in Sources */,
-				CE4C0AA9258A135200D9C1C8 /* Strings+TabView.swift in Sources */,
 				CE0EF11825558B3A0054D2AA /* SceneDelegate.swift in Sources */,
-				CE4C0AA4258A135200D9C1C8 /* Strings+SignUp.swift in Sources */,
-				CE4C0AA7258A135200D9C1C8 /* Strings+AddMealScreen.swift in Sources */,
-				CE4C0AA6258A135200D9C1C8 /* Strings+MealListScreen.swift in Sources */,
-				CE4C0A95258A12E200D9C1C8 /* BottomSheet.swift in Sources */,
-				46A57FAF255ABFA10076BB88 /* LocationManager.swift in Sources */,
-				CE4C0A99258A12E200D9C1C8 /* ActiveAlert.swift in Sources */,
-				CE4C0A9A258A12E200D9C1C8 /* TabNavigationItem.swift in Sources */,
-				CE2BA108255AD490006AFF20 /* Strings+extension.swift in Sources */,
 				CE0EF10C25558B160054D2AA /* AppDelegate.swift in Sources */,
-				CE4C0ACA258A1A1000D9C1C8 /* SignUpInfoView.swift in Sources */,
 				CE4C0ABC258A197500D9C1C8 /* LoginView.swift in Sources */,
 				CE4C0AE7258A1A7D00D9C1C8 /* MealRowViewModel.swift in Sources */,
 				CE4C0ACE258A1A3900D9C1C8 /* AddMealView.swift in Sources */,
 				CE4C0AF3258A1AB200D9C1C8 /* SignUpWithPasswordViewModel.swift in Sources */,
-				CE4C0AC4258A19F500D9C1C8 /* AuthorizationStore.swift in Sources */,
 				CE4C0AEB258A1AA300D9C1C8 /* SettingsView.swift in Sources */,
-				CE4C0A98258A12E200D9C1C8 /* ViewModifiers.swift in Sources */,
 				CE4C0AF6258A1AB200D9C1C8 /* SignUpView.swift in Sources */,
-				CE4C0AA8258A135200D9C1C8 /* Strings.swift in Sources */,
 				CE4C0ADC258A1A5E00D9C1C8 /* MapView.swift in Sources */,
 				CE4C0ADB258A1A5E00D9C1C8 /* MealMapView.swift in Sources */,
 				CE4C0AF4258A1AB200D9C1C8 /* SignUpWithEmailViewModel.swift in Sources */,
-				CE4C0AA3258A135200D9C1C8 /* Strings+Common.swift in Sources */,
-				CE4C0AA5258A135200D9C1C8 /* Strings+Login.swift in Sources */,
 				CE4C0ABD258A197500D9C1C8 /* LoginViewModel.swift in Sources */,
-				CE4C0AC9258A1A1000D9C1C8 /* SignUpUserEntryView.swift in Sources */,
-				CE0EF12C25558B740054D2AA /* ColorManager.swift in Sources */,
 				CE4C0AF9258A1AC000D9C1C8 /* TabAppView.swift in Sources */,
 				CE4C0AF5258A1AB200D9C1C8 /* SignUpWithPassword.swift in Sources */,
 				CE4C0AE2258A1A7200D9C1C8 /* MealListView.swift in Sources */,
@@ -691,6 +594,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -751,6 +655,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -941,6 +846,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE2F637D258A308A00F5C172 /* Location */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Location;
+		};
+		CE2F6392258A314D00F5C172 /* Extensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Extensions;
+		};
+		CE2F63A1258A334700F5C172 /* Strings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Strings;
+		};
+		CE2F63B0258A412700F5C172 /* Components */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Components;
+		};
+		CE4C0B18258A1F1600D9C1C8 /* Theming */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Theming;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }

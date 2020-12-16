@@ -8,6 +8,9 @@
 
 import shared
 import MapKit
+import Location
+import Strings
+import Components
 
 final class MealListViewModel: ObservableObject {
 

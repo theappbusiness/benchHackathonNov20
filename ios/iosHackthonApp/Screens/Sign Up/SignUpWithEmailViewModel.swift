@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Strings
 
 final class SignUpWithEmailViewModel: ObservableObject {
   @Published var email: String = ""

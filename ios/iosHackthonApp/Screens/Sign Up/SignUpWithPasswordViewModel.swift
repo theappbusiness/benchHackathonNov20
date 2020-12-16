@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import shared
+import Strings
+import Components
 
 final class SignUpWithPasswordViewModel: ObservableObject {
   

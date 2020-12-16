@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Theming
 
 public struct TabNavigationItem: View {
   

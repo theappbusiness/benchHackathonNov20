@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import Strings
+import Components
 
 struct SignUpWithPassword: View {
   

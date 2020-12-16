@@ -8,6 +8,9 @@
 
 import SwiftUI
 import shared
+import Theming
+import Strings
+import Components
 
 struct LoginView: View {
   

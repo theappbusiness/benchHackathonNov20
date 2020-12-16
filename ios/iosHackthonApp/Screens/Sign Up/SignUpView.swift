@@ -7,6 +7,9 @@
 //
 
 import SwiftUI
+import Theming
+import Strings
+import Components
 
 struct SignUpView: View {
   

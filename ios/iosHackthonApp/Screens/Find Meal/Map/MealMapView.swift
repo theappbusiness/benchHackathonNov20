@@ -7,6 +7,8 @@
 
 import SwiftUI
 import shared
+import Strings
+import Components
 
 struct MealMapView: View {
     

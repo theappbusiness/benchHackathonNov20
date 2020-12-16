@@ -8,6 +8,7 @@
 
 import SwiftUI
 import shared
+import Components
 
 struct SignUpWithEmail: View {
   

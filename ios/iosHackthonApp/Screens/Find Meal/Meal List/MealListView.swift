@@ -1,6 +1,8 @@
 import SwiftUI
 import shared
-import CoreLocation
+import Location
+import Strings
+import Components
 
 struct MealListView: View {
     

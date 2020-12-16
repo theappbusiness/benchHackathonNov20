@@ -8,6 +8,10 @@
 
 import SwiftUI
 import shared
+import Theming
+import Location
+import Strings
+import Components
 
 struct TabAppView: View {
   

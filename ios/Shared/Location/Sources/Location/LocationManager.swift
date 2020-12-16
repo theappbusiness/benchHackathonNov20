@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CoreLocation
 
-class LocationManager: NSObject, ObservableObject {
+public class LocationManager: NSObject, ObservableObject {
 
   private let locationManager = CLLocationManager()
 
@@ -20,9 +20,9 @@ class LocationManager: NSObject, ObservableObject {
   @Published public var status: CLAuthorizationStatus? {
     willSet { objectWillChange.send() }
   }
-  let objectWillChange = PassthroughSubject<Void, Never>()
+  public let objectWillChange = PassthroughSubject<Void, Never>()
 
-  override init() {
+  public override init() {
     super.init()
     self.locationManager.delegate = self
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -33,7 +33,7 @@ class LocationManager: NSObject, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
 
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+  public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.last else { return }
     userLatitude = location.coordinate.latitude
     userLongitude = location.coordinate.longitude
@@ -51,7 +51,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
   }
 
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+  public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     self.status = status
   }
 }

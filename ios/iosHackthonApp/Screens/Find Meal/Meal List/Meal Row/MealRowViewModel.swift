@@ -8,6 +8,8 @@
 
 import SwiftUI
 import shared
+import Theming
+import Strings
 
 final class MealRowViewModel: ObservableObject {
 

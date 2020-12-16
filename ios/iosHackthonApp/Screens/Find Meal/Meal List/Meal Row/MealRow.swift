@@ -8,6 +8,8 @@
 
 import SwiftUI
 import shared
+import Location
+import Strings
 
 struct MealRow: View {
     var listViewModel: MealListViewModel
