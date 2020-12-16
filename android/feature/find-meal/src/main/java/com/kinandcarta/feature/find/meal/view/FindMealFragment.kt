@@ -1,6 +1,5 @@
 package com.kinandcarta.feature.find.meal.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +16,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kinandcarta.feature.find.meal.R
 import com.kinandcarta.feature.find.meal.adapter.MealsAdapter
 import com.kinandcarta.feature.find.meal.databinding.FindMealFragmentBinding
-import com.kinandcarta.feature.find.meal.extension.*
+import com.kinandcarta.feature.find.meal.extension.getPortionsString
+import com.kinandcarta.feature.find.meal.extension.showToast
 import com.kinandcarta.feature.find.meal.ui.BottomSheetBehaviourCallback
 import com.kinandcarta.feature.find.meal.viewmodel.DisplayMealsViewModel
+import com.kinandcarta.kmmhackathon.lib.core.permissions.Permission
+import com.kinandcarta.kmmhackathon.lib.core.permissions.PermissionManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,6 +42,8 @@ class FindMealFragment : Fragment() {
     @Inject
     lateinit var behaviourCallback: BottomSheetBehaviourCallback
 
+    private val permissionManager = PermissionManager.from(this)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,31 +62,21 @@ class FindMealFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::onStateChanged)
 
         setupUI()
-
-        checkForLocationPermissions()
     }
 
-    @SuppressLint("MissingPermission")
     private fun checkForLocationPermissions() {
-        if (checkFineLocationPermissionGranted()) {
-            viewModel.startUpdatingLocation()
-            map.isMyLocationEnabled = true
-        } else {
-            if (shouldShowLocationRationale()) {
-                // TODO Change to a non-cancellable Dialog, and when the user clicks OK, ask again
-                showToast("Location permissions are required to find meals")
-            } else {
-                requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+        permissionManager
+            .request(Permission.Location)
+            .rationale(getString(R.string.rationale_location))
+            .checkPermission { granted ->
+                if (granted) {
+                    viewModel.startUpdatingLocation()
+                    map.isMyLocationEnabled = true
+                } else {
+                    // TODO: Explain that the app won't work correctly without permission
+                    showToast(getString(R.string.no_location_message))
+                }
             }
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        checkForLocationPermissions()
     }
 
     private fun setupUI() {
@@ -91,7 +85,7 @@ class FindMealFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
             map = googleMap
-            requestFineLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
+            checkForLocationPermissions()
         }
 
         behaviourCallback.setup(::onBottomSheetCollapsed, ::onBottomSheetExpanded)
@@ -167,9 +161,5 @@ class FindMealFragment : Fragment() {
 
     private fun onBottomSheetExpanded() {
         binding.bottomSheetTitle.text = getString(R.string.title_hide_list)
-    }
-
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 }

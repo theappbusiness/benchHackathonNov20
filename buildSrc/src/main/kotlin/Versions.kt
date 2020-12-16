@@ -56,7 +56,7 @@ object Versions {
 
     const val constraintlayout: String = "2.0.4"
 
-    const val fragment_ktx: String = "1.2.5"
+    const val fragment_ktx: String = "1.3.0-beta02"
 
     const val recyclerview: String = "1.1.0"
 
