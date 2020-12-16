@@ -140,7 +140,7 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
-				CE4C0B0E258A1E8C00D9C1C8 /* Shared */,
+				CE4C0B0E258A1E8C00D9C1C8 /* Modules */,
 				7555FF7D242A565900829871 /* iosHackthonApp */,
 				7555FF94242A565B00829871 /* iosHackthonAppTests */,
 				7555FF9F242A565B00829871 /* iosHackthonAppUITests */,
@@ -325,7 +325,7 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		CE4C0B0E258A1E8C00D9C1C8 /* Shared */ = {
+		CE4C0B0E258A1E8C00D9C1C8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				CE2F63A9258A40C600F5C172 /* Components */,
@@ -334,7 +334,7 @@
 				CE62C028258A2FEA0014A764 /* Location */,
 				CE4C0B11258A1EA700D9C1C8 /* Theming */,
 			);
-			path = Shared;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
