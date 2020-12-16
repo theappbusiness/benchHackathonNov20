@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 import shared
-import Components
-import Theming
 
 final class LoginViewModel: ObservableObject {
   
