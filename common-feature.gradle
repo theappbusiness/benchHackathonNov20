@@ -2,5 +2,6 @@ apply plugin: "com.android.library"
 apply from: rootProject.file("common.gradle")
 
 dependencies {
+    implementation project(":android:lib:core")
     implementation project(":android:lib:theming")
 }

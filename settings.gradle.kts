@@ -16,6 +16,7 @@ pluginManagement {
 rootProject.name = "KMMHackathon"
 
 include(":android:app")
+include(":android:lib:core")
 include(":android:lib:theming")
 include(":android:feature:find-meal")
 include(":android:feature:add-meal")

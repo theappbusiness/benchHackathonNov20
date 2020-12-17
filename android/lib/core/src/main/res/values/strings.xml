@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_permission_title">Permission required</string>
+    <string name="dialog_permission_button_ok">OK</string>
+    <string name="dialog_permission_default_message">The app needs your permission in order to work properly</string>
+</resources>
