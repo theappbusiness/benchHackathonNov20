@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
+    app:cardElevation="@dimen/find_meal_card_elevation"
     card_view:cardCornerRadius="@dimen/row_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout

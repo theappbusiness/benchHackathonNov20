@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="find_meal_activity_header">This is the find meal activity screen</string>
-    <string name="title_switch_to_list">Show List</string>
+    <string name="title_show_list">Show list</string>
+    <string name="title_hide_list">Hide list</string>
 
-    //Find meal list item row
+    <!-- Find meal list item row -->
     <string name="available_leader">Available:</string>
     <string name="expiry_leader">Expires:</string>
     <string name="info_leader">Info:</string>
@@ -12,11 +13,11 @@
     <string name="reserve_button_available">Reserve a portion</string>
     <string name="reserve_button_unavailable">Unavailable</string>
 
-    //Reserving meal messages
+    <!-- Reserving meal messages -->
     <string name="reservation_message">Your meal reservation code is</string>
     <string name="meal_unavailable_message">Unfortunately this meal is unavailable</string>
 
-    //Error messages
+    <!-- Error messages -->
     <string name="error_loading_meals">An unexpected error occurred loading meals</string>
     <string name="error_reserving_meal">An unexpected error occurred reserving a meal</string>
 

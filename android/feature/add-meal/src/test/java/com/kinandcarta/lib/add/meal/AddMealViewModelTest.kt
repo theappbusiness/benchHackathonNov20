@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.kcc.kmmhackathon.shared.entity.Meal
 import com.kinandcarta.lib.add.meal.network.MealSDKRepository
 import com.kinandcarta.lib.add.meal.viewmodel.AddMealViewModel
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
@@ -35,8 +36,8 @@ class AddMealViewModelTest {
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
         Dispatchers.setMain(mainThreadSurrogate)
-        mealSDKRepository = mockk<MealSDKRepository>()
         subject = AddMealViewModel(mealSDKRepository = mealSDKRepository)
     }
 
