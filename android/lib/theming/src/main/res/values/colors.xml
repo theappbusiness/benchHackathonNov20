@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    //Core
+    <!-- Core -->
     <color name="colorPrimary">#8AB495</color>
     <color name="colorPrimaryDark">#5a8c67</color>
     <color name="colorAccent">#03DAC5</color>
@@ -8,8 +8,9 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="link">#3F51B5</color>
+    <color name="bottomSheetBackground">#F8F8F8</color>
 
-    //Meal
+    <!-- Meal -->
     <color name="colorHot">#E74551</color>
     <color name="colorCold">#0346FF</color>
     <color name="colorReserve">#8AB495</color>
