@@ -17,6 +17,8 @@ struct LoginView: View {
   @EnvironmentObject var appState: AppState
   @ObservedObject private var loginViewModel: LoginViewModel
   
+  @State var isViewActive: Bool = false // TODO: used for sign up..try and use 1 variable for both login and sign up
+  
   init(viewModel: LoginViewModel) {
     self.loginViewModel = viewModel
     UINavigationBar.appearance().standardAppearance = self.loginViewModel.coloredNavAppearance
@@ -80,11 +82,12 @@ struct LoginView: View {
         VStack {
           Spacer(minLength: 20)
           GeometryReader { geometry in
-            NavigationLink(destination: SignUpView()) {
+            NavigationLink(destination: SignUpView(), isActive: $isViewActive) {
               Text(Strings.Login.signupButtonTitle)
                 .frame(width: geometry.size.width, alignment: .center)
                 .foregroundColor(ColorManager.appPrimary)
             }
+            .isDetailLink(false)
           }
         }
       }
@@ -108,6 +111,7 @@ struct LoginView: View {
         self.loginViewModel.clear()
         self.loginViewModel.email = ""
         self.loginViewModel.password = ""
+        self.isViewActive = false // TODO: used for sign up..try and use 1 variable for both login and sign up
       }
     }
   }
