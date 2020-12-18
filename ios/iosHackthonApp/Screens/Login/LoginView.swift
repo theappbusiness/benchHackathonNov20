@@ -13,7 +13,8 @@ import Strings
 import Components
 
 struct LoginView: View {
-  
+
+  @EnvironmentObject var appState: AppState
   @ObservedObject private var loginViewModel: LoginViewModel
   
   init(viewModel: LoginViewModel) {
@@ -58,6 +59,8 @@ struct LoginView: View {
                 NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(loginViewModel.authorizationStore.isAuthorised)) {
                   Text("")
                 }
+                .isDetailLink(false)
+
                 let isDisabled = loginViewModel.email.isEmpty || loginViewModel.password.isEmpty
                 let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
                 Button(action: {
@@ -96,6 +99,16 @@ struct LoginView: View {
         title: Text(Strings.Login.invalidLoginTitle),
         message: Text(Strings.Login.invalidLoginMessage),
         dismissButton: .default(Text(Strings.Common.ok)))
+    }
+    .onReceive(self.appState.$moveToHome) { moveToHome in
+      if moveToHome {
+
+        print("moving to home")
+        self.appState.moveToHome = false
+        self.loginViewModel.clear()
+        self.loginViewModel.email = ""
+        self.loginViewModel.password = ""
+      }
     }
   }
 }

@@ -41,4 +41,9 @@ final class LoginViewModel: ObservableObject {
       self.isLoading = false
     })
   }
+
+  func clear() {
+    self.authorizationStore.storeUserLoggedInStatus(false)
+    self.authorizationStore.clearCache()
+  }
 }

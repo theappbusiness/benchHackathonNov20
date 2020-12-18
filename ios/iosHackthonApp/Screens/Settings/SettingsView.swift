@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct SettingsView: View {
-  
-  init() { }
+  @EnvironmentObject var appState: AppState
+//  init() { }
   
   var body: some View {
-    Text("Settings screen")
+    VStack {
+           Text("Hello, World #3!")
+           Button (action: {
+            self.appState.moveToHome = true
+
+           } ){
+               Text("Pop to root")
+           }
+       }
   }
 }
 
