@@ -9,6 +9,8 @@
 import Foundation
 import Combine
 
-class AppState: ObservableObject {
-  @Published var moveToHome: Bool = false
+public class AppState: ObservableObject {
+  @Published public var moveToHome: Bool = false
+
+  public init() {}
 }
