@@ -115,15 +115,15 @@ struct LoginView: View {
 private extension LoginView {
 
   func resetOnLogOut() {
-    self.appState.moveToHome = false
-    self.isSignUpButtonPressed = false
-    self.loginViewModel.authorizationStore.isAuthorised = false
-    self.loginViewModel.clear()
-    self.resetEmailAndPassword()
+    appState.moveToHome = false
+    isSignUpButtonPressed = false
+    loginViewModel.authorizationStore.isAuthorised = false
+    loginViewModel.clear()
+    resetEmailAndPassword()
   }
 
   func resetEmailAndPassword() {
-    self.loginViewModel.email = ""
-    self.loginViewModel.password = ""
+    loginViewModel.email = ""
+    loginViewModel.password = ""
   }
 }
