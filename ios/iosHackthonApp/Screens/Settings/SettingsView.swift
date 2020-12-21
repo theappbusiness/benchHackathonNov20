@@ -6,21 +6,21 @@
 //
 
 import SwiftUI
+import Strings
 
 struct SettingsView: View {
   @EnvironmentObject var appState: AppState
-//  init() { }
   
   var body: some View {
-    VStack {
-           Text("Hello, World #3!")
-           Button (action: {
-            self.appState.moveToHome = true
-
-           } ){
-               Text("Pop to root")
-           }
-       }
+    List {
+      Button (action: {
+        self.appState.moveToHome = true
+      } ){
+        Text(Strings.Settings.signOutButtonTitle)
+      }
+      //TODO: Add more settings option when required here
+    }
+    .navigationBarTitle(Strings.Settings.title)
   }
 }
 
