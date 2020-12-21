@@ -17,7 +17,7 @@ struct LoginView: View {
   @EnvironmentObject var appState: AppState
   @ObservedObject private var loginViewModel: LoginViewModel
   
-  @State var isViewActive: Bool = false // TODO: used for sign up..try and use 1 variable for both login and sign up
+  @State var isSignUpButtonPressed: Bool = false
   
   init(viewModel: LoginViewModel) {
     self.loginViewModel = viewModel
@@ -82,7 +82,7 @@ struct LoginView: View {
         VStack {
           Spacer(minLength: 20)
           GeometryReader { geometry in
-            NavigationLink(destination: SignUpView(), isActive: $isViewActive) {
+            NavigationLink(destination: SignUpView(), isActive: $isSignUpButtonPressed) {
               Text(Strings.Login.signupButtonTitle)
                 .frame(width: geometry.size.width, alignment: .center)
                 .foregroundColor(ColorManager.appPrimary)
@@ -105,14 +105,25 @@ struct LoginView: View {
     }
     .onReceive(self.appState.$moveToHome) { moveToHome in
       if moveToHome {
-
-        print("moving to home")
-        self.appState.moveToHome = false
-        self.loginViewModel.clear()
-        self.loginViewModel.email = ""
-        self.loginViewModel.password = ""
-        self.isViewActive = false // TODO: used for sign up..try and use 1 variable for both login and sign up
+        self.resetOnLogOut()
       }
     }
+  }
+}
+
+// MARK: - Functions
+private extension LoginView {
+
+  func resetOnLogOut() {
+    self.appState.moveToHome = false
+    self.isSignUpButtonPressed = false
+    self.loginViewModel.authorizationStore.isAuthorised = false
+    self.loginViewModel.clear()
+    self.resetEmailAndPassword()
+  }
+
+  func resetEmailAndPassword() {
+    self.loginViewModel.email = ""
+    self.loginViewModel.password = ""
   }
 }
