@@ -103,9 +103,9 @@ struct LoginView: View {
         message: Text(Strings.Login.invalidLoginMessage),
         dismissButton: .default(Text(Strings.Common.ok)))
     }
-    .onReceive(self.appState.$moveToHome) { moveToHome in
-      if moveToHome {
-        self.resetOnLogOut()
+    .onReceive(self.appState.$navDestination) { navDestination in
+      if navDestination == .home {
+        self.resetUIOnLogout()
       }
     }
   }
@@ -113,13 +113,16 @@ struct LoginView: View {
 
 // MARK: - Functions
 private extension LoginView {
+  func resetUIOnLogout() {
+    resetAuthorizationStoreAndLogout()
+    resetEmailAndPassword()
+  }
 
-  func resetOnLogOut() {
-    appState.moveToHome = false
-    isSignUpButtonPressed = false
+  func resetAuthorizationStoreAndLogout() {
     loginViewModel.authorizationStore.isAuthorised = false
     loginViewModel.clear()
-    resetEmailAndPassword()
+    appState.navDestination = nil
+    isSignUpButtonPressed = false
   }
 
   func resetEmailAndPassword() {

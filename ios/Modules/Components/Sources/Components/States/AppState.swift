@@ -10,7 +10,9 @@ import Foundation
 import Combine
 
 public class AppState: ObservableObject {
-  @Published public var moveToHome: Bool = false
-
+  public enum NavDestination{
+    case home
+  }
+  @Published public var navDestination: NavDestination? = nil
   public init() {}
 }

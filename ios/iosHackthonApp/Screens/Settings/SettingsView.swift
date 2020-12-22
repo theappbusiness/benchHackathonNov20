@@ -15,7 +15,7 @@ struct SettingsView: View {
   var body: some View {
     List {
       Button (action: {
-        self.appState.moveToHome = true
+        self.appState.navDestination = .home
       } ){
         Text(Strings.Settings.signOutButtonTitle)
       }
