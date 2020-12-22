@@ -13,8 +13,11 @@ import Strings
 import Components
 
 struct LoginView: View {
-  
+
+  @EnvironmentObject var appState: AppState
   @ObservedObject private var loginViewModel: LoginViewModel
+  
+  @State var isSignUpButtonPressed: Bool = false
   
   init(viewModel: LoginViewModel) {
     self.loginViewModel = viewModel
@@ -58,6 +61,8 @@ struct LoginView: View {
                 NavigationLink(destination: TabAppView(selectedView: 0), isActive: .constant(loginViewModel.authorizationStore.isAuthorised)) {
                   Text("")
                 }
+                .isDetailLink(false)
+
                 let isDisabled = loginViewModel.email.isEmpty || loginViewModel.password.isEmpty
                 let backgroundColor = isDisabled ? ColorManager.gray: ColorManager.appPrimary
                 Button(action: {
@@ -77,11 +82,12 @@ struct LoginView: View {
         VStack {
           Spacer(minLength: 20)
           GeometryReader { geometry in
-            NavigationLink(destination: SignUpView()) {
+            NavigationLink(destination: SignUpView(), isActive: $isSignUpButtonPressed) {
               Text(Strings.Login.signupButtonTitle)
                 .frame(width: geometry.size.width, alignment: .center)
                 .foregroundColor(ColorManager.appPrimary)
             }
+            .isDetailLink(false)
           }
         }
       }
@@ -97,5 +103,30 @@ struct LoginView: View {
         message: Text(Strings.Login.invalidLoginMessage),
         dismissButton: .default(Text(Strings.Common.ok)))
     }
+    .onReceive(self.appState.$navDestination) { navDestination in
+      if navDestination == .home {
+        self.resetUIOnLogout()
+      }
+    }
+  }
+}
+
+// MARK: - Functions
+private extension LoginView {
+  func resetUIOnLogout() {
+    resetAuthorizationStoreAndLogout()
+    resetEmailAndPassword()
+  }
+
+  func resetAuthorizationStoreAndLogout() {
+    loginViewModel.authorizationStore.isAuthorised = false
+    loginViewModel.clear()
+    appState.navDestination = nil
+    isSignUpButtonPressed = false
+  }
+
+  func resetEmailAndPassword() {
+    loginViewModel.email = ""
+    loginViewModel.password = ""
   }
 }

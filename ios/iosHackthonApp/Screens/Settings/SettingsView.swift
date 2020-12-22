@@ -6,13 +6,22 @@
 //
 
 import SwiftUI
+import Strings
+import Components
 
 struct SettingsView: View {
-  
-  init() { }
+  @EnvironmentObject var appState: AppState
   
   var body: some View {
-    Text("Settings screen")
+    List {
+      Button (action: {
+        self.appState.navDestination = .home
+      } ){
+        Text(Strings.Settings.signOutButtonTitle)
+      }
+      //TODO: Add more settings option when required here
+    }
+    .navigationBarTitle(Strings.Settings.title)
   }
 }
 
